@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Person.Person;
 
 /**
  *
@@ -48,10 +49,33 @@ public class MySQLUtil {
             if(rs.next()) {
                 System.out.println("ID: " + rs.getString(1) + " " + rs.getString(2));
             }
+            
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+    
+    public static void addPerson(Connection conn, Person person) {
+        String query = "INSERT INTO person (id, first_name, last_name, email, gender, password, role)"
+        + " values (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, person.getId());
+            ps.setString(2, person.getFirstname());
+            ps.setString(3, person.getLastname());
+            ps.setString(4, person.getEmail());
+            ps.setString(5, person.getGender());
+            ps.setString(6, person.getPassword());
+            System.out.println(person.getRole().toString());
+            ps.setString(7, person.getRole().toString());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

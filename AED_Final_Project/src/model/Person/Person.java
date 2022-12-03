@@ -9,22 +9,28 @@ package model.Person;
  * @author slenk
  */
 
-enum Roles {
-    PASSENGER,
-    ADMIN,
-    LifestyleAdmin,
-    HotelAdmin,
-    RestrauntAdmin
-}
-
 public class Person {
+    private static int counter = 100;
     private int id;
     private String firstname;
     private String lastname;
     private String gender;
-    private String age;
     private Roles role;
     private String email;
+    private String password;
+
+    public Person(String firstname, String lastname, String gender, 
+            Roles role, String email, String password) {
+        this.id = ++counter;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -58,14 +64,6 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
     public Roles getRole() {
         return role;
     }
@@ -80,6 +78,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }
