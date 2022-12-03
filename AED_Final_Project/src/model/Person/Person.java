@@ -12,6 +12,9 @@ package model.Person;
 enum Roles {
     PASSENGER,
     ADMIN,
+    LifestyleAdmin,
+    HotelAdmin,
+    RestrauntAdmin
 }
 
 public class Person {
