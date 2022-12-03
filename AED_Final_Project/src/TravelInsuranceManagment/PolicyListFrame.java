@@ -33,7 +33,6 @@ public class PolicyListFrame extends javax.swing.JFrame {
         CreatePolicyBtn = new javax.swing.JButton();
         ViewPolicyBtn = new javax.swing.JButton();
         UpdatePolicyBtn = new javax.swing.JButton();
-        DeletePolicyBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,13 +62,6 @@ public class PolicyListFrame extends javax.swing.JFrame {
             }
         });
 
-        DeletePolicyBtn.setText("Delete Policy");
-        DeletePolicyBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeletePolicyBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,7 +70,6 @@ public class PolicyListFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(CreatePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(DeletePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdatePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ViewPolicyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -91,9 +82,7 @@ public class PolicyListFrame extends javax.swing.JFrame {
                 .addComponent(ViewPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(UpdatePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DeletePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 204, Short.MAX_VALUE))
+                .addGap(0, 273, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -102,7 +91,7 @@ public class PolicyListFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
+            .addGap(0, 667, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,12 +142,6 @@ public class PolicyListFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(UpdatePanel);
     }//GEN-LAST:event_UpdatePolicyBtnActionPerformed
 
-    private void DeletePolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePolicyBtnActionPerformed
-        // TODO add your handling code here:
-         DeletePolicyJPanel DeletePanel = new DeletePolicyJPanel();
-         jSplitPane1.setRightComponent(DeletePanel);
-    }//GEN-LAST:event_DeletePolicyBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -196,7 +179,6 @@ public class PolicyListFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatePolicyBtn;
-    private javax.swing.JButton DeletePolicyBtn;
     private javax.swing.JButton UpdatePolicyBtn;
     private javax.swing.JButton ViewPolicyBtn;
     private javax.swing.JLabel jLabel1;
