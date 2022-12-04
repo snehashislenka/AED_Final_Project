@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package TravelInsuranceManagment;
+package Person;
 
 /**
  *
  * @author parjita
  */
-public class ViewUserJPanel extends javax.swing.JPanel {
+public class ViewPersonJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewUserJPanel
      */
-    public ViewUserJPanel() {
+    public ViewPersonJPanel() {
         initComponents();
     }
 

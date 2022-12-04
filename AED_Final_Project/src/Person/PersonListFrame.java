@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package TravelInsuranceManagment;
+package Person;
 
 /**
  *
  * @author parjita
  */
-public class UserListFrame extends javax.swing.JFrame {
+public class PersonListFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form UserListFrame
      */
-    public UserListFrame() {
+    public PersonListFrame() {
         initComponents();
     }
 
@@ -125,19 +125,19 @@ public class UserListFrame extends javax.swing.JFrame {
 
     private void CreatePolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePolicyBtnActionPerformed
         // TODO add your handling code here:
-        CreateUserJPanel CreatePanel = new CreateUserJPanel();
+        CreatePersonJPanel CreatePanel = new CreatePersonJPanel();
         jSplitPane1.setRightComponent(CreatePanel);
     }//GEN-LAST:event_CreatePolicyBtnActionPerformed
 
     private void ViewPolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPolicyBtnActionPerformed
         // TODO add your handling code here:
-        ViewUserJPanel ViewPanel = new ViewUserJPanel();
+        ViewPersonJPanel ViewPanel = new ViewPersonJPanel();
         jSplitPane1.setRightComponent(ViewPanel);
     }//GEN-LAST:event_ViewPolicyBtnActionPerformed
 
     private void UpdatePolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePolicyBtnActionPerformed
         // TODO add your handling code here:
-        UpdateUserJPanel UpdatePanel = new UpdateUserJPanel();
+        UpdatePersonJPanel UpdatePanel = new UpdatePersonJPanel();
         jSplitPane1.setRightComponent(UpdatePanel);
     }//GEN-LAST:event_UpdatePolicyBtnActionPerformed
 
@@ -158,20 +158,21 @@ public class UserListFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserListFrame().setVisible(true);
+                new PersonListFrame().setVisible(true);
             }
         });
     }
