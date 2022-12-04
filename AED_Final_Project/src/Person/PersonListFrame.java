@@ -4,6 +4,10 @@
  */
 package Person;
 
+import java.sql.Connection;
+import static mysql.util.MySQLUtil.connectMySQL;
+import static mysql.util.MySQLUtil.getAllPerson;
+
 /**
  *
  * @author parjita
@@ -15,6 +19,8 @@ public class PersonListFrame extends javax.swing.JFrame {
      */
     public PersonListFrame() {
         initComponents();
+        Connection conn = connectMySQL();
+        getAllPerson(conn);
     }
 
     /**

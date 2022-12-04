@@ -32,14 +32,14 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="UserIDTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="UserFirstNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="UserLastNameTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="PersonIDTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="FirstNameTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="LastNameTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="GenderTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="EmailTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="CreatePolicyBtn" alignment="0" pref="266" max="32767" attributes="0"/>
                           <Component id="ContactTextField" max="32767" attributes="0"/>
-                          <Component id="AddressTextField" max="32767" attributes="0"/>
+                          <Component id="PasswordTextField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -55,16 +55,16 @@
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="UserIDTextField" alignment="0" pref="40" max="32767" attributes="0"/>
+                  <Component id="PersonIDTextField" alignment="0" pref="40" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="UserFirstNameTextField" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="FirstNameTextField" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="UserLastNameTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="LastNameTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -85,11 +85,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel8" max="32767" attributes="0"/>
-                  <Component id="AddressTextField" pref="42" max="32767" attributes="0"/>
+                  <Component id="PasswordTextField" pref="35" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
               <Component id="CreatePolicyBtn" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,17 +97,17 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User FirstName"/>
+        <Property name="text" type="java.lang.String" value="FirstName"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="UserFirstNameTextField">
+    <Component class="javax.swing.JTextField" name="FirstNameTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User LastName"/>
+        <Property name="text" type="java.lang.String" value="LastName"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="UserLastNameTextField">
+    <Component class="javax.swing.JTextField" name="LastNameTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -127,6 +127,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreatePolicyBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -139,10 +142,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User ID"/>
+        <Property name="text" type="java.lang.String" value="Person ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="UserIDTextField">
+    <Component class="javax.swing.JTextField" name="PersonIDTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -153,10 +156,10 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Address"/>
+        <Property name="text" type="java.lang.String" value="Password"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="AddressTextField">
+    <Component class="javax.swing.JTextField" name="PasswordTextField">
     </Component>
   </SubComponents>
 </Form>
