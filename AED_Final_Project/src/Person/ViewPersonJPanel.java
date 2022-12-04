@@ -4,6 +4,17 @@
  */
 package Person;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author parjita
@@ -12,9 +23,34 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewUserJPanel
+     * @param conn
      */
     public ViewPersonJPanel() {
-        initComponents();
+        initComponents();        
+        String query = "SELECT * FROM person";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) PersonViewTable.getModel();
+            model.setRowCount(0);
+            while(rs.next()) {
+                   Object[] row = new Object[8];
+                   row[0] = rs;
+                   row[1] = rs.getString("id");
+                   row[2] = rs.getString("firstname");
+                   row[3] = rs.getString("lastname");
+                   row[4] = rs.getString("gender");
+                   row[5] = rs.getString("role");
+                   row[6] = rs.getString("email");
+                   row[7] = rs.getString("password");
+                   
+                   model.addRow(row);
+             }           
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -27,10 +63,11 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        UserViewTable = new javax.swing.JTable();
+        PersonViewTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        DeleteBtn = new javax.swing.JButton();
 
-        UserViewTable.setModel(new javax.swing.table.DefaultTableModel(
+        PersonViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -38,14 +75,21 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "User ID", "User FirstName", "User LastName", "Gender", "Email", "Contact", "Address"
+                "Person ID", "FirstName", "LastName", "Gender", "Email", "Contact", "Password"
             }
         ));
-        jScrollPane1.setViewportView(UserViewTable);
+        jScrollPane1.setViewportView(PersonViewTable);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("User View Table");
+
+        DeleteBtn.setText("Delete");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,7 +101,9 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -67,14 +113,28 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        // TODO add your handling code here:
+  
+       
+      
+    }//GEN-LAST:event_DeleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable UserViewTable;
+    private javax.swing.JButton DeleteBtn;
+    private javax.swing.JTable PersonViewTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+   
+
+    
 }
