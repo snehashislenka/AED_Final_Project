@@ -158,7 +158,7 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
         String Email = EmailTextField.getText();
         String Password = PasswordTextField.getText();
         
-        String query = "INSERT INTO person (id, first_name, last_name, email, gender, password, role)"
+        String query = "INSERT INTO person (id, firstname, lastname, email, gender, password,role)"
         + " values (?, ?, ?, ?, ?, ?, ?)";
          try {
             Connection conn = connectMySQL();

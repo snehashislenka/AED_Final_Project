@@ -100,8 +100,8 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -110,16 +110,32 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // TODO add your handling code here:
-          
+         String query = "delete from person";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            DefaultTableModel model = (DefaultTableModel) PersonViewTable.getModel();
+            if(PersonViewTable.getSelectedRowCount()==1){
+                model.removeRow(PersonViewTable.getSelectedRow());
+            }else{
+            if(PersonViewTable.getRowCount()==0){
+                JOptionPane.showMessageDialog(this,"Table is empty");                  
+            }else{
+                JOptionPane.showMessageDialog(this,"Please selectsingle Row for delete"); 
+            }
+          }
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
 
