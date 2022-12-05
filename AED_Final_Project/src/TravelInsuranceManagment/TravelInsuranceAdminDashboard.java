@@ -4,6 +4,8 @@
  */
 package TravelInsuranceManagment;
 
+import Person.PersonListFrame;
+
 /**
  *
  * @author parjita
@@ -83,7 +85,7 @@ public class TravelInsuranceAdminDashboard extends javax.swing.JFrame {
 
     private void UserListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserListBtnActionPerformed
         // TODO add your handling code here:
-        UserListFrame frame = new UserListFrame();
+        PersonListFrame frame = new PersonListFrame();
         frame.setVisible(true);
         dispose(); 
         
