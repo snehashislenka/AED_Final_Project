@@ -2,18 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package TravelInsuranceManagment;
+package Person;
+
+import com.sun.jdi.connect.spi.Connection;
 
 /**
  *
  * @author parjita
  */
-public class UserListFrame extends javax.swing.JFrame {
+public class PersonListFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form UserListFrame
      */
-    public UserListFrame() {
+    public PersonListFrame() {
         initComponents();
     }
 
@@ -81,7 +83,7 @@ public class UserListFrame extends javax.swing.JFrame {
                 .addComponent(ViewPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(UpdatePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 273, Short.MAX_VALUE))
+                .addGap(0, 423, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -90,11 +92,11 @@ public class UserListFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -105,10 +107,12 @@ public class UserListFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(254, 254, 254)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(445, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,8 +120,7 @@ public class UserListFrame extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,19 +128,19 @@ public class UserListFrame extends javax.swing.JFrame {
 
     private void CreatePolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePolicyBtnActionPerformed
         // TODO add your handling code here:
-        CreateUserJPanel CreatePanel = new CreateUserJPanel();
+        CreatePersonJPanel CreatePanel = new CreatePersonJPanel();
         jSplitPane1.setRightComponent(CreatePanel);
     }//GEN-LAST:event_CreatePolicyBtnActionPerformed
 
     private void ViewPolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPolicyBtnActionPerformed
         // TODO add your handling code here:
-        ViewUserJPanel ViewPanel = new ViewUserJPanel();
+        ViewPersonJPanel ViewPanel = new ViewPersonJPanel();
         jSplitPane1.setRightComponent(ViewPanel);
     }//GEN-LAST:event_ViewPolicyBtnActionPerformed
 
     private void UpdatePolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePolicyBtnActionPerformed
         // TODO add your handling code here:
-        UpdateUserJPanel UpdatePanel = new UpdateUserJPanel();
+        UpdatePersonJPanel UpdatePanel = new UpdatePersonJPanel();
         jSplitPane1.setRightComponent(UpdatePanel);
     }//GEN-LAST:event_UpdatePolicyBtnActionPerformed
 
@@ -158,20 +161,21 @@ public class UserListFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserListFrame().setVisible(true);
+                new PersonListFrame().setVisible(true);
             }
         });
     }

@@ -19,6 +19,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="Searchbtn" min="-2" pref="124" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="1" min="-2" pref="326" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -32,18 +33,18 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="UserIDTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="UserFirstNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="UserLastNameTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="PersonIDTextField" alignment="0" pref="266" max="32767" attributes="0"/>
+                          <Component id="FirstNameTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="LastNameTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="GenderTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="EmailTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="CreatePolicyBtn" alignment="0" pref="266" max="32767" attributes="0"/>
-                          <Component id="ContactTextField" max="32767" attributes="0"/>
-                          <Component id="AddressTextField" max="32767" attributes="0"/>
+                          <Component id="ContactTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="PasswordTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="updatebtn" alignment="1" min="-2" pref="131" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="247" max="32767" attributes="0"/>
+              <EmptySpace pref="224" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,19 +53,21 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="UserIDTextField" alignment="0" pref="40" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="UserFirstNameTextField" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="PersonIDTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="Searchbtn" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="FirstNameTextField" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="UserLastNameTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="LastNameTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -79,40 +82,49 @@
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel7" max="32767" attributes="0"/>
-                  <Component id="ContactTextField" pref="46" max="32767" attributes="0"/>
+                  <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ContactTextField" alignment="0" pref="46" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel8" max="32767" attributes="0"/>
-                  <Component id="AddressTextField" pref="42" max="32767" attributes="0"/>
+                  <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+                  <Component id="PasswordTextField" alignment="0" pref="35" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
-              <Component id="CreatePolicyBtn" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <Component id="updatebtn" min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="User FirstName"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="FirstNameTextField">
     </Component>
-    <Component class="javax.swing.JTextField" name="UserFirstNameTextField">
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Contact"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User LastName"/>
+        <Property name="text" type="java.lang.String" value="LastName"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="UserLastNameTextField">
+    <Component class="javax.swing.JTextField" name="ContactTextField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="LastNameTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Password"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gender"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="PasswordTextField">
     </Component>
     <Component class="javax.swing.JTextField" name="GenderTextField">
     </Component>
@@ -123,10 +135,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="EmailTextField">
     </Component>
-    <Component class="javax.swing.JButton" name="CreatePolicyBtn">
+    <Component class="javax.swing.JButton" name="updatebtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create"/>
+        <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updatebtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -134,29 +149,28 @@
           <Font name="Segoe UI" size="48" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Create User"/>
+        <Property name="text" type="java.lang.String" value="Update User"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="User ID"/>
+        <Property name="text" type="java.lang.String" value="Person ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="UserIDTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Contact"/>
+        <Property name="text" type="java.lang.String" value="FirstName"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="ContactTextField">
+    <Component class="javax.swing.JTextField" name="PersonIDTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JButton" name="Searchbtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Address"/>
+        <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="AddressTextField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SearchbtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
