@@ -35,15 +35,13 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
             DefaultTableModel model = (DefaultTableModel) PersonViewTable.getModel();
             model.setRowCount(0);
             while(rs.next()) {
-                   Object[] row = new Object[8];
-                   row[0] = rs;
-                   row[1] = rs.getString("id");
-                   row[2] = rs.getString("firstname");
-                   row[3] = rs.getString("lastname");
-                   row[4] = rs.getString("gender");
-                   row[5] = rs.getString("role");
-                   row[6] = rs.getString("email");
-                   row[7] = rs.getString("password");
+                   Object[] row = new Object[7];
+                   row[0] = rs.getString("id");
+                   row[1] = rs.getString("firstname");
+                   row[2] = rs.getString("lastname");
+                   row[3] = rs.getString("gender");
+                   row[4] = rs.getString("email");
+                   row[5] = rs.getString("password");
                    
                    model.addRow(row);
              }           
@@ -69,13 +67,13 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
         PersonViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Person ID", "FirstName", "LastName", "Gender", "Email", "Contact", "Password"
+                "Person ID", "FirstName", "LastName", "Gender", "Email", "Password"
             }
         ));
         jScrollPane1.setViewportView(PersonViewTable);
@@ -121,8 +119,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // TODO add your handling code here:
-        
-      
+          
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
 

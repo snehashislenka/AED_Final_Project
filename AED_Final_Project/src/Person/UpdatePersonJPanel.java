@@ -193,8 +193,6 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
                 EmailTextField.setText(rs.getString("email"));
                 PasswordTextField.setText(rs.getString("password"));
             }  
-        
-            JOptionPane.showMessageDialog(this,"New Person Detail Added");
             
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
