@@ -7,6 +7,7 @@ package Person;
 import static mysql.util.MySQLUtil.connectMySQL;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -184,12 +185,13 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
          try {          
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 
-            while(ps.next()){
-                FirstNameTextField.setText(ps.getString("firstname"));
-                LastNameTextField.setText(ps.getString("lastname"));
-                GenderTextField.setText(ps.getString("gender"));
-                EmailTextField.setText(ps.getString("email"));
-                PasswordTextField.setText(ps.getString("password"));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                FirstNameTextField.setText(rs.getString("firstname"));
+                LastNameTextField.setText(rs.getString("lastname"));
+                GenderTextField.setText(rs.getString("gender"));
+                EmailTextField.setText(rs.getString("email"));
+                PasswordTextField.setText(rs.getString("password"));
             }  
         
             JOptionPane.showMessageDialog(this,"New Person Detail Added");

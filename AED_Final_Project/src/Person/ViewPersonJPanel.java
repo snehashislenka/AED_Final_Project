@@ -121,8 +121,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // TODO add your handling code here:
-  
-       
+        
       
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
