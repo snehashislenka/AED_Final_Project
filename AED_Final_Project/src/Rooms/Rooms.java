@@ -14,6 +14,7 @@ public class Rooms {
     private String type;
     private String desc;
     private String price;
+    private String status;
 
     public int getRoom_no() {
         return room_no;
@@ -54,6 +55,16 @@ public class Rooms {
     public void setPrice(String price) {
         this.price = price;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
     
     
 }

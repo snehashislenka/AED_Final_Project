@@ -8,12 +8,12 @@ package HotelBookings;
  *
  * @author Anshul
  */
-public class BookingAdmin extends javax.swing.JPanel {
+public class HotelBookingCrud extends javax.swing.JPanel {
 
     /**
      * Creates new form BookingAdmin
      */
-    public BookingAdmin() {
+    public HotelBookingCrud() {
         initComponents();
     }
 
