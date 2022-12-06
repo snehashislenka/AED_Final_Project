@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package MenuItems;
+package ui.Restraunt;
 
 /**
  *
  * @author Anshul
  */
-public class MenuAdmin extends javax.swing.JPanel {
+public class RestrauntCrud extends javax.swing.JPanel {
 
     /**
-     * Creates new form MenuAdmin
+     * Creates new form RestrauntCrud
      */
-    public MenuAdmin() {
+    public RestrauntCrud() {
         initComponents();
     }
 
@@ -34,19 +34,23 @@ public class MenuAdmin extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jTextField12 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jTextField15 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
+        jTextField16 = new javax.swing.JTextField();
         jTextField17 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jTextField18 = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        jTextField19 = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -63,7 +67,7 @@ public class MenuAdmin extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Restraunt", "Item", "Price", "Desc"
+                "Restraunt", "Address", "City", "Zipcode"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -85,16 +89,20 @@ public class MenuAdmin extends javax.swing.JPanel {
         });
         add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 30));
         add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
+        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
 
-        jLabel15.setText("Desc");
+        jLabel15.setText("City");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
-        jLabel16.setText("Price");
+        jLabel16.setText("Address");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, 20));
+
+        jLabel17.setText("Zipcode");
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 20));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 600, 10));
         add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
 
-        jLabel19.setText("Item");
+        jLabel19.setText("Restraunt");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
         add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
 
@@ -105,18 +113,22 @@ public class MenuAdmin extends javax.swing.JPanel {
             }
         });
         add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 150, 30));
-        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, 200, 30));
+        add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 30));
+        add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 200, 30));
 
-        jLabel17.setText("Desc");
-        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, 20));
+        jLabel23.setText("City");
+        add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, 20));
 
-        jLabel18.setText("Price");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, -1, 20));
-        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 200, 30));
+        jLabel24.setText("Address");
+        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, 20));
 
-        jLabel20.setText("Item");
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, 20));
-        add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, 200, 30));
+        jLabel25.setText("Zipcode");
+        add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, 20));
+        add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 30));
+
+        jLabel26.setText("Restraunt");
+        add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, 20));
+        add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -135,9 +147,11 @@ public class MenuAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -146,9 +160,11 @@ public class MenuAdmin extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

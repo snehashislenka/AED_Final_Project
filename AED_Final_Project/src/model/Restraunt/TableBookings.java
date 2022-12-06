@@ -2,18 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Orders;
+package model.Restraunt;
+
+import java.util.Date;
 
 /**
  *
  * @author Anshul
  */
-public class Orders {
+public class TableBookings {
     private int id;
-    private int userId;
     private int restrauntId;
-    private Float orderTotal;
+    private int table_no;
+    private int no_of_tables;
     private String status;
+    private Date from;
 
     public int getId() {
         return id;
@@ -21,14 +24,6 @@ public class Orders {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public int getRestrauntId() {
@@ -39,12 +34,20 @@ public class Orders {
         this.restrauntId = restrauntId;
     }
 
-    public Float getOrderTotal() {
-        return orderTotal;
+    public int getTable_no() {
+        return table_no;
     }
 
-    public void setOrderTotal(Float orderTotal) {
-        this.orderTotal = orderTotal;
+    public void setTable_no(int table_no) {
+        this.table_no = table_no;
+    }
+
+    public int getNo_of_tables() {
+        return no_of_tables;
+    }
+
+    public void setNo_of_tables(int no_of_tables) {
+        this.no_of_tables = no_of_tables;
     }
 
     public String getStatus() {
@@ -54,6 +57,16 @@ public class Orders {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Date getFrom() {
+        return from;
+    }
+
+    public void setFrom(Date from) {
+        this.from = from;
+    }
+    
+    
     
     
 }

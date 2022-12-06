@@ -2,23 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Tables;
+package model.Restraunt;
 
 /**
  *
  * @author Anshul
  */
-public class Tables {
-    private int table_no;
+public class Orders {
+    private int id;
+    private int userId;
     private int restrauntId;
+    private Float orderTotal;
     private String status;
 
-    public int getTable_no() {
-        return table_no;
+    public int getId() {
+        return id;
     }
 
-    public void setTable_no(int table_no) {
-        this.table_no = table_no;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getRestrauntId() {
@@ -27,6 +37,14 @@ public class Tables {
 
     public void setRestrauntId(int restrauntId) {
         this.restrauntId = restrauntId;
+    }
+
+    public Float getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOrderTotal(Float orderTotal) {
+        this.orderTotal = orderTotal;
     }
 
     public String getStatus() {
