@@ -6,10 +6,15 @@ package ui.userdashboard;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneLayout;
-import ui.userdashboard.Demo;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import ui.userdashboard.FlightsDisplay;
 
 /**
  *
@@ -67,7 +72,6 @@ public class FlightBooking extends javax.swing.JFrame {
         jLabel1.setText("FLIGHTS");
 
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1520, 158));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Flying From");
@@ -93,6 +97,8 @@ public class FlightBooking extends javax.swing.JFrame {
 
         lblReturn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblReturn.setText("Return");
+
+        txtOutbound.setToolTipText("Outbound Date Format YYYY-MM-DD");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Outbound");
@@ -192,12 +198,12 @@ public class FlightBooking extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(121, 121, 121)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)))
-                .addGap(108, 108, 108))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +216,7 @@ public class FlightBooking extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,8 +264,26 @@ public class FlightBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_radiobtnReturnMouseClicked
 
     private void btnSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFlightsActionPerformed
+        String departureCity = txtFlyingFrom.getText();
+        String arrivalCity = txtFlyingTo.getText();
+        String departureDate = txtOutbound.getText();
+//        String arrivalDate = txtReturn.getText();
+        int passenger = Integer.parseInt(txtPassenger.getText());
+        
         scrollPane.setLayout(new ScrollPaneLayout());
-        scrollPane.setViewportView(new Demo());
+        try {
+            System.out.println("called flightsdisplay class");
+            scrollPane.setViewportView(new FlightsDisplay(departureCity, arrivalCity,
+                    departureDate, passenger));
+        } catch (IOException ex) {
+            Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSearchFlightsActionPerformed
 
     /**
