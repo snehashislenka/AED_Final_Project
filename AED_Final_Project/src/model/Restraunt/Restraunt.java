@@ -9,6 +9,9 @@ package model.Restraunt;
  * @author Anshul
  */
 public class Restraunt {
+
+    public Restraunt(int aInt, String string, String string1, String string2, String string3) {
+    }
     private int id;
     private String restraunt;
     private String city;

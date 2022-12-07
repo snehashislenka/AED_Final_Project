@@ -8,12 +8,12 @@ package ui.HotelUser;
  *
  * @author Anshul
  */
-public class checkoutHotel extends javax.swing.JPanel {
+public class CheckoutHotel extends javax.swing.JPanel {
 
     /**
      * Creates new form checkoutHotel
      */
-    public checkoutHotel() {
+    public CheckoutHotel() {
         initComponents();
     }
 
@@ -77,6 +77,7 @@ public class checkoutHotel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(153, 204, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -90,7 +91,7 @@ public class checkoutHotel extends javax.swing.JPanel {
         jLabel2.setText("Hotel Photo");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 110, 100));
 
-        jPanel4.setBackground(new java.awt.Color(245, 239, 239));
+        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -135,7 +136,7 @@ public class checkoutHotel extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 239, 239)));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(245, 239, 239));
+        jPanel6.setBackground(new java.awt.Color(255, 204, 204));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel29.setForeground(new java.awt.Color(0, 153, 102));
@@ -185,7 +186,7 @@ public class checkoutHotel extends javax.swing.JPanel {
         jLabel4.setText("hotel address");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 190, 30));
 
-        jLabel5.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel5.setBackground(new java.awt.Color(153, 204, 255));
         jLabel5.setForeground(new java.awt.Color(255, 204, 204));
         jLabel5.setText("Hotel Rating: 4/5");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 190, -1));

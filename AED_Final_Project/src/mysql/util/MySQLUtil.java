@@ -22,10 +22,10 @@ import model.Restraunt.Restraunt;
  * @author slenk
  */
 public class MySQLUtil {
-    public static void main(String[] args) {
-        Connection conn = connectMySQL();
-        getAllPerson(conn);
-    }
+//    public static void main(String[] args) {
+//        Connection conn = connectMySQL();
+//        getAllPerson();
+//    }
     
     public static Connection connectMySQL() {
         Connection conn = null;
@@ -43,10 +43,12 @@ public class MySQLUtil {
         return conn;    
     }
     
-    public static void getAllPerson(Connection conn) {
+    public static void getAllPerson() {
         
         String query = "SELECT * FROM person";
         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             
@@ -82,31 +84,27 @@ public class MySQLUtil {
         }
     }
     
-    public static void getAllRestraunt(Connection conn) {
-        ArrayList<Hotel> list = new ArrayList();
+    public static ArrayList<Restraunt> getAllRestraunt() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Restraunt> restrauntList = new ArrayList();
         
         String query = "SELECT * FROM restraunt";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             System.out.println("---------" + rs);
-            if(rs.next()) {
-                System.out.println("ID: " + rs.getString(1) + " " + rs.getString(2));
+                    
+                        
+            while(rs.next()) {
+                Restraunt res = new Restraunt(rs.getInt("id"), rs.getString("restraunt"), rs.getString("city"), rs.getString("address"), rs.getString("zipcode"));
+                restrauntList.add(res);
             }
             
-//            for(i = 0; i < rs.length; i++){  
-//                Hotel hotel;
-//                hotel = new Hotel(rs[i].id, "hotel", "city", "address", "zipcode");
-//
-//                list.add(hotel);
-//            }
-                    
-//            return list;
-//            
-//            conn.close();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return restrauntList;
     }
     
     public static void addRestraunt(Connection conn, Restraunt restraunt) {
