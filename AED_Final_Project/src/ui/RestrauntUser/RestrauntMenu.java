@@ -13,8 +13,10 @@ public class RestrauntMenu extends javax.swing.JPanel {
     /**
      * Creates new form RestrauntMenu
      */
-    public RestrauntMenu() {
+    RestrauntFrame restrauntFrame;
+    public RestrauntMenu(RestrauntFrame restrauntFrame) {
         initComponents();
+        this.restrauntFrame = restrauntFrame;
     }
 
     /**
@@ -40,6 +42,13 @@ public class RestrauntMenu extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,39 +87,103 @@ public class RestrauntMenu extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jPanel2);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 600, 310));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 600, 230));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Photo");
         jLabel2.setToolTipText("");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 200));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 160));
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 300, 200));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 230, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Restraunt Name");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 86, 250, 30));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 250, 30));
 
         jLabel4.setText("Restraunt Address");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 250, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 250, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 204, 204));
         jLabel5.setForeground(new java.awt.Color(255, 204, 204));
-        jLabel5.setText("3.4/5 Rating");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
+        jLabel5.setText("Restraunt Rating: 4/5");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
         jButton1.setText("Directions");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
 
         jLabel7.setText("9am - 12pm");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
+
+        jPanel6.setBackground(new java.awt.Color(255, 0, 102));
+        jPanel6.setForeground(new java.awt.Color(255, 0, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("ORDER");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 70, 280, -1));
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Photo");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 100, 60));
+
+        add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 280, 100));
+
+        jPanel7.setBackground(new java.awt.Color(255, 0, 102));
+        jPanel7.setForeground(new java.awt.Color(255, 0, 102));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("BOOK TABLE");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 70, 280, -1));
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Photo");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 100, 60));
+
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, 100));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 580, 10));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        this.restrauntFrame.switchPanel(new Checkout());
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        // TODO add your handling code here:
+        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame));
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame));
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame));
+    }//GEN-LAST:event_jLabel11MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -118,15 +191,22 @@ public class RestrauntMenu extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

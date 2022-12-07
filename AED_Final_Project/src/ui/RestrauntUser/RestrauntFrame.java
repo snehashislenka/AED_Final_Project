@@ -17,7 +17,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
      */
     public RestrauntFrame() {
         initComponents();
-        RestrauntSearch restrauntSearch = new RestrauntSearch();
+        RestrauntSearch restrauntSearch = new RestrauntSearch(this);
         jSplitPane1.setRightComponent(restrauntSearch);
     }
     
