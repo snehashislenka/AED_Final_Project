@@ -13,8 +13,10 @@ public class Checkout extends javax.swing.JPanel {
     /**
      * Creates new form checkoutHotel
      */
-    public Checkout() {
+    HotelFrame hotelFrame;
+    public Checkout(HotelFrame hotelFrame) {
         initComponents();
+        this.hotelFrame = hotelFrame;
     }
 
     /**
@@ -78,6 +80,7 @@ public class Checkout extends javax.swing.JPanel {
         jLabel27 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
@@ -259,9 +262,19 @@ public class Checkout extends javax.swing.JPanel {
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel38.setText("CHECKOUT");
         jPanel7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 16, 580, 40));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton2.setText("←");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 50));
 
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 70));
 
@@ -271,9 +284,15 @@ public class Checkout extends javax.swing.JPanel {
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 220, 40));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.hotelFrame.switchPanel(new RoomSelect(this.hotelFrame));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
