@@ -8,12 +8,12 @@ package ui.Restraunt;
  *
  * @author Anshul
  */
-public class TablesAdminCrud extends javax.swing.JPanel {
+public class TableAdminCrud extends javax.swing.JPanel {
 
     /**
      * Creates new form TablesAdminCrud
      */
-    public TablesAdminCrud() {
+    public TableAdminCrud() {
         initComponents();
     }
 

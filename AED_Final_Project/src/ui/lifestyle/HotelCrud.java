@@ -2,19 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.Restraunt;
+package ui.lifestyle;
+
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
 
 /**
  *
  * @author Anshul
  */
-public class RestrauntCrud extends javax.swing.JPanel {
+public class HotelCrud extends javax.swing.JPanel {
 
     /**
-     * Creates new form RestrauntCrud
+     * Creates new form HotelCrud
      */
-    public RestrauntCrud() {
+    public HotelCrud() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -33,24 +40,24 @@ public class RestrauntCrud extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        crCity = new javax.swing.JTextField();
+        crZipcode = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jTextField12 = new javax.swing.JTextField();
+        crHotel = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        crAddress = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        upCity = new javax.swing.JTextField();
+        upZipcode = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        upHotel = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        upAddress = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,7 +74,7 @@ public class RestrauntCrud extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Restraunt", "Address", "City", "Zipcode"
+                "Hotel", "Address", "City", "Zipcode"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -88,8 +95,8 @@ public class RestrauntCrud extends javax.swing.JPanel {
             }
         });
         add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 30));
-        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
-        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
+        add(crCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
+        add(crZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
 
         jLabel15.setText("City");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
@@ -100,11 +107,17 @@ public class RestrauntCrud extends javax.swing.JPanel {
         jLabel17.setText("Zipcode");
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 20));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 600, 10));
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
 
-        jLabel19.setText("Restraunt");
+        crHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crHotelActionPerformed(evt);
+            }
+        });
+        add(crHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
+
+        jLabel19.setText("Hotel");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
-        add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
+        add(crAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
 
         jButton8.setText("Update");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +126,8 @@ public class RestrauntCrud extends javax.swing.JPanel {
             }
         });
         add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 150, 30));
-        add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 30));
-        add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 200, 30));
+        add(upCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 30));
+        add(upZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 200, 30));
 
         jLabel23.setText("City");
         add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, 20));
@@ -124,23 +137,87 @@ public class RestrauntCrud extends javax.swing.JPanel {
 
         jLabel25.setText("Zipcode");
         add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, 20));
-        add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 30));
+        add(upHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 30));
 
-        jLabel26.setText("Restraunt");
+        jLabel26.setText("Hotel");
         add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, 20));
-        add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 200, 30));
+        add(upAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+          if(crHotel.getText().isEmpty() || crAddress.getText().isEmpty() || crCity.getText().isEmpty() ||
+                crZipcode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Fill all the fields");
+            return;
+        }
+//        String name = crHotel.getText();
+//        String address = crAddress.getText();
+//        String city = crCity.getText();
+//        String zipcode = crZipcode.getText();
+//
+//        Employee e = allEmployees.addNewEmployee();
+//        e.setName(name);
+//        e.setEmployeeId(employeeId);
+//        e.setAge(age);
+//        e.setGender(gender);
+//        e.setStartDate(startDate);
+//        e.setLevel(level);
+//        e.setTeamInfo(teamInfo);
+//        e.setPositionTitle(positionTitle);
+//        e.setCellPhoneNumber(cellPhoneNumber);
+//        e.setEmailAddress(emailAddress);
+//        e.setPhoto(photo);
+//
+//        JOptionPane.showMessageDialog(this, "New Employee added!");
+//
+//        txtName.setText("");
+//        txtEmployeeId.setText("");
+//        txtAge.setText("");
+//        txtCellPhoneNumber.setText("");
+//        txtEmailAddress.setText("");
+//        txtGender.setSelectedItem("");
+//        txtLevel.setText("");
+//        labelPhoto.setText("");
+//        txtPositionTitle.setText("");
+//        txtStartDate.setText(null);
+//        txtTeamInfo.setText("");
+//        imgPhoto.setText("");
+//        imgPhoto.setIcon(null);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void crHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crHotelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crHotelActionPerformed
+
+    
+    private void populateTable(){
+        
+        Connection conn = connectMySQL();
+//        DefaultTableModel model = (DefaultTableModel) tableEmployee.getModel();
+//        model.setRowCount(0);
+        
+//        allHotels allHotels = MySQLUtil.getAllHotel(conn);
+        
+//        for(Employee e : allEmployees.getAllEmployees()) {
+//            Object[] row = new Object[12];
+//            row[0] = e;
+//            row[1] = e.getEmployeeId();
+//            row[2] = e.getAge();
+//            
+//            model.addRow(row);
+//        }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField crAddress;
+    private javax.swing.JTextField crCity;
+    private javax.swing.JTextField crHotel;
+    private javax.swing.JTextField crZipcode;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
@@ -158,13 +235,9 @@ public class RestrauntCrud extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField upAddress;
+    private javax.swing.JTextField upCity;
+    private javax.swing.JTextField upHotel;
+    private javax.swing.JTextField upZipcode;
     // End of variables declaration//GEN-END:variables
 }
