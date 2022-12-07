@@ -2,48 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.userdashboard;
-
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JSeparator;
+package ui.sysAdminDashboard;
 
 /**
  *
  * @author slenk
  */
-public class Demo extends javax.swing.JPanel {
+public class SysAdminHomePanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form demo
+     * Creates new form SysAdminDashboard
      */
-    public Demo() {
+    public SysAdminHomePanel() {
         initComponents();
-        setLayout(new GridLayout(2, 3, 0, 0));
-                
-//        setAlignmentX(CENTER_ALIGNMENT);
-        for(int i = 0; i < 1; i++) {
-            for (int j=0; j<3; j++) {
-                JLabel lbl = new JLabel("Demo");
-                lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-//                lbl.setSize(100, 200);
-                this.add(lbl); 
-//                if(i%2 == 0) {
-//                    JSeparator sep = new JSeparator();
-//                    this.add(sep);
-//                } else {
-//                    this.add(lbl);  
-//                }
-                
-    //            this.add(new JSeparator());
-            }
-//            JSeparator sep = new JSeparator();
-//            this.add(sep);
-        }
-        
-//        JSeparator sep = new JSeparator();
-//        this.add(sep);
-        
     }
 
     /**
@@ -55,19 +26,32 @@ public class Demo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Flights");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(602, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(377, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
