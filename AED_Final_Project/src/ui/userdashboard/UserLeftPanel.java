@@ -13,8 +13,11 @@ public class UserLeftPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserLeftPanel
      */
-    public UserLeftPanel() {
+    Dashboard dashboard;
+    
+    public UserLeftPanel(Dashboard dashboard) {
         initComponents();
+        this.dashboard = dashboard;
     }
 
     /**
@@ -29,7 +32,9 @@ public class UserLeftPanel extends javax.swing.JPanel {
         btnHome = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
         btnMyBookings = new javax.swing.JButton();
+        btnSignout = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(180, 0));
 
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -41,6 +46,14 @@ public class UserLeftPanel extends javax.swing.JPanel {
         btnMyBookings.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMyBookings.setText("My Bookings");
 
+        btnSignout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSignout.setText("Sign out");
+        btnSignout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -51,12 +64,17 @@ public class UserLeftPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnMyBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMyBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSignout))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMyBookings, btnSignout});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -66,17 +84,26 @@ public class UserLeftPanel extends javax.swing.JPanel {
                 .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnMyBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(btnSignout)
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnHome, btnProfile});
 
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnMyBookings, btnSignout});
+
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
+        this.dashboard.dispose();
+    }//GEN-LAST:event_btnSignoutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnMyBookings;
     private javax.swing.JButton btnProfile;
+    private javax.swing.JButton btnSignout;
     // End of variables declaration//GEN-END:variables
 }

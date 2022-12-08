@@ -19,8 +19,10 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         dashboardSplitPane.setRightComponent(new HomePanel());
-        dashboardSplitPane.setLeftComponent(new UserLeftPanel());
+        dashboardSplitPane.setLeftComponent(new UserLeftPanel(this));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

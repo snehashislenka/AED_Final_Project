@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.userdashboard;
+package ui.busUIPanels;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,35 +13,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
-import javax.swing.border.Border;
 import javax.xml.parsers.ParserConfigurationException;
-import model.Flight.Flight;
+import model.bus.Bus;
+import mysql.util.MySQLUtil;
 import org.xml.sax.SAXException;
 import ui.flightUIPanels.CallFlightUIPanels;
-import ui.flightUIPanels.FlightSeatSelection;
+import ui.userdashboard.FlightDispalyUILabels;
 import util.flights.FlightUtils;
 
 /**
  *
  * @author slenk
  */
-public class FlightsDisplay extends javax.swing.JPanel {
+public class BusSearchDisplay extends javax.swing.JPanel {
 
     /**
-     * Creates new form demo
+     * Creates new form NewJPanel
      */
     
-    private String departureCity;
-    private String arrivalCity;
-    private String departureDate;
+    String departureCity;
+    String arrivalCity;
+    String departureDate;
 //    private String arrivalDate;
-    private int passenger;
+    int passenger;
     
-    public FlightsDisplay(String departureCity, String arrivalCity, 
-        String departureDate,int passenger ) throws IOException, InterruptedException,
-            ParserConfigurationException, SAXException {
+    public BusSearchDisplay(String departureCity, String arrivalCity, 
+        String departureDate,int passenger) throws IOException, 
+            InterruptedException, ParserConfigurationException, SAXException {
         initComponents();
         
         this.departureCity = departureCity;
@@ -51,31 +48,37 @@ public class FlightsDisplay extends javax.swing.JPanel {
 //        this.arrivalDate = arrivalDate;
         this.passenger = passenger;
         
-        populateFlightSearchPane();
+        this.setBackground(new Color(1f, 1f, 1f, 0.2f));
+        
+        populateBusSearchPane();
     }
     
-    public void populateFlightSearchPane() throws IOException, InterruptedException, 
+    public void populateBusSearchPane() throws IOException, InterruptedException, 
             ParserConfigurationException, SAXException {
         
-        ArrayList<Flight> flightSearchList = FlightUtils
-                .getListOfFlightSearch(this.departureCity, this.arrivalCity,
-                        this.departureDate, this.passenger);
+        ArrayList<Bus> busSearchList = MySQLUtil
+                .getListOfBusSearch(this.departureCity, this.arrivalCity);
                 
-        setLayout(new GridLayout(flightSearchList.size(), 3, 0, 0));     
-        for(Flight flight: flightSearchList) {
+        setLayout(new GridLayout(busSearchList.size(), 3, 0, 0));     
+        for(Bus bus: busSearchList) {
+            
+            System.out.println(bus.getDepartureBusStation());
+            
             for (int j=0; j<3; j++) {
                 JLabel lbl = new JLabel();
                 if(j == 0) {
-                    lbl.setText(FlightDispalyUILabels.getHTMLFlightScheduleCode(
-                            flight.getDepartingTimeStamp(),
-                    flight.getArrivalTimeStamp(), flight.getDepartingCity(),
-                    flight.getArrivalCity(), flight.getFlightCompanyCode(), 
-                    flight.getFlightType(), flight.getFlightCompanyName()));
+                    lbl.setText(BusDisplayUILabels.getHTMLBusScheduleCode(bus.getBusId()
+                            ,departureDate,
+                            bus.getDepartingTimestamp(),
+                    bus.getArrivalTimestamp(), bus.getDepartingCity(),
+                    bus.getArrivalCity(), bus.getBusCompanyName()));
                 }
                 else if(j == 1) {
-                    lbl.setText(FlightDispalyUILabels.getHTMLFlightDurationCode(flight.getTotalFlightDuration()));
+                    lbl.setText(BusDisplayUILabels.getHTMLBusDurationCode(
+                            bus.getBusTotalDuration()));
                 } else {
-                    lbl.setText(FlightDispalyUILabels.getHTMLFlightPriceCode(this.passenger, flight.getPrice()));
+                    lbl.setText(BusDisplayUILabels.getHTMLBusPriceCode(
+                            this.passenger, bus.getPrice()));
                     Component comp = this;
                     lbl.addMouseListener(new MouseAdapter() {
                         @Override
@@ -83,7 +86,7 @@ public class FlightsDisplay extends javax.swing.JPanel {
 //                            JOptionPane.showMessageDialog(comp, "Clicked"
 //                                    + flight.getFlightCompanyCode() + "-" + flight.getFlightType()
 //                            + flight.getFlightCompanyName());
-                            CallFlightUIPanels.callFlightUIPanels(passenger, flight);
+//                            CallFlightUIPanels.callFlightUIPanels(passenger, flight);
                         }
                     });
                 }
@@ -93,7 +96,7 @@ public class FlightsDisplay extends javax.swing.JPanel {
         }
         
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,11 +110,11 @@ public class FlightsDisplay extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGap(0, 604, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
