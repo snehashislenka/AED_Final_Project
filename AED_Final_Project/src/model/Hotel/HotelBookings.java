@@ -11,6 +11,22 @@ import java.util.Date;
  * @author Anshul
  */
 public class HotelBookings {
+    public HotelBookings(){
+        
+    }
+    
+    public HotelBookings(int id, int hotelId, int room_no, int userId, Date from, Date to, int no_of_rooms, String status, String user) {
+        this.id = id;
+        this.hotelId = hotelId;
+        this.room_no = room_no;
+        this.userId = userId;
+        this.from = from;
+        this.to = to;
+        this.no_of_rooms = no_of_rooms;
+        this.status = status;
+        this.user = user;
+    }
+    
     private int id;
     private int hotelId;
     private int room_no;
@@ -19,6 +35,8 @@ public class HotelBookings {
     private Date to;
     private int no_of_rooms;
     private String status;
+    private float price;
+    private String user;
 
     public int getId() {
         return id;
@@ -82,6 +100,22 @@ public class HotelBookings {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
     
     

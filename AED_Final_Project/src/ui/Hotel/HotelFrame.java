@@ -34,6 +34,7 @@ public class HotelFrame extends javax.swing.JFrame {
         bookings2 = new javax.swing.JButton();
         customer = new javax.swing.JButton();
         rooms = new javax.swing.JButton();
+        rooms1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,7 +48,7 @@ public class HotelFrame extends javax.swing.JFrame {
                 bookings2ActionPerformed(evt);
             }
         });
-        jPanel1.add(bookings2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, 30));
+        jPanel1.add(bookings2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, 30));
 
         customer.setText("Customer");
         customer.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +56,7 @@ public class HotelFrame extends javax.swing.JFrame {
                 customerActionPerformed(evt);
             }
         });
-        jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 100, 30));
+        jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 100, 30));
 
         rooms.setText("Rooms");
         rooms.addActionListener(new java.awt.event.ActionListener() {
@@ -63,14 +64,22 @@ public class HotelFrame extends javax.swing.JFrame {
                 roomsActionPerformed(evt);
             }
         });
-        jPanel1.add(rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 100, 30));
+        jPanel1.add(rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, 30));
+
+        rooms1.setText("Home");
+        rooms1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rooms1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rooms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jSplitPane1.setRightComponent(jPanel2);
 
-        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 600));
+        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -93,6 +102,12 @@ public class HotelFrame extends javax.swing.JFrame {
         RoomAdminCrud roomAdminCrud = new RoomAdminCrud();
         jSplitPane1.setRightComponent(roomAdminCrud);
     }//GEN-LAST:event_roomsActionPerformed
+
+    private void rooms1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rooms1ActionPerformed
+        // TODO add your handling code here:
+        HotelAdminPanel hotelAdminPanel = new HotelAdminPanel();
+        jSplitPane1.setRightComponent(hotelAdminPanel);
+    }//GEN-LAST:event_rooms1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,13 +145,12 @@ public class HotelFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bookings;
-    private javax.swing.JButton bookings1;
     private javax.swing.JButton bookings2;
     private javax.swing.JButton customer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton rooms;
+    private javax.swing.JButton rooms1;
     // End of variables declaration//GEN-END:variables
 }

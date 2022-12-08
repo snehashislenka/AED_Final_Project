@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Hotel.Hotel;
 import model.Flight.Flight;
+import model.Hotel.HotelBookings;
 import model.Person.Person;
 import model.Restraunt.Restraunt;
 
@@ -283,5 +284,32 @@ public class MySQLUtil {
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static ArrayList<HotelBookings> getHotelBookings(HotelBookings hotelBookings) {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<HotelBookings> bookingList = new ArrayList();
+        
+        String query = "SELECT h.*, p.firstName + ' ' + p.lastName as user FROM hotel_bookings h INNER JOIN person p ON h.userId = p.id WHERE hotelId = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, hotelBookings.getHotelId());
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                HotelBookings res = new HotelBookings(rs.getInt("id"), rs.getInt("hotelId"),
+                        rs.getInt("room_no"),  rs.getInt("userId"),
+                 rs.getDate("from"), rs.getDate("to"), rs.getInt("no_of_rooms"),
+                 rs.getString("status"), rs.getString("user"));
+
+                bookingList.add(res);
+            }
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return bookingList;
     }
 }
