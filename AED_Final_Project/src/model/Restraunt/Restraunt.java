@@ -9,15 +9,24 @@ package model.Restraunt;
  * @author Anshul
  */
 public class Restraunt {
-
-    public Restraunt(int aInt, String string, String string1, String string2, String string3) {
-    }
     private int id;
     private String restraunt;
-    private String city;
     private String address;
+    private String city;
     private String zipcode;
+    
+    public Restraunt() {
+    
+    }
 
+    public Restraunt(int id, String restraunt, String address, String city, String zipcode) {
+        this.id = id;
+        this.restraunt = restraunt;
+        this.address = address;
+        this.city = city;
+        this.zipcode = zipcode;
+    }
+    
     public int getId() {
         return id;
     }

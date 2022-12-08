@@ -4,6 +4,13 @@
  */
 package ui.lifestyle;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Hotel.Hotel;
+import model.Restraunt.Restraunt;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author Anshul
@@ -15,6 +22,7 @@ public class RestrauntCrud extends javax.swing.JPanel {
      */
     public RestrauntCrud() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -64,16 +72,27 @@ public class RestrauntCrud extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Restraunt", "Address", "City", "Zipcode"
+                "Restraunt", "Address", "City", "Zipcode", "Id"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 460, 170));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 600, 10));
@@ -160,24 +179,147 @@ public class RestrauntCrud extends javax.swing.JPanel {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
+         if(crRes.getText().isEmpty() || crAddress.getText().isEmpty() || crCity.getText().isEmpty() ||
+                crZipcode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
+            return;
+        }
+        
+        String restraunt = crRes.getText();
+        String address = crAddress.getText();
+        String city = crCity.getText();
+        String zipcode = crZipcode.getText();
+        
+        Restraunt r = new Restraunt();
+        
+        r.setRestraunt(restraunt);
+        r.setAddress(address);
+        r.setCity(city);
+        r.setZipcode(zipcode);
+        MySQLUtil.addRestraunt(r);
+        
+        JOptionPane.showMessageDialog(this, "Record created successfully!");
+        
+        crRes.setText("");
+        crAddress.setText("");
+        crCity.setText("");
+        crZipcode.setText("");
+        
+        populateTable();
+         
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
+        if(upRes.getText().isEmpty() || upAddress.getText().isEmpty() ||
+                upCity.getText().isEmpty() || upZipcode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
+            return;
+        }
+        
+        String restraunt = upRes.getText();
+        String address = upAddress.getText();
+        String city = upCity.getText();
+        String zipcode = upZipcode.getText();
+        
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
+        
+        Restraunt r = new Restraunt(id, restraunt, address, city, zipcode);
+        MySQLUtil.updateRestraunt(r);
+        
+        upRes.setText("");
+        upAddress.setText("");
+        upCity.setText("");
+        upZipcode.setText("");
+        
+        populateTable();
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         // TODO add your handling code here:
+        upRes.setText("");
+        upAddress.setText("");
+        upCity.setText("");
+        upZipcode.setText("");
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String restraunt = model.getValueAt(selectedRowIndex, 0).toString();
+        String address = model.getValueAt(selectedRowIndex, 1).toString();
+        String city = model.getValueAt(selectedRowIndex, 2).toString();
+        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+        
+        upRes.setText(restraunt);
+        upAddress.setText(address);
+        upCity.setText(city);
+        upZipcode.setText(zipcode);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        String restraunt = model.getValueAt(selectedRowIndex, 0).toString();
+        String address = model.getValueAt(selectedRowIndex, 1).toString();
+        String city = model.getValueAt(selectedRowIndex, 2).toString();
+        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
+        
+        Restraunt r = new Restraunt(id, restraunt, address, city, zipcode);
+        
+        MySQLUtil.deleteRestraunt(r);
+        JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
+        
+        upRes.setText("");
+        upAddress.setText("");
+        upCity.setText("");
+        upZipcode.setText("");
+        
+        populateTable();
     }//GEN-LAST:event_deleteBtnActionPerformed
-
+    
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        ArrayList<Restraunt> allRestraunt = MySQLUtil.getAllRestraunt();
+        
+        for(Restraunt r : allRestraunt) {
+            Object[] row = new Object[5];
+            row[0] = r.getRestraunt();
+            row[1] = r.getAddress();
+            row[2] = r.getCity();
+            row[3] = r.getZipcode();
+            row[4] = r.getId();
+            
+            model.addRow(row);
+        }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearBtn;

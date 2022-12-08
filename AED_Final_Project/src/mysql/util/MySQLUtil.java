@@ -94,9 +94,8 @@ public class MySQLUtil {
             ResultSet rs = ps.executeQuery();
             System.out.println("---------" + rs);
                     
-                        
             while(rs.next()) {
-                Restraunt res = new Restraunt(rs.getInt("id"), rs.getString("restraunt"), rs.getString("city"), rs.getString("address"), rs.getString("zipcode"));
+                Restraunt res = new Restraunt(rs.getInt("id"), rs.getString("restraunt"),rs.getString("address"), rs.getString("city"), rs.getString("zipcode"));
                 restrauntList.add(res);
             }
             
@@ -107,16 +106,54 @@ public class MySQLUtil {
         return restrauntList;
     }
     
-    public static void addRestraunt(Connection conn, Restraunt restraunt) {
-        String query = "INSERT INTO restraunt (id, first_name, last_name, email, gender, password, role)"
-        + " values (?, ?, ?, ?, ?, ?, ?)";
+    public static void addRestraunt(Restraunt restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO restraunt (restraunt, address, city, zipcode)"
+        + " values (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, restraunt.getRestraunt());
+            ps.setString(2, restraunt.getAddress());
+            ps.setString(3, restraunt.getCity());
+            ps.setString(4, restraunt.getZipcode());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateRestraunt(Restraunt restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "UPDATE restraunt SET restraunt = ?, address = ?, city = ?, zipcode = ? WHERE id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, restraunt.getRestraunt());
+            ps.setString(2, restraunt.getAddress());
+            ps.setString(3, restraunt.getCity());
+            ps.setString(4, restraunt.getZipcode());
+            ps.setInt(5, restraunt.getId());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteRestraunt(Restraunt restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "DELETE FROM restraunt WHERE id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, restraunt.getId());
-            ps.setString(2, restraunt.getRestraunt());
-            ps.setString(3, restraunt.getCity());
-            ps.setString(4, restraunt.getAddress());
-            ps.setString(5, restraunt.getZipcode());
+            
             ps.execute();
             
             conn.close();
@@ -177,7 +214,8 @@ public class MySQLUtil {
          
             while(rs.next()) {
                 Hotel res = new Hotel(rs.getInt("id"), rs.getString("hotel"), 
-                        rs.getString("city"), rs.getString("address"),
+                        rs.getString("address"),
+                        rs.getString("city"),
                         rs.getString("zipcode"));
 
                 hotelList.add(res);
@@ -194,13 +232,13 @@ public class MySQLUtil {
     public static void addHotel(Hotel hotel) {
         Connection conn = MySQLUtil.connectMySQL();
         
-        String query = "INSERT INTO hotel (hotel, city, address, zipcode)"
+        String query = "INSERT INTO hotel (hotel, address, city, zipcode)"
         + " values (?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, hotel.getHotel());
-            ps.setString(2, hotel.getCity());
-            ps.setString(3, hotel.getAddress());
+            ps.setString(2, hotel.getAddress());
+            ps.setString(3, hotel.getCity());
             ps.setString(4, hotel.getZipcode());
             
             ps.execute();
@@ -214,12 +252,12 @@ public class MySQLUtil {
     public static void updateHotel(Hotel hotel) {
         Connection conn = MySQLUtil.connectMySQL();
         
-        String query = "UPDATE hotel set hotel = (?), city = (?), address = (?), zipcode = (?) where id = (?)";
+        String query = "UPDATE hotel SET hotel = ?, address = ?, city = ?, zipcode = ? WHERE id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, hotel.getHotel());
-            ps.setString(2, hotel.getCity());
-            ps.setString(3, hotel.getAddress());
+            ps.setString(2, hotel.getAddress());
+            ps.setString(3, hotel.getCity());
             ps.setString(4, hotel.getZipcode());
             ps.setInt(5, hotel.getId());
             
@@ -234,7 +272,7 @@ public class MySQLUtil {
     public static void deleteHotel(Hotel hotel) {
         Connection conn = MySQLUtil.connectMySQL();
         
-        String query = "DELETE hotel where id = (?)";
+        String query = "DELETE FROM hotel WHERE id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, hotel.getId());

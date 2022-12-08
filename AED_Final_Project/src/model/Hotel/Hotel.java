@@ -12,20 +12,19 @@ package model.Hotel;
 public class Hotel {
     private int id;
     private String hotel;
-    private String city;
     private String address;
+    private String city;
     private String zipcode;
 
     public Hotel() {
         
     }
     
-    public Hotel(int id, String hotel, String city, String address, String zipcode) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Hotel(int id, String hotel, String address, String city, String zipcode) {
         this.id = id;
         this.hotel = hotel;
-        this.city = city;
         this.address = address;
+        this.city = city;
         this.zipcode = zipcode;
     }
 
@@ -44,15 +43,7 @@ public class Hotel {
     public void setHotel(String hotel) {
         this.hotel = hotel;
     }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
+    
     public String getAddress() {
         return address;
     }
@@ -61,6 +52,14 @@ public class Hotel {
         this.address = address;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
     public String getZipcode() {
         return zipcode;
     }

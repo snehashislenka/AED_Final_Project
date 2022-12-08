@@ -22,10 +22,8 @@ public class HotelCrud extends javax.swing.JPanel {
      * Creates new form HotelCrud
      */
     
-    Hotel allHotel;
     public HotelCrud() {
         initComponents();
-//        this.allHotel = allHotel;
         populateTable();
     }
 
@@ -76,16 +74,25 @@ public class HotelCrud extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Hotel", "Id", "Address", "City", "Zipcode"
+                "Hotel", "Address", "City", "Zipcode", "Id"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 460, 170));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 600, 10));
@@ -178,7 +185,7 @@ public class HotelCrud extends javax.swing.JPanel {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-          if(crHotel.getText().isEmpty() || crAddress.getText().isEmpty() || crCity.getText().isEmpty() ||
+        if(crHotel.getText().isEmpty() || crAddress.getText().isEmpty() || crCity.getText().isEmpty() ||
                 crZipcode.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
             return;
@@ -228,25 +235,11 @@ public class HotelCrud extends javax.swing.JPanel {
         }
           
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Hotel h = (Hotel) model.getValueAt(selectedRowIndex, 0);
         
-        h.setHotel(hotel);
-        h.setAddress(address);
-        h.setCity(city);
-        h.setZipcode(zipcode);
-        h.setId(h.getId());
+        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
         
+        Hotel h = new Hotel(id, hotel, address, city, zipcode);
         MySQLUtil.updateHotel(h);
-        
-//        selectedHotel.setHotel(hotel);
-//        selectedHotel.setAddress(address);
-//        selectedHotel.setCity(city);
-//        selectedHotel.setZipcode(zipcode);
-        
-        model.setValueAt(hotel, jTable1.getSelectedRow(), 0);
-        model.setValueAt(address, jTable1.getSelectedRow(), 1);
-        model.setValueAt(city, jTable1.getSelectedRow(), 2);
-        model.setValueAt(zipcode, jTable1.getSelectedRow(), 3);
         
         upHotel.setText("");
         upAddress.setText("");
@@ -270,12 +263,16 @@ public class HotelCrud extends javax.swing.JPanel {
         }
           
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Hotel h = (Hotel) model.getValueAt(selectedRowIndex, 0);
+        String hotel = model.getValueAt(selectedRowIndex, 0).toString();
+        String address = model.getValueAt(selectedRowIndex, 1).toString();
+        String city = model.getValueAt(selectedRowIndex, 2).toString();
+        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+//        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4));
         
-        upHotel.setText(h.getHotel());
-        upAddress.setText(h.getAddress());
-        upCity.setText(h.getCity());
-        upZipcode.setText(h.getZipcode());
+        upHotel.setText(hotel);
+        upAddress.setText(address);
+        upCity.setText(city);
+        upZipcode.setText(zipcode);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -288,11 +285,17 @@ public class HotelCrud extends javax.swing.JPanel {
         }
           
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Hotel h = (Hotel) model.getValueAt(selectedRowIndex, 0);
+        
+        String hotel = model.getValueAt(selectedRowIndex, 0).toString();
+        String address = model.getValueAt(selectedRowIndex, 1).toString();
+        String city = model.getValueAt(selectedRowIndex, 2).toString();
+        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
+        
+        Hotel h = new Hotel(id, hotel, address, city, zipcode);
         
         MySQLUtil.deleteHotel(h);
-//        allCity.deleteCity(h);
-//        JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
+        JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
 
         upHotel.setText("");
         upAddress.setText("");
@@ -320,8 +323,8 @@ public class HotelCrud extends javax.swing.JPanel {
         for(Hotel h : allHotel) {
             Object[] row = new Object[5];
             row[0] = h.getHotel();
-            row[1] = h.getCity();
-            row[2] = h.getAddress();
+            row[1] = h.getAddress();
+            row[2] = h.getCity();
             row[3] = h.getZipcode();
             row[4] = h.getId();
             
