@@ -32,25 +32,28 @@ public class RestrauntCrud extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        submitBtn = new javax.swing.JButton();
+        crCity = new javax.swing.JTextField();
+        crZipcode = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jTextField12 = new javax.swing.JTextField();
+        crRes = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        crAddress = new javax.swing.JTextField();
+        updateBtn = new javax.swing.JButton();
+        upCity = new javax.swing.JTextField();
+        upZipcode = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        upRes = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        upAddress = new javax.swing.JTextField();
+        clearBtn = new javax.swing.JButton();
+        viewBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -72,7 +75,7 @@ public class RestrauntCrud extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 580, 170));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 460, 170));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 600, 10));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 600, 10));
 
@@ -81,15 +84,15 @@ public class RestrauntCrud extends javax.swing.JPanel {
         jLabel8.setText("Create");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 600, 30));
 
-        jButton6.setText("Submit");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                submitBtnActionPerformed(evt);
             }
         });
-        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 30));
-        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
-        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
+        add(submitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 30));
+        add(crCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
+        add(crZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
 
         jLabel15.setText("City");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
@@ -100,21 +103,21 @@ public class RestrauntCrud extends javax.swing.JPanel {
         jLabel17.setText("Zipcode");
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 20));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 600, 10));
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
+        add(crRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
 
         jLabel19.setText("Restraunt");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
-        add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
+        add(crAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
 
-        jButton8.setText("Update");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
-        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 150, 30));
-        add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 30));
-        add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 200, 30));
+        add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 150, 30));
+        add(upCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 30));
+        add(upZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 200, 30));
 
         jLabel23.setText("City");
         add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, 20));
@@ -124,25 +127,65 @@ public class RestrauntCrud extends javax.swing.JPanel {
 
         jLabel25.setText("Zipcode");
         add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, 20));
-        add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 30));
+        add(upRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 30));
 
         jLabel26.setText("Restraunt");
         add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, 20));
-        add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 200, 30));
+        add(upAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 200, 30));
+
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
+        add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 90, 30));
+
+        viewBtn.setText("View");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBtnActionPerformed(evt);
+            }
+        });
+        add(viewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 90, 30));
+
+        deleteBtn.setText("Delete");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_submitBtnActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearBtnActionPerformed
+
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton clearBtn;
+    private javax.swing.JTextField crAddress;
+    private javax.swing.JTextField crCity;
+    private javax.swing.JTextField crRes;
+    private javax.swing.JTextField crZipcode;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -158,13 +201,12 @@ public class RestrauntCrud extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton submitBtn;
+    private javax.swing.JTextField upAddress;
+    private javax.swing.JTextField upCity;
+    private javax.swing.JTextField upRes;
+    private javax.swing.JTextField upZipcode;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

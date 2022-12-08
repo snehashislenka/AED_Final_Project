@@ -16,8 +16,17 @@ public class Hotel {
     private String address;
     private String zipcode;
 
+    public Hotel() {
+        
+    }
+    
     public Hotel(int id, String hotel, String city, String address, String zipcode) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.id = id;
+        this.hotel = hotel;
+        this.city = city;
+        this.address = address;
+        this.zipcode = zipcode;
     }
 
     public int getId() {
@@ -60,6 +69,9 @@ public class Hotel {
         this.zipcode = zipcode;
     }
     
-    
+//    @Override
+//    public String toString() {
+//        return hotel;
+//    }
 }
 

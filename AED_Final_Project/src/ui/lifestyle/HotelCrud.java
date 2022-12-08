@@ -5,8 +5,10 @@
 package ui.lifestyle;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Hotel.Hotel;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
 
@@ -19,8 +21,11 @@ public class HotelCrud extends javax.swing.JPanel {
     /**
      * Creates new form HotelCrud
      */
+    
+    Hotel allHotel;
     public HotelCrud() {
         initComponents();
+//        this.allHotel = allHotel;
         populateTable();
     }
 
@@ -39,7 +44,7 @@ public class HotelCrud extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        submitBtn = new javax.swing.JButton();
         crCity = new javax.swing.JTextField();
         crZipcode = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -49,7 +54,7 @@ public class HotelCrud extends javax.swing.JPanel {
         crHotel = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         crAddress = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
         upCity = new javax.swing.JTextField();
         upZipcode = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
@@ -58,6 +63,9 @@ public class HotelCrud extends javax.swing.JPanel {
         upHotel = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         upAddress = new javax.swing.JTextField();
+        clearBtn = new javax.swing.JButton();
+        viewBtn = new javax.swing.JButton();
+        deleteBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,18 +76,18 @@ public class HotelCrud extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Hotel", "Address", "City", "Zipcode"
+                "Hotel", "Id", "Address", "City", "Zipcode"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 580, 170));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 460, 170));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 600, 10));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 600, 10));
 
@@ -88,13 +96,13 @@ public class HotelCrud extends javax.swing.JPanel {
         jLabel8.setText("Create");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 600, 30));
 
-        jButton6.setText("Submit");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                submitBtnActionPerformed(evt);
             }
         });
-        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 30));
+        add(submitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 30));
         add(crCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
         add(crZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
 
@@ -119,13 +127,13 @@ public class HotelCrud extends javax.swing.JPanel {
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
         add(crAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
 
-        jButton8.setText("Update");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
-        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 150, 30));
+        add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 150, 30));
         add(upCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 200, 30));
         add(upZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 200, 30));
 
@@ -142,84 +150,192 @@ public class HotelCrud extends javax.swing.JPanel {
         jLabel26.setText("Hotel");
         add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, 20));
         add(upAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 200, 30));
+
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
+        add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 90, 30));
+
+        viewBtn.setText("View");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBtnActionPerformed(evt);
+            }
+        });
+        add(viewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 90, 30));
+
+        deleteBtn.setText("Delete");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
           if(crHotel.getText().isEmpty() || crAddress.getText().isEmpty() || crCity.getText().isEmpty() ||
                 crZipcode.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Fill all the fields");
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
             return;
         }
-//        String name = crHotel.getText();
-//        String address = crAddress.getText();
-//        String city = crCity.getText();
-//        String zipcode = crZipcode.getText();
-//
-//        Employee e = allEmployees.addNewEmployee();
-//        e.setName(name);
-//        e.setEmployeeId(employeeId);
-//        e.setAge(age);
-//        e.setGender(gender);
-//        e.setStartDate(startDate);
-//        e.setLevel(level);
-//        e.setTeamInfo(teamInfo);
-//        e.setPositionTitle(positionTitle);
-//        e.setCellPhoneNumber(cellPhoneNumber);
-//        e.setEmailAddress(emailAddress);
-//        e.setPhoto(photo);
-//
-//        JOptionPane.showMessageDialog(this, "New Employee added!");
-//
-//        txtName.setText("");
-//        txtEmployeeId.setText("");
-//        txtAge.setText("");
-//        txtCellPhoneNumber.setText("");
-//        txtEmailAddress.setText("");
-//        txtGender.setSelectedItem("");
-//        txtLevel.setText("");
-//        labelPhoto.setText("");
-//        txtPositionTitle.setText("");
-//        txtStartDate.setText(null);
-//        txtTeamInfo.setText("");
-//        imgPhoto.setText("");
-//        imgPhoto.setIcon(null);
-    }//GEN-LAST:event_jButton6ActionPerformed
+          
+        String hotel = crHotel.getText();
+        String address = crAddress.getText();
+        String city = crCity.getText();
+        String zipcode = crZipcode.getText();
+        
+        Hotel h = new Hotel();
+        
+        h.setHotel(hotel);
+        h.setAddress(address);
+        h.setCity(city);
+        h.setZipcode(zipcode);
+        MySQLUtil.addHotel(h);
+        
+        JOptionPane.showMessageDialog(this, "Record created successfully!");
+        
+        crHotel.setText("");
+        crAddress.setText("");
+        crCity.setText("");
+        crZipcode.setText("");
+        
+        populateTable();
+    }//GEN-LAST:event_submitBtnActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+        if(upHotel.getText().isEmpty() || upAddress.getText().isEmpty() ||
+                upCity.getText().isEmpty() || upZipcode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
+            return;
+        }
+        
+        String hotel = upHotel.getText();
+        String address = upAddress.getText();
+        String city = upCity.getText();
+        String zipcode = upZipcode.getText();
+        
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Hotel h = (Hotel) model.getValueAt(selectedRowIndex, 0);
+        
+        h.setHotel(hotel);
+        h.setAddress(address);
+        h.setCity(city);
+        h.setZipcode(zipcode);
+        h.setId(h.getId());
+        
+        MySQLUtil.updateHotel(h);
+        
+//        selectedHotel.setHotel(hotel);
+//        selectedHotel.setAddress(address);
+//        selectedHotel.setCity(city);
+//        selectedHotel.setZipcode(zipcode);
+        
+        model.setValueAt(hotel, jTable1.getSelectedRow(), 0);
+        model.setValueAt(address, jTable1.getSelectedRow(), 1);
+        model.setValueAt(city, jTable1.getSelectedRow(), 2);
+        model.setValueAt(zipcode, jTable1.getSelectedRow(), 3);
+        
+        upHotel.setText("");
+        upAddress.setText("");
+        upCity.setText("");
+        upZipcode.setText("");
+        
+        populateTable();
+    }//GEN-LAST:event_updateBtnActionPerformed
 
     private void crHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crHotelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_crHotelActionPerformed
 
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Hotel h = (Hotel) model.getValueAt(selectedRowIndex, 0);
+        
+        upHotel.setText(h.getHotel());
+        upAddress.setText(h.getAddress());
+        upCity.setText(h.getCity());
+        upZipcode.setText(h.getZipcode());
+    }//GEN-LAST:event_viewBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Hotel h = (Hotel) model.getValueAt(selectedRowIndex, 0);
+        
+        MySQLUtil.deleteHotel(h);
+//        allCity.deleteCity(h);
+//        JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
+
+        upHotel.setText("");
+        upAddress.setText("");
+        upCity.setText("");
+        upZipcode.setText("");
+        
+        populateTable();
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+        upHotel.setText("");
+        upAddress.setText("");
+        upCity.setText("");
+        upZipcode.setText("");
+    }//GEN-LAST:event_clearBtnActionPerformed
+
     
     private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
         
-        Connection conn = connectMySQL();
-//        DefaultTableModel model = (DefaultTableModel) tableEmployee.getModel();
-//        model.setRowCount(0);
+        ArrayList<Hotel> allHotel = MySQLUtil.getAllHotel();
         
-//        allHotels allHotels = MySQLUtil.getAllHotel(conn);
-        
-//        for(Employee e : allEmployees.getAllEmployees()) {
-//            Object[] row = new Object[12];
-//            row[0] = e;
-//            row[1] = e.getEmployeeId();
-//            row[2] = e.getAge();
-//            
-//            model.addRow(row);
-//        }
+        for(Hotel h : allHotel) {
+            Object[] row = new Object[5];
+            row[0] = h.getHotel();
+            row[1] = h.getCity();
+            row[2] = h.getAddress();
+            row[3] = h.getZipcode();
+            row[4] = h.getId();
+            
+            model.addRow(row);
+        }
     }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearBtn;
     private javax.swing.JTextField crAddress;
     private javax.swing.JTextField crCity;
     private javax.swing.JTextField crHotel;
     private javax.swing.JTextField crZipcode;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -235,9 +351,12 @@ public class HotelCrud extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton submitBtn;
     private javax.swing.JTextField upAddress;
     private javax.swing.JTextField upCity;
     private javax.swing.JTextField upHotel;
     private javax.swing.JTextField upZipcode;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

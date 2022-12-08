@@ -30,7 +30,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "1234";
+        String PASSWORD = "root";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -166,16 +166,44 @@ public class MySQLUtil {
         }
     }
     
-    public static void getAllHotel(Connection conn) {
+    public static ArrayList<Hotel> getAllHotel() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Hotel> hotelList = new ArrayList();
         
         String query = "SELECT * FROM hotel";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()) {
-                System.out.println("ID: " + rs.getString(1) + " " + rs.getString(2));
+         
+            while(rs.next()) {
+                Hotel res = new Hotel(rs.getInt("id"), rs.getString("hotel"), 
+                        rs.getString("city"), rs.getString("address"),
+                        rs.getString("zipcode"));
+
+                hotelList.add(res);
             }
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return hotelList;
+    }
+    
+    public static void addHotel(Hotel hotel) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO hotel (hotel, city, address, zipcode)"
+        + " values (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, hotel.getHotel());
+            ps.setString(2, hotel.getCity());
+            ps.setString(3, hotel.getAddress());
+            ps.setString(4, hotel.getZipcode());
+            
+            ps.execute();
             
             conn.close();
         } catch (SQLException ex) {
@@ -183,16 +211,33 @@ public class MySQLUtil {
         }
     }
     
-    public static void addHotel(Connection conn, Hotel hotel) {
-        String query = "INSERT INTO hotel (id, first_name, last_name, email, gender, password, role)"
-        + " values (?, ?, ?, ?, ?, ?, ?)";
+    public static void updateHotel(Hotel hotel) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "UPDATE hotel set hotel = (?), city = (?), address = (?), zipcode = (?) where id = (?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, hotel.getHotel());
+            ps.setString(2, hotel.getCity());
+            ps.setString(3, hotel.getAddress());
+            ps.setString(4, hotel.getZipcode());
+            ps.setInt(5, hotel.getId());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteHotel(Hotel hotel) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "DELETE hotel where id = (?)";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, hotel.getId());
-              ps.setString(2, hotel.getHotel());
-            ps.setString(3, hotel.getCity());
-            ps.setString(4, hotel.getAddress());
-            ps.setString(5, hotel.getZipcode());
             
             ps.execute();
             
