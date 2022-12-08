@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Hotel.Hotel;
 import model.Flight.Flight;
+import model.Hotel.HotelBookings;
 import model.Person.Person;
+import model.Restraunt.Restraunt;
 import model.bus.Bus;
 
 /**
@@ -21,10 +24,10 @@ import model.bus.Bus;
  * @author slenk
  */
 public class MySQLUtil {
-    public static void main(String[] args) {
-        Connection conn = connectMySQL();
-        getAllPerson(conn);
-    }
+//    public static void main(String[] args) {
+//        Connection conn = connectMySQL();
+//        getAllPerson();
+//    }
     
     /*
         Get MySQL Connection
@@ -33,7 +36,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "1234";
+        String PASSWORD = "root";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -46,14 +49,11 @@ public class MySQLUtil {
         return conn;    
     }
     
-    /*
-        All Person related CRUD DB operations
-    */
-    
-    public static void getAllPerson(Connection conn) {
-        
+    public static void getAllPerson() {
         String query = "SELECT * FROM person";
         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             
@@ -144,6 +144,83 @@ public class MySQLUtil {
         }
     }
     
+    public static ArrayList<Restraunt> getAllRestraunt() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Restraunt> restrauntList = new ArrayList();
+        
+        String query = "SELECT * FROM restraunt";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("---------" + rs);
+                    
+            while(rs.next()) {
+                Restraunt res = new Restraunt(rs.getInt("id"), rs.getString("restraunt"),rs.getString("address"), rs.getString("city"), rs.getString("zipcode"));
+                restrauntList.add(res);
+            }
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return restrauntList;
+    }
+    
+    public static void addRestraunt(Restraunt restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO restraunt (restraunt, address, city, zipcode)"
+        + " values (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, restraunt.getRestraunt());
+            ps.setString(2, restraunt.getAddress());
+            ps.setString(3, restraunt.getCity());
+            ps.setString(4, restraunt.getZipcode());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateRestraunt(Restraunt restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "UPDATE restraunt SET restraunt = ?, address = ?, city = ?, zipcode = ? WHERE id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, restraunt.getRestraunt());
+            ps.setString(2, restraunt.getAddress());
+            ps.setString(3, restraunt.getCity());
+            ps.setString(4, restraunt.getZipcode());
+            ps.setInt(5, restraunt.getId());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteRestraunt(Restraunt restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "DELETE FROM restraunt WHERE id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, restraunt.getId());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /*
         Person Session Operations
     */
@@ -246,9 +323,108 @@ public class MySQLUtil {
         }
     }
     
-    /*
-        Bus SQL Operations
-    */
+    public static ArrayList<Hotel> getAllHotel() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Hotel> hotelList = new ArrayList();
+        
+        String query = "SELECT * FROM hotel";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                Hotel res = new Hotel(rs.getInt("id"), rs.getString("hotel"), 
+                        rs.getString("address"),
+                        rs.getString("city"),
+                        rs.getString("zipcode"));
+
+                hotelList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hotelList;
+    }
+    
+    public static void addHotel(Hotel hotel) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO hotel (hotel, address, city, zipcode)"
+        + " values (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, hotel.getHotel());
+            ps.setString(2, hotel.getAddress());
+            ps.setString(3, hotel.getCity());
+            ps.setString(4, hotel.getZipcode());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateHotel(Hotel hotel) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "UPDATE hotel SET hotel = ?, address = ?, city = ?, zipcode = ? WHERE id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, hotel.getHotel());
+            ps.setString(2, hotel.getAddress());
+            ps.setString(3, hotel.getCity());
+            ps.setString(4, hotel.getZipcode());
+            ps.setInt(5, hotel.getId());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteHotel(Hotel hotel) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "DELETE FROM hotel WHERE id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, hotel.getId());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static ArrayList<HotelBookings> getHotelBookings(HotelBookings hotelBookings) {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<HotelBookings> bookingList = new ArrayList();
+        
+        String query = "SELECT h.*, p.firstName + ' ' + p.lastName as user FROM hotel_bookings h INNER JOIN person p ON h.userId = p.id WHERE hotelId = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, hotelBookings.getHotelId());
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                HotelBookings res = new HotelBookings(rs.getInt("id"), rs.getInt("hotelId"),
+                        rs.getInt("room_no"),  rs.getInt("userId"),
+                 rs.getDate("from"), rs.getDate("to"), rs.getInt("no_of_rooms"),
+                 rs.getString("status"), rs.getString("user"));
+
+                bookingList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bookingList;
+    }
     
     public static void addBusDetails(String departureCity, String arrivalCity, String departureTime,
             String arrivalTime, String departureBusTerminal, String arrivalBusTerminal, String departureBusStation,
@@ -288,10 +464,6 @@ public class MySQLUtil {
         }
     }
     
-    /*
-        Get all bus details
-    */
-    
     public static ArrayList<Bus> getAllBusDetails() {
         ArrayList<Bus> busList = new ArrayList<>();
         
@@ -323,10 +495,9 @@ public class MySQLUtil {
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return busList;
     }
-    
+
     public static Bus getBusById(int busId) {
         Bus bus = null;
         String query = "SELECT * FROM bus WHERE busId = ?";
@@ -454,10 +625,10 @@ public class MySQLUtil {
                 busSearchList.add(bus);
             }
             
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex); 
         }
         
         return busSearchList;
     }
-    
 }
