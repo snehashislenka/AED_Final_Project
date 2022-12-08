@@ -10,6 +10,6 @@ package email.util;
  */
 public class Test {
     public static void main(String[] args) throws Exception{
-        EmailUtil.sendEmail("parjita.munshi04@gmail.com");
+        EmailUtil.sendEmail("slenkadev@gmail.com");
     }
 }

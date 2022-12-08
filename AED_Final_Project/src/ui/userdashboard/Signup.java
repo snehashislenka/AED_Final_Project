@@ -6,8 +6,6 @@ package ui.userdashboard;
 
 import java.sql.Connection;
 import javax.swing.JFrame;
-import model.Person.Person;
-import model.Person.Roles;
 import mysql.util.MySQLUtil;
 
 /**
@@ -176,13 +174,10 @@ public class Signup extends javax.swing.JFrame {
         String firstname = lblFirstname.getText().trim();
         String lastname = lblLastname.getText().trim();
         String gender = lblGender.getText().trim();
-        String roled = Roles.PASSENGER.toString();
-        Roles role = Roles.PASSENGER;
-        System.out.println(roled);
-        Person newPerson = new Person(firstname, lastname, gender, role, email, password);
+        String role = "PASSENGER";
         
         Connection conn = MySQLUtil.connectMySQL();
-        MySQLUtil.addPerson(conn, newPerson);
+        MySQLUtil.addPerson(conn, firstname, lastname, gender, role, email, password);
         
         dispose();
     }//GEN-LAST:event_btnSignupActionPerformed

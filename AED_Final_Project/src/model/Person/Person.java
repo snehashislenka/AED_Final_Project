@@ -10,18 +10,18 @@ package model.Person;
  */
 
 public class Person {
-    private static int counter = 100;
+
     private int id;
     private String firstname;
     private String lastname;
     private String gender;
-    private Roles role;
+    private String role;
     private String email;
     private String password;
 
-    public Person(String firstname, String lastname, String gender, 
-            Roles role, String email, String password) {
-        this.id = ++counter;
+    public Person(int id, String firstname, String lastname, String gender, 
+            String role, String email, String password) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
@@ -29,8 +29,6 @@ public class Person {
         this.email = email;
         this.password = password;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -64,11 +62,11 @@ public class Person {
         this.gender = gender;
     }
 
-    public Roles getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Roles role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
