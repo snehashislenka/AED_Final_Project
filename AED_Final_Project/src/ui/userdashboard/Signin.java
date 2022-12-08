@@ -7,6 +7,8 @@ package ui.userdashboard;
 import auth.AuthenticationUtil;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import mysql.util.MySQLUtil;
+import model.Person.Person;
 
 /**
  *
@@ -161,6 +163,10 @@ public class Signin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid credentials!");
         } else {
             JOptionPane.showMessageDialog(this, "Sign in successful!");
+            Person person = MySQLUtil.getPerson(email);
+
+            MySQLUtil.savePersonSession(person.getId(), person.getRole());
+            
             dispose();
             Dashboard dashboard = new Dashboard();
             dashboard.setVisible(true);
