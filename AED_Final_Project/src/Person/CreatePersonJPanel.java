@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Person.Roles;
+//import model.Person.Roles;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
 
@@ -170,7 +170,7 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
             ps.setString(4, Email);
             ps.setString(5, Gender);
             ps.setString(6, Password);
-            ps.setString(7, Roles.PASSENGER.toString());
+//            ps.setString(7, Roles.PASSENGER.toString());
             
 //            System.out.println(person.getRole().toString());
 //            ps.setString(7, person.getRole().toString());

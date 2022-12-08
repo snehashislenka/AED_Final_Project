@@ -20,6 +20,7 @@ import javax.swing.border.Border;
 import javax.xml.parsers.ParserConfigurationException;
 import model.Flight.Flight;
 import org.xml.sax.SAXException;
+import ui.flightUIPanels.CallFlightUIPanels;
 import ui.flightUIPanels.FlightSeatSelection;
 import util.flights.FlightUtils;
 
@@ -56,8 +57,6 @@ public class FlightsDisplay extends javax.swing.JPanel {
     public void populateFlightSearchPane() throws IOException, InterruptedException, 
             ParserConfigurationException, SAXException {
         
-        System.out.println("populate method!");
-        
         ArrayList<Flight> flightSearchList = FlightUtils
                 .getListOfFlightSearch(this.departureCity, this.arrivalCity,
                         this.departureDate, this.passenger);
@@ -81,9 +80,10 @@ public class FlightsDisplay extends javax.swing.JPanel {
                     lbl.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            JOptionPane.showMessageDialog(comp, "Clicked"
-                                    + flight.getFlightCompanyCode() + "-" + flight.getFlightType()
-                            + flight.getFlightCompanyName());
+//                            JOptionPane.showMessageDialog(comp, "Clicked"
+//                                    + flight.getFlightCompanyCode() + "-" + flight.getFlightType()
+//                            + flight.getFlightCompanyName());
+                            CallFlightUIPanels.callFlightUIPanels(passenger, flight);
                         }
                     });
                 }

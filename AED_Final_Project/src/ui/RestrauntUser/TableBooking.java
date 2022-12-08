@@ -39,13 +39,13 @@ public class TableBooking extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,7 +94,6 @@ public class TableBooking extends javax.swing.JPanel {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 290, 180));
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 180, 30));
 
         jPanel5.setBackground(new java.awt.Color(255, 0, 102));
         jPanel5.setForeground(new java.awt.Color(255, 0, 102));
@@ -142,6 +141,7 @@ public class TableBooking extends javax.swing.JPanel {
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 100, 60));
 
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 80, -1, 100));
+        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 252, 180, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -172,7 +172,7 @@ public class TableBooking extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
