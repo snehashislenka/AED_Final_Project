@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Flight.Flight;
+//import model.Flight.Flight;
 import model.Person.Person;
 
 /**
@@ -27,7 +27,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "1234";
+        String PASSWORD = "ParjitaMunshi461998@";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -83,42 +83,42 @@ public class MySQLUtil {
         Flight SQL Operations
     */
     
-    public static void addFlight(Connection conn, Flight flight) {
-        
-        System.out.println("addFlight sql called");
-        
-        String query = "INSERT INTO flight (flightId, totalFlightDuration, totalMiles, "
-                + "departingTimeStamp, arrivalTimeStamp, departureAirport, departureTerminal, "
-                + "arrivalAirport, arrivalTerminal, flightCompanyCode, flightCompanyName, "
-                + "flightType, seats, departingCity, arrivalCity, price)"
-        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            
-            PreparedStatement ps = conn.prepareStatement(query);
-            
-            ps.setInt(1, flight.getFlightId());
-            ps.setString(2, flight.getTotalFlightDuration());
-            ps.setInt(3, flight.getTotalMiles());
-            ps.setString(4, flight.getDepartingTimeStamp());
-            ps.setString(5, flight.getArrivalTimeStamp());
-            ps.setString(6, flight.getDepartureAirport());
-            ps.setString(7, flight.getDepartureTerminal());
-            ps.setString(8, flight.getArrivalAirport());
-            ps.setString(9, flight.getArrivalTerminal());
-            ps.setString(10, flight.getFlightCompanyCode());
-            ps.setString(11, flight.getFlightCompanyName());
-            ps.setString(12, flight.getFlightType());
-            ps.setInt(13, flight.getSeats());
-            ps.setString(14, flight.getDepartingCity());
-            ps.setString(15, flight.getArrivalCity());
-            ps.setDouble(16, flight.getPrice());
-            
-            ps.execute();
-            
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public static void addFlight(Connection conn, Flight flight) {
+//        
+//        System.out.println("addFlight sql called");
+//        
+//        String query = "INSERT INTO flight (flightId, totalFlightDuration, totalMiles, "
+//                + "departingTimeStamp, arrivalTimeStamp, departureAirport, departureTerminal, "
+//                + "arrivalAirport, arrivalTerminal, flightCompanyCode, flightCompanyName, "
+//                + "flightType, seats, departingCity, arrivalCity, price)"
+//        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//        try {
+//            
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            
+//            ps.setInt(1, flight.getFlightId());
+//            ps.setString(2, flight.getTotalFlightDuration());
+//            ps.setInt(3, flight.getTotalMiles());
+//            ps.setString(4, flight.getDepartingTimeStamp());
+//            ps.setString(5, flight.getArrivalTimeStamp());
+//            ps.setString(6, flight.getDepartureAirport());
+//            ps.setString(7, flight.getDepartureTerminal());
+//            ps.setString(8, flight.getArrivalAirport());
+//            ps.setString(9, flight.getArrivalTerminal());
+//            ps.setString(10, flight.getFlightCompanyCode());
+//            ps.setString(11, flight.getFlightCompanyName());
+//            ps.setString(12, flight.getFlightType());
+//            ps.setInt(13, flight.getSeats());
+//            ps.setString(14, flight.getDepartingCity());
+//            ps.setString(15, flight.getArrivalCity());
+//            ps.setDouble(16, flight.getPrice());
+//            
+//            ps.execute();
+//            
+//            conn.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
 }

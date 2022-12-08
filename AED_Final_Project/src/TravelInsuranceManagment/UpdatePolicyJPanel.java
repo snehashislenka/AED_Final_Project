@@ -4,6 +4,16 @@
  */
 package TravelInsuranceManagment;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author parjita
@@ -30,17 +40,19 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         PolicyIDTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        PolicyNameTectField = new javax.swing.JTextField();
+        PolicyNameTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TenureTextField = new javax.swing.JTextField();
+        SumAssuranceTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         PremiumTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        DateTextField = new javax.swing.JTextField();
-        CreatePolicyBtn = new javax.swing.JButton();
+        TenureTextField = new javax.swing.JTextField();
+        UpdatePolicybtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Searchbtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        DateTextField = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -56,11 +68,23 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Tenure");
 
-        CreatePolicyBtn.setText("Update");
+        UpdatePolicybtn.setText("Update");
+        UpdatePolicybtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdatePolicybtnActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Category");
 
-        jButton1.setText("Search");
+        Searchbtn.setText("Search");
+        Searchbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Date");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,25 +93,27 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Searchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(PolicyIDTextField)
-                            .addComponent(PolicyNameTectField)
-                            .addComponent(TenureTextField)
+                            .addComponent(PolicyNameTextField)
+                            .addComponent(SumAssuranceTextField)
                             .addComponent(PremiumTextField)
-                            .addComponent(DateTextField)
-                            .addComponent(CreatePolicyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                            .addComponent(jTextField1))))
+                            .addComponent(TenureTextField)
+                            .addComponent(UpdatePolicybtn, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addComponent(jTextField1)
+                            .addComponent(DateTextField))))
                 .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,10 +126,10 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PolicyIDTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Searchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PolicyNameTectField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PolicyNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -112,39 +138,84 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TenureTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SumAssuranceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PremiumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(DateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addComponent(CreatePolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TenureTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DateTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(UpdatePolicybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SearchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchbtnActionPerformed
+        // TODO add your handling code here:
+        int PolicyID  =  Integer.parseInt(PolicyIDTextField.getText());
+        String query = "SELECT * FROM insurance_policy where id = '"+ PolicyID +"'";
+         try {          
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                PolicyNameTextField.setText(rs.getString("Policyname"));
+                SumAssuranceTextField.setText(rs.getString("SumAssurance"));
+                PremiumTextField.setText(rs.getString("Premium"));
+                TenureTextField.setText(rs.getString("Tenure"));
+                DateTextField.setText(rs.getString("date"));
+                
+            }  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_SearchbtnActionPerformed
+
+    private void UpdatePolicybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePolicybtnActionPerformed
+        // TODO add your handling code here:
+        String PolicyName = PolicyNameTextField.getText();
+        int PolicySumAssurance = Integer.parseInt(SumAssuranceTextField.getText());
+        int PolicyPremium = Integer.parseInt(PremiumTextField.getText());
+        int PolicyTenure = Integer.parseInt(TenureTextField.getText());
+        String PolicyDate = DateTextField.getText();
+
+        String query = "update insurance_policy set Policyname = '"+PolicyName+"',SumAssurance = '"+PolicySumAssurance+"',Premium = '"+PolicyPremium+"',Tenure = '"+PolicyTenure+"',Date = '"+PolicyDate+"'";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            JOptionPane.showMessageDialog(this,"policy Details Updates");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_UpdatePolicybtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreatePolicyBtn;
     private javax.swing.JTextField DateTextField;
     private javax.swing.JTextField PolicyIDTextField;
-    private javax.swing.JTextField PolicyNameTectField;
+    private javax.swing.JTextField PolicyNameTextField;
     private javax.swing.JTextField PremiumTextField;
+    private javax.swing.JButton Searchbtn;
+    private javax.swing.JTextField SumAssuranceTextField;
     private javax.swing.JTextField TenureTextField;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton UpdatePolicybtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

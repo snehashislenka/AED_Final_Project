@@ -16,26 +16,40 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="812" max="-2" attributes="0"/>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="232" max="-2" attributes="0"/>
+              <EmptySpace pref="339" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="240" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" pref="103" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="718" max="-2" attributes="0"/>
+                  <EmptySpace pref="82" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="jLabel1" pref="42" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="462" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="69" max="-2" attributes="0"/>
+              <EmptySpace pref="213" max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="109" max="-2" attributes="0"/>
+                  <EmptySpace pref="250" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,27 +62,21 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="EnterpriseViewTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="4">
-                <Column editable="true" title="Serial No" type="java.lang.Object"/>
-                <Column editable="true" title="Policy Name" type="java.lang.Object"/>
-                <Column editable="true" title="Category" type="java.lang.Object"/>
-                <Column editable="true" title="Sum Assurance" type="java.lang.Object"/>
-                <Column editable="true" title="Premium" type="java.lang.Object"/>
-                <Column editable="true" title="Tenure" type="java.lang.Object"/>
-                <Column editable="true" title="Creation Date" type="java.lang.Object"/>
-                <Column editable="true" title="Apply" type="java.lang.Object"/>
+              <Table columnCount="7" rowCount="4">
+                <Column editable="true" title="Enterprise Name" type="java.lang.Object"/>
+                <Column editable="true" title="FirstName" type="java.lang.Object"/>
+                <Column editable="true" title="LastName" type="java.lang.Object"/>
+                <Column editable="true" title="Gender" type="java.lang.Object"/>
+                <Column editable="true" title="Email" type="java.lang.Object"/>
+                <Column editable="true" title="Role" type="java.lang.Object"/>
+                <Column editable="true" title="Password" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -119,7 +127,12 @@
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Available Policies"/>
+        <Property name="text" type="java.lang.String" value="View Enterprise"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
     </Component>
   </SubComponents>

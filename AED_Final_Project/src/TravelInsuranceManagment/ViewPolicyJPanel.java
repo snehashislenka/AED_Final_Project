@@ -4,6 +4,17 @@
  */
 package TravelInsuranceManagment;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author parjita
@@ -15,6 +26,28 @@ public class ViewPolicyJPanel extends javax.swing.JPanel {
      */
     public ViewPolicyJPanel() {
         initComponents();
+         String query = "SELECT * FROM insurance_policy";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) PolicyTable.getModel();
+            model.setRowCount(0);
+            while(rs.next()) {
+                   Object[] row = new Object[6];
+                   row[0] = rs.getString("id");
+                   row[1] = rs.getString("Policyname");
+                   row[2] = rs.getString("Sumassurance");
+                   row[3] = rs.getString("premium");
+                   row[4] = rs.getString("Tenure");
+                   row[5] = rs.getString("Date");                   
+                   
+                   model.addRow(row);
+             }           
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -27,9 +60,11 @@ public class ViewPolicyJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        PolicyTable = new javax.swing.JTable();
+        DeleteBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        PolicyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -40,29 +75,74 @@ public class ViewPolicyJPanel extends javax.swing.JPanel {
                 "Policy ID", "Policy Name", "Category", "Sum Assurance", "Premium", "Tenure", "Creatation Date"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(PolicyTable);
+
+        DeleteBtn.setText("Delete");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Policy List");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        // TODO add your handling code here:
+        String query = "delete from insurance_policy";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            DefaultTableModel model = (DefaultTableModel) PolicyTable.getModel();
+            if(PolicyTable.getSelectedRowCount()==1){
+                model.removeRow(PolicyTable.getSelectedRow());
+            }else{
+            if(PolicyTable.getRowCount()==0){
+                JOptionPane.showMessageDialog(this,"Table is empty");                  
+            }else{
+                JOptionPane.showMessageDialog(this,"Please selectsingle Row for delete"); 
+            }
+          }
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DeleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteBtn;
+    private javax.swing.JTable PolicyTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

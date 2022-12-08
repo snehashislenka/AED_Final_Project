@@ -20,17 +20,15 @@
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel4" pref="326" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="CategoryDateTextField" max="32767" attributes="0"/>
-                      <Component id="jLabel3" max="32767" attributes="0"/>
-                      <Component id="CategoryIDTextField" max="32767" attributes="0"/>
-                      <Component id="CategoryNameTextField" max="32767" attributes="0"/>
-                      <Component id="jLabel2" max="32767" attributes="0"/>
-                      <Component id="jLabel1" pref="326" max="32767" attributes="0"/>
-                      <Component id="CategoryAddbtn" min="-2" pref="147" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="CategoryDateTextField" max="32767" attributes="0"/>
+                  <Component id="jLabel3" max="32767" attributes="0"/>
+                  <Component id="CategoryIDTextField" max="32767" attributes="0"/>
+                  <Component id="CategoryNameTextField" max="32767" attributes="0"/>
+                  <Component id="jLabel2" max="32767" attributes="0"/>
+                  <Component id="jLabel1" pref="326" max="32767" attributes="0"/>
+                  <Component id="CategoryAddbtn" min="-2" pref="147" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,7 +45,7 @@
               <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="CategoryNameTextField" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="CategoryDateTextField" min="-2" pref="41" max="-2" attributes="0"/>
