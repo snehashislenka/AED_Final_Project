@@ -6,6 +6,7 @@ package ui.flightUIPanels;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import model.Flight.Flight;
 
 /**
  *
@@ -18,6 +19,7 @@ public class FlightSeatSelection extends javax.swing.JFrame {
      */
     
     int seatCount;
+    Flight flight;
     boolean a1Toggler = false;
     boolean a2Toggler;
     boolean a3Toggler;
@@ -123,11 +125,12 @@ public class FlightSeatSelection extends javax.swing.JFrame {
         }
     }
     
-    public FlightSeatSelection(int passenger) {
+    public FlightSeatSelection(int passenger, Flight flight) {
         initComponents();
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.seatCount = passenger;
-        System.out.println("constru called");
+        this.flight = flight;
+//        System.out.println("constru called");
         this.seatsSelected = new ArrayList<>();
         if(seatCount == 1) {
             lblSeatsDesc.setText("Please select a seat.");
@@ -18966,6 +18969,9 @@ public class FlightSeatSelection extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         System.out.println(Arrays.toString(this.seatsSelected.toArray()));
+        BookFlightDetails flightBookingFrame = 
+                new BookFlightDetails(this.flight, this.seatsSelected);
+        flightBookingFrame.setVisible(true);
     }//GEN-LAST:event_btnSubmitActionPerformed
     
     /**

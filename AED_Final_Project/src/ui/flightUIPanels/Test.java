@@ -28,6 +28,7 @@ import org.xml.sax.SAXException;
 public class Test {
     public static void main(String[] args) {
         String str = "PT6H38M";
+        System.out.println(str.substring(0, str.length() - 1));
         StringBuilder stb = new StringBuilder(str);
 //        stb.replace(0, 11, "");
         stb.replace(0, 2, "");
@@ -35,6 +36,7 @@ public class Test {
         System.out.println(stb.toString());
         
         String timestamp = "2022-12-19T05:55:00";
+        System.out.println(timestamp.substring(11));
         int month = 0;
         String day = "";
         String year = "";
