@@ -11,6 +11,15 @@ package model.city;
 public class City {
     private int CityID;
     private String CityName;
+    private int NetworkID;
+
+    public int getNetworkID() {
+        return NetworkID;
+    }
+
+    public void setNetworkID(int NetworkID) {
+        this.NetworkID = NetworkID;
+    }
 
     public int getCityID() {
         return CityID;
@@ -28,9 +37,10 @@ public class City {
         this.CityName = CityName;
     }
 
-    public City(int CityID, String CityName) {
+    public City(int CityID, String CityName,int NetworkID) {
         this.CityID = CityID;
         this.CityName = CityName;
+        this.NetworkID = NetworkID;
     }
     
     

@@ -1021,14 +1021,35 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       public static void addecitydetails(String CityName){
-         String queryperson = "INSERT INTO city(name)" + "Values (?)";
+       public static ArrayList<Network> getallNetwork(){
+           String query = "select * from Network";
+           ArrayList<Network> NetworkList = new ArrayList<>();
+            try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Network network = new Network(rs.getString("name"),rs.getInt("networkId"));
+                NetworkList.add(network);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return NetworkList;
+       }
+       public static void addecitydetails(String CityName,int networkId){
+         String queryperson = "INSERT INTO city(name,networkId)" + "Values (?,?)";
             
          try {
             Connection conn = MySQLUtil.connectMySQL();
             PreparedStatement ps = conn.prepareStatement(queryperson);           
                
             ps.setString(1, CityName);
+            ps.setInt(2, networkId);
             ps.execute();
             conn.close();
             
@@ -1045,7 +1066,7 @@ public class MySQLUtil {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()) {
-                City city = new City(rs.getInt("cityId"),rs.getString("name"));
+                City city = new City(rs.getInt("cityId"),rs.getString("name"),rs.getInt("networkId"));
                 cityList.add(city);
              }           
             

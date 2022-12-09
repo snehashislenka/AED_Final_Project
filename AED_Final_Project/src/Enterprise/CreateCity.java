@@ -41,7 +41,7 @@ public class CreateCity extends javax.swing.JPanel {
         updatebtn = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        networkdropdown = new javax.swing.JComboBox<>();
+        networkDropdown = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         viewbtn = new javax.swing.JButton();
 
@@ -86,10 +86,10 @@ public class CreateCity extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("City");
 
-        networkdropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USA", "INDIA" }));
-        networkdropdown.addActionListener(new java.awt.event.ActionListener() {
+        networkDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Please select network" }));
+        networkDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                networkdropdownActionPerformed(evt);
+                networkDropdownActionPerformed(evt);
             }
         });
 
@@ -130,7 +130,7 @@ public class CreateCity extends javax.swing.JPanel {
                                     .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(6, 6, 6))
                                 .addComponent(CityTextField)
-                                .addComponent(networkdropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(networkDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
@@ -142,7 +142,7 @@ public class CreateCity extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(networkdropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(networkDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -164,8 +164,9 @@ public class CreateCity extends javax.swing.JPanel {
     private void CreatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatebtnActionPerformed
         // TODO add your handling code here:
         String cityName = CityTextField.getText();
+        int networkId = 0;
                 
-        MySQLUtil.addecitydetails(cityName);
+        MySQLUtil.addecitydetails(cityName,networkId);
         JOptionPane.showMessageDialog(this,"New city Added");
     }//GEN-LAST:event_CreatebtnActionPerformed
 
@@ -206,10 +207,18 @@ public class CreateCity extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_updatebtnActionPerformed
 
-    private void networkdropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkdropdownActionPerformed
+    private void networkDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkDropdownActionPerformed
         // TODO add your handling code here:
+        ArrayList<Network> networkList = MySQLUtil.getallNetwork();
+        String[] networkNameArr = new String[networkList.size()];
+        for(int i =0; i< networkList.size(); i++) {
+	networkNameArr[i] = networkList.get(i).getNetworkName();
+        }
+
+        networkDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(networkNameArr));
         
-    }//GEN-LAST:event_networkdropdownActionPerformed
+        
+    }//GEN-LAST:event_networkDropdownActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -221,7 +230,7 @@ public class CreateCity extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> networkdropdown;
+    private javax.swing.JComboBox<String> networkDropdown;
     private javax.swing.JButton updatebtn;
     private javax.swing.JButton viewbtn;
     // End of variables declaration//GEN-END:variables
@@ -234,9 +243,10 @@ public class CreateCity extends javax.swing.JPanel {
             Object[] row = new Object[3];                   
                    row[0] = c.getCityID();
                    row[1] = c.getCityName(); 
-                   row[2] = c.getCityID();
+                   row[2] = c.getNetworkID();
                    model.addRow(row);
        }
     
     }
+
 }
