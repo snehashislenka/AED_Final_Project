@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.CarRental.CarRental;
 import model.Flight.Flight;
 import model.Person.Person;
 import model.bus.Bus;
@@ -127,6 +128,7 @@ public class MySQLUtil {
             String role, String email, String password) {
         String query = "INSERT INTO person (first_name, last_name, email, gender, password, role)"
         + " values (?, ?, ?, ?, ?, ?)";
+        
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, firstname);
@@ -142,6 +144,7 @@ public class MySQLUtil {
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     /*
@@ -454,10 +457,141 @@ public class MySQLUtil {
                 busSearchList.add(bus);
             }
             
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return busSearchList;
     }
     
+    
+    /*
+        Car rentals MySQL utils
+    */
+    
+    public static void addCarRentalDetails(String pickupLocation, int seats, Double ratePerHour,
+            String carCompanyName, String mileage, String modelName, String fuelType, 
+            String carType) {
+        
+        String query = "INSERT INTO car_rentals (pickupLocation, ratePerHour, mileage, fuelType,"
+                + "seats, carType, carCompany, carModel) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, pickupLocation);
+            ps.setDouble(2, ratePerHour);
+            ps.setString(3, mileage);
+            ps.setString(4, fuelType);
+            ps.setInt(5, seats);
+            ps.setString(6, carType);
+            ps.setString(7, carCompanyName);
+            ps.setString(8, modelName);
+            
+            ps.execute();
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public static ArrayList<CarRental> getAllCarRentalDetails() {
+        
+        ArrayList<CarRental> carRentalsList = new ArrayList<>();
+        
+        String query = "SELECT * FROM car_rentals";
+        
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                CarRental carRental = new CarRental(rs.getInt("rentalId"), 
+                        rs.getString("pickupLocation"), rs.getDouble("ratePerHour"), 
+                        rs.getString("mileage"), rs.getString("fuelType"), 
+                        rs.getInt("seats"), rs.getString("carType"), 
+                        rs.getString("carCompany"), rs.getString("carModel"));
+                
+                carRentalsList.add(carRental);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return carRentalsList;
+        
+    }
+    
+    public static void updateCarRentalDetails(int rentalId, String pickupLocation, int seats, Double ratePerHour, 
+            String mileage, String fuelType, String carCompany, String modelName,
+            String carType) {
+        
+        String query = "UPDATE car_rentals SET pickupLocation=?, ratePerHour=?, mileage=?, "
+                + "fuelType=?, seats=?, carType=?,"
+                + "carCompany=?, carModel=? WHERE rentalId=?";
+              
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, pickupLocation);
+            ps.setDouble(2, ratePerHour);
+            ps.setString(3, mileage);
+            ps.setString(4, fuelType);
+            ps.setInt(5, seats);
+            ps.setString(6, carType);
+            ps.setString(7, carCompany);
+            ps.setString(8, modelName);
+            ps.setInt(9, rentalId);
+            
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /*
+        Search car rentals by location
+    */
+    
+    public static ArrayList<CarRental> searchCarRentalsByPickupLocation(String pickupLocation) {
+        
+        String query = "SELECT * FROM car_rentals where pickupLocation=?";
+        
+        ArrayList<CarRental> carRentalList = new ArrayList<>();
+        
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, pickupLocation);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                CarRental carRental = new CarRental(rs.getInt("rentalId"), 
+                        rs.getString("pickupLocation"), rs.getDouble("ratePerHour"), 
+                        rs.getString("mileage"), rs.getString("fuelType"), 
+                        rs.getInt("seats"), rs.getString("carType"), 
+                        rs.getString("carCompany"), rs.getString("carModel"));
+                
+                carRentalList.add(carRental);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return carRentalList;
+        
+    }
 }

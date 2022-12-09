@@ -51,6 +51,8 @@ public class FlightsDisplay extends javax.swing.JPanel {
 //        this.arrivalDate = arrivalDate;
         this.passenger = passenger;
         
+        this.setBackground(new Color(1f, 1f, 1f, 0.2f));
+        
         populateFlightSearchPane();
     }
     
