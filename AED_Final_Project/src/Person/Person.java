@@ -4,7 +4,7 @@
  */
 package Person;
 
-import model.Person.Roles;
+//import model.Person.Roles;
 
 /**
  *
@@ -16,12 +16,12 @@ class Person {
     private String firstname;
     private String lastname;
     private String gender;
-    private Roles role;
+    private String role;
     private String email;
     private String password;
 
     public Person(String firstname, String lastname, String gender, 
-            Roles role, String email, String password) {
+            String role, String email, String password) {
         this.id = ++counter;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -63,11 +63,11 @@ class Person {
         this.gender = gender;
     }
 
-    public Roles getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Roles role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
