@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package SystemAdmin;
+package Enterprise;
 
 import javax.swing.JFrame;
 
@@ -34,7 +34,6 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         CreateEnterpriseBtn = new javax.swing.JButton();
         ViewEnterpriseBtn = new javax.swing.JButton();
-        UpdateEnterpriseBtn = new javax.swing.JButton();
         Addnetworkbtn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -59,13 +58,6 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        UpdateEnterpriseBtn.setText("Update Ent");
-        UpdateEnterpriseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateEnterpriseBtnActionPerformed(evt);
-            }
-        });
-
         Addnetworkbtn.setText("Network");
         Addnetworkbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,12 +79,17 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Addnetworkbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UpdateEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ViewEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ViewEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CreateEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Addnetworkbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,13 +97,11 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
                 .addComponent(CreateEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ViewEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(UpdateEnterpriseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(Addnetworkbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 253, Short.MAX_VALUE))
+                .addGap(0, 292, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -143,7 +138,7 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE))
+                .addComponent(jSplitPane1))
         );
 
         pack();
@@ -160,12 +155,6 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         ViewEnterprise ViewPanel = new ViewEnterprise();
         jSplitPane1.setRightComponent(ViewPanel);
     }//GEN-LAST:event_ViewEnterpriseBtnActionPerformed
-
-    private void UpdateEnterpriseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEnterpriseBtnActionPerformed
-        // TODO add your handling code here:
-        UpdateEnterprise UpdatePanel = new UpdateEnterprise();
-        jSplitPane1.setRightComponent(UpdatePanel);
-    }//GEN-LAST:event_UpdateEnterpriseBtnActionPerformed
 
     private void AddnetworkbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddnetworkbtnActionPerformed
         // TODO add your handling code here:
@@ -217,7 +206,6 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Addnetworkbtn;
     private javax.swing.JButton CreateEnterpriseBtn;
-    private javax.swing.JButton UpdateEnterpriseBtn;
     private javax.swing.JButton ViewEnterpriseBtn;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

@@ -37,15 +37,17 @@
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="FirstNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LastNameTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="GenderTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="EmailTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="Createbtn" alignment="0" pref="266" max="32767" attributes="0"/>
-                          <Component id="RoleTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="PasswordTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="EnterpriseNameTextField" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="FirstNameTextField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="LastNameTextField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="GenderTextField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="Createbtn" alignment="0" pref="266" max="32767" attributes="0"/>
+                              <Component id="RoleTextField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="EnterpriseNameTextField" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="EmailTextField" min="-2" pref="266" max="-2" attributes="0"/>
+                          <Component id="PasswordTextField" alignment="0" min="-2" pref="266" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -53,7 +55,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="239" max="32767" attributes="0"/>
+              <EmptySpace pref="111" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,7 +64,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel9" min="-2" pref="45" max="-2" attributes="0"/>
@@ -87,24 +89,29 @@
                   <Component id="GenderTextField" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel7" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="RoleTextField" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                  <Component id="EmailTextField" alignment="0" pref="44" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="EmailTextField" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="PasswordTextField" min="-2" pref="35" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
-                  <Component id="RoleTextField" alignment="0" pref="46" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
-                  <Component id="PasswordTextField" alignment="0" pref="35" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="Createbtn" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

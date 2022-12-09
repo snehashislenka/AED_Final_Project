@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.policy.Policy;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
 
@@ -160,23 +161,14 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
     private void SearchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchbtnActionPerformed
         // TODO add your handling code here:
         int PolicyID  =  Integer.parseInt(PolicyIDTextField.getText());
-        String query = "SELECT * FROM insurance_policy where id = '"+ PolicyID +"'";
-         try {          
-            Connection conn = connectMySQL();
-            PreparedStatement ps = conn.prepareStatement(query); 
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                PolicyNameTextField.setText(rs.getString("Policyname"));
-                SumAssuranceTextField.setText(rs.getString("SumAssurance"));
-                PremiumTextField.setText(rs.getString("Premium"));
-                TenureTextField.setText(rs.getString("Tenure"));
-                DateTextField.setText(rs.getString("date"));
-                
-            }  
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Policy policy = MySQLUtil.searchpolicybyID(PolicyID);
+
+        PolicyNameTextField.setText(policy.getPolicyName());
+        SumAssuranceTextField.setText(String.valueOf(policy.getPolicySumAssurance()));
+        PremiumTextField.setText(String.valueOf(policy.getPolicyPremium()));
+        TenureTextField.setText(String.valueOf(policy.getPolicyTenure()));
+        DateTextField.setText(policy.getPolicyDate());
+
     }//GEN-LAST:event_SearchbtnActionPerformed
 
     private void UpdatePolicybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatePolicybtnActionPerformed
@@ -186,17 +178,10 @@ public class UpdatePolicyJPanel extends javax.swing.JPanel {
         int PolicyPremium = Integer.parseInt(PremiumTextField.getText());
         int PolicyTenure = Integer.parseInt(TenureTextField.getText());
         String PolicyDate = DateTextField.getText();
+        
+        MySQLUtil.updatepolicy(PolicyName,PolicySumAssurance,PolicyPremium,PolicyTenure,PolicyDate);
 
-        String query = "update insurance_policy set Policyname = '"+PolicyName+"',SumAssurance = '"+PolicySumAssurance+"',Premium = '"+PolicyPremium+"',Tenure = '"+PolicyTenure+"',Date = '"+PolicyDate+"'";
-        try {
-            Connection conn = connectMySQL();
-            PreparedStatement ps = conn.prepareStatement(query);
-
-            JOptionPane.showMessageDialog(this,"policy Details Updates");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         JOptionPane.showMessageDialog(this,"policy Details Updates");
     }//GEN-LAST:event_UpdatePolicybtnActionPerformed
 
 
