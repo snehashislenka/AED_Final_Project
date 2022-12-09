@@ -4,6 +4,13 @@
  */
 package Enterprise;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.city.City;
+import model.network.Network;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author parjita
@@ -28,19 +35,25 @@ public class CreateCity extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         CityTextField = new javax.swing.JTextField();
-        Addbtn = new javax.swing.JButton();
+        Createbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         CityViewTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        updatebtn = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        networkdropdown = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        viewbtn = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Add City");
 
-        Addbtn.setText("Add");
+        Createbtn.setText("Add");
+        Createbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreatebtnActionPerformed(evt);
+            }
+        });
 
         CityViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -50,23 +63,45 @@ public class CreateCity extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "ID", "Network Name", "City Name"
+                "City ID", "City Name", "Network ID"
             }
         ));
         jScrollPane1.setViewportView(CityViewTable);
 
-        jButton1.setText("Update");
+        updatebtn.setText("Update");
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatebtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Delete");
+        deletebtn.setText("Delete");
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("City");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USA", "INDIA" }));
+        networkdropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USA", "INDIA" }));
+        networkdropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                networkdropdownActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Select The Network");
+
+        viewbtn.setText("View");
+        viewbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,22 +112,25 @@ public class CreateCity extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(340, 340, 340)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(187, 187, 187)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(Addbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Createbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(viewbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(6, 6, 6))
                                 .addComponent(CityTextField)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(networkdropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
@@ -104,34 +142,101 @@ public class CreateCity extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(networkdropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Addbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Createbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CreatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatebtnActionPerformed
+        // TODO add your handling code here:
+        String cityName = CityTextField.getText();
+                
+        MySQLUtil.addecitydetails(cityName);
+        JOptionPane.showMessageDialog(this,"New city Added");
+    }//GEN-LAST:event_CreatebtnActionPerformed
+
+    private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
+        // TODO add your handling code here:
+          populateTable();
+    }//GEN-LAST:event_viewbtnActionPerformed
+
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = CityViewTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) CityViewTable.getModel();
+        int cityID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        MySQLUtil.deletecity(cityID);
+                    
+        populateTable();  
+    }//GEN-LAST:event_deletebtnActionPerformed
+
+    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = CityViewTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) CityViewTable.getModel();
+        int selectedCityId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        JOptionPane.showMessageDialog(this,"city Details Updates");
+        String enterCityName = CityTextField.getText();
+               
+        MySQLUtil.updatecitydetail(enterCityName, selectedCityId);
+        populateTable();
+    }//GEN-LAST:event_updatebtnActionPerformed
+
+    private void networkdropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkdropdownActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_networkdropdownActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Addbtn;
     private javax.swing.JTextField CityTextField;
     private javax.swing.JTable CityViewTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton Createbtn;
+    private javax.swing.JButton deletebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> networkdropdown;
+    private javax.swing.JButton updatebtn;
+    private javax.swing.JButton viewbtn;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+       DefaultTableModel model = (DefaultTableModel) CityViewTable.getModel();
+       model.setRowCount(0);
+       ArrayList<City> cityList = MySQLUtil.viewcitydetails();
+       for(City c : cityList ){
+            Object[] row = new Object[3];                   
+                   row[0] = c.getCityID();
+                   row[1] = c.getCityName(); 
+                   row[2] = c.getCityID();
+                   model.addRow(row);
+       }
+    
+    }
 }

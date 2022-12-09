@@ -179,7 +179,7 @@ public class CreateNetwork extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) NetworkViewTable.getModel();
         int selectedNetworkId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
         
-        JOptionPane.showMessageDialog(this,"enterprise Details Updates");
+        JOptionPane.showMessageDialog(this,"network Details Updates");
         String enterNetworkName = NetworkTextField.getText();
                
         MySQLUtil.updatenetworkdetail(enterNetworkName, selectedNetworkId);

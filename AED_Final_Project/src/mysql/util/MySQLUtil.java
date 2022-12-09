@@ -23,6 +23,7 @@ import model.Hotel.HotelBookings;
 import model.Person.Person;
 import model.Restraunt.Restraunt;
 import model.bus.Bus;
+import model.city.City;
 import model.enterprise.Enterprise;
 import model.network.Network;
 
@@ -877,6 +878,71 @@ public class MySQLUtil {
 
             ps.setString(1, NetworkName);
             ps.setInt(2, NetworkID);
+                 
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static void addecitydetails(String CityName){
+         String queryperson = "INSERT INTO city(name)" + "Values (?)";
+            
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(queryperson);           
+               
+            ps.setString(1, CityName);
+            ps.execute();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static ArrayList<City> viewcitydetails(){
+           String query = "select * from city";
+           ArrayList<City> cityList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                City city = new City(rs.getInt("cityId"),rs.getString("name"));
+                cityList.add(city);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cityList;
+    
+    }
+        public static void deletecity(int cityID){
+          String query = "delete from city where cityId = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1,cityID);
+            ps.execute();
+            conn.close();
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static void updatecitydetail(String cityName,int cityID){
+        String query = "UPDATE city SET name=? WHERE cityId=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, cityName);
+            ps.setInt(2, cityID);
                  
             ps.execute();
                         
