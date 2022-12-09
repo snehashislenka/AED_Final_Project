@@ -5,6 +5,7 @@
 package Enterprise;
 
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.city.City;
@@ -20,8 +21,20 @@ public class CreateCity extends javax.swing.JPanel {
     /**
      * Creates new form CreateCity
      */
+    
+    ArrayList<Network> networkList;
+    Network selectedNetwork;
+    
     public CreateCity() {
         initComponents();
+        
+        this.networkList = MySQLUtil.getallNetwork();
+        String[] networkNameArr = new String[networkList.size()];
+        for(int i =0; i< networkList.size(); i++) {
+	networkNameArr[i] = networkList.get(i).getNetworkName();
+        }
+
+        networkDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(networkNameArr));
     }
 
     /**
@@ -166,7 +179,7 @@ public class CreateCity extends javax.swing.JPanel {
         String cityName = CityTextField.getText();
         int networkId = 0;
                 
-        MySQLUtil.addecitydetails(cityName,networkId);
+        MySQLUtil.addecitydetails(cityName, this.selectedNetwork.getNetworkID());
         JOptionPane.showMessageDialog(this,"New city Added");
     }//GEN-LAST:event_CreatebtnActionPerformed
 
@@ -209,15 +222,15 @@ public class CreateCity extends javax.swing.JPanel {
 
     private void networkDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkDropdownActionPerformed
         // TODO add your handling code here:
-        ArrayList<Network> networkList = MySQLUtil.getallNetwork();
-        String[] networkNameArr = new String[networkList.size()];
-        for(int i =0; i< networkList.size(); i++) {
-	networkNameArr[i] = networkList.get(i).getNetworkName();
-        }
 
-        networkDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(networkNameArr));
+        JComboBox networkDropdown = (JComboBox)evt.getSource();
+        String networkName = (String)networkDropdown.getSelectedItem();
         
-        
+        for(Network network: this.networkList) {
+            if(network.getNetworkName().equals(networkName)) {
+                this.selectedNetwork = network;
+            }
+        }
     }//GEN-LAST:event_networkDropdownActionPerformed
 
 
