@@ -5,6 +5,7 @@
 package ui.flightUIPanels;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import model.Flight.Flight;
 import mysql.util.MySQLUtil;
 import model.Person.Person;
@@ -32,7 +33,9 @@ public class BookFlightDetails extends javax.swing.JFrame {
         this.selectedFlight = flight;
         this.seatList = seatList;
         
-        populateFlightBookingFrame();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+//        populateFlightBookingFrame();
     }
     
     public void populateFlightBookingFrame() {
