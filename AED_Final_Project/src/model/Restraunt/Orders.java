@@ -14,6 +14,18 @@ public class Orders {
     private int restrauntId;
     private Float orderTotal;
     private String status;
+    private String user;
+    private String restraunt;
+
+    public Orders(int id, int userId, int restrauntId, float orderTotal, String status, String user, String restraunt) {
+        this.id = id;
+        this.userId = userId;
+        this.restrauntId = restrauntId;
+        this.orderTotal = orderTotal;
+        this.status = status;
+        this.user = user;
+        this.restraunt = restraunt;
+    }
 
     public int getId() {
         return id;
@@ -53,6 +65,22 @@ public class Orders {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getRestraunt() {
+        return restraunt;
+    }
+
+    public void setRestraunt(String restraunt) {
+        this.restraunt = restraunt;
     }
     
     

@@ -4,11 +4,21 @@
  */
 package ui.Hotel;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel.Hotel;
 import model.Hotel.HotelBookings;
+import model.Hotel.Rooms;
 import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
 
 /**
  *
@@ -19,6 +29,7 @@ public class HotelBookingCrud extends javax.swing.JPanel {
     /**
      * Creates new form BookingAdmin
      */
+    int booking_id;
     public HotelBookingCrud() {
         initComponents();
         populateTable();
@@ -36,86 +47,282 @@ public class HotelBookingCrud extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jTextField12 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        statusBox = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        customertxt = new javax.swing.JTextField();
+        roomnotxt = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Room No", "Customer", "from", "to", "No of Rooms"
+                "Room No"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 580, 350));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 300, 180));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Bookings");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 600, 30));
 
-        jButton4.setText("Submit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jLabel20.setText("Customer");
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, 20));
+
+        jButton5.setText("Fetch Room");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 510, 150, 30));
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 200, 30));
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 150, 30));
 
-        jLabel19.setText("Room No");
-        add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, 20));
+        statusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Booked", "Checked-in", "Checked-out", "Cancelled" }));
+        add(statusBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 200, 30));
 
-        jLabel20.setText("Status");
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, 20));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Room No", "Customer", "from", "to", "Price", "Status", "Hotel Id", "Id"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Booked", "Checked-in", "Checked-out", "Cancelled" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 200, 30));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 580, 170));
+
+        jButton7.setText("Update");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 520, 150, 30));
+
+        jButton8.setText("Assign Room");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 150, 30));
+
+        customertxt.setEnabled(false);
+        add(customertxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 200, 30));
+
+        roomnotxt.setEnabled(false);
+        add(roomnotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 200, 30));
+
+        jLabel21.setText("Status");
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, -1, 20));
+
+        jLabel22.setText("Room No");
+        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, 20));
+
+        jButton9.setText("Update Status");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 150, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        int selectedRowIndex = jTable2.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        booking_id = Integer.parseInt(model.getValueAt(selectedRowIndex, 7).toString());
+        int hotelId = Integer.parseInt(model.getValueAt(selectedRowIndex, 6).toString());
+        int room_no = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        populateRoomNoTable(hotelId, room_no);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-     private void populateTable(){
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+//        update status here
+        String status = statusBox.getSelectedItem().toString();
+        
+        int selectedRowIndex = jTable2.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        
+        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 7).toString());
+        
+        String query = "Update hotel_bookings set status = ? where id = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setString(1,status);
+            ps.setInt(2,id);
+            
+            ps.execute();   
+            conn.close();
+         } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        populateTable();
+        
+        
+        roomnotxt.setText("");
+        customertxt.setText("");
+        
+        populateTable();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+//        assign room
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        int room_no = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        
+        String query = "Update hotel_bookings set room_no = ? where id = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1,room_no);
+            ps.setInt(2,booking_id);
+            
+            ps.execute();   
+            conn.close();
+         } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        populateTable();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+//        populate status
+        int selectedRowIndex = jTable2.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        int roomno = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        String customer = model.getValueAt(selectedRowIndex, 1).toString();
+        
+        roomnotxt.setText(String.valueOf(roomno));
+        customertxt.setText(customer);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         
-        HotelBookings hotelBookings = new HotelBookings();
-        
-        ArrayList<HotelBookings> allBookings = MySQLUtil.getHotelBookings(hotelBookings);
+        ArrayList<HotelBookings> allBookings = MySQLUtil.getHotelBookings();
         
         for(HotelBookings b : allBookings) {
-            Object[] row = new Object[6];
+            Object[] row = new Object[8];
             row[0] = b.getRoom_no();
             row[1] = b.getUser();
             row[2] = b.getFrom();
             row[3] = b.getTo();
-            row[4] = b.getNo_of_rooms();
-            row[5] = b.getPrice();
+            row[4] = b.getPrice();
+            row[5] = b.getStatus();
+            row[6] = b.getHotelId();
+            row[7] = b.getId();
             
             model.addRow(row);
         }
     }    
     
+    private void populateRoomNoTable(int hotelId, int room_no) {
+        if(room_no > 0) {
+            JOptionPane.showMessageDialog(this,"Room already assigned!");
+            return;
+        } 
+        System.out.println("here------------"+hotelId);
+        ArrayList<Rooms> roomsList = new ArrayList(); 
+        String query = "Select r.room_no from rooms r inner join hotel_bookings h on r.hotelId = h.hotelId where r.hotelId = ? and (h.status = 'CHECKED-OUT' or r.status = 'AVAILABLE')";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1,hotelId);
+            
+            ResultSet rs = ps.executeQuery();   
+            
+//        System.out.println("here------------"+rs.getInt("room_no"));
+            while(rs.next()) {
+                Rooms res = new Rooms(rs.getInt("room_no"));
+                roomsList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(Rooms r : roomsList) {
+            Object[] row = new Object[6];
+            row[0] = r.getRoom_no();
+            
+            model.addRow(row);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JTextField customertxt;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField roomnotxt;
+    private javax.swing.JComboBox<String> statusBox;
     // End of variables declaration//GEN-END:variables
 }

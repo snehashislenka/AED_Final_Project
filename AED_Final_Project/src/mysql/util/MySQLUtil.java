@@ -15,7 +15,11 @@ import javax.swing.JOptionPane;
 import model.Hotel.Hotel;
 import model.Flight.Flight;
 import model.Hotel.HotelBookings;
+import model.Hotel.Rooms;
 import model.Person.Person;
+import model.Restraunt.MenuItems;
+import model.Restraunt.OrderItems;
+import model.Restraunt.Orders;
 import model.Restraunt.Restraunt;
 import model.bus.Bus;
 
@@ -402,14 +406,13 @@ public class MySQLUtil {
         }
     }
 
-    public static ArrayList<HotelBookings> getHotelBookings(HotelBookings hotelBookings) {
+    public static ArrayList<HotelBookings> getHotelBookings() {
         Connection conn = MySQLUtil.connectMySQL();
         ArrayList<HotelBookings> bookingList = new ArrayList();
         
-        String query = "SELECT h.*, p.firstName + ' ' + p.lastName as user FROM hotel_bookings h INNER JOIN person p ON h.userId = p.id WHERE hotelId = ?";
+        String query = "SELECT h.*, CONCAT(p.firstname, \" \", p.lastname) as user FROM hotel_bookings h INNER JOIN person p ON h.userId = p.id";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, hotelBookings.getHotelId());
             ResultSet rs = ps.executeQuery();
          
             while(rs.next()) {
@@ -631,4 +634,259 @@ public class MySQLUtil {
         
         return busSearchList;
     }
+    
+    public static ArrayList<Rooms> getAllRooms() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Rooms> roomList = new ArrayList();
+        
+        String query = "SELECT * FROM rooms";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                Rooms res = new Rooms(rs.getInt("room_no"), rs.getInt("hotelId"),
+                        rs.getString("hotel"),
+                        rs.getString("type"),
+                        rs.getString("descr"),
+                        rs.getFloat("price"),
+                        rs.getString("status"));
+                
+
+                roomList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return roomList;
+    }
+    
+    public static void addRooms(Rooms rooms) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO rooms"
+        + " values (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, rooms.getRoom_no());
+            ps.setInt(2, rooms.getHotelId());
+            ps.setString(3, rooms.getType());
+            ps.setString(4, rooms.getDesc());
+            ps.setFloat(5, rooms.getPrice());
+            ps.setString(6, rooms.getStatus());
+            ps.setString(7, rooms.getHotel());
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteRooms(int room, int hotelId) {
+        String query = "DELETE FROM rooms WHERE room_no = ? and hotelId = ?";
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            
+            PreparedStatement ps1 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
+            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps2 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
+            
+            ps.setInt(1, room);
+            ps.setInt(2, hotelId);
+            
+            ps1.execute();
+            ps.execute();
+            ps2.execute();
+                                    
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public static void updateRooms(Rooms room) {
+            Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "update rooms set type = ?, descr = ?, price = ?, status = ? where room_no = ? and hotelId = ?";
+        try {
+            System.out.println("------"+ room.getHotelId());
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, room.getType());
+            ps.setString(2, room.getDesc());
+            ps.setFloat(3, room.getPrice());
+            ps.setString(4, room.getStatus());
+            ps.setInt(5, room.getRoom_no());
+            ps.setInt(6, room.getHotelId());
+            
+            ps.execute();
+            conn.close();
+                     
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Update issue", ex);
+        }
+        
+    }
+     
+      public static ArrayList<MenuItems> getAllMenu() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<MenuItems> menuList = new ArrayList();
+        
+        String query = "SELECT * FROM menu_items";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                MenuItems res = new MenuItems(rs.getInt("id"), rs.getInt("restrauntId"),
+                        rs.getString("item"),
+                        rs.getFloat("price"),
+                        rs.getString("descr"),
+                            rs.getString("restraunt"));
+                
+
+                menuList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return menuList;
+    }
+    
+    public static void addMenu(String item,float price,String descr,int resId,String restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO menu_items (restrauntId, item, price, descr, restraunt)"
+                + " values (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, resId);
+            ps.setString(5,restraunt);
+            ps.setString(2,item);
+            ps.setFloat(3, price);
+            ps.setString(4,descr);
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteMenu(int menuId) {
+        String query = "DELETE FROM menu_items WHERE id = ?";
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            
+            PreparedStatement ps1 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
+            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps2 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
+            
+            ps.setInt(1, menuId);
+            
+            ps1.execute();
+            ps.execute();
+            ps2.execute();
+                                    
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public static void updateMenu(int id, String item, float price, String descr) {
+            Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "update menu_items set item = ?, price = ?, descr = ? where id = ?";
+        try {
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, item);
+            ps.setFloat(2, price);
+            ps.setString(3, descr);
+            ps.setInt(4, id);
+            
+            ps.execute();
+            conn.close();
+                     
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Update issue", ex);
+        }
+        
+    }
+     
+    public static ArrayList<Orders> getAllOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+        
+        String query = "SELECT * FROM orders";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"));
+                
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
+    }
+    
+    public static ArrayList<OrderItems> getAllOrderItems(int orderId) {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<OrderItems> orderItemList = new ArrayList();
+        
+        String query = "SELECT * FROM order_items where orderId = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                OrderItems res = new OrderItems(rs.getString("item"),
+                        rs.getFloat("price"),
+                        rs.getInt("quantity"));
+                
+                orderItemList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orderItemList;
+    }
+    
+    public static void updateOrder(int id, String status) {
+            Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "update orders set status = ? where id = ?";
+        try {
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, status);
+            ps.setInt(2, id);
+            
+            ps.execute();
+            conn.close();
+                     
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Update issue", ex);
+        }
+        
+    }
+     
+     
 }
