@@ -1,33 +1,32 @@
-package model.Hotel;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package model.Restraunt;
 
 /**
  *
  * @author Anshul
  */
-public class Hotel {
+public class Restraunt {
     private int id;
-    private String hotel;
+    private String restraunt;
     private String address;
     private String city;
     private String zipcode;
-
-    public Hotel() {
-        
-    }
     
-    public Hotel(int id, String hotel, String address, String city, String zipcode) {
+    public Restraunt() {
+    
+    }
+
+    public Restraunt(int id, String restraunt, String address, String city, String zipcode) {
         this.id = id;
-        this.hotel = hotel;
+        this.restraunt = restraunt;
         this.address = address;
         this.city = city;
         this.zipcode = zipcode;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -36,20 +35,12 @@ public class Hotel {
         this.id = id;
     }
 
-    public String getHotel() {
-        return hotel;
+    public String getRestraunt() {
+        return restraunt;
     }
 
-    public void setHotel(String hotel) {
-        this.hotel = hotel;
-    }
-    
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setRestraunt(String restraunt) {
+        this.restraunt = restraunt;
     }
 
     public String getCity() {
@@ -59,7 +50,15 @@ public class Hotel {
     public void setCity(String city) {
         this.city = city;
     }
-    
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getZipcode() {
         return zipcode;
     }
@@ -68,9 +67,5 @@ public class Hotel {
         this.zipcode = zipcode;
     }
     
-//    @Override
-//    public String toString() {
-//        return hotel;
-//    }
+    
 }
-

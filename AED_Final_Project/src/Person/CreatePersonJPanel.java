@@ -4,6 +4,17 @@
  */
 package Person;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+//import model.Person.Roles;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
 
 
 /**
@@ -141,7 +152,38 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
 
     private void CreatePolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePolicyBtnActionPerformed
         // TODO add your handling code here:
-       
+
+        int PersonID  =  Integer.parseInt(PersonIDTextField.getText());
+        String FirstName = FirstNameTextField.getText();
+        String LastName = LastNameTextField.getText();
+        String Gender = GenderTextField.getText();
+        String Email = EmailTextField.getText();
+        String Password = PasswordTextField.getText();
+        
+        String query = "INSERT INTO person (id, firstname, lastname, email, gender, password,role)"
+        + " values (?, ?, ?, ?, ?, ?, ?)";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1,PersonID);
+            ps.setString(2, FirstName);
+            ps.setString(3, LastName);
+            ps.setString(4, Email);
+            ps.setString(5, Gender);
+            ps.setString(6, Password);
+//            ps.setString(7, Roles.PASSENGER.toString());
+            
+//            System.out.println(person.getRole().toString());
+//            ps.setString(7, person.getRole().toString());
+            
+            ps.execute();            
+            conn.close();
+            JOptionPane.showMessageDialog(this,"New Person Detail Added");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_CreatePolicyBtnActionPerformed
 
