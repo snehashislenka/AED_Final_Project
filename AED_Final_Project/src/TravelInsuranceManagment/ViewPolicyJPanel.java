@@ -4,6 +4,12 @@
  */
 package TravelInsuranceManagment;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.policy.Policy;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author parjita
@@ -15,8 +21,10 @@ public class ViewPolicyJPanel extends javax.swing.JPanel {
      */
     public ViewPolicyJPanel() {
         initComponents();
+        populateTable();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,9 +35,11 @@ public class ViewPolicyJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        PolicyTable = new javax.swing.JTable();
+        DeleteBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        PolicyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -40,29 +50,87 @@ public class ViewPolicyJPanel extends javax.swing.JPanel {
                 "Policy ID", "Policy Name", "Category", "Sum Assurance", "Premium", "Tenure", "Creatation Date"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(PolicyTable);
+
+        DeleteBtn.setText("Delete");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Policy List");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = PolicyTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) PolicyTable.getModel();
+        int policyID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        MySQLUtil.deletepolicy(policyID);
+                    
+        populateTable();
+        
+    }//GEN-LAST:event_DeleteBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteBtn;
+    private javax.swing.JTable PolicyTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+       DefaultTableModel model = (DefaultTableModel) PolicyTable.getModel();
+       model.setRowCount(0);
+       ArrayList<Policy> policyList = MySQLUtil.viewpolicydetails();
+       for(Policy p : policyList ){
+            Object[] row = new Object[6];
+                   row[0] = p.getPolicyID();
+                   row[1] = p.getPolicyName();
+                   row[2] = p.getPolicySumAssurance();
+                   row[3] = p.getPolicyPremium();
+                   row[4] = p.getPolicyTenure();
+                   row[5] = p.getPolicyDate();                   
+                   
+                   model.addRow(row);
+       }
+    }
 }

@@ -506,9 +506,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
     private void LogoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutbtnActionPerformed
         // TODO add your handling code here:
-        Customer_Login frame = new Customer_Login();
-        frame.setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_LogoutbtnActionPerformed
 
     private void dashboardbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardbtnActionPerformed
@@ -519,8 +517,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
     private void CustomerPolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerPolicyBtnActionPerformed
         // TODO add your handling code here:
-        AdminCustomerJPanel PolicyPanel = new AdminCustomerJPanel();
-        jSplitPane1.setRightComponent(PolicyPanel);
+        
     }//GEN-LAST:event_CustomerPolicyBtnActionPerformed
 
     private void UpdateCategorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCategorybtnActionPerformed
