@@ -22,7 +22,7 @@ public class Flight {
     private String arrivalAirport;
     private String arrivalTerminal;
     private String flightCompanyCode;
-    private String flightCompanyName;
+    private String flightCompanyName; 
     private String flightType;
     private int seats;
     private String departingCity;

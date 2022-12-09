@@ -12,12 +12,22 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+//import model.Flight.Flight;
+//import model.Flight.Flight;
+import model.Person.Person;
+import model.policy.Policy;
+import model.CarRental.CarRental;
+
 import model.Hotel.Hotel;
 import model.Flight.Flight;
 import model.Hotel.HotelBookings;
 import model.Person.Person;
 import model.Restraunt.Restraunt;
 import model.bus.Bus;
+import model.city.City;
+import model.enterprise.Enterprise;
+import model.network.Network;
 
 /**
  *
@@ -36,7 +46,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "root";
+        String PASSWORD = "ParjitaMunshi461998@";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -127,6 +137,7 @@ public class MySQLUtil {
             String role, String email, String password) {
         String query = "INSERT INTO person (first_name, last_name, email, gender, password, role)"
         + " values (?, ?, ?, ?, ?, ?)";
+        
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, firstname);
@@ -142,6 +153,7 @@ public class MySQLUtil {
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     public static ArrayList<Restraunt> getAllRestraunt() {
@@ -626,9 +638,489 @@ public class MySQLUtil {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return busSearchList;
+    }    
+    
+    /*
+        Car rentals MySQL utils
+    */
+    
+    public static void addCarRentalDetails(String pickupLocation, int seats, Double ratePerHour,
+            String carCompanyName, String mileage, String modelName, String fuelType, 
+            String carType) {
+        
+        String query = "INSERT INTO car_rentals (pickupLocation, ratePerHour, mileage, fuelType,"
+                + "seats, carType, carCompany, carModel) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, pickupLocation);
+            ps.setDouble(2, ratePerHour);
+            ps.setString(3, mileage);
+            ps.setString(4, fuelType);
+            ps.setInt(5, seats);
+            ps.setString(6, carType);
+            ps.setString(7, carCompanyName);
+            ps.setString(8, modelName);
+            
+            ps.execute();
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public static ArrayList<CarRental> getAllCarRentalDetails() {
+        
+        ArrayList<CarRental> carRentalsList = new ArrayList<>();
+        
+        String query = "SELECT * FROM car_rentals";
+        
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                CarRental carRental = new CarRental(rs.getInt("rentalId"), 
+                        rs.getString("pickupLocation"), rs.getDouble("ratePerHour"), 
+                        rs.getString("mileage"), rs.getString("fuelType"), 
+                        rs.getInt("seats"), rs.getString("carType"), 
+                        rs.getString("carCompany"), rs.getString("carModel"));
+                
+                carRentalsList.add(carRental);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return carRentalsList;
+        
+    }
+    
+    public static void updateCarRentalDetails(int rentalId, String pickupLocation, int seats, Double ratePerHour, 
+            String mileage, String fuelType, String carCompany, String modelName,
+            String carType) {
+        
+        String query = "UPDATE car_rentals SET pickupLocation=?, ratePerHour=?, mileage=?, "
+                + "fuelType=?, seats=?, carType=?,"
+                + "carCompany=?, carModel=? WHERE rentalId=?";
+              
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, pickupLocation);
+            ps.setDouble(2, ratePerHour);
+            ps.setString(3, mileage);
+            ps.setString(4, fuelType);
+            ps.setInt(5, seats);
+            ps.setString(6, carType);
+            ps.setString(7, carCompany);
+            ps.setString(8, modelName);
+            ps.setInt(9, rentalId);
+            
+            ps.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /*
+        Search car rentals by location
+    */
+    
+    public static ArrayList<CarRental> searchCarRentalsByPickupLocation(String pickupLocation) {
+        
+        String query = "SELECT * FROM car_rentals where pickupLocation=?";
+        
+        ArrayList<CarRental> carRentalList = new ArrayList<>();
+        
+        try {
+            Connection conn = connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, pickupLocation);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                CarRental carRental = new CarRental(rs.getInt("rentalId"), 
+                        rs.getString("pickupLocation"), rs.getDouble("ratePerHour"), 
+                        rs.getString("mileage"), rs.getString("fuelType"), 
+                        rs.getInt("seats"), rs.getString("carType"), 
+                        rs.getString("carCompany"), rs.getString("carModel"));
+                
+                carRentalList.add(carRental);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return carRentalList;
+        
+    }
+
+    
+    
+//policy crud operations
+    public static void addpolicydetails(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
+         String query = "INSERT INTO insurance_policy (Policyname,SumAssurance,Premium,Tenure,Date)"
+        + " values (?, ?, ?, ?, ?)";
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setString(1, PolicyName);
+            ps.setInt(2, PolicySumAssurance);
+            ps.setInt(3, PolicyPremium);
+            ps.setInt(4, PolicyTenure);
+            ps.setString(5, PolicyDate);
+                       
+            ps.execute();            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static ArrayList<Policy> viewpolicydetails(){
+           String query = "SELECT * FROM insurance_policy";
+           ArrayList<Policy> policyList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Policy policy = new Policy(rs.getInt("id"),
+                        rs.getString("Policyname"),rs.getInt("Sumassurance"),
+                        rs.getInt("premium"),rs.getInt("Tenure"),rs.getString("Date"));
+                policyList.add(policy);
+             }           
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return policyList;
+    
+    }
+    
+    public static void deletepolicy(int policyID){
+          String query = "delete from insurance_policy where id = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1,policyID);
+            ps.execute();
+            conn.close();
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static Policy searchpolicybyID(int policyID){
+          String query = "SELECT * FROM insurance_policy where id = ?";
+          Policy policy = null;
+         try {          
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, policyID);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+               policy = new Policy(rs.getInt("id"),rs.getString("Policyname"),rs.getInt("Sumassurance"),rs.getInt("premium"),rs.getInt("Tenure"),rs.getString("Date"));
+            }  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return policy;
+    }
+    
+    public static void updatepolicy(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
+        String query = "UPDATE insurance_policy SET PolicyName=?, PolicySumAssurance=?, PolicyPremium=?, "
+                + "PolicyTenure=?, PolicyDate=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, PolicyName);
+            ps.setInt(2, PolicySumAssurance);
+            ps.setInt(3, PolicyPremium);
+            ps.setInt(4, PolicyTenure);
+            ps.setString(5, PolicyDate);            
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+//category crud operations
+    
+    
+//enyterprise crud operations
+    
+      public static void addenterprisedetails(String EnterpriseName , 
+              String FirstName ,String LastName ,String Gender,String Role,String Email,String Password){
+         String queryperson = "INSERT INTO person(firstname,lastname,gender,role,email,password)" + "Values (? ,? ,? ,? ,? ,? )";
+         String querypersonid = "select id from person order by id desc limit 1";
+         String query = "INSERT INTO enterprise (name, adminId)" + " values (?, ?)";
+        
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement personInsert = conn.prepareStatement(queryperson);
+            PreparedStatement fetchPersonId = conn.prepareStatement(querypersonid);
+            PreparedStatement enterpriseInsert = conn.prepareStatement(query);
+           
+               
+            personInsert.setString(1, FirstName);
+            personInsert.setString(2, LastName);
+            personInsert.setString(3, Gender);
+            personInsert.setString(4, Role);
+            personInsert.setString(5, Email);
+            personInsert.setString(6, Password);    
+            personInsert.execute();
+             
+            ResultSet rs = fetchPersonId.executeQuery();
+            int personId = 0;
+            while(rs.next()) {
+              personId = rs.getInt("id");
+            }
+            
+            if(personId == 0) Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, "Person not found!");
+            
+            enterpriseInsert.setString(1, EnterpriseName);
+            enterpriseInsert.setInt(2, personId);
+            enterpriseInsert.execute();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static ArrayList<Enterprise> viewenterprisedetails(){
+           String query = "select e.adminId, e.name, p.email from enterprise e inner join person p on e.adminId = p.id";
+           ArrayList<Enterprise> enterpriseList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Enterprise enterprise = new Enterprise(rs.getInt("adminId"),rs.getString("name"),rs.getString("email"));
+                enterpriseList.add(enterprise);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return enterpriseList;
+    
+    }
+        public static void deleteenterprise(int AdminID){
+          String query = "delete from enterprise where adminId = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1,AdminID);
+            ps.execute();
+            conn.close();
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static void updateenterprisedetail(String EnterpriseName,int AdminID){
+        String query = "UPDATE enterprise SET name=? WHERE adminId=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, EnterpriseName);
+            ps.setInt(2, AdminID);
+                 
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+// network crud operations
+        public static void addenetworkdetails(String NetworkName){
+         String queryperson = "INSERT INTO network(name)" + "Values (?)";
+            
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(queryperson);           
+               
+            ps.setString(1, NetworkName);
+            ps.execute();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static ArrayList<Network> viewnetworkdetails(){
+           String query = "select * from network";
+           ArrayList<Network> networkList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Network network = new Network(rs.getString("name"),rs.getInt("networkId"));
+                networkList.add(network);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return networkList;
+    
+    }
+        public static void deletenetwork(int networkID){
+          String query = "delete from network where networkId = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1,networkID);
+            ps.execute();
+            conn.close();
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static void updatenetworkdetail(String NetworkName,int NetworkID){
+        String query = "UPDATE network SET name=? WHERE networkId=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, NetworkName);
+            ps.setInt(2, NetworkID);
+                 
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static ArrayList<Network> getallNetwork(){
+           String query = "select * from Network";
+           ArrayList<Network> NetworkList = new ArrayList<>();
+            try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Network network = new Network(rs.getString("name"),rs.getInt("networkId"));
+                NetworkList.add(network);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return NetworkList;
+       }
+       
+       
+//       city crud operations
+       
+       public static void addecitydetails(String CityName,int networkId){
+         String queryperson = "INSERT INTO city(name,networkId)" + "Values (?,?)";
+            
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(queryperson);           
+               
+            ps.setString(1, CityName);
+            ps.setInt(2, networkId);
+            ps.execute();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static ArrayList<City> viewcitydetails(){
+           String query = "select * from city";
+           ArrayList<City> cityList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                City city = new City(rs.getInt("cityId"),rs.getString("name"),rs.getInt("networkId"));
+                cityList.add(city);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cityList;
+    
+    }
+        public static void deletecity(int cityID){
+          String query = "delete from city where cityId = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1,cityID);
+            ps.execute();
+            conn.close();
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static void updatecitydetail(String cityName,int cityID){
+        String query = "UPDATE city SET name=? WHERE cityId=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, cityName);
+            ps.setInt(2, cityID);
+                 
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
+
+    
+

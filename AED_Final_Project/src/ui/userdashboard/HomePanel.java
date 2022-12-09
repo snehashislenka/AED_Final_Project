@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import ui.busUIPanels.UserBusBookingFrame;
+import ui.carRentalUIPanels.UserCarRentalFrame;
 
 /**
  *
@@ -105,9 +107,6 @@ public class HomePanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblFlightsMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblFlightsMouseEntered(evt);
-            }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -118,6 +117,11 @@ public class HomePanel extends javax.swing.JPanel {
         lblBus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBus.setText("Buses");
         lblBus.setToolTipText("Buses");
+        lblBus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBusMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,6 +151,11 @@ public class HomePanel extends javax.swing.JPanel {
 
         lblRentals.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRentals.setText("Rentals");
+        lblRentals.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRentalsMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout tabsPanelLayout = new javax.swing.GroupLayout(tabsPanel);
         tabsPanel.setLayout(tabsPanelLayout);
@@ -256,9 +265,15 @@ public class HomePanel extends javax.swing.JPanel {
         flightBookingFrame.setVisible(true);
     }//GEN-LAST:event_lblFlightsMouseClicked
 
-    private void lblFlightsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFlightsMouseEntered
+    private void lblBusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusMouseClicked
+        UserBusBookingFrame busBookingFrame = new UserBusBookingFrame();
+        busBookingFrame.setVisible(true);
+    }//GEN-LAST:event_lblBusMouseClicked
 
-    }//GEN-LAST:event_lblFlightsMouseEntered
+    private void lblRentalsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRentalsMouseClicked
+        UserCarRentalFrame userCarRentalFrame = new UserCarRentalFrame();
+        userCarRentalFrame.setVisible(true);
+    }//GEN-LAST:event_lblRentalsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

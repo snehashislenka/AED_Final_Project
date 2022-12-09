@@ -6,6 +6,7 @@ package ui.flightUIPanels;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JFrame;
 import model.Flight.Flight;
 
 /**
@@ -115,18 +116,11 @@ public class FlightSeatSelection extends javax.swing.JFrame {
     
     public FlightSeatSelection() {
         initComponents();
-        this.seatCount = 2;
-        System.out.println("constru called");
-        this.seatsSelected = new ArrayList<>();
-        if(seatCount == 1) {
-            lblSeatsDesc.setText("Please select a seat.");
-        } else {
-            lblSeatsDesc.setText("Please select " + seatCount + "seat.");
-        }
     }
     
     public FlightSeatSelection(int passenger, Flight flight) {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.seatCount = passenger;
         this.flight = flight;
@@ -137,6 +131,7 @@ public class FlightSeatSelection extends javax.swing.JFrame {
         } else {
             lblSeatsDesc.setText("Please select " + seatCount + "seat.");
         }
+        System.out.println(passenger);
         handleSeatSelection();
     }
     
@@ -18969,6 +18964,8 @@ public class FlightSeatSelection extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         System.out.println(Arrays.toString(this.seatsSelected.toArray()));
+        System.out.println(this.flight.getFlightCompanyName());
+        
         BookFlightDetails flightBookingFrame = 
                 new BookFlightDetails(this.flight, this.seatsSelected);
         flightBookingFrame.setVisible(true);
