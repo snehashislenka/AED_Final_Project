@@ -30,6 +30,7 @@ import model.catgeory.Category;
 import model.city.City;
 import model.enterprise.Enterprise;
 import model.network.Network;
+import policystatus.Policystatus;
 
 /**
  *
@@ -1269,7 +1270,35 @@ public class MySQLUtil {
         return BookingList;
     
     }
-        public static void updatepolicybookingdetail(int bookingId,int policyId,int personId,String AppliedDate,String Status){
+        public static ArrayList<Policystatus> viewpolicystatusdetails(){
+           String query = "select * from (select * from insurance_policy p inner join " +
+                            "insurance_policybooking b on p.id = b.policyid) a inner join person" +
+                            " on person.id = a.personid";
+           ArrayList<Policystatus> PolicystatusList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Policystatus status = new Policystatus(rs.getInt("personid"),
+                        rs.getString("firstname"),rs.getInt("policyid"),
+                        rs.getString("Policyname"),rs.getString("categoryname"),
+                        rs.getInt("Sumassurance"),rs.getInt("Premium"),rs.getInt("Tenure"),
+                        rs.getString("applieddate"),rs.getString("status"));
+                PolicystatusList.add(status);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return PolicystatusList;
+    
+    }
+        
+        public static void updatepolicybookingdetail(String Status,int personID){
         String query = "UPDATE insurance_policybooking SET status= WHERE bookingid=?";
         try {
             Connection conn = connectMySQL();

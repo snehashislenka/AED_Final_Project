@@ -159,6 +159,8 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
     private void CustomerPolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerPolicyBtnActionPerformed
         // TODO add your handling code here:
+        CutomerAppliedPolicies applypanel = new CutomerAppliedPolicies(this);
+        jSplitPane1.setRightComponent(applypanel);
         
     }//GEN-LAST:event_CustomerPolicyBtnActionPerformed
 

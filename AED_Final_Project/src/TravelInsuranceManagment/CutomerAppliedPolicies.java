@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.booking.PolicyBooking;
 import mysql.util.MySQLUtil;
+import policystatus.Policystatus;
 
 /**
  *
@@ -18,8 +19,11 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
     /**
      * Creates new form CutomerAppliedPolicies
      */
-    public CutomerAppliedPolicies() {
+    InsuranceAdmin_Dashboard dashboardpanel;
+   
+    public CutomerAppliedPolicies(InsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
+        this.dashboardpanel = dashboardpanel;
         populateTable();
     }
 
@@ -106,13 +110,19 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
     private void populateTable() {
        DefaultTableModel model = (DefaultTableModel) AvailablePoliciesTable.getModel();
        model.setRowCount(0);
-       ArrayList<PolicyBooking> policybookingList = MySQLUtil.viewpolicybookingdetails();
-       for(PolicyBooking p : policybookingList ){
-        Object[] row = new Object[4];
-               row[0] = p.getPolicyID();
-               row[1] = p.getPolicyName();
-               row[2] = p.getAppliedDate();
-               row[3] = p.getStatus();                              
+       ArrayList<Policystatus> PolicystatusList = MySQLUtil.viewpolicystatusdetails();
+       for(Policystatus p : PolicystatusList ){
+        Object[] row = new Object[10];
+               row[0] = p.getPersonID();
+               row[1] = p.getPersonName();
+               row[2] = p.getPolicyID();
+               row[3] = p.getPolicyName();
+               row[4] = p.getCategory();
+               row[5] = p.getSumassurance();
+               row[6] = p.getPremium();
+               row[7] = p.getTenure();
+               row[8] = p.getAppliedDate();
+               row[9] = p.getStatus();                            
 
                model.addRow(row);
        }
