@@ -35,6 +35,7 @@ public class HotelFrame extends javax.swing.JFrame {
         customer = new javax.swing.JButton();
         rooms = new javax.swing.JButton();
         rooms1 = new javax.swing.JButton();
+        customer1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +75,14 @@ public class HotelFrame extends javax.swing.JFrame {
         });
         jPanel1.add(rooms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
 
+        customer1.setText("Reports");
+        customer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customer1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 100, 30));
+
         jSplitPane1.setLeftComponent(jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,8 +101,8 @@ public class HotelFrame extends javax.swing.JFrame {
 
     private void customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerActionPerformed
         // TODO add your handling code here:
-        RoomAdminCrud roomAdminCrud = new RoomAdminCrud();
-        jSplitPane1.setRightComponent(roomAdminCrud);
+        Customers customers = new Customers();
+        jSplitPane1.setRightComponent(customers);
 
     }//GEN-LAST:event_customerActionPerformed
 
@@ -108,6 +117,12 @@ public class HotelFrame extends javax.swing.JFrame {
         HotelAdminPanel hotelAdminPanel = new HotelAdminPanel();
         jSplitPane1.setRightComponent(hotelAdminPanel);
     }//GEN-LAST:event_rooms1ActionPerformed
+
+    private void customer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer1ActionPerformed
+        // TODO add your handling code here:
+        Reports reports = new Reports();
+        jSplitPane1.setRightComponent(reports);
+    }//GEN-LAST:event_customer1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,6 +162,7 @@ public class HotelFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookings2;
     private javax.swing.JButton customer;
+    private javax.swing.JButton customer1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
