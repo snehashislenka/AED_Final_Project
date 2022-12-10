@@ -14,9 +14,20 @@ public class TableBookings {
     private int id;
     private int restrauntId;
     private int table_no;
-    private int no_of_tables;
+    private String restraunt;
     private String status;
     private Date from;
+
+    public TableBookings(int id, int restrauntId, int table_no, String restraunt, String status, java.sql.Date from) {
+        this.id = id;
+        this.restrauntId = restrauntId;
+        this.table_no = table_no;
+        this.restraunt = restraunt;
+        this.status = status;
+        this.from = from;
+        
+    }
+    
 
     public int getId() {
         return id;
@@ -42,13 +53,15 @@ public class TableBookings {
         this.table_no = table_no;
     }
 
-    public int getNo_of_tables() {
-        return no_of_tables;
+    public String getRestraunt() {
+        return restraunt;
     }
 
-    public void setNo_of_tables(int no_of_tables) {
-        this.no_of_tables = no_of_tables;
+    public void setRestraunt(String restraunt) {
+        this.restraunt = restraunt;
     }
+
+    
 
     public String getStatus() {
         return status;

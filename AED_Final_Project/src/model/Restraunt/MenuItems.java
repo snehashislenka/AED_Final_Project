@@ -14,6 +14,35 @@ public class MenuItems {
     private String item;
     private Float price;
     private String desc;
+    private String restraunt;
+
+    public MenuItems(int restrauntId, String item, float price, String desc, String restraunt) {
+        this.restrauntId = restrauntId;
+        this.item = item;
+        this.price = price;
+        this.desc = desc;
+        this.restraunt = restraunt;
+    }
+
+    public MenuItems(int id, int restrauntId, String item, float price, String desc, String restraunt) {
+        this.id = id;
+        this.restrauntId = restrauntId;
+        this.item = item;
+        this.price = price;
+        this.desc = desc;
+        this.restraunt = restraunt;
+    }
+
+    public MenuItems() {
+   
+    }
+
+    public MenuItems(int id, String item, float price, String desc) {
+        this.id = id;
+        this.item = item;
+        this.price = price;
+        this.desc = desc;
+    }
 
     public int getId() {
         return id;
@@ -53,6 +82,14 @@ public class MenuItems {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getRestraunt() {
+        return restraunt;
+    }
+
+    public void setRestraunt(String restraunt) {
+        this.restraunt = restraunt;
     }
     
     

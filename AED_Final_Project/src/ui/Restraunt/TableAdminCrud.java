@@ -4,6 +4,13 @@
  */
 package ui.Restraunt;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Restraunt.MenuItems;
+import model.Restraunt.Tables;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author Anshul
@@ -15,6 +22,7 @@ public class TableAdminCrud extends javax.swing.JPanel {
      */
     public TableAdminCrud() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -35,31 +43,35 @@ public class TableAdminCrud extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jTextField12 = new javax.swing.JTextField();
+        crTable = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
+        upTable = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        crStatus = new javax.swing.JComboBox<>();
+        crRes = new javax.swing.JComboBox<>();
+        upStatus = new javax.swing.JComboBox<>();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Update");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 600, 30));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 320, 30));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Table No", "Status"
+                "Table No", "Restraunt", "Status", "Restraunt Id"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -79,68 +91,209 @@ public class TableAdminCrud extends javax.swing.JPanel {
                 jButton6ActionPerformed(evt);
             }
         });
-        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 150, 30));
+        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 150, 30));
 
         jLabel16.setText("Status");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 600, 10));
 
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        crTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                crTableActionPerformed(evt);
             }
         });
-        add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
+        add(crTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 200, 30));
 
         jLabel19.setText("Table No");
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 20));
-        add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
 
-        jButton7.setText("Submit");
+        jButton7.setText("Delete");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 150, 30));
+        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 110, 30));
 
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        upTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                upTableActionPerformed(evt);
             }
         });
-        add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, 200, 30));
-        add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, 200, 30));
+        add(upTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, 200, 30));
 
         jLabel18.setText("Status");
         add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, 20));
 
         jLabel21.setText("Table No");
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, 20));
+
+        jLabel17.setText("Restraunt");
+        add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, 20));
+
+        crStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "AVAILABLE" }));
+        add(crStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
+
+        crRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popeyes", "panera" }));
+        add(crRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
+
+        upStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "AVAILABLE" }));
+        add(upStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, 200, 30));
+
+        jButton8.setText("Update");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 150, 30));
+
+        jButton9.setText("View");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 110, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+//        insert
+        if(crTable.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
+            return;
+        }
+          
+        int table = Integer.parseInt(crTable.getText());
+        String status = crStatus.getSelectedItem().toString();
+        String restraunt = crRes.getSelectedItem().toString();
+        
+        int resId = 1;
+        if(restraunt.equals("popeyes")) resId = 1;
+        if(restraunt.equals("panera")) resId = 2;
+        
+        MySQLUtil.addTables(table, status, resId, restraunt);
+        
+        JOptionPane.showMessageDialog(this, "Record created successfully!");
+        
+        crTable.setText("");
+        crRes.setSelectedItem("panera");
+        crStatus.setSelectedItem("BOOKED");
+     
+        populateTable();
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+    private void crTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crTableActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_crTableActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+//        delete
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        int table = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        int restrauntId = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+        
+        MySQLUtil.deleteTables(table, restrauntId);
+        JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
+
+        upTable.setText("");
+        upStatus.setSelectedItem("BOOKED");
+        
+        populateTable();
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void upTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upTableActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_upTableActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+//        update
+        if(upTable.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
+            return;
+        }
+        
+        int table = Integer.parseInt(upTable.getText());
+        String status = upStatus.getSelectedItem().toString();
+        
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        int resId = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+        
+        MySQLUtil.updateTables(table, status, resId);
+        
+        upTable.setText("");
+        upStatus.setSelectedItem("BOOKED");
+        
+        populateTable();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+//        view
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int table = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
+        String status = model.getValueAt(selectedRowIndex, 2).toString();
+        
+        upTable.setText(String.valueOf(table));
+        upStatus.setSelectedItem(status);
+    }//GEN-LAST:event_jButton9ActionPerformed
+    
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        ArrayList<Tables> allTables = MySQLUtil.getAllTables();
+        
+        for(Tables t : allTables) {
+            Object[] row = new Object[5];
+            row[0] = t.getTable_no();
+            row[1] = t.getRestraunt();
+            row[2] = t.getStatus();
+            row[3] = t.getRestrauntId();
+            
+            model.addRow(row);
+        }
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> crRes;
+    private javax.swing.JComboBox<String> crStatus;
+    private javax.swing.JTextField crTable;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel21;
@@ -150,9 +303,7 @@ public class TableAdminCrud extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
+    private javax.swing.JComboBox<String> upStatus;
+    private javax.swing.JTextField upTable;
     // End of variables declaration//GEN-END:variables
 }

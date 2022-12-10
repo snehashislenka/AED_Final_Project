@@ -4,6 +4,11 @@
  */
 package ui.HotelUser;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author Anshul
@@ -13,10 +18,60 @@ public class Checkout extends javax.swing.JPanel {
     /**
      * Creates new form checkoutHotel
      */
-    HotelFrame hotelFrame;
-    public Checkout(HotelFrame hotelFrame) {
+    HotelFrame hotelFrame;String city;
+    String hotel;
+    String address;
+    String zipcode;
+    int hotelId;
+    Date checkin;
+    Date checkout;
+    int no_rooms;
+    int room_no;
+    float price;
+    long days;
+    String roomName;
+    
+    public Checkout(HotelFrame hotelFrame, String hotel, String address,
+            String city, String zipcode, int hotelId, Date checkin, 
+            Date checkout, int no_rooms, int room_no, float price,long days, String roomName) {
         initComponents();
         this.hotelFrame = hotelFrame;
+        this.hotel = hotel;
+        this.address = address;
+        this.city =city;
+        this.zipcode = zipcode;
+        this.hotelId =hotelId;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.no_rooms = no_rooms;
+        this.room_no = room_no;
+        this.price = price;
+        this.days = days;
+        this.roomName = roomName;
+        
+        sHotel.setText(hotel);
+        sAddress.setText(address);
+        sCity.setText(city);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String formatCheckin = formatter.format(checkin);
+        String formatCheckout = formatter.format(checkout);
+        
+        sIn.setText(String.valueOf(formatCheckin));
+        sOut.setText(String.valueOf(formatCheckout));
+        
+        sRooms.setText(String.valueOf(no_rooms));
+        sRooms1.setText(String.valueOf(no_rooms));
+        sRooms2.setText(String.valueOf(no_rooms));
+        sPrice.setText(String.valueOf(price));
+        sRoom.setText(roomName);
+        String nights = days + " Nights";
+        sDiff.setText(nights);
+        sDiff2.setText(String.valueOf(days));
+        float totalPrice = price * no_rooms * days;
+        sTotal.setText(String.valueOf(totalPrice));
+        float totalPayable = totalPrice + 40;
+        sPay.setText(String.valueOf(totalPayable));
     }
 
     /**
@@ -34,11 +89,11 @@ public class Checkout extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        sDiff = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        sRooms = new javax.swing.JLabel();
+        sIn = new javax.swing.JLabel();
+        sOut = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -48,17 +103,20 @@ public class Checkout extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
-        jLabel31 = new javax.swing.JLabel();
+        x = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        sRooms2 = new javax.swing.JLabel();
+        sRoom = new javax.swing.JLabel();
+        sHotel = new javax.swing.JLabel();
+        sCity = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        sAddress = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -70,11 +128,11 @@ public class Checkout extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        sPay = new javax.swing.JLabel();
+        sPrice = new javax.swing.JLabel();
+        sRooms1 = new javax.swing.JLabel();
+        sDiff2 = new javax.swing.JLabel();
+        sTotal = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
@@ -106,23 +164,23 @@ public class Checkout extends javax.swing.JPanel {
         jLabel19.setText("ROOMS");
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
 
-        jLabel20.setText("2 Nights");
-        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
+        sDiff.setText("2 Nights");
+        jPanel4.add(sDiff, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
 
         jLabel21.setText("CHECK-OUT");
         jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
-        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel23.setText("1");
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 80, 30));
+        sRooms.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sRooms.setText("1");
+        jPanel4.add(sRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 80, 30));
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel25.setText("12/24/2022");
-        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, 30));
+        sIn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sIn.setText("12/24/2022");
+        jPanel4.add(sIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, 30));
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel26.setText("12/26/2022");
-        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 80, 30));
+        sOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sOut.setText("12/26/2022");
+        jPanel4.add(sOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 80, 30));
 
         jLabel22.setText("CHECK-IN");
         jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -158,9 +216,9 @@ public class Checkout extends javax.swing.JPanel {
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 20, 140));
 
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel31.setText("1 x Standard Room");
-        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 30));
+        x.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        x.setText("x");
+        jPanel5.add(x, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 10, 30));
 
         jLabel32.setText("icon");
         jPanel5.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 30, 30));
@@ -183,20 +241,31 @@ public class Checkout extends javax.swing.JPanel {
         jLabel37.setText("on website.");
         jPanel5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 140, -1));
 
+        sRooms2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sRooms2.setText("1");
+        jPanel5.add(sRooms2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 10, 30));
+
+        sRoom.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sRoom.setText("Standard Room");
+        jPanel5.add(sRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 110, 30));
+
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 330, 240));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Hotel Name");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 190, -1));
+        sHotel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        sHotel.setText("Hotel Name");
+        jPanel1.add(sHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 190, -1));
 
-        jLabel4.setText("hotel address");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, 30));
+        sCity.setText("hotel address");
+        jPanel1.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, 30));
 
         jLabel5.setBackground(new java.awt.Color(153, 204, 255));
         jLabel5.setForeground(new java.awt.Color(255, 204, 204));
         jLabel5.setText("Hotel Rating: 4/5");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 190, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 330, 10));
+
+        sAddress.setText("hotel address");
+        jPanel1.add(sAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 190, 30));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 350, 510));
 
@@ -229,23 +298,23 @@ public class Checkout extends javax.swing.JPanel {
         jLabel12.setText("Price");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel13.setText("2000");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+        sPay.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sPay.setText("2000");
+        jPanel2.add(sPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
 
-        jLabel14.setText("800");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+        sPrice.setText("800");
+        jPanel2.add(sPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
-        jLabel15.setText("1");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
+        sRooms1.setText("1");
+        jPanel2.add(sRooms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
 
-        jLabel16.setText("2");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        sDiff2.setText("2");
+        jPanel2.add(sDiff2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
-        jLabel17.setText("1600");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+        sTotal.setText("1600");
+        jPanel2.add(sTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
-        jLabel18.setText("400");
+        jLabel18.setText("40");
         jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 220, 250));
@@ -280,14 +349,30 @@ public class Checkout extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("ORDER");
+        jButton1.setText("BOOK HOTEL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 220, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.hotelFrame.switchPanel(new RoomSelect(this.hotelFrame));
+        this.hotelFrame.switchPanel(new SearchHotel(this.hotelFrame));
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String status = "BOOKED";
+        MySQLUtil.bookHotel(hotelId, room_no, hotelId, checkin, checkout, no_rooms, status);
+        System.out.println("hotel booked");
+        
+        JOptionPane.showMessageDialog(this,"Hotel Booked Successfully!");
+        this.hotelFrame.switchPanel(new SearchHotel(this.hotelFrame));
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -297,27 +382,16 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -325,7 +399,6 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -345,5 +418,20 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel sAddress;
+    private javax.swing.JLabel sCity;
+    private javax.swing.JLabel sDiff;
+    private javax.swing.JLabel sDiff2;
+    private javax.swing.JLabel sHotel;
+    private javax.swing.JLabel sIn;
+    private javax.swing.JLabel sOut;
+    private javax.swing.JLabel sPay;
+    private javax.swing.JLabel sPrice;
+    private javax.swing.JLabel sRoom;
+    private javax.swing.JLabel sRooms;
+    private javax.swing.JLabel sRooms1;
+    private javax.swing.JLabel sRooms2;
+    private javax.swing.JLabel sTotal;
+    private javax.swing.JLabel x;
     // End of variables declaration//GEN-END:variables
 }
