@@ -874,8 +874,9 @@ public class MySQLUtil {
                         
             while(rs.next()) {
                 policy = new Policy(rs.getInt("id"),
-                        rs.getString("Policyname"), 
-                        rs.getInt("Sumassurance"),
+                        rs.getString("Policyname"),
+                        rs.getString("categoryname"),
+                        rs.getInt("Sumassurance"),                        
                         rs.getInt("Premium"), 
                         rs.getInt("Tenure"), 
                         rs.getString("Date"));

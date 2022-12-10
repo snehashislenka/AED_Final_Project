@@ -41,7 +41,6 @@ public class Customer_Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Logoutbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
@@ -50,63 +49,52 @@ public class Customer_Dashboard extends javax.swing.JFrame {
         Dashboardbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 51));
 
-        Logoutbtn.setText("Logout");
-        Logoutbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutbtnActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 204, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Customer Dashboard");
 
-        ApplyPolicyBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 369));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ApplyPolicyBtn.setBackground(new java.awt.Color(51, 204, 255));
+        ApplyPolicyBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ApplyPolicyBtn.setForeground(new java.awt.Color(255, 255, 255));
         ApplyPolicyBtn.setText("Apply Policy");
+        ApplyPolicyBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         ApplyPolicyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ApplyPolicyBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(ApplyPolicyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 112, 280, 43));
 
-        Historybtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Historybtn.setBackground(new java.awt.Color(51, 204, 255));
+        Historybtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Historybtn.setForeground(new java.awt.Color(255, 255, 255));
         Historybtn.setText("History");
+        Historybtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         Historybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HistorybtnActionPerformed(evt);
             }
         });
+        jPanel1.add(Historybtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 209, 280, 42));
 
-        Dashboardbtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Dashboardbtn.setBackground(new java.awt.Color(51, 204, 255));
+        Dashboardbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Dashboardbtn.setForeground(new java.awt.Color(255, 255, 255));
         Dashboardbtn.setText("Dashboard");
+        Dashboardbtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        Dashboardbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Dashboardbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DashboardbtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Dashboardbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Historybtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ApplyPolicyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(Dashboardbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(ApplyPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(Historybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
-        );
+        jPanel1.add(Dashboardbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 25, 280, 48));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -114,34 +102,24 @@ public class Customer_Dashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSplitPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Logoutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Logoutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(75, 75, 75)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void LogoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutbtnActionPerformed
-        // TODO add your handling code here:
-      
-    }//GEN-LAST:event_LogoutbtnActionPerformed
 
     private void ApplyPolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyPolicyBtnActionPerformed
         // TODO add your handling code here:
@@ -200,7 +178,6 @@ public class Customer_Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton ApplyPolicyBtn;
     private javax.swing.JButton Dashboardbtn;
     private javax.swing.JButton Historybtn;
-    private javax.swing.JButton Logoutbtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;

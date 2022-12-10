@@ -17,6 +17,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
      */
     public InsuranceAdmin_Dashboard() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         AdminDashboardJPanel dashboardpanel = new AdminDashboardJPanel(this);
         jSplitPane1.setRightComponent(dashboardpanel);
     }
