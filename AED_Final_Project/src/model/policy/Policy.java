@@ -16,6 +16,7 @@ public class Policy {
        private int PolicyPremium;
        private int PolicyTenure;
        private String PolicyDate;
+       private String Policystatus;
 
     public Policy(int PolicyID, String PolicyName, int PolicySumAssurance, int PolicyPremium, int PolicyTenure, String PolicyDate) {
          this.PolicyID = PolicyID;
@@ -81,6 +82,13 @@ public class Policy {
 
     public void setPolicyDate(String PolicyDate) {
         this.PolicyDate = PolicyDate;
+    }
+     public String getPolicystatus() {
+        return Policystatus;
+    }
+
+    public void setPolicystatus(String Policystatus) {
+        this.Policystatus = Policystatus;
     }
 
     public Policy(int PolicyID, String PolicyName,String CategoryName, int PolicySumAssurance, int PolicyPremium, int PolicyTenure, String PolicyDate) {
