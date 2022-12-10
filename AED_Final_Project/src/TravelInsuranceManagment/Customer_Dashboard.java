@@ -19,6 +19,7 @@ public class Customer_Dashboard extends javax.swing.JFrame {
      */
     public Customer_Dashboard() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         CustomerDashboardPanel dashboardpanel = new CustomerDashboardPanel(this);
         jSplitPane1.setRightComponent(dashboardpanel);
     }
@@ -144,13 +145,13 @@ public class Customer_Dashboard extends javax.swing.JFrame {
 
     private void ApplyPolicyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyPolicyBtnActionPerformed
         // TODO add your handling code here:
-//        APolicyJPanel PolicyPanel = new ApplyPolicyJPanel();
-//        jSplitPane1.setRightComponent(PolicyPanel);
+        Available_policies PolicyPanel = new Available_policies(this);
+        jSplitPane1.setRightComponent(PolicyPanel);
     }//GEN-LAST:event_ApplyPolicyBtnActionPerformed
 
     private void HistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorybtnActionPerformed
         // TODO add your handling code here:
-        PolicyHistoryJPanel HistoryPanel = new PolicyHistoryJPanel();
+        PolicyHistoryJPanel HistoryPanel = new PolicyHistoryJPanel(this);
         jSplitPane1.setRightComponent(HistoryPanel);
     }//GEN-LAST:event_HistorybtnActionPerformed
 

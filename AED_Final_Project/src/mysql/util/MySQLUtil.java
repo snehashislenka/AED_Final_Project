@@ -24,6 +24,7 @@ import model.Flight.Flight;
 import model.Hotel.HotelBookings;
 import model.Person.Person;
 import model.Restraunt.Restraunt;
+import model.booking.PolicyBooking;
 import model.bus.Bus;
 import model.catgeory.Category;
 import model.city.City;
@@ -239,7 +240,7 @@ public class MySQLUtil {
     */
     
     public static void savePersonSession(int id, String role) {
-        String query = "INSERT INTO person_sesssion (id, role) VALUES (?, ?)";
+        String query = "INSERT INTO person_session (id, role) VALUES (?, ?)";
         try {
             Connection conn = MySQLUtil.connectMySQL();
             
@@ -1222,6 +1223,70 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+        
+//policybooking crud
+        public static void addpolicybookingdetails(int policyId, int personId, String AppliedDate,String Status){
+         
+         String querybooking = "insert into insurance_policybooking("
+                 + "policyid, personid, applieddate,status)" + "values(?, ?, ?,?) ";
+                    
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+             
+            PreparedStatement importbooking = conn.prepareStatement(querybooking); 
+            
+            importbooking.setInt(1, policyId);
+            importbooking.setInt(2, personId);
+            importbooking.setString(3, AppliedDate);
+            importbooking.setString(4, Status);
+            importbooking.execute();
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static ArrayList<PolicyBooking> viewpolicybookingdetails(){
+           String query = "select * from insurance_policy p"
+                   + " inner join insurance_policybooking b on p.id = b.policyid";
+           ArrayList<PolicyBooking> BookingList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                PolicyBooking booking = new PolicyBooking(rs.getInt("bookingid"),rs.getInt("policyid"),rs.getInt("personid"),rs.getString("Policyname"),rs.getString("applieddate"),rs.getString("status"));
+                BookingList.add(booking);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return BookingList;
+    
+    }
+        public static void updatepolicybookingdetail(int bookingId,int policyId,int personId,String AppliedDate,String Status){
+        String query = "UPDATE insurance_policybooking SET status= WHERE bookingid=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, Status);
+            ps.setInt(2, bookingId);
+                 
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       
 }
 
     
