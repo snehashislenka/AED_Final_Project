@@ -5,6 +5,7 @@
 package TravelInsuranceManagment;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.booking.PolicyBooking;
 import mysql.util.MySQLUtil;
@@ -38,8 +39,8 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         AvailablePoliciesTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Approvedbtn = new javax.swing.JButton();
+        rejectbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         AvailablePoliciesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -55,9 +56,19 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(AvailablePoliciesTable);
 
-        jButton1.setText("Approved");
+        Approvedbtn.setText("Approved");
+        Approvedbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApprovedbtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Reject");
+        rejectbtn.setText("Reject");
+        rejectbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rejectbtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,9 +82,9 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Approvedbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rejectbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(253, 253, 253)
@@ -92,19 +103,53 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Approvedbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rejectbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ApprovedbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovedbtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = AvailablePoliciesTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) AvailablePoliciesTable.getModel();
+        int selectedpersonId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        JOptionPane.showMessageDialog(this,"Person Policy Approved");
+        String Status = "Approved";
+               
+        MySQLUtil.updatepolicybookingdetail(Status, selectedpersonId);
+        populateTable();
+    }//GEN-LAST:event_ApprovedbtnActionPerformed
+
+    private void rejectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectbtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = AvailablePoliciesTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) AvailablePoliciesTable.getModel();
+        int selectedId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        JOptionPane.showMessageDialog(this,"Person Policy Rejected");
+        String Status = "REJECTED";
+               
+        MySQLUtil.rejectpolicybookingdetail(Status, selectedId);
+        populateTable();
+    }//GEN-LAST:event_rejectbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Approvedbtn;
     private javax.swing.JTable AvailablePoliciesTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton rejectbtn;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {

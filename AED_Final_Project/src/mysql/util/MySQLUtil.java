@@ -1298,15 +1298,30 @@ public class MySQLUtil {
     
     }
         
-        public static void updatepolicybookingdetail(String Status,int personID){
-        String query = "UPDATE insurance_policybooking SET status= WHERE bookingid=?";
+        public static void updatepolicybookingdetail(String Status,int personId){
+        String query = "UPDATE insurance_policybooking SET status=? WHERE personid=?";
         try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query);
 
             ps.setString(1, Status);
-            ps.setInt(2, bookingId);
-                 
+            ps.setInt(2, personId);                 
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static void rejectpolicybookingdetail(String Status,int personId){
+        String query = "UPDATE insurance_policybooking SET status=? WHERE personid=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, Status);
+            ps.setInt(2, personId);                 
             ps.execute();
                         
             conn.close();
