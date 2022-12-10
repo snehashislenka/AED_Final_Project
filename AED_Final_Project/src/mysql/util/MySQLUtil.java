@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,6 +22,8 @@ import model.Restraunt.MenuItems;
 import model.Restraunt.OrderItems;
 import model.Restraunt.Orders;
 import model.Restraunt.Restraunt;
+import model.Restraunt.TableBookings;
+import model.Restraunt.Tables;
 import model.bus.Bus;
 
 /**
@@ -888,5 +891,173 @@ public class MySQLUtil {
         
     }
      
+     public static ArrayList<Tables> getAllTables() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Tables> tableList = new ArrayList();
+        
+        String query = "SELECT * FROM tables";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                Tables res = new Tables(rs.getInt("table_no"), rs.getString("status"),
+                        rs.getInt("restrauntId"),
+                        rs.getString("restraunt"));
+                
+                tableList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tableList;
+    }
+     
+     public static void addTables(int table,String status,int resId, String restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO tables (table_no, status, restrauntId, restraunt)"
+                + " values (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, table);
+            ps.setString(2,status);
+            ps.setInt(3, resId);
+            ps.setString(4,restraunt);
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+    public static void deleteTables(int table, int resId) {
+        String query = "DELETE FROM tables WHERE table_no = ? and restrauntId = ?";
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            
+            PreparedStatement ps1 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
+            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps2 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
+            
+            ps.setInt(1, table);
+            ps.setInt(2, resId);
+            
+            ps1.execute();
+            ps.execute();
+            ps2.execute();
+                                    
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void updateTables(int table, String status, int resId) {
+            Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "update tables set status = ? where restrauntId = ? and table_no = ?";
+        try {
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, status);
+            ps.setInt(2, resId);
+            ps.setInt(3, table);
+            
+            ps.execute();
+            conn.close();
+                     
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Update issue", ex);
+        }
+    }
+    
+    public static ArrayList<TableBookings> getAllTableBookings() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<TableBookings> tableBookingList = new ArrayList();
+        
+        String query = "SELECT * FROM table_bookings";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                TableBookings res = new TableBookings(rs.getInt("id"), rs.getInt("restrauntId"),
+                        rs.getInt("table_no"),
+                        rs.getString("restraunt"),
+                        rs.getString("status"),
+                        rs.getDate("fromDate"));
+                
+                tableBookingList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tableBookingList;
+    }
+    public static void updateTableBooking(int id, String status) {
+            Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "update table_bookings set status = ? where id = ?";
+        try {
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setString(1, status);
+            ps.setInt(2, id);
+            
+            ps.execute();
+            conn.close();
+                     
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Update issue", ex);
+        }
+    }
+    
+    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt)"
+                + " values (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, table);
+            ps.setString(2,status);
+            ps.setString(3, dates);
+            ps.setInt(4, resId);
+            ps.setString(5,restraunt);
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+    public static void deleteTableBookings(int id) {
+        String query = "DELETE FROM table_bookings WHERE id = ?";
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            
+            PreparedStatement ps1 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
+            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps2 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
+            
+            ps.setInt(1, id);
+            
+            ps1.execute();
+            ps.execute();
+            ps2.execute();
+                                    
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
      
 }
