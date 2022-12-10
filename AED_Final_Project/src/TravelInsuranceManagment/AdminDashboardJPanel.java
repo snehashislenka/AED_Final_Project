@@ -13,8 +13,10 @@ public class AdminDashboardJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminDashboardJPanel
      */
-    public AdminDashboardJPanel() {
+   InsuranceAdmin_Dashboard dashboardpanel;
+    public AdminDashboardJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
+        this.dashboardpanel = dashboardpanel;
     }
 
     /**

@@ -4,6 +4,12 @@
  */
 package TravelInsuranceManagment;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.booking.PolicyBooking;
+import model.policy.Policy;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author parjita
@@ -13,8 +19,12 @@ public class PolicyHistoryJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PolicyHistoryJPanel
      */
-    public PolicyHistoryJPanel() {
+    Customer_Dashboard customer_dashboard;
+    
+    public PolicyHistoryJPanel(Customer_Dashboard customerDashboard) {
         initComponents();
+        this.customer_dashboard = customerDashboard;
+        populateTable();
     }
 
     /**
@@ -27,10 +37,11 @@ public class PolicyHistoryJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        PolicyHistoryTabel = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        Backbtn = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        PolicyHistoryTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -41,41 +52,72 @@ public class PolicyHistoryJPanel extends javax.swing.JPanel {
                 "Serial No", "Policy Name", "Applied Date", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(PolicyHistoryTabel);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("History");
+
+        Backbtn.setText("Back");
+        Backbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(284, 284, 284)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(Backbtn)
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(90, 90, 90)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
+        // TODO add your handling code here:
+//        this.Customer_Dashboard.switchPanel(new CustomerDashboardPanel(this.dashboardpanel));
+        customer_dashboard.switchPanel(new CustomerDashboardPanel(this.customer_dashboard));
+    }//GEN-LAST:event_BackbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Backbtn;
+    private javax.swing.JTable PolicyHistoryTabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+       DefaultTableModel model = (DefaultTableModel) PolicyHistoryTabel.getModel();
+       model.setRowCount(0);
+       ArrayList<PolicyBooking> policybookingList = MySQLUtil.viewpolicybookingdetails();
+       for(PolicyBooking p : policybookingList ){
+        Object[] row = new Object[4];
+               row[0] = p.getPolicyID();
+               row[1] = p.getPolicyName();
+               row[2] = p.getAppliedDate();
+               row[3] = p.getStatus();                              
+
+               model.addRow(row);
+       }
+    }
 }
