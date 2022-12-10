@@ -21,6 +21,13 @@ public class OrderItems {
         this.quantity = quantity;
     }
 
+    public OrderItems(int itemId, String item, float total, int quantity) {
+        this.itemId = itemId;
+        this.item = item;
+        this.total = total;
+        this.quantity = quantity;
+    }
+
     public int getOrderId() {
         return orderId;
     }

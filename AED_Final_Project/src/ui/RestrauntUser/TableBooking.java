@@ -14,6 +14,22 @@ public class TableBooking extends javax.swing.JPanel {
      * Creates new form TableBooking
      */
     RestrauntFrame restrauntFrame;
+    String city;String restraunt; 
+    String address;
+    String zipcode;
+    int restrauntId;
+    
+    public TableBooking(RestrauntFrame restrauntFrame, String city, String restraunt, 
+            String address, String zipcode, int restrauntId) {
+        initComponents();
+        this.restrauntFrame = restrauntFrame;
+        this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+    }
+    
     public TableBooking(RestrauntFrame restrauntFrame) {
         initComponents();
         this.restrauntFrame = restrauntFrame;

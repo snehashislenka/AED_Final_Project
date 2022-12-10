@@ -421,7 +421,7 @@ public class MySQLUtil {
             while(rs.next()) {
                 HotelBookings res = new HotelBookings(rs.getInt("id"), rs.getInt("hotelId"),
                         rs.getInt("room_no"),  rs.getInt("userId"),
-                 rs.getDate("from"), rs.getDate("to"), rs.getInt("no_of_rooms"),
+                 rs.getDate("fromDate"), rs.getDate("toDate"), rs.getInt("no_of_rooms"),
                  rs.getString("status"), rs.getString("user"));
 
                 bookingList.add(res);
@@ -1053,6 +1053,101 @@ public class MySQLUtil {
             ps.execute();
             ps2.execute();
                                     
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static ArrayList<HotelBookings> getAllUserBookings(int userId) {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<HotelBookings> userBookingList = new ArrayList();
+        
+        String query = "SELECT h.hotel, hb.room_no, hb.from, hb.to FROM hotel_bookings as hb inner join hotel h on h.id = hb.hotelId where userId = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+         
+            while(rs.next()) {
+                HotelBookings res = new HotelBookings(rs.getString("hotel"), rs.getInt("room_no"),
+                rs.getDate("from"), rs.getDate("to"));
+                
+                userBookingList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return userBookingList;
+    }
+    
+    public static void bookHotel(int hotelId, int room_no, int userId, Date from, 
+            Date to, int no_of_rooms, String status) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO hotel_bookings (hotelId, room_no, userId, fromDate, toDate, no_of_rooms, status)"
+                + " values (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            java.sql.Date fromDate = new java.sql.Date(from.getTime());
+            java.sql.Date toDate = new java.sql.Date(to.getTime());
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, hotelId);
+            ps.setInt(2,room_no);
+            ps.setInt(3, userId);
+            ps.setDate(4, fromDate);
+            ps.setDate(5, toDate);
+            ps.setInt(6, no_of_rooms);
+            ps.setString(7,status);
+            
+            ps.execute();
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void createOrder(int userId, int restrauntId, float orderTotal, String status, String user, String restraunt, int tax) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO orders (userId, restrauntId, orderTotal, "
+                + "status, user, restraunt, tax)"
+                + " values (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setInt(2,restrauntId);
+            ps.setFloat(3, orderTotal);
+            ps.setString(4, status);
+            ps.setString(5,user);
+            ps.setString(6,restraunt);
+            ps.setInt(7,tax);
+            
+            ps.execute();
+            System.out.println("order created here");
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public static void createOrderItem(int orderId, int itemId, String item, float total, 
+                int quantity) {
+        Connection conn = MySQLUtil.connectMySQL();
+        
+        String query = "INSERT INTO order_items (orderId, itemId, item, total, quantity)"
+                + " values (?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, orderId);
+            ps.setInt(2,itemId);
+            ps.setString(3, item);
+            ps.setFloat(4, total);
+            ps.setInt(5, quantity);
+            
+            ps.execute();
+            
+            System.out.println("order items created --");
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);

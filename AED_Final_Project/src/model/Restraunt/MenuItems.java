@@ -37,6 +37,13 @@ public class MenuItems {
    
     }
 
+    public MenuItems(int id, String item, float price, String desc) {
+        this.id = id;
+        this.item = item;
+        this.price = price;
+        this.desc = desc;
+    }
+
     public int getId() {
         return id;
     }
