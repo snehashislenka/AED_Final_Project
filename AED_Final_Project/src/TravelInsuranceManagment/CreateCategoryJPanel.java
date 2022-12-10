@@ -7,9 +7,13 @@ package TravelInsuranceManagment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.catgeory.Category;
+import model.network.Network;
 import mysql.util.MySQLUtil;
 
 /**
@@ -37,11 +41,14 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         CategoryAddbtn = new javax.swing.JButton();
         CategoryNameTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        CategoryIDTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         CategoryDateTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        CategoryTable = new javax.swing.JTable();
+        viewbtn = new javax.swing.JButton();
+        updatebtn = new javax.swing.JButton();
+        deletebtn = new javax.swing.JButton();
 
         CategoryAddbtn.setText("Add");
         CategoryAddbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -51,14 +58,6 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         });
 
         jLabel1.setText("Category Name");
-
-        jLabel2.setText("Category ID");
-
-        CategoryIDTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CategoryIDTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Date");
 
@@ -72,91 +71,176 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Create the Category");
 
+        CategoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Serial No", "Category Name", "Category Date"
+            }
+        ));
+        jScrollPane1.setViewportView(CategoryTable);
+
+        viewbtn.setText("View");
+        viewbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewbtnActionPerformed(evt);
+            }
+        });
+
+        updatebtn.setText("Update");
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatebtnActionPerformed(evt);
+            }
+        });
+
+        deletebtn.setText("Delete");
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(CategoryDateTextField)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CategoryIDTextField)
-                    .addComponent(CategoryNameTextField)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(CategoryAddbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CategoryNameTextField)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(CategoryAddbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CategoryIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(CategoryAddbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(CategoryNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(updatebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deletebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CategoryAddbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(viewbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void CategoryIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryIDTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CategoryIDTextFieldActionPerformed
 
     private void CategoryDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryDateTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CategoryDateTextFieldActionPerformed
 
     private void CategoryAddbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryAddbtnActionPerformed
-        // TODO add your handling code here:
-        int CategoryID  =  Integer.parseInt(CategoryIDTextField.getText());
         String CategoryName = CategoryNameTextField.getText();
         String CategoryDate = CategoryDateTextField.getText();
-        
-        String query = "INSERT INTO insurance_category (id,categoryname,categorydate)"
-        + " values (?, ?, ?)";
-         try {
-            Connection conn = MySQLUtil.connectMySQL();
-            PreparedStatement ps = conn.prepareStatement(query); 
-            
-            ps.setInt(1,CategoryID);
-            ps.setString(2, CategoryName);
-            ps.setString(3, CategoryDate);
-            
-//            System.out.println(person.getRole().toString());
-//            ps.setString(7, person.getRole().toString());
-            
-            ps.execute();            
-            conn.close();
-            JOptionPane.showMessageDialog(this,"New Category Detail Added");
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                
+        MySQLUtil.addcategorydetails(CategoryName,CategoryDate);
+        JOptionPane.showMessageDialog(this,"New Category Added");        // TODO add your handling code here:
+  
     }//GEN-LAST:event_CategoryAddbtnActionPerformed
+
+    private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
+        // TODO add your handling code here:
+          populateTable();
+    }//GEN-LAST:event_viewbtnActionPerformed
+
+    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = CategoryTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) CategoryTable.getModel();
+        int selectedcategoryId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        JOptionPane.showMessageDialog(this,"category Details Updates");
+        String entercategoryName = CategoryNameTextField.getText();
+               
+        MySQLUtil.updatecategorydetail(entercategoryName, selectedcategoryId);
+        populateTable();
+    }//GEN-LAST:event_updatebtnActionPerformed
+
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = CategoryTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) CategoryTable.getModel();
+        int CategoryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        MySQLUtil.deletecatgeory(CategoryID);
+                    
+        populateTable();  
+    }//GEN-LAST:event_deletebtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CategoryAddbtn;
     private javax.swing.JTextField CategoryDateTextField;
-    private javax.swing.JTextField CategoryIDTextField;
     private javax.swing.JTextField CategoryNameTextField;
+    private javax.swing.JTable CategoryTable;
+    private javax.swing.JButton deletebtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton updatebtn;
+    private javax.swing.JButton viewbtn;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+       DefaultTableModel model = (DefaultTableModel) CategoryTable.getModel();
+       model.setRowCount(0);
+       ArrayList<Category> categoryList = MySQLUtil.viewcategorydetails();
+       for(Category c : categoryList ){
+            Object[] row = new Object[3];                   
+                   row[0] = c.getCategoryId();
+                   row[1] = c.getCategoryName();
+                   row[2] = c.getDate();
+                   model.addRow(row);
+       }
+    }
 }
