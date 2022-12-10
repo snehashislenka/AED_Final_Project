@@ -171,7 +171,7 @@ public class CreateNetwork extends javax.swing.JPanel {
 
     private void UpdatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatebtnActionPerformed
         // TODO add your handling code here:
-         int selectedRow = NetworkViewTable.getSelectedRow();
+        int selectedRow = NetworkViewTable.getSelectedRow();
         if(selectedRow < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to update!");
             return;

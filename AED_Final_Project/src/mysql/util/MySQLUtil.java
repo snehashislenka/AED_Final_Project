@@ -25,6 +25,7 @@ import model.Hotel.HotelBookings;
 import model.Person.Person;
 import model.Restraunt.Restraunt;
 import model.bus.Bus;
+import model.catgeory.Category;
 import model.city.City;
 import model.enterprise.Enterprise;
 import model.network.Network;
@@ -777,18 +778,19 @@ public class MySQLUtil {
     
     
 //policy crud operations
-    public static void addpolicydetails(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
-         String query = "INSERT INTO insurance_policy (Policyname,SumAssurance,Premium,Tenure,Date)"
-        + " values (?, ?, ?, ?, ?)";
+    public static void addpolicydetails(String PolicyName,String CategoryName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
+         String query = "INSERT INTO insurance_policy (Policyname,categoryname,SumAssurance,Premium,Tenure,Date)"
+        + " values (?, ?, ?, ?, ?, ?)";
          try {
             Connection conn = MySQLUtil.connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 
             
             ps.setString(1, PolicyName);
-            ps.setInt(2, PolicySumAssurance);
-            ps.setInt(3, PolicyPremium);
-            ps.setInt(4, PolicyTenure);
-            ps.setString(5, PolicyDate);
+            ps.setString(2, CategoryName);
+            ps.setInt(3, PolicySumAssurance);            
+            ps.setInt(4, PolicyPremium);
+            ps.setInt(5, PolicyTenure);
+            ps.setString(6, PolicyDate);
                        
             ps.execute();            
             conn.close();
@@ -806,9 +808,8 @@ public class MySQLUtil {
             PreparedStatement ps = conn.prepareStatement(query); 
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                Policy policy = new Policy(rs.getInt("id"),
-                        rs.getString("Policyname"),rs.getInt("Sumassurance"),
-                        rs.getInt("premium"),rs.getInt("Tenure"),rs.getString("Date"));
+                Policy policy = new Policy(rs.getInt("id"),rs.getString("Policyname"),rs.getString("categoryname"),
+                        rs.getInt("Sumassurance"),rs.getInt("premium"),rs.getInt("Tenure"),rs.getString("Date"));
                 policyList.add(policy);
              }           
             conn.close();
@@ -818,6 +819,7 @@ public class MySQLUtil {
         return policyList;
     
     }
+    
     
     public static void deletepolicy(int policyID){
           String query = "delete from insurance_policy where id = ?";
@@ -832,36 +834,138 @@ public class MySQLUtil {
         }
     }
     
-    public static Policy searchpolicybyID(int policyID){
-          String query = "SELECT * FROM insurance_policy where id = ?";
-          Policy policy = null;
-         try {          
-            Connection conn = connectMySQL();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, policyID);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-               policy = new Policy(rs.getInt("id"),rs.getString("Policyname"),rs.getInt("Sumassurance"),rs.getInt("premium"),rs.getInt("Tenure"),rs.getString("Date"));
-            }  
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         return policy;
-    }
-    
-    public static void updatepolicy(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
-        String query = "UPDATE insurance_policy SET PolicyName=?, PolicySumAssurance=?, PolicyPremium=?, "
-                + "PolicyTenure=?, PolicyDate=?";
+   public static void updatepolicydetail(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate,int PolicyId){
+        String query = "UPDATE insurance_policy SET PolicyName=?, Sumassurance=?, Premium=?,Tenure=?, Date=? where id=?";
         try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query);
-
+            
+            
+            
             ps.setString(1, PolicyName);
             ps.setInt(2, PolicySumAssurance);
             ps.setInt(3, PolicyPremium);
             ps.setInt(4, PolicyTenure);
-            ps.setString(5, PolicyDate);            
+            ps.setString(5, PolicyDate);
+            ps.setInt(6, PolicyId);
+            ps.execute();
+                        
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+    }
+        public static Policy getPolicyById(int policyId) {
+        Policy policy = null;
+        String query = "SELECT * FROM insurance_policy WHERE id = ?";
+        try {
+            
+            Connection conn = MySQLUtil.connectMySQL();
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            
+            ps.setInt(1, policyId);
+            
+            ResultSet rs = ps.executeQuery();
+                        
+            while(rs.next()) {
+                policy = new Policy(rs.getInt("id"),
+                        rs.getString("Policyname"), 
+                        rs.getInt("Sumassurance"),
+                        rs.getInt("Premium"), 
+                        rs.getInt("Tenure"), 
+                        rs.getString("Date"));
+
+            }
+            
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return policy;
+    }
+   public static ArrayList<Category> getallcategory(){
+           String query = "select * from insurance_category";
+           ArrayList<Category> CategoryList = new ArrayList<>();
+            try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Category category = new Category(rs.getInt("id"),rs.getString("categoryname"),rs.getString("categorydate"));
+                CategoryList.add(category);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return CategoryList;
+       }
+//category crud operations
+        public static void addcategorydetails(String CategoryName,String CategoryDate){
+         String queryperson = "INSERT INTO insurance_category(categoryname,categorydate)" + "Values (?,?)";
+            
+         try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(queryperson);           
+               
+            ps.setString(1, CategoryName);
+            ps.setString(2, CategoryDate);
+            ps.execute();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       public static ArrayList<Category> viewcategorydetails(){
+           String query = "select * from insurance_category";
+           ArrayList<Category> categoryList = new ArrayList<>();
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);           
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Category category = new Category(rs.getInt("id"),rs.getString("categoryname"),rs.getString("categorydate"));
+                categoryList.add(category);
+             }           
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return categoryList;
+    
+    }
+        public static void deletecatgeory(int categoryID){
+          String query = "delete from insurance_category where id = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1,categoryID);
+            ps.execute();
+            conn.close();
+          } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public static void updatecategorydetail(String categoryName,int categoryID){
+        String query = "UPDATE insurance_category SET categoryname=? WHERE id=?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, categoryName);
+            ps.setInt(2, categoryID);
+                 
             ps.execute();
                         
             conn.close();
@@ -870,13 +974,11 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-//category crud operations
-    
     
 //enyterprise crud operations
     
       public static void addenterprisedetails(String EnterpriseName , 
-              String FirstName ,String LastName ,String Gender,String Role,String Email,String Password){
+         String FirstName ,String LastName ,String Gender,String Role,String Email,String Password){
          String queryperson = "INSERT INTO person(firstname,lastname,gender,role,email,password)" + "Values (? ,? ,? ,? ,? ,? )";
          String querypersonid = "select id from person order by id desc limit 1";
          String query = "INSERT INTO enterprise (name, adminId)" + " values (?, ?)";
