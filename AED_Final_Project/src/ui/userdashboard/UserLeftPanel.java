@@ -4,6 +4,8 @@
  */
 package ui.userdashboard;
 
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author slenk
@@ -39,6 +41,11 @@ public class UserLeftPanel extends javax.swing.JPanel {
 
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
 
         btnProfile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnProfile.setText("Profile");
@@ -97,7 +104,14 @@ public class UserLeftPanel extends javax.swing.JPanel {
 
     private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
         this.dashboard.dispose();
+        MySQLUtil.removePersonSession();
+        Signin signinFrame = new Signin();
+        signinFrame.setVisible(true);
     }//GEN-LAST:event_btnSignoutActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

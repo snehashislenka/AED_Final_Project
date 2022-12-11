@@ -4,7 +4,7 @@
  */
 package ui.userdashboard;
 
-import TravelInsuranceManagment.Customer_Dashboard;
+import ui.InsuranceManagment.Customer_Dashboard;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -32,32 +32,56 @@ public class HomePanel extends javax.swing.JPanel {
         initComponents();
         tabsPanel.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.4f));
 
+//        ImageIcon flightIcon = new ImageIcon(
+//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        
+//        ImageIcon busIcon = new ImageIcon(
+//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon hotelIcon = new ImageIcon(
+//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon resturantIcon = new ImageIcon(
+//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon carRentIcon = new ImageIcon(
+//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon InsuranceIcon = new ImageIcon(
+//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         ImageIcon flightIcon = new ImageIcon(
-                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
+                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         
         ImageIcon busIcon = new ImageIcon(
-                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
+                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         ImageIcon hotelIcon = new ImageIcon(
-                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
+                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         ImageIcon resturantIcon = new ImageIcon(
-                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
+                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         ImageIcon carRentIcon = new ImageIcon(
-                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
+                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        ImageIcon InsuranceIcon = new ImageIcon(
+                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         lblFlights.setText("");
         lblBus.setText("");
         lblHotels.setText("");
         lblResturant.setText("");
         lblRentals.setText("");
+        lblInsurance.setText("");
         lblFlights.setIcon(flightIcon);
         lblBus.setIcon(busIcon);
         lblHotels.setIcon(hotelIcon);
         lblResturant.setIcon(resturantIcon);
         lblRentals.setIcon(carRentIcon);
+        lblInsurance.setIcon(InsuranceIcon);
 //        lblFlights.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
     }
@@ -184,23 +208,28 @@ public class HomePanel extends javax.swing.JPanel {
         tabsPanelLayout.setHorizontalGroup(
             tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabsPanelLayout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
-                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblBus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(29, 29, 29)
+                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tabsPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabsPanelLayout.createSequentialGroup()
+                        .addComponent(lblBus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)))
+                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(40, 40, 40)
+                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
                 .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblResturant, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,36 +242,31 @@ public class HomePanel extends javax.swing.JPanel {
         tabsPanelLayout.setVerticalGroup(
             tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabsPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabsPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(tabsPanelLayout.createSequentialGroup()
-                                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblBus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addComponent(jLabel3)))
-                            .addGroup(tabsPanelLayout.createSequentialGroup()
-                                .addComponent(lblResturant, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4))
-                            .addGroup(tabsPanelLayout.createSequentialGroup()
-                                .addComponent(lblRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5))))
+                        .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblBus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)))
                     .addGroup(tabsPanelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)))
-                .addContainerGap(150, Short.MAX_VALUE))
+                        .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblResturant, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblInsurance, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tabsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)))
+                    .addGroup(tabsPanelLayout.createSequentialGroup()
+                        .addComponent(lblRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -250,16 +274,16 @@ public class HomePanel extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(100, 100, 100)
                 .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
+                .addGap(157, 157, 157)
                 .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(486, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel5);

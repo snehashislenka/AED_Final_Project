@@ -21,7 +21,6 @@ public class Policy {
     public Policy(int PolicyID, String PolicyName, int PolicySumAssurance, int PolicyPremium, int PolicyTenure, String PolicyDate) {
          this.PolicyID = PolicyID;
         this.PolicyName = PolicyName;
-        this.CategoryName = CategoryName;
         this.PolicySumAssurance = PolicySumAssurance;
         this.PolicyPremium = PolicyPremium;
         this.PolicyTenure = PolicyTenure;
