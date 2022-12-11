@@ -37,6 +37,14 @@ public class HotelBookings {
     private String status;
     private float price;
     private String user;
+    private String hotel;
+
+    public HotelBookings(String hotel, int room_no, java.sql.Date from, java.sql.Date to) {
+        this.hotel = hotel;
+        this.room_no = room_no;
+        this.from = from;
+        this.to = to;
+    }
 
     public int getId() {
         return id;
@@ -116,6 +124,14 @@ public class HotelBookings {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
     }
     
     

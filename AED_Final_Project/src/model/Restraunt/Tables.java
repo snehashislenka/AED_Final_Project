@@ -11,7 +11,15 @@ package model.Restraunt;
 public class Tables {
     private int table_no;
     private int restrauntId;
+    private String restraunt;
     private String status;
+
+    public Tables(int table_no, String status, int restrauntId, String restraunt) {
+        this.table_no = table_no;
+        this.status = status;
+        this.restrauntId =restrauntId;
+        this.restraunt = restraunt;
+    }
 
     public int getTable_no() {
         return table_no;
@@ -35,6 +43,14 @@ public class Tables {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRestraunt() {
+        return restraunt;
+    }
+
+    public void setRestraunt(String restraunt) {
+        this.restraunt = restraunt;
     }
     
     

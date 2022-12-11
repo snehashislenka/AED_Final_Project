@@ -11,10 +11,29 @@ package model.Hotel;
 public class Rooms {
     private int room_no;
     private int hotelId;
+    private String hotel;
     private String type;
     private String desc;
-    private String price;
+    private float price;
     private String status;
+
+    public Rooms() {
+        
+    }
+    
+    public Rooms(int room_no) {
+        this.room_no = room_no;
+    }
+
+    public Rooms(int room_no, int hotelId, String hotel, String type, String desc, float price, String status) {
+        this.room_no = room_no;
+        this.hotelId = hotelId;
+        this.hotel = hotel;
+        this.type = type;
+        this.desc = desc;
+        this.price = price;
+        this.status = status;
+    }
 
     public int getRoom_no() {
         return room_no;
@@ -30,6 +49,14 @@ public class Rooms {
 
     public void setHotelId(int hotelId) {
         this.hotelId = hotelId;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
     }
 
     public String getType() {
@@ -48,11 +75,11 @@ public class Rooms {
         this.desc = desc;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

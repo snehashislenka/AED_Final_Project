@@ -4,6 +4,21 @@
  */
 package ui.RestrauntUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Restraunt.MenuItems;
+import model.Restraunt.OrderItems;
+import model.Restraunt.Restraunt;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -14,6 +29,36 @@ public class RestrauntMenu extends javax.swing.JPanel {
      * Creates new form RestrauntMenu
      */
     RestrauntFrame restrauntFrame;
+    String city;
+    String restraunt; 
+    String address;
+    String zipcode;
+    int restrauntId;
+    String item;
+    float price;
+    String desc;
+    int itemId;
+    int quantity;
+    ArrayList<OrderItems> cartItems = new ArrayList(); 
+    
+    public RestrauntMenu(RestrauntFrame restrauntFrame, String city, String restraunt, 
+            String address, String zipcode, int restrauntId) {
+        initComponents();
+        this.restrauntFrame = restrauntFrame;
+        this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+        
+        sCity.setText(city);
+        sAddress.setText(address);
+        sRestraunt.setText(restraunt);
+        sZipcode.setText(zipcode);
+        
+        populateTable();
+    }
+     
     public RestrauntMenu(RestrauntFrame restrauntFrame) {
         initComponents();
         this.restrauntFrame = restrauntFrame;
@@ -34,15 +79,23 @@ public class RestrauntMenu extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        sQuantity = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        sTotal = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        sItem = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        sRestraunt = new javax.swing.JLabel();
+        sAddress = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        sZipcode = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -50,6 +103,7 @@ public class RestrauntMenu extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        sCity = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,12 +142,62 @@ public class RestrauntMenu extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Item", "Price", "Desc", "Id"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
-        jButton2.setText("Add to cart");
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 150));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, 60));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 30, 210));
+
+        jLabel3.setText("Total");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 30));
+
+        jButton1.setText("Add to Cart");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 120, 30));
+
+        sQuantity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        sQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sQuantityActionPerformed(evt);
+            }
+        });
+        jPanel2.add(sQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 200, 30));
+
+        jButton2.setText("Select");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 100, 30));
+
+        sTotal.setEnabled(false);
+        jPanel2.add(sTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 200, 30));
+
+        jLabel4.setText("Quantity");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, 30));
+
+        sItem.setEnabled(false);
+        jPanel2.add(sItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 200, 30));
+
+        jLabel6.setText("Item");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, 30));
 
         jScrollPane1.setViewportView(jPanel2);
 
@@ -108,23 +212,20 @@ public class RestrauntMenu extends javax.swing.JPanel {
 
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 230, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Restraunt Name");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 250, 30));
+        sRestraunt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sRestraunt.setText("Restraunt Name");
+        add(sRestraunt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 250, 30));
 
-        jLabel4.setText("Restraunt Address");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 250, -1));
+        sAddress.setText("Restraunt Address");
+        add(sAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 300, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 204, 204));
         jLabel5.setForeground(new java.awt.Color(255, 204, 204));
         jLabel5.setText("Restraunt Rating: 4/5");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
-        jButton1.setText("Directions");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
-
-        jLabel7.setText("9am - 12pm");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
+        sZipcode.setText("Restraunt City");
+        add(sZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(255, 0, 102));
         jPanel6.setForeground(new java.awt.Color(255, 0, 102));
@@ -173,33 +274,144 @@ public class RestrauntMenu extends javax.swing.JPanel {
 
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, 100));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 580, 10));
+
+        sCity.setText("Restraunt City");
+        add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new Checkout(this.restrauntFrame));
+//        cart btn
+        int size = cartItems.size();
+        if(size <= 0) {
+            JOptionPane.showMessageDialog(this,"Please add something to cart!");
+            return;
+        }
+        this.restrauntFrame.switchPanel(new Checkout(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId, cartItems));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame));
+        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId));
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame));
+        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId));
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame));
+        this.restrauntFrame.switchPanel(new TableBooking(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId));
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new RestrauntList(this.restrauntFrame));
+        this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         int selectedRowIndex = jTable1.getSelectedRow();
+
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        item = model.getValueAt(selectedRowIndex, 0).toString();
+        sItem.setText(item);
+        price = Float.parseFloat(model.getValueAt(selectedRowIndex, 1).toString());
+        sTotal.setText(String.valueOf(price));
+        
+        desc = model.getValueAt(selectedRowIndex, 2).toString();
+        itemId = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:\
+        if(itemId <= 0) {
+            JOptionPane.showMessageDialog(this,"Select an item first!"); 
+            return;
+        } 
+        
+        int size = cartItems.size();
+        System.out.println("size cartItems"+ size);
+        int matched = 0;
+        if(size > 0) {
+            for(OrderItems i : cartItems) {
+                System.out.println("now item id = "+ i.getItemId() + itemId);
+                if(i.getItemId() == itemId) {
+                    matched = matched + 1;
+                    System.out.println("matched here" + matched);
+                    
+                    int totalQuantity = Integer.parseInt(sQuantity.getSelectedItem().toString()) + i.getQuantity();
+                    i.setQuantity(totalQuantity);
+                    
+                    float totalPrice = price * totalQuantity;
+                    i.setTotal(totalPrice);
+                }
+            }
+        } 
+        
+        if(matched == 0) {
+            System.out.println("did not match here");
+            quantity = Integer.parseInt(sQuantity.getSelectedItem().toString());
+            float totalPrice = price * quantity;
+            OrderItems cart = new OrderItems(itemId, item, totalPrice, quantity);
+            cartItems.add(cart);
+            System.out.println("cartItems------" +cartItems);
+        }
+        
+        JOptionPane.showMessageDialog(this,"Item added to cart!");
+           
+        sItem.setText("");
+        sQuantity.setSelectedItem("1");
+        sTotal.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void sQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sQuantityActionPerformed
+        // TODO add your handling code here:
+        quantity = Integer.parseInt(sQuantity.getSelectedItem().toString());
+        float totalPrice = price * quantity;
+        sTotal.setText(String.valueOf(totalPrice));
+    }//GEN-LAST:event_sQuantityActionPerformed
+
+    private void populateTable() {
+        ArrayList<MenuItems> itemList = new ArrayList(); 
+        String query = "Select id, item, price, descr from menu_items where restrauntId = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1,restrauntId);
+            
+            ResultSet rs = ps.executeQuery();   
+            
+        System.out.println("here------------"+rs);
+            while(rs.next()) {
+                MenuItems res = new MenuItems(rs.getInt("id"), rs.getString("item"), rs.getFloat("price"), 
+                rs.getString("descr"));
+                itemList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(MenuItems h : itemList) {
+            Object[] row = new Object[5];
+            row[0] = h.getItem();
+            row[1] = h.getPrice();
+            row[2] = h.getDesc();
+            row[3] = h.getId();
+            
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -214,15 +426,24 @@ public class RestrauntMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel sAddress;
+    private javax.swing.JLabel sCity;
+    private javax.swing.JTextField sItem;
+    private javax.swing.JComboBox<String> sQuantity;
+    private javax.swing.JLabel sRestraunt;
+    private javax.swing.JTextField sTotal;
+    private javax.swing.JLabel sZipcode;
     // End of variables declaration//GEN-END:variables
 }

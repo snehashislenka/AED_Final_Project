@@ -4,6 +4,20 @@
  */
 package ui.RestrauntUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Restraunt.MenuItems;
+import model.Restraunt.OrderItems;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -14,6 +28,36 @@ public class Checkout extends javax.swing.JPanel {
      * Creates new form Checkout
      */
     RestrauntFrame restrauntFrame;
+    String city;
+    String restraunt; 
+    String address;
+    String zipcode;
+    int restrauntId;
+    float totalPrice = 0;
+    float totalQuantity = 0;
+    int tax = 20;
+    float totalPay = 0;
+    ArrayList<OrderItems> cartItems;
+    
+    public Checkout(RestrauntFrame restrauntFrame, String city, String restraunt, 
+            String address, String zipcode, int restrauntId, ArrayList<OrderItems> cartItems) {
+        initComponents();
+        this.restrauntFrame = restrauntFrame;
+         this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+        this.cartItems = cartItems;
+        
+        sCity.setText(city);
+        sAddress.setText(address);
+        sRestraunt.setText(restraunt);
+//        sZipcode.setText(zipcode);
+
+        populateTable();
+    }
+     
     public Checkout(RestrauntFrame restrauntFrame) {
         initComponents();
         this.restrauntFrame = restrauntFrame;
@@ -34,27 +78,26 @@ public class Checkout extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        sRestraunt = new javax.swing.JLabel();
+        sCity = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        sAddress = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        sPay = new javax.swing.JLabel();
+        sQuantity = new javax.swing.JLabel();
+        sTotal = new javax.swing.JLabel();
+        sTax = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -92,12 +135,12 @@ public class Checkout extends javax.swing.JPanel {
         jLabel3.setText("Restraunt Photo");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 110, 100));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Restraunt Name");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 190, -1));
+        sRestraunt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        sRestraunt.setText("Restraunt Name");
+        jPanel2.add(sRestraunt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 190, -1));
 
-        jLabel5.setText("restraunt address");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, 30));
+        sCity.setText("restraunt address");
+        jPanel2.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, 30));
 
         jLabel6.setBackground(new java.awt.Color(153, 204, 255));
         jLabel6.setForeground(new java.awt.Color(255, 204, 204));
@@ -107,13 +150,13 @@ public class Checkout extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ITEM", "PRICE", "QUANTITY"
+                "ITEM ID", "ITEM", "PRICE", "QUANTITY"
             }
         ));
         jTable1.setToolTipText("");
@@ -121,6 +164,9 @@ public class Checkout extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 330, 340));
+
+        sAddress.setText("restraunt address");
+        jPanel2.add(sAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 190, 30));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 350, 510));
 
@@ -130,43 +176,37 @@ public class Checkout extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("PRICE SUMMARY");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 20));
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 200, 10));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, 10));
 
         jLabel8.setText("Tax");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         jLabel9.setText("Total Quantity");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
         jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 10));
-
-        jLabel11.setText("Item Total");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Total Payable");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 200, 10));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, 10));
 
         jLabel13.setText("Price");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setText("2000");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        sPay.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sPay.setText("2000");
+        jPanel3.add(sPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
-        jLabel15.setText("800");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+        sQuantity.setText("8");
+        jPanel3.add(sQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
-        jLabel16.setText("8");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
+        sTotal.setText("1600");
+        jPanel3.add(sTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
 
-        jLabel18.setText("1600");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
+        sTax.setText("20");
+        jPanel3.add(sTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
 
-        jLabel27.setText("400");
-        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
-
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 220, 220));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 220, 200));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -174,37 +214,108 @@ public class Checkout extends javax.swing.JPanel {
         jLabel38.setText("Hotel?");
         jPanel7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 220, 240));
+        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 220, 250));
 
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("ORDER");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 220, 40));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 220, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new RestrauntMenu(this.restrauntFrame));
+        this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+//        order here
+        int userId = 1;
+        String username = "";
+        String status = "ORDERED";
+        int orderId = 0;
+        
+        String query = "select CONCAT(firstname, \" \", lastname) as user from person where id = ?";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            ps.setInt(1, userId);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                username = rs.getString("user");
+            }
+         } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        MySQLUtil.createOrder(userId, restrauntId, totalPay, status, username, restraunt, tax);
+        
+//        get order id
+        
+        String queryOrderId = "select id from orders order by id desc limit 1";
+        try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(queryOrderId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                orderId = rs.getInt("id");
+            }
+            System.out.println("order created here --" + orderId);
+         } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        create order item
+        for(OrderItems item : cartItems) {
+            System.out.println("creating order items here --" + orderId);
+            MySQLUtil.createOrderItem(orderId, item.getItemId(), item.getItem(),
+                    item.getTotal(), item.getQuantity());
+        }
+        
+        JOptionPane.showMessageDialog(this,"Order created Successfully!");
+        this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void populateTable() { 
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+//        ArrayList<OrderItems> cartItems = new cartItems();
+        for(OrderItems item : cartItems) {
+            Object[] row = new Object[5];
+            totalPrice = totalPrice + item.getTotal();
+            totalQuantity = totalQuantity + item.getQuantity();
+            totalPay = totalPrice + tax;
+            sTotal.setText(String.valueOf(totalPrice));
+            sQuantity.setText(String.valueOf(totalQuantity));
+            sPay.setText(String.valueOf(totalPay));
+            sTax.setText(String.valueOf(tax));
+            
+            System.out.println("items-----"+ item);
+            row[0] = item.getItemId();
+            row[1] = item.getItem();
+            row[2] = item.getTotal();
+            row[3] = item.getQuantity();
+            
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -219,5 +330,12 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel sAddress;
+    private javax.swing.JLabel sCity;
+    private javax.swing.JLabel sPay;
+    private javax.swing.JLabel sQuantity;
+    private javax.swing.JLabel sRestraunt;
+    private javax.swing.JLabel sTax;
+    private javax.swing.JLabel sTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,21 @@
  */
 package ui.HotelUser;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import model.Hotel.Rooms;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -14,6 +29,35 @@ public class RoomSelect extends javax.swing.JPanel {
      * Creates new form RoomSelects
      */
     HotelFrame hotelFrame;
+    String city;
+    String hotel;
+    String address;
+    String zipcode;
+    int hotelId;
+    Date checkin;
+    Date checkout;
+    int no_rooms;
+    int room_no;
+    float price;
+    
+    public RoomSelect(HotelFrame hotelFrame, String hotel, String address, String city, String zipcode, int hotelId, Date checkin, Date checkout, int no_rooms) {
+        initComponents();
+         this.hotelFrame = hotelFrame;
+         this.hotel = hotel;
+         this.address = address;
+         this.city =city;
+         this.zipcode = zipcode;
+         this.hotelId =hotelId;
+         this.checkin = checkin;
+         this.checkout = checkout;
+         this.no_rooms = no_rooms;
+         
+         sHotel.setText(hotel);
+         sAddress.setText(address);
+         sCity.setText(city);
+         
+    }
+    
     public RoomSelect(HotelFrame hotelFrame) {
         initComponents();
          this.hotelFrame = hotelFrame;
@@ -30,8 +74,8 @@ public class RoomSelect extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        sHotel = new javax.swing.JLabel();
+        sCity = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -40,10 +84,12 @@ public class RoomSelect extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+        sAddress = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -52,10 +98,13 @@ public class RoomSelect extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,14 +114,14 @@ public class RoomSelect extends javax.swing.JPanel {
         jLabel1.setText("Hotel Photo");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 210));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Hotel Name here");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 350, 40));
+        sHotel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sHotel.setForeground(new java.awt.Color(255, 255, 255));
+        sHotel.setText("Hotel Name here");
+        jPanel1.add(sHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 350, 40));
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Hotel Address here");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 350, 40));
+        sCity.setForeground(new java.awt.Color(255, 255, 255));
+        sCity.setText("Hotel Address here");
+        jPanel1.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,6 +167,10 @@ public class RoomSelect extends javax.swing.JPanel {
         });
         jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 50, 50));
 
+        sAddress.setForeground(new java.awt.Color(255, 255, 255));
+        sAddress.setText("Hotel Address here");
+        jPanel1.add(sAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 360, 30));
+
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -133,11 +186,19 @@ public class RoomSelect extends javax.swing.JPanel {
         });
         jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
+        jLabel11.setText("DELUXE ROOM");
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 230, 160));
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setText("Select");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -161,6 +222,9 @@ public class RoomSelect extends javax.swing.JPanel {
 
         jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 230, 160));
 
+        jLabel12.setText("PREMIUM ROOM");
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 230, 160));
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,6 +237,9 @@ public class RoomSelect extends javax.swing.JPanel {
         });
         jPanel9.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
+        jLabel13.setText("SUITE");
+        jPanel9.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+
         jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 230, 160));
 
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -183,7 +250,10 @@ public class RoomSelect extends javax.swing.JPanel {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel10.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        jPanel10.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        jLabel10.setText("PRESEDENTIAL SUITE");
+        jPanel10.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 230, 160));
 
@@ -217,22 +287,61 @@ public class RoomSelect extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        this.hotelFrame.switchPanel(new HotelList(this.hotelFrame));
+        this.hotelFrame.switchPanel(new SearchHotel(this.hotelFrame));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.hotelFrame.switchPanel(new Checkout(this.hotelFrame));
+//        deluxe
+        String roomName = "DELUXE ROOM";
+        
+        long diffInMillies = Math.abs(checkin.getTime() - checkout.getTime());
+        long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        System.out.println("diff-----"+days);
+        
+        getPrice(roomName);
+        System.out.println("price-----"+room_no+price);
+        
+        this.hotelFrame.switchPanel(new Checkout(this.hotelFrame, hotel,address,city,zipcode,hotelId,checkin,checkout,no_rooms,room_no,price,days, roomName));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+//        suite
+        String roomName = "SUITE";
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+//        presedential
+        String roomName = "PRESIDENTIAL SUITE";
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+//        premium
+        String roomName = "PREMIUM ROOM";
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void getPrice(String room){
+        String query = "Select r.room_no, r.price from rooms r inner join hotel_bookings h on r.hotelId = h.hotelId where r.type like CONCAT('%', ?, '%') and r.hotelId = ? and (h.status = 'CHECKED-OUT' or r.status = 'AVAILABLE') LIMIT 1";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setString(1, room);
+            ps.setInt(2,hotelId);
+            
+            ResultSet rs = ps.executeQuery();   
+            
+            if(rs.next()){
+                room_no = rs.getInt("room_no");
+                price = rs.getFloat("price");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -244,8 +353,10 @@ public class RoomSelect extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -263,5 +374,8 @@ public class RoomSelect extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel sAddress;
+    private javax.swing.JLabel sCity;
+    private javax.swing.JLabel sHotel;
     // End of variables declaration//GEN-END:variables
 }

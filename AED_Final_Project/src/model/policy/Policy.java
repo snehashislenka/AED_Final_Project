@@ -11,12 +11,23 @@ package model.policy;
 public class Policy {
        private int PolicyID;
        private String PolicyName;
+       private String CategoryName;
        private int PolicySumAssurance;
        private int PolicyPremium;
        private int PolicyTenure;
        private String PolicyDate;
+       private String Policystatus;
 
-    public int getPolicyID() {
+    public Policy(int PolicyID, String PolicyName, int PolicySumAssurance, int PolicyPremium, int PolicyTenure, String PolicyDate) {
+         this.PolicyID = PolicyID;
+        this.PolicyName = PolicyName;
+        this.PolicySumAssurance = PolicySumAssurance;
+        this.PolicyPremium = PolicyPremium;
+        this.PolicyTenure = PolicyTenure;
+        this.PolicyDate = PolicyDate;
+    }
+
+   public int getPolicyID() {
         return PolicyID;
     }
 
@@ -30,6 +41,14 @@ public class Policy {
 
     public void setPolicyName(String PolicyName) {
         this.PolicyName = PolicyName;
+    }
+    
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String CategoryName) {
+        this.CategoryName = CategoryName;
     }
 
     public int getPolicySumAssurance() {
@@ -63,10 +82,18 @@ public class Policy {
     public void setPolicyDate(String PolicyDate) {
         this.PolicyDate = PolicyDate;
     }
+     public String getPolicystatus() {
+        return Policystatus;
+    }
 
-    public Policy(int PolicyID, String PolicyName, int PolicySumAssurance, int PolicyPremium, int PolicyTenure, String PolicyDate) {
+    public void setPolicystatus(String Policystatus) {
+        this.Policystatus = Policystatus;
+    }
+
+    public Policy(int PolicyID, String PolicyName,String CategoryName, int PolicySumAssurance, int PolicyPremium, int PolicyTenure, String PolicyDate) {
         this.PolicyID = PolicyID;
         this.PolicyName = PolicyName;
+        this.CategoryName = CategoryName;
         this.PolicySumAssurance = PolicySumAssurance;
         this.PolicyPremium = PolicyPremium;
         this.PolicyTenure = PolicyTenure;
