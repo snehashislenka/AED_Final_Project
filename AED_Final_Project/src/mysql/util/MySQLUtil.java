@@ -200,6 +200,33 @@ public class MySQLUtil {
         }
         return personList;
     }
+    
+    public static ArrayList<Person> getCarRentalAdmin() {
+        String query = "select * from person where role in ('CAR_RENTAL_ADMIN')";
+
+        ArrayList<Person> personList = new ArrayList<>();
+
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Person person = new Person(rs.getInt("id"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"),
+                        rs.getString("role"), rs.getString("email"),
+                        rs.getString("password"));
+
+                personList.add(person);
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return personList;
+    }
 
     public static ArrayList<Restraunt> getAllRestraunt() {
         Connection conn = MySQLUtil.connectMySQL();
@@ -413,7 +440,7 @@ public class MySQLUtil {
         }
 
     }
-
+    
     public static ArrayList<FlightBookings> getAllFlightBookings() {
 
         ArrayList<FlightBookings> flightBookingsList = new ArrayList<>();
@@ -545,7 +572,8 @@ public class MySQLUtil {
 
         return flightList;
     }
-
+    
+    
     public static ArrayList<Flight> getAllFlightData() {
         String query = "select * from flight";
 

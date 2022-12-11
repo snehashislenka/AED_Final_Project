@@ -27,7 +27,7 @@ public class UpdateCarRentalBookings extends javax.swing.JFrame {
     
     public UpdateCarRentalBookings() {
         initComponents();
-        
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         String[] statusArr = {"SELECT A STATUS", "BOOKED", 
             "CANCELED", "CHECKED_IN"}; 
         statusDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(statusArr));

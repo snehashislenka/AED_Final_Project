@@ -156,6 +156,11 @@ public class CarRentalAdminFrame extends javax.swing.JFrame {
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Total Revenue");
 
@@ -242,6 +247,11 @@ public class CarRentalAdminFrame extends javax.swing.JFrame {
                 new ViewAllRentalBookings();
         viewAllCarBookings.setVisible(true);
     }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        TotalRevenueFrame total = new TotalRevenueFrame();
+        total.setVisible(true);
+    }//GEN-LAST:event_jPanel6MouseClicked
 
     /**
      * @param args the command line arguments

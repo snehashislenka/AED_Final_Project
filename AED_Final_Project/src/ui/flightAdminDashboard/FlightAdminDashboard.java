@@ -20,7 +20,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
