@@ -50,15 +50,23 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         updatebtn = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
 
+        CategoryAddbtn.setBackground(new java.awt.Color(0, 204, 255));
+        CategoryAddbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CategoryAddbtn.setForeground(new java.awt.Color(255, 255, 255));
         CategoryAddbtn.setText("Add");
+        CategoryAddbtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         CategoryAddbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CategoryAddbtnActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 204, 255));
         jLabel1.setText("Category Name");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 204, 255));
         jLabel3.setText("Date");
 
         CategoryDateTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -68,9 +76,11 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 204, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Create the Category");
 
+        CategoryTable.setForeground(new java.awt.Color(0, 204, 255));
         CategoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -84,21 +94,33 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(CategoryTable);
 
+        viewbtn.setBackground(new java.awt.Color(0, 204, 255));
+        viewbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        viewbtn.setForeground(new java.awt.Color(255, 255, 255));
         viewbtn.setText("View");
+        viewbtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         viewbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewbtnActionPerformed(evt);
             }
         });
 
+        updatebtn.setBackground(new java.awt.Color(0, 204, 255));
+        updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
         updatebtn.setText("Update");
+        updatebtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatebtnActionPerformed(evt);
             }
         });
 
+        deletebtn.setBackground(new java.awt.Color(0, 204, 255));
+        deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deletebtn.setForeground(new java.awt.Color(255, 255, 255));
         deletebtn.setText("Delete");
+        deletebtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         deletebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deletebtnActionPerformed(evt);
@@ -123,22 +145,18 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
                                         .addComponent(CategoryAddbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(45, 45, 45)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(235, 235, 235)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

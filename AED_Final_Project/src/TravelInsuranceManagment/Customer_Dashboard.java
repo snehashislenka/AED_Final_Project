@@ -57,7 +57,6 @@ public class Customer_Dashboard extends javax.swing.JFrame {
         jLabel1.setText("Customer Dashboard");
 
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 369));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ApplyPolicyBtn.setBackground(new java.awt.Color(51, 204, 255));
         ApplyPolicyBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -69,7 +68,6 @@ public class Customer_Dashboard extends javax.swing.JFrame {
                 ApplyPolicyBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(ApplyPolicyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 112, 280, 43));
 
         Historybtn.setBackground(new java.awt.Color(51, 204, 255));
         Historybtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -81,7 +79,6 @@ public class Customer_Dashboard extends javax.swing.JFrame {
                 HistorybtnActionPerformed(evt);
             }
         });
-        jPanel1.add(Historybtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 209, 280, 42));
 
         Dashboardbtn.setBackground(new java.awt.Color(51, 204, 255));
         Dashboardbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -94,7 +91,31 @@ public class Customer_Dashboard extends javax.swing.JFrame {
                 DashboardbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(Dashboardbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 25, 280, 48));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(Dashboardbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(ApplyPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(Historybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(Dashboardbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(ApplyPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(Historybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -105,7 +126,7 @@ public class Customer_Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -115,7 +136,7 @@ public class Customer_Dashboard extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
