@@ -2277,5 +2277,32 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static ArrayList<Person> getHotelAndRestrauntAdmin() {
+        String query = "select * from person where role in ('HOTEL_ADMIN', 'RESTRAUNT_ADMIN')";
+
+        ArrayList<Person> personList = new ArrayList<>();
+
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Person person = new Person(rs.getInt("id"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"),
+                        rs.getString("role"), rs.getString("email"),
+                        rs.getString("password"));
+
+                personList.add(person);
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return personList;
+    }
 
 }

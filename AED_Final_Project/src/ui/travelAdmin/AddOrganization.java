@@ -223,6 +223,8 @@ public class AddOrganization extends javax.swing.JPanel {
         MySQLUtil.addPerson(MySQLUtil.connectMySQL(), firstname, lastname, this.selectedGender
                 , role, email, password);
         
+        JOptionPane.showMessageDialog(this,"Organization Created Successfully!");
+        
         clearFields();
     }//GEN-LAST:event_jButton1ActionPerformed
     
