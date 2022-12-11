@@ -187,8 +187,18 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 
         MySQLUtil.addenterprisedetails(EnterpriseName,FirstName, LastName, Gender, Role, Email, Password);
         JOptionPane.showMessageDialog(this,"New Enterprise Added");
+        clearAllFields();
     }//GEN-LAST:event_CreatebtnActionPerformed
-
+    public void clearAllFields() {
+        EnterpriseNameTextField.setText("");
+        FirstNameTextField.setText("");
+        LastNameTextField.setText("");
+        GenderTextField.setText("");
+        RoleTextField.setText("");
+        EmailTextField.setText("");        
+        PasswordTextField.setText("");
+      
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Createbtn;

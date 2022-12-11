@@ -21,8 +21,8 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        TravelInsuraceAdminDashboardJPanel dashboardpanel = new TravelInsuraceAdminDashboardJPanel(this);
-        jSplitPane1.setRightComponent(dashboardpanel);
+        TravelInsuraceAdminDashboardJPanel traveldashboardpanel = new TravelInsuraceAdminDashboardJPanel(this);
+        jSplitPane1.setRightComponent(traveldashboardpanel);
     }
     public void switchPanel(Component comp){
         jSplitPane1.setRightComponent(comp);
@@ -42,9 +42,8 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         dashboardbtn = new javax.swing.JButton();
         CustomerPolicyBtn = new javax.swing.JButton();
-        CreateCategorybtn = new javax.swing.JButton();
         Createpolicybtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        signoutbtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,17 +78,6 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        CreateCategorybtn.setBackground(new java.awt.Color(0, 204, 255));
-        CreateCategorybtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        CreateCategorybtn.setForeground(new java.awt.Color(255, 255, 255));
-        CreateCategorybtn.setText("Organization");
-        CreateCategorybtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        CreateCategorybtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateCategorybtnActionPerformed(evt);
-            }
-        });
-
         Createpolicybtn.setBackground(new java.awt.Color(0, 204, 255));
         Createpolicybtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Createpolicybtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,14 +89,14 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Signout");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        signoutbtn.setBackground(new java.awt.Color(0, 204, 255));
+        signoutbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        signoutbtn.setForeground(new java.awt.Color(255, 255, 255));
+        signoutbtn.setText("Signout");
+        signoutbtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        signoutbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                signoutbtnActionPerformed(evt);
             }
         });
 
@@ -118,14 +106,11 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(dashboardbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                        .addComponent(CreateCategorybtn, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                        .addComponent(Createpolicybtn, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                        .addComponent(CustomerPolicyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(signoutbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Createpolicybtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CustomerPolicyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dashboardbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,14 +118,12 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(dashboardbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(CustomerPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(CreateCategorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(Createpolicybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CustomerPolicyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(634, Short.MAX_VALUE))
+                .addComponent(Createpolicybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(signoutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -151,7 +134,7 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
+            .addGap(0, 911, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,25 +181,19 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CustomerPolicyBtnActionPerformed
 
-    private void CreateCategorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCategorybtnActionPerformed
-        // TODO add your handling code here:
-        CreateCategoryJPanel createPanel = new CreateCategoryJPanel();
-        jSplitPane1.setRightComponent(createPanel);
-    }//GEN-LAST:event_CreateCategorybtnActionPerformed
-
     private void CreatepolicybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatepolicybtnActionPerformed
         // TODO add your handling code here:
         CreatePolicyJPanel policyPanel = new CreatePolicyJPanel(this);
         jSplitPane1.setRightComponent(policyPanel);
     }//GEN-LAST:event_CreatepolicybtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void signoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutbtnActionPerformed
         // TODO add your handling code here:
         MySQLUtil.removePersonSession();
         dispose();
         Signin signinFrame = new Signin();
         signinFrame.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_signoutbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,14 +232,13 @@ public class TravelInsuranceAdmin_Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreateCategorybtn;
     private javax.swing.JButton Createpolicybtn;
     private javax.swing.JButton CustomerPolicyBtn;
     private javax.swing.JButton dashboardbtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton signoutbtn;
     // End of variables declaration//GEN-END:variables
 }

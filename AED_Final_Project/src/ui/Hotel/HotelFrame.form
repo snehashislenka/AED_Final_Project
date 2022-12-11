@@ -47,6 +47,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="bookings2">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="0" red="cc" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Bookings"/>
               </Properties>
               <Events>
@@ -60,6 +63,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="customer">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="0" red="cc" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Customer"/>
               </Properties>
               <Events>
@@ -73,6 +79,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="rooms">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="0" red="cc" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Rooms"/>
               </Properties>
               <Events>
@@ -86,6 +95,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="rooms1">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="0" red="cc" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Home"/>
               </Properties>
               <Events>
@@ -99,6 +111,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="customer1">
               <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="0" red="cc" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Reports"/>
               </Properties>
               <Events>
@@ -113,6 +128,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>

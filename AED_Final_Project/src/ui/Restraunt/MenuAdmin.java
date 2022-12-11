@@ -60,6 +60,7 @@ public class MenuAdmin extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         crRes = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(0, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
