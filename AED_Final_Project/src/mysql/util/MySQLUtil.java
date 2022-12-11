@@ -1250,10 +1250,10 @@ public class MySQLUtil {
 
     }
 
-    public static void addpolicydetails(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
-         String query = "INSERT INTO insurance_policy (Policyname,SumAssurance,Premium,Tenure,Date)"
-        + " values (?, ?, ?, ?, ?)";
-         try {
+//    public static void addpolicydetails(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
+//         String query = "INSERT INTO insurance_policy (Policyname,SumAssurance,Premium,Tenure,Date)"
+//        + " values (?, ?, ?, ?, ?)";
+//         try {
 
     // policy crud operations
     public static void addpolicydetails(String PolicyName, String CategoryName, int PolicySumAssurance,
