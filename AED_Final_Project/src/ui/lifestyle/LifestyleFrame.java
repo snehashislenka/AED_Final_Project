@@ -15,6 +15,7 @@ public class LifestyleFrame extends javax.swing.JFrame {
      */
     public LifestyleFrame() {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         LifestyleAdminPanel lifestyleAdminPanel = new LifestyleAdminPanel();
         jSplitPane1.setRightComponent(lifestyleAdminPanel);
     }
