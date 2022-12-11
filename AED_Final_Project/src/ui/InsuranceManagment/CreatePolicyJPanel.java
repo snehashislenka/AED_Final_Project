@@ -19,19 +19,20 @@ import mysql.util.MySQLUtil;
  */
 public class CreatePolicyJPanel extends javax.swing.JPanel {
 
-//    InsuranceAdmin_Dashboard admin_dashboardpanel;
-//    public CreatePolicyJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
+//    TravelInsuranceAdmin_Dashboard admin_dashboardpanel;
+//    public CreatePolicyJPanel(TravelInsuranceAdmin_Dashboard dashboardpanel) {
 //        initComponents();
 //        this.admin_dashboardpanel = dashboardpanel;
 //    }
     /**
      * Creates new form CreatePolicyJPanel
      */
+    TravelInsuranceAdmin_Dashboard dashboardpanel;
     ArrayList<Category> categoryList;
     Category selectedCategory;
-    public CreatePolicyJPanel() {
+    public CreatePolicyJPanel(TravelInsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
-         
+        this.dashboardpanel = dashboardpanel;
         this.categoryList = MySQLUtil.getallcategory();
         String[] categoryNameArr = new String[categoryList.size()];
         for(int i =0; i< categoryList.size(); i++) {
@@ -84,6 +85,8 @@ public class CreatePolicyJPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(PolicyTable);
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
@@ -287,9 +290,17 @@ public class CreatePolicyJPanel extends javax.swing.JPanel {
         
         MySQLUtil.addpolicydetails(PolicyName,this.selectedCategory.getCategoryName(),PolicySumAssurance,PolicyPremium,PolicyTenure,PolicyDate);
         JOptionPane.showMessageDialog(this,"New Policy Detail Added");
-       
+        clearAllFields();
     }//GEN-LAST:event_CreatePolicyBtnActionPerformed
 
+    public void clearAllFields() {
+        PolicyNameTextField.setText("");
+        SumAssuranceTextField.setText("");
+        PremiumTextField.setText("");
+        TenureTextField.setText("");
+        PolicyDateTextField.setText("");
+      
+    }
     private void viewpolicybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewpolicybtnActionPerformed
         // TODO add your handling code here:
          populateTable();
@@ -328,6 +339,7 @@ public class CreatePolicyJPanel extends javax.swing.JPanel {
                
         MySQLUtil.updatepolicydetail(PolicyName,PolicySumAssurance,PolicyPremium,PolicyTenure,PolicyDate,selectedpolicyId);
         populateTable();
+        clearAllFields();
     }//GEN-LAST:event_updatepolicybtnActionPerformed
 
     private void categoryDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryDropdownActionPerformed

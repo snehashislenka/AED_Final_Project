@@ -204,8 +204,12 @@ public class CreateCity extends javax.swing.JPanel {
                 
         MySQLUtil.addecitydetails(cityName, this.selectedNetwork.getNetworkID());
         JOptionPane.showMessageDialog(this,"New city Added");
+        clearAllFields();
     }//GEN-LAST:event_CreatebtnActionPerformed
-
+  public void clearAllFields() {
+        CityTextField.setText("");
+      
+    }
     private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
         // TODO add your handling code here:
           populateTable();
@@ -241,6 +245,7 @@ public class CreateCity extends javax.swing.JPanel {
                
         MySQLUtil.updatecitydetail(enterCityName, selectedCityId);
         populateTable();
+        clearAllFields();
     }//GEN-LAST:event_updatebtnActionPerformed
 
     private void networkDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkDropdownActionPerformed

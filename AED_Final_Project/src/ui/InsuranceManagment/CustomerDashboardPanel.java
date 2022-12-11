@@ -51,6 +51,8 @@ public class CustomerDashboardPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         availablepolicy = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
