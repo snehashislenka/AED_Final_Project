@@ -168,7 +168,10 @@ public class CreateNetwork extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"New Network Added");
         
     }//GEN-LAST:event_AddbtnActionPerformed
-
+    public void clearAllFields() {
+        NetworkTextField.setText("");
+      
+    }
     private void ViewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewbtnActionPerformed
         // TODO add your handling code here:
         populateTable();
@@ -203,6 +206,7 @@ public class CreateNetwork extends javax.swing.JPanel {
                
         MySQLUtil.updatenetworkdetail(enterNetworkName, selectedNetworkId);
         populateTable();
+        clearAllFields();
     }//GEN-LAST:event_UpdatebtnActionPerformed
 
 

@@ -43,6 +43,7 @@ public class HotelFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        bookings2.setForeground(new java.awt.Color(204, 0, 102));
         bookings2.setText("Bookings");
         bookings2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,6 +52,7 @@ public class HotelFrame extends javax.swing.JFrame {
         });
         jPanel1.add(bookings2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, 30));
 
+        customer.setForeground(new java.awt.Color(204, 0, 102));
         customer.setText("Customer");
         customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +61,7 @@ public class HotelFrame extends javax.swing.JFrame {
         });
         jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 100, 30));
 
+        rooms.setForeground(new java.awt.Color(204, 0, 102));
         rooms.setText("Rooms");
         rooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +70,7 @@ public class HotelFrame extends javax.swing.JFrame {
         });
         jPanel1.add(rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, 30));
 
+        rooms1.setForeground(new java.awt.Color(204, 0, 102));
         rooms1.setText("Home");
         rooms1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +79,7 @@ public class HotelFrame extends javax.swing.JFrame {
         });
         jPanel1.add(rooms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
 
+        customer1.setForeground(new java.awt.Color(204, 0, 102));
         customer1.setText("Reports");
         customer1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +90,7 @@ public class HotelFrame extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jSplitPane1.setRightComponent(jPanel2);
 

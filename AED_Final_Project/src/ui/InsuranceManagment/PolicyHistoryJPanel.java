@@ -41,6 +41,8 @@ public class PolicyHistoryJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         Backbtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         PolicyHistoryTabel.setForeground(new java.awt.Color(0, 204, 255));
         PolicyHistoryTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
