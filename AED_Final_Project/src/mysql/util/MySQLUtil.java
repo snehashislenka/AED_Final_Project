@@ -1430,7 +1430,7 @@ public class MySQLUtil {
 
             while (rs.next()) {
                 OrderItems res = new OrderItems(rs.getString("item"),
-                        rs.getFloat("price"),
+                        rs.getFloat("total"),
                         rs.getInt("quantity"));
 
                 orderItemList.add(res);
@@ -1877,7 +1877,7 @@ public class MySQLUtil {
     }
 
     public static void bookHotel(int hotelId, int room_no, int userId, Date from,
-            Date to, int no_of_rooms, String status) {
+            Date to, int no_of_rooms, String status, float totalPayable, int tax) {
         Connection conn = MySQLUtil.connectMySQL();
 
         String query = "INSERT INTO hotel_bookings (hotelId, room_no, userId, fromDate, toDate, no_of_rooms, status)"

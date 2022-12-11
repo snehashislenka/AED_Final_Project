@@ -36,6 +36,7 @@ public class HotelBookings {
     private int no_of_rooms;
     private String status;
     private float price;
+    private int tax;
     private String user;
     private String hotel;
 
