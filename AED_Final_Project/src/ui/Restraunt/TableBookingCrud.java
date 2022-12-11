@@ -68,6 +68,7 @@ public class TableBookingCrud extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         upRestraunt = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
