@@ -66,6 +66,8 @@ public class HotelList extends javax.swing.JPanel {
         sCity = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         sOut = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -95,15 +97,14 @@ public class HotelList extends javax.swing.JPanel {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Where");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+        jLabel2.setText("Check-out");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         sIn.setBackground(new java.awt.Color(255, 204, 204));
-        sIn.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check-in", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         sIn.setForeground(new java.awt.Color(255, 204, 204));
         sIn.setToolTipText("");
         sIn.setDateFormatString("MM-dd-yyyy");
-        jPanel1.add(sIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 110, -1));
+        jPanel1.add(sIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 110, -1));
 
         sCity.setBackground(new java.awt.Color(255, 204, 204));
         sCity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -120,11 +121,18 @@ public class HotelList extends javax.swing.JPanel {
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 50, 50));
 
         sOut.setBackground(new java.awt.Color(255, 204, 204));
-        sOut.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check-out", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         sOut.setForeground(new java.awt.Color(255, 204, 204));
         sOut.setToolTipText("");
         sOut.setDateFormatString("MM-dd-yyyy");
-        jPanel1.add(sOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 110, -1));
+        jPanel1.add(sOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 110, -1));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Where");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Check-in");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 90));
 
@@ -247,6 +255,8 @@ public class HotelList extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

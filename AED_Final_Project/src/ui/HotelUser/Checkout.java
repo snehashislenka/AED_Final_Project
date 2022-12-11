@@ -7,6 +7,7 @@ package ui.HotelUser;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.Person.Person;
 import mysql.util.MySQLUtil;
 
 /**
@@ -23,6 +24,7 @@ public class Checkout extends javax.swing.JPanel {
     String address;
     String zipcode;
     int hotelId;
+    int userId;
     Date checkin;
     Date checkout;
     int no_rooms;
@@ -368,7 +370,12 @@ public class Checkout extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String status = "BOOKED";
-        MySQLUtil.bookHotel(hotelId, room_no, hotelId, checkin, checkout, no_rooms, status, 
+        
+        Person person = MySQLUtil.getPersonSession();
+        userId = person.getId();
+        System.out.println("userid: -----"+ userId);
+        
+        MySQLUtil.bookHotel(hotelId, room_no, userId, checkin, checkout, no_rooms, status, 
                 totalPayable, tax);
         System.out.println("hotel booked");
         
