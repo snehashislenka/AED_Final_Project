@@ -2406,5 +2406,32 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     
+      public static ArrayList<Orders> getAllBulkOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+
+        String query = "SELECT * FROM orders where hotelId is not null or flightId is not null";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"),
+                rs.getInt("hotelId"),
+                rs.getInt("flightId"));
+
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
+    }
 
 }
