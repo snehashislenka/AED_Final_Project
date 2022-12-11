@@ -18,7 +18,9 @@ import model.Hotel.Hotel;
 import model.Restraunt.Restraunt;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
+import ui.Hotel.HotelFrame;
 import ui.HotelUser.RoomSelect;
+import ui.flightAdminDashboard.FlightAdminDashboard;
 
 /**
  *
@@ -30,7 +32,11 @@ public class RestrauntList extends javax.swing.JPanel {
      * Creates new form RestrauntList
      */
     RestrauntFrame restrauntFrame;
+    FlightAdminDashboard flightAdminDashboard;
+    HotelFrame hotelFrame;
     String city;
+    int extraId;
+    String extraType;
     
     public RestrauntList(RestrauntFrame restrauntFrame, String city) {
         initComponents();
@@ -42,6 +48,26 @@ public class RestrauntList extends javax.swing.JPanel {
      public RestrauntList(RestrauntFrame restrauntFrame) {
         initComponents();
         this.restrauntFrame = restrauntFrame;
+    }
+     
+     public RestrauntList(FlightAdminDashboard flightAdminDashboard, String city, int extraId, String extraType) {
+        initComponents();
+        this.flightAdminDashboard = flightAdminDashboard;
+        this.city = city;
+        this.extraId = extraId;
+        this.extraType = extraType;
+        this.jButton3.setVisible(false);
+        searchRestraunt(city);
+    }
+     
+     public RestrauntList(HotelFrame hotelFrame, String city, int extraId, String extraType) {
+        initComponents();
+        this.hotelFrame = hotelFrame;
+        this.city = city;
+        this.extraId = extraId;
+        this.extraType = extraType;
+        this.jButton3.setVisible(false);
+        searchRestraunt(city);
     }
 
 
@@ -60,10 +86,11 @@ public class RestrauntList extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        sCity1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,7 +102,7 @@ public class RestrauntList extends javax.swing.JPanel {
         sCity.setForeground(new java.awt.Color(255, 51, 51));
         sCity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         sCity.setText("Boston");
-        sCity.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 51, 51))); // NOI18N
+        sCity.setBorder(null);
         sCity.setEnabled(false);
         sCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,9 +130,9 @@ public class RestrauntList extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Delivery Restaurants in Boston");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 290, 30));
+        sCity1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sCity1.setText("City");
+        jPanel2.add(sCity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, 30));
 
         jButton2.setText("Select");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +156,10 @@ public class RestrauntList extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 540, 330));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Restaurants near");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, 30));
 
         jScrollPane1.setViewportView(jPanel2);
 
@@ -155,7 +186,15 @@ public class RestrauntList extends javax.swing.JPanel {
         String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
         int restrauntId = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
 
-        this.restrauntFrame.switchPanel(new RestrauntMenu(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId));
+        if(extraId > 0 && extraType.equals("flight")) {
+               this.flightAdminDashboard.switchPanel(new RestrauntMenu(this.flightAdminDashboard, city, restraunt, address, zipcode, restrauntId, extraId, extraType));    
+        } 
+        else if(extraId > 0 && extraType.equals("hotel")) {
+              this.hotelFrame.switchPanel(new RestrauntMenu(this.hotelFrame, city, restraunt, address, zipcode, restrauntId, extraId, extraType));           
+        }
+        else {
+            this.restrauntFrame.switchPanel(new RestrauntMenu(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId));  
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -166,6 +205,7 @@ public class RestrauntList extends javax.swing.JPanel {
      private void searchRestraunt(String city) {
         
         sCity.setText(city);
+        sCity1.setText(city);
         
         ArrayList<Restraunt> restrauntList = new ArrayList(); 
         String query = "Select id, restraunt, address, city, zipcode from restraunt where city like CONCAT('%', ?, '%')";
@@ -206,12 +246,13 @@ public class RestrauntList extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField sCity;
+    private javax.swing.JLabel sCity1;
     // End of variables declaration//GEN-END:variables
 }

@@ -2304,5 +2304,107 @@ public class MySQLUtil {
         }
         return personList;
     }
+    
+    public static ArrayList<Orders> getAllFlightOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+
+        String query = "SELECT * FROM orders where flightId is not null";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"));
+
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
+    }
+    
+     public static ArrayList<Orders> getAllHotelOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+
+        String query = "SELECT * FROM orders where hotelId is not null";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"));
+
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
+    }
+     
+     public static void createFlightOrder(int userId, int restrauntId, float orderTotal, String status, String user,
+            String restraunt, int tax, int flightId) {
+        Connection conn = MySQLUtil.connectMySQL();
+
+        String query = "INSERT INTO orders (userId, restrauntId, orderTotal, "
+                + "status, user, restraunt, tax, flightId)"
+                + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setInt(2, restrauntId);
+            ps.setFloat(3, orderTotal);
+            ps.setString(4, status);
+            ps.setString(5, user);
+            ps.setString(6, restraunt);
+            ps.setInt(7, tax);
+            ps.setInt(8, flightId);
+
+            ps.execute();
+            System.out.println("order created here");
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     public static void createHotelOrder(int userId, int restrauntId, float orderTotal, String status, String user,
+            String restraunt, int tax, int hotelId) {
+        Connection conn = MySQLUtil.connectMySQL();
+
+        String query = "INSERT INTO orders (userId, restrauntId, orderTotal, "
+                + "status, user, restraunt, tax, hotelId)"
+                + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setInt(2, restrauntId);
+            ps.setFloat(3, orderTotal);
+            ps.setString(4, status);
+            ps.setString(5, user);
+            ps.setString(6, restraunt);
+            ps.setInt(7, tax);
+            ps.setInt(8, hotelId);
+
+            ps.execute();
+            System.out.println("order created here");
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

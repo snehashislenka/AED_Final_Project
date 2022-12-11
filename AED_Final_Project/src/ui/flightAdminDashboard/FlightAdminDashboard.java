@@ -4,6 +4,7 @@
  */
 package ui.flightAdminDashboard;
 
+import java.awt.Component;
 import javax.swing.JFrame;
 
 /**
@@ -20,6 +21,11 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
+    
+     public void switchPanel(Component comp) {
+        splitPane.setRightComponent(comp);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,6 +40,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
         btnFlightBookingStatus = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         dashboardRightPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -66,6 +74,20 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Order Food For Flight");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Food Orders");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,7 +96,9 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFlightBookingStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFlightBookingStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -84,7 +108,11 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
                 .addComponent(btnHome)
                 .addGap(50, 50, 50)
                 .addComponent(btnFlightBookingStatus)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jButton1)
+                .addGap(44, 44, 44)
+                .addComponent(jButton2)
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(jPanel1);
@@ -312,6 +340,16 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         splitPane.setRightComponent(new ActiveFlightsPanel());
     }//GEN-LAST:event_jPanel6MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         splitPane.setRightComponent(new OrderFlightFood(this));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         splitPane.setRightComponent(new FoodOrders());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -351,6 +389,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnFlightBookingStatus;
     private javax.swing.JButton btnHome;
     private javax.swing.JPanel dashboardRightPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
