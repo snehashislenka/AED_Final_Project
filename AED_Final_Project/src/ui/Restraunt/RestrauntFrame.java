@@ -15,7 +15,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
      */
     public RestrauntFrame() {
         initComponents();
-        
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         RestrauntAdminPanel restrauntAdminPanel = new RestrauntAdminPanel();
         jSplitPane1.setRightComponent(restrauntAdminPanel);
     }

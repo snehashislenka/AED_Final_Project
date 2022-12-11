@@ -4,9 +4,11 @@
  */
 package util.helper;
 import Enterprise.SystemAdminLeftPanel;
-import Enterprise.SystemAdmin_Dashboard;
+import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import java.awt.Component;
 import model.Person.Person;
+import ui.InsuranceManagment.InsuranceAdmin_Dashboard;
+import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import ui.sysAdminDashboard.SysAdminHomePanel;
 import ui.userdashboard.Dashboard;
 import ui.userdashboard.HomePanel;
@@ -52,6 +54,14 @@ public class GetRoleSpecificDashboard {
                         new SystemAdmin_Dashboard();
                 systemAdminDashboard.setVisible(true);  
                 break;
+                
+            case "INSURANCE_ADMIN":
+                System.out.println("ias");
+                InsuranceAdmin_Dashboard ia_dash = new 
+                    InsuranceAdmin_Dashboard();
+                ia_dash.setVisible(true);
+                break;
+            
             default:
                 throw new AssertionError();
         }
