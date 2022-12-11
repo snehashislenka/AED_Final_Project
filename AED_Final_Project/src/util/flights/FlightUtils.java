@@ -39,7 +39,7 @@ public class FlightUtils {
 		.uri(URI.create("https://timetable-lookup.p.rapidapi.com/"
                         + "TimeTable/" + departureCity + "/" + arrivalCity +
                         "/" + departureDate +"/?Connection=NONSTOP"))
-		.header("X-RapidAPI-Key", "79357b13e8mshbbb17379ff07c75p1a3f34jsn845570293c89")
+		.header("X-RapidAPI-Key", "6e29ebb67cmsh6e3622103e2c907p1771fajsn10ae383c1c9c")
 		.header("X-RapidAPI-Host", "timetable-lookup.p.rapidapi.com")
 		.method("GET", HttpRequest.BodyPublishers.noBody())
 		.build();
