@@ -68,6 +68,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Home"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnProfile">
       <Properties>
