@@ -39,9 +39,10 @@ public class FlightsDisplay extends javax.swing.JPanel {
     private String departureDate;
 //    private String arrivalDate;
     private int passenger;
+    String formattedDate;
     
     public FlightsDisplay(String departureCity, String arrivalCity, 
-        String departureDate,int passenger ) throws IOException, InterruptedException,
+        String departureDate, String formattedDate, int passenger ) throws IOException, InterruptedException,
             ParserConfigurationException, SAXException {
         initComponents();
         
@@ -50,6 +51,7 @@ public class FlightsDisplay extends javax.swing.JPanel {
         this.departureDate = departureDate;
 //        this.arrivalDate = arrivalDate;
         this.passenger = passenger;
+        this.formattedDate = formattedDate;
         
         this.setBackground(new Color(1f, 1f, 1f, 0.2f));
         
@@ -61,7 +63,7 @@ public class FlightsDisplay extends javax.swing.JPanel {
         
         ArrayList<Flight> flightSearchList = FlightUtils
                 .getListOfFlightSearch(this.departureCity, this.arrivalCity,
-                        this.departureDate, this.passenger);
+                        this.departureDate, this.formattedDate,  this.passenger);
                 
         setLayout(new GridLayout(flightSearchList.size(), 3, 0, 0));     
         for(Flight flight: flightSearchList) {

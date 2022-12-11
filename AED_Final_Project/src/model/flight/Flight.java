@@ -11,7 +11,7 @@ import java.util.Date;
  * @author slenk
  */
 public class Flight {
-    private static int counter = 9000;
+//    private static int counter = 9000;
     private int flightId;
     private String totalFlightDuration;
     private int totalMiles;
@@ -29,12 +29,12 @@ public class Flight {
     private String arrivalCity;
     private double price;
 
-    public Flight(String totalFlightDuration, int totalMiles,
+    public Flight(int flightId, String totalFlightDuration, int totalMiles,
             String departingTimeStamp, String arrivalTimeStamp, String departureAirport,
             String departureTerminal, String arrivalAirport, String arrivalTerminal,
             String flightCompanyCode, String flightCompanyName, String flightType, int seats,
             String departingCity, String arrivalCity, double price) {
-        this.flightId = ++counter;
+        this.flightId = flightId;
         this.totalFlightDuration = totalFlightDuration;
         this.totalMiles = totalMiles;
         this.departingTimeStamp = departingTimeStamp;

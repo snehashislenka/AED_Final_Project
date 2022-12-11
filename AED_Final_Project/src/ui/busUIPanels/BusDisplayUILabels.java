@@ -12,7 +12,7 @@ public class BusDisplayUILabels {
     public static String getHTMLBusScheduleCode(int busId, String departingDate, String departureTimestamp, 
             String arrivalTimestamp, String departingCity, String arrivalCity, String busCompanyName) {
         
-        String formattedDate = getFormattedDate(departingDate);
+//        String formattedDate = getFormattedDate(departingDate);
                 
         return "<html>\n" +
                 "  <head>\n" +
@@ -80,7 +80,7 @@ public class BusDisplayUILabels {
                 "    <div class=\"row\">\n" +
                 "      <h2>Time</h2>\n" +
                 "      <div class=\"flight-details\">\n" +
-                "        <h3>" + formattedDate + "</h3>\n" +
+                "        <h3>" + departingDate + "</h3>\n" +
                 "        <h4>"+ departingCity + " | " + departureTimestamp + "  ---  " + 
                 "<span>🚌️</span>" + "  ---  "
                 + arrivalCity + " | " + arrivalTimestamp +"</h4>\n" +

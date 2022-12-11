@@ -11,6 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import model.Flight.Flight;
@@ -28,17 +29,17 @@ import org.xml.sax.SAXException;
 public class FlightUtils {
     
     public static ArrayList<Flight> getListOfFlightSearch(String departureCity, String arrivalCity,
-            String departureDate, int passenger) throws IOException,
+            String departureDate, String formattedDate, int passenger) throws IOException,
             InterruptedException, ParserConfigurationException, SAXException {
         
-        System.out.println("flight utils called!");
+//        System.out.println("flight utils called!");
         
         ArrayList<Flight> flightSearchList = new ArrayList<>();
         
         HttpRequest request = HttpRequest.newBuilder()
 		.uri(URI.create("https://timetable-lookup.p.rapidapi.com/"
                         + "TimeTable/" + departureCity + "/" + arrivalCity +
-                        "/" + departureDate +"/?Connection=NONSTOP"))
+                        "/" + formattedDate +"/?Connection=NONSTOP"))
 		.header("X-RapidAPI-Key", "6e29ebb67cmsh6e3622103e2c907p1771fajsn10ae383c1c9c")
 		.header("X-RapidAPI-Host", "timetable-lookup.p.rapidapi.com")
 		.method("GET", HttpRequest.BodyPublishers.noBody())
@@ -47,7 +48,7 @@ public class FlightUtils {
                 HttpResponse.BodyHandlers.ofString());
         
         String str = response.body().toString();
-        System.out.println(str);
+//        System.out.println(str);
         str = str.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
         
 //        System.out.println("Response" + str);
@@ -65,10 +66,20 @@ public class FlightUtils {
             String totalFlightTime = flightLegEle.getAttribute("JourneyDuration");
             int totalMiles = Integer.parseInt(flightLegEle.getAttribute("LegDistance"));
             String departureTimestamp = flightLegEle.getAttribute("DepartureDateTime");
+            
+//            Date d1 = new Date(departureDate);
+//            Date d2 = new Date(departureTimestamp);
+            
+//            if(d1.compareTo(d2) == 0) {
+//                System.out.println(true);
+//            } else {
+//                System.out.println(false);
+//            }
+            
             String arrivalTimeStamp = flightLegEle.getAttribute("ArrivalDateTime");
             
-            System.out.println(totalFlightTime + " " + totalMiles
-                    + " " + departureTimestamp + " " + arrivalTimeStamp);
+//            System.out.println(totalFlightTime + " " + totalMiles
+//                    + " " + departureTimestamp + " " + arrivalTimeStamp);
             
             Element err = (Element)errNodes.item(nodes);
             Element ele = (Element)err.getElementsByTagName("DepartureAirport").item(0);
@@ -82,25 +93,38 @@ public class FlightUtils {
             String companyName = ele.getAttribute("CompanyShortName");
             ele = (Element)err.getElementsByTagName("Equipment").item(0);
             String flightType = ele.getAttribute("AirEquipType");
-            System.out.println(departureAirport + " " + departureTerminal + " " +
-                    arrivalAirport + " " + arrivalTerminal + " " + companyCode + " " + companyName
-            + " " + flightType);
+//            System.out.println(departureAirport + " " + departureTerminal + " " +
+//                    arrivalAirport + " " + arrivalTerminal + " " + companyCode + " " + companyName
+//            + " " + flightType);
             
-            Flight flightDetails = new Flight(totalFlightTime, totalMiles,
+//            Flight flightDetails = new Flight(totalFlightTime, totalMiles,
+//                    departureTimestamp, arrivalTimeStamp,
+//                    departureAirport, departureTerminal, arrivalAirport, 
+//                    arrivalTerminal, companyCode, companyName,
+//                    flightType, 60, departureCity, arrivalCity, 500);
+            
+            
+            
+            try {
+                MySQLUtil.addFlight(MySQLUtil.connectMySQL(), totalFlightTime, totalMiles,
                     departureTimestamp, arrivalTimeStamp,
                     departureAirport, departureTerminal, arrivalAirport, 
                     arrivalTerminal, companyCode, companyName,
-                    flightType, 60, departureCity, arrivalCity, 500);
-            
-            try {
-                MySQLUtil.addFlight(MySQLUtil.connectMySQL(), flightDetails);
+                    flightType, 60, departureCity, arrivalCity, 500.0);
             } catch (Exception e) {
                 System.out.println(e);
             }
             
-            flightSearchList.add(flightDetails);
+//            flightSearchList.add(flightDetails);
             
             nodes++;
+        }
+        
+        try {
+            flightSearchList = MySQLUtil.getAllFlightDataByDate(departureDate);
+            
+        } catch(Exception e) {
+            System.out.println(e.toString());
         }
         
         return flightSearchList;
