@@ -39,6 +39,7 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         Addnetworkbtn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnSignout = new javax.swing.JButton();
+        btnSignout1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,19 +111,39 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
             }
         });
 
+        btnSignout1.setBackground(new java.awt.Color(0, 153, 153));
+        btnSignout1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSignout1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSignout1.setText("Employees");
+        btnSignout1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        btnSignout1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSignout1MouseClicked(evt);
+            }
+        });
+        btnSignout1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignout1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CreateEnterpriseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                    .addComponent(ViewEnterpriseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Addnetworkbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSignout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CreateEnterpriseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(ViewEnterpriseBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Addnetworkbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSignout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnSignout1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +156,11 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
                 .addComponent(Addnetworkbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(btnSignout1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(btnSignout, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 100, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -218,6 +241,16 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         signinFrame.setVisible(true);
     }//GEN-LAST:event_btnSignoutActionPerformed
 
+    private void btnSignout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignout1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSignout1MouseClicked
+
+    private void btnSignout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignout1ActionPerformed
+        // TODO add your handling code here:
+        Employee employee = new Employee();
+        jSplitPane1.setRightComponent(employee);
+    }//GEN-LAST:event_btnSignout1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +291,7 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton CreateEnterpriseBtn;
     private javax.swing.JButton ViewEnterpriseBtn;
     private javax.swing.JButton btnSignout;
+    private javax.swing.JButton btnSignout1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
