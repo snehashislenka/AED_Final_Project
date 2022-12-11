@@ -11,13 +11,13 @@ import javax.swing.ImageIcon;
  *
  * @author parjita
  */
-public class AdminDashboardJPanel extends javax.swing.JPanel {
+public class TravelInsuraceAdminDashboardJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form AdminDashboardJPanel
+     * Creates new form TravelInsuraceAdminDashboardJPanel
      */
-   InsuranceAdmin_Dashboard dashboardpanel;
-    public AdminDashboardJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
+   TravelInsuranceAdmin_Dashboard dashboardpanel;
+    public TravelInsuraceAdminDashboardJPanel(TravelInsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
         this.dashboardpanel = dashboardpanel;
         

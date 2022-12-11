@@ -7,7 +7,7 @@ import Enterprise.SystemAdminLeftPanel;
 import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import java.awt.Component;
 import model.Person.Person;
-import ui.InsuranceManagment.InsuranceAdmin_Dashboard;
+import ui.InsuranceManagment.TravelInsuranceAdmin_Dashboard;
 import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import ui.sysAdminDashboard.SysAdminHomePanel;
 import ui.userdashboard.Dashboard;
@@ -57,8 +57,8 @@ public class GetRoleSpecificDashboard {
                 
             case "INSURANCE_ADMIN":
                 System.out.println("ias");
-                InsuranceAdmin_Dashboard ia_dash = new 
-                    InsuranceAdmin_Dashboard();
+                TravelInsuranceAdmin_Dashboard ia_dash = new 
+                    TravelInsuranceAdmin_Dashboard();
                 ia_dash.setVisible(true);
                 break;
             

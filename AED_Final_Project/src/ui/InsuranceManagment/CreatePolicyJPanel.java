@@ -19,18 +19,18 @@ import mysql.util.MySQLUtil;
  */
 public class CreatePolicyJPanel extends javax.swing.JPanel {
 
-//    InsuranceAdmin_Dashboard admin_dashboardpanel;
-//    public CreatePolicyJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
+//    TravelInsuranceAdmin_Dashboard admin_dashboardpanel;
+//    public CreatePolicyJPanel(TravelInsuranceAdmin_Dashboard dashboardpanel) {
 //        initComponents();
 //        this.admin_dashboardpanel = dashboardpanel;
 //    }
     /**
      * Creates new form CreatePolicyJPanel
      */
-    InsuranceAdmin_Dashboard dashboardpanel;
+    TravelInsuranceAdmin_Dashboard dashboardpanel;
     ArrayList<Category> categoryList;
     Category selectedCategory;
-    public CreatePolicyJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
+    public CreatePolicyJPanel(TravelInsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
         this.dashboardpanel = dashboardpanel;
         this.categoryList = MySQLUtil.getallcategory();
@@ -85,6 +85,8 @@ public class CreatePolicyJPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(PolicyTable);
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));

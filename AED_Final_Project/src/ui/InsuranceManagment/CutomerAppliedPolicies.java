@@ -20,9 +20,9 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
     /**
      * Creates new form CutomerAppliedPolicies
      */
-    InsuranceAdmin_Dashboard dashboardpanel;
+    TravelInsuranceAdmin_Dashboard dashboardpanel;
    
-    public CutomerAppliedPolicies(InsuranceAdmin_Dashboard dashboardpanel) {
+    public CutomerAppliedPolicies(TravelInsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
         this.dashboardpanel = dashboardpanel;
         populateTable();
