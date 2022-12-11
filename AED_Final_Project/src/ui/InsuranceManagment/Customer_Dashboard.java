@@ -20,6 +20,7 @@ public class Customer_Dashboard extends javax.swing.JFrame {
     public Customer_Dashboard() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         CustomerDashboardPanel dashboardpanel = new CustomerDashboardPanel(this);
         jSplitPane1.setRightComponent(dashboardpanel);
     }

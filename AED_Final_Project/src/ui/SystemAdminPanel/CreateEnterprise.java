@@ -46,6 +46,8 @@ public class CreateEnterprise extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         EnterpriseNameTextField = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("FirstName");

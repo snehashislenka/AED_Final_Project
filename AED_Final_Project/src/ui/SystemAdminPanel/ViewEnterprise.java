@@ -41,6 +41,8 @@ public class ViewEnterprise extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         EnterpriseTextField = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         EnterpriseViewTable.setForeground(new java.awt.Color(0, 153, 153));
         EnterpriseViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
