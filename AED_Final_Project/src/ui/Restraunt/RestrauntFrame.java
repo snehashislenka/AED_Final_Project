@@ -36,6 +36,8 @@ public class RestrauntFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        customer = new javax.swing.JButton();
+        customer1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,6 +85,22 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 120, 30));
 
+        customer.setText("Customer");
+        customer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 120, 30));
+
+        customer1.setText("Reports");
+        customer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customer1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 120, 30));
+
         jSplitPane1.setLeftComponent(jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,6 +141,18 @@ public class RestrauntFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(restrauntAdminPanel);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerActionPerformed
+        // TODO add your handling code here:
+        Customers customers = new Customers();
+        jSplitPane1.setRightComponent(customers);
+    }//GEN-LAST:event_customerActionPerformed
+
+    private void customer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer1ActionPerformed
+        // TODO add your handling code here:
+        Reports reports = new Reports();
+        jSplitPane1.setRightComponent(reports);
+    }//GEN-LAST:event_customer1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -159,6 +189,8 @@ public class RestrauntFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton customer;
+    private javax.swing.JButton customer1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

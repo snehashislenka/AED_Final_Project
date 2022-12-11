@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.Hotel;
+package ui.Restraunt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import model.Hotel.Rooms;
 import model.Person.Person;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
@@ -69,7 +68,7 @@ public class Customers extends javax.swing.JPanel {
 
     private void populateTable() {
         ArrayList<Person> customerList = new ArrayList(); 
-        String query = "Select p.id, CONCAT(p.firstname, ' ', p.lastname) as name, p.gender, p.email from person p inner join hotel_bookings h on h.userId = p.id group by p.id";
+        String query = "Select p.id, CONCAT(p.firstname, ' ', p.lastname) as name, p.gender, p.email from person p inner join orders o on o.userId = p.id inner join table_bookings t on t.userId = p.id group by p.id";
          try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 
