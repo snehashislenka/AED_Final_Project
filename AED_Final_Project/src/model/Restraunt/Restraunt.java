@@ -26,6 +26,12 @@ public class Restraunt {
         this.city = city;
         this.zipcode = zipcode;
     }
+
+    public Restraunt(int id, String restraunt, String address) {
+        this.id = id;
+        this.restraunt = restraunt;
+        this.address = address;
+    }
     
     public int getId() {
         return id;

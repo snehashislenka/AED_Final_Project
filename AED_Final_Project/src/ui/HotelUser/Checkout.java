@@ -30,6 +30,8 @@ public class Checkout extends javax.swing.JPanel {
     float price;
     long days;
     String roomName;
+    float totalPayable = 0;
+    int tax = 40;
     
     public Checkout(HotelFrame hotelFrame, String hotel, String address,
             String city, String zipcode, int hotelId, Date checkin, 
@@ -70,7 +72,7 @@ public class Checkout extends javax.swing.JPanel {
         sDiff2.setText(String.valueOf(days));
         float totalPrice = price * no_rooms * days;
         sTotal.setText(String.valueOf(totalPrice));
-        float totalPayable = totalPrice + 40;
+        totalPayable = totalPrice + tax;
         sPay.setText(String.valueOf(totalPayable));
     }
 
@@ -366,7 +368,8 @@ public class Checkout extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String status = "BOOKED";
-        MySQLUtil.bookHotel(hotelId, room_no, hotelId, checkin, checkout, no_rooms, status);
+        MySQLUtil.bookHotel(hotelId, room_no, hotelId, checkin, checkout, no_rooms, status, 
+                totalPayable, tax);
         System.out.println("hotel booked");
         
         JOptionPane.showMessageDialog(this,"Hotel Booked Successfully!");

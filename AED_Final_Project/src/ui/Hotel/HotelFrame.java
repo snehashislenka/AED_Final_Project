@@ -4,6 +4,8 @@
  */
 package ui.Hotel;
 
+import java.awt.Component;
+
 /**
  *
  * @author Anshul
@@ -19,7 +21,11 @@ public class HotelFrame extends javax.swing.JFrame {
         HotelAdminPanel hotelAdminPanel = new HotelAdminPanel();
         jSplitPane1.setRightComponent(hotelAdminPanel);
     }
-
+    
+    public void switchPanel(Component comp) {
+        jSplitPane1.setRightComponent(comp);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +42,8 @@ public class HotelFrame extends javax.swing.JFrame {
         rooms = new javax.swing.JButton();
         rooms1 = new javax.swing.JButton();
         customer1 = new javax.swing.JButton();
+        customer2 = new javax.swing.JButton();
+        customer3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +58,7 @@ public class HotelFrame extends javax.swing.JFrame {
                 bookings2ActionPerformed(evt);
             }
         });
-        jPanel1.add(bookings2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, 30));
+        jPanel1.add(bookings2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 100, 30));
 
         customer.setForeground(new java.awt.Color(204, 0, 102));
         customer.setText("Customer");
@@ -59,7 +67,7 @@ public class HotelFrame extends javax.swing.JFrame {
                 customerActionPerformed(evt);
             }
         });
-        jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 100, 30));
+        jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 100, 30));
 
         rooms.setForeground(new java.awt.Color(204, 0, 102));
         rooms.setText("Rooms");
@@ -68,7 +76,7 @@ public class HotelFrame extends javax.swing.JFrame {
                 roomsActionPerformed(evt);
             }
         });
-        jPanel1.add(rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, 30));
+        jPanel1.add(rooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, 30));
 
         rooms1.setForeground(new java.awt.Color(204, 0, 102));
         rooms1.setText("Home");
@@ -77,7 +85,7 @@ public class HotelFrame extends javax.swing.JFrame {
                 rooms1ActionPerformed(evt);
             }
         });
-        jPanel1.add(rooms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 30));
+        jPanel1.add(rooms1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, 30));
 
         customer1.setForeground(new java.awt.Color(204, 0, 102));
         customer1.setText("Reports");
@@ -86,7 +94,25 @@ public class HotelFrame extends javax.swing.JFrame {
                 customer1ActionPerformed(evt);
             }
         });
-        jPanel1.add(customer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 100, 30));
+        jPanel1.add(customer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 100, 30));
+
+        customer2.setForeground(new java.awt.Color(204, 0, 102));
+        customer2.setText("Food Orders");
+        customer2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customer2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 100, 30));
+
+        customer3.setForeground(new java.awt.Color(204, 0, 102));
+        customer3.setText("Order Food");
+        customer3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customer3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 100, 30));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -130,6 +156,18 @@ public class HotelFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(reports);
     }//GEN-LAST:event_customer1ActionPerformed
 
+    private void customer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer2ActionPerformed
+        // TODO add your handling code here:
+        FoodOrders foodOrders = new FoodOrders();
+        jSplitPane1.setRightComponent(foodOrders);
+    }//GEN-LAST:event_customer2ActionPerformed
+
+    private void customer3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer3ActionPerformed
+        // TODO add your handling code here:
+        OrderHotelFood orderFood = new OrderHotelFood(this);
+        jSplitPane1.setRightComponent(orderFood);
+    }//GEN-LAST:event_customer3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -169,6 +207,8 @@ public class HotelFrame extends javax.swing.JFrame {
     private javax.swing.JButton bookings2;
     private javax.swing.JButton customer;
     private javax.swing.JButton customer1;
+    private javax.swing.JButton customer2;
+    private javax.swing.JButton customer3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
