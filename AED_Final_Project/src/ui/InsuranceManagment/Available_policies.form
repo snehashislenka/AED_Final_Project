@@ -85,7 +85,7 @@
               <Table columnCount="6" rowCount="4">
                 <Column editable="true" title="Serial No" type="java.lang.Object"/>
                 <Column editable="true" title="Policy Name" type="java.lang.Object"/>
-                <Column editable="true" title="Category" type="java.lang.Object"/>
+                <Column editable="true" title="Organization" type="java.lang.Object"/>
                 <Column editable="true" title="Sum Assurance" type="java.lang.Object"/>
                 <Column editable="true" title="Premium" type="java.lang.Object"/>
                 <Column editable="true" title="Tenure" type="java.lang.Object"/>
@@ -289,7 +289,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Category"/>
+            <Property name="text" type="java.lang.String" value="Organization"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -337,7 +337,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="PolicyCategoryLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Policy Category"/>
+            <Property name="text" type="java.lang.String" value="Organization"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="PolicySumassuranceLabel">

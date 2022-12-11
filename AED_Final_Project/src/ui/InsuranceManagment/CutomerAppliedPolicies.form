@@ -79,7 +79,7 @@
                 <Column editable="true" title="Person Name" type="java.lang.Object"/>
                 <Column editable="true" title="Policy ID" type="java.lang.Object"/>
                 <Column editable="true" title="Policy Name" type="java.lang.Object"/>
-                <Column editable="true" title="Category" type="java.lang.Object"/>
+                <Column editable="true" title="Organization" type="java.lang.Object"/>
                 <Column editable="true" title="Sum Assurance" type="java.lang.Object"/>
                 <Column editable="true" title="Premium" type="java.lang.Object"/>
                 <Column editable="true" title="Tenure" type="java.lang.Object"/>

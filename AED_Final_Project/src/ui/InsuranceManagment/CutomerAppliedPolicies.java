@@ -54,7 +54,7 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Person ID", "Person Name", "Policy ID", "Policy Name", "Category", "Sum Assurance", "Premium", "Tenure", "Application Date", "Status"
+                "Person ID", "Person Name", "Policy ID", "Policy Name", "Organization", "Sum Assurance", "Premium", "Tenure", "Application Date", "Status"
             }
         ));
         jScrollPane1.setViewportView(AvailablePoliciesTable);
