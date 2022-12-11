@@ -4,7 +4,7 @@
  */
 package ui.userdashboard;
 
-import TravelInsuranceManagment.Customer_Dashboard;
+import ui.InsuranceManagment.Customer_Dashboard;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
