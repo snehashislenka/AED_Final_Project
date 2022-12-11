@@ -57,6 +57,9 @@ public class Customer_Dashboard extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Customer Dashboard");
 
+        jSplitPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 369));
 
         ApplyPolicyBtn.setBackground(new java.awt.Color(51, 204, 255));

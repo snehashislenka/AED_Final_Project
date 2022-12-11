@@ -20,12 +20,13 @@ import mysql.util.MySQLUtil;
  *
  * @author parjita
  */
-public class CreateCategoryJPanel extends javax.swing.JPanel {
+public class CreateOrganizationJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form CreateCategoryJPanel
      */
-    public CreateCategoryJPanel() {
+    InsuranceAdmin_Dashboard dashboardpanel;
+    public CreateOrganizationJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
     }
 
@@ -50,6 +51,8 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         updatebtn = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         CategoryAddbtn.setBackground(new java.awt.Color(0, 204, 255));
         CategoryAddbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CategoryAddbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -63,7 +66,7 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
-        jLabel1.setText("Category Name");
+        jLabel1.setText("Organization Name");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 204, 255));
@@ -78,7 +81,7 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 204, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Create the Category");
+        jLabel4.setText("Create the Organization");
 
         CategoryTable.setForeground(new java.awt.Color(0, 204, 255));
         CategoryTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -89,7 +92,7 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Serial No", "Category Name", "Category Date"
+                "Serial No", "Organization Name", "Organization Date"
             }
         ));
         jScrollPane1.setViewportView(CategoryTable);
@@ -132,30 +135,28 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CategoryNameTextField)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(CategoryAddbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(165, 165, 165)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(235, 235, 235)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CategoryNameTextField)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CategoryAddbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(deletebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CategoryDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,10 +194,17 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         String CategoryDate = CategoryDateTextField.getText();
                 
         MySQLUtil.addcategorydetails(CategoryName,CategoryDate);
-        JOptionPane.showMessageDialog(this,"New Category Added");        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"New Category Added");    
+        clearAllFields();// TODO add your handling code here:
   
     }//GEN-LAST:event_CategoryAddbtnActionPerformed
 
+    public void clearAllFields() {
+        CategoryNameTextField.setText("");
+        CategoryDateTextField.setText("");
+      
+    }
+     
     private void viewbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewbtnActionPerformed
         // TODO add your handling code here:
           populateTable();
@@ -217,6 +225,7 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
                
         MySQLUtil.updatecategorydetail(entercategoryName, selectedcategoryId);
         populateTable();
+         clearAllFields();
     }//GEN-LAST:event_updatebtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed

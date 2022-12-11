@@ -63,6 +63,8 @@ public class Available_policies extends javax.swing.JPanel {
         Applybtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         ViewPolicyTable.setForeground(new java.awt.Color(0, 204, 255));
         ViewPolicyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,7 +74,7 @@ public class Available_policies extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Serial No", "Policy Name", "Category", "Sum Assurance", "Premium", "Tenure"
+                "Serial No", "Policy Name", "Organization", "Sum Assurance", "Premium", "Tenure"
             }
         ));
         ViewPolicyTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -112,7 +114,7 @@ public class Available_policies extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 204, 255));
-        jLabel4.setText("Category");
+        jLabel4.setText("Organization");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 204, 255));
@@ -130,7 +132,7 @@ public class Available_policies extends javax.swing.JPanel {
 
         PolicyNameLabel.setText("Policy Name");
 
-        PolicyCategoryLabel.setText("Policy Category");
+        PolicyCategoryLabel.setText("Organization");
 
         PolicySumassuranceLabel.setText("Policy SumAssurance");
 
