@@ -34,6 +34,8 @@ public class LifestyleFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +50,7 @@ public class LifestyleFrame extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 120, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, 30));
 
         jButton3.setForeground(new java.awt.Color(204, 0, 102));
         jButton3.setText("Restraunt");
@@ -57,7 +59,7 @@ public class LifestyleFrame extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 120, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 30));
 
         jButton4.setForeground(new java.awt.Color(204, 0, 102));
         jButton4.setText("Hotel");
@@ -66,7 +68,25 @@ public class LifestyleFrame extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 120, 30));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 140, 30));
+
+        jButton5.setForeground(new java.awt.Color(204, 0, 102));
+        jButton5.setText("View Organisation");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 140, 30));
+
+        jButton6.setForeground(new java.awt.Color(204, 0, 102));
+        jButton6.setText("Create Organisation");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 140, 30));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -96,6 +116,18 @@ public class LifestyleFrame extends javax.swing.JFrame {
         HotelCrud hotelCrud = new HotelCrud();
         jSplitPane1.setRightComponent(hotelCrud);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+         ViewOrganizationAdmins ViewOrganizationAdmins = new ViewOrganizationAdmins();
+        jSplitPane1.setRightComponent(ViewOrganizationAdmins);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+         AddOrganization AddOrganization = new AddOrganization();
+        jSplitPane1.setRightComponent(AddOrganization);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +168,8 @@ public class LifestyleFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;

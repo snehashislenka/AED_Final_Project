@@ -18,6 +18,8 @@ import model.Restraunt.OrderItems;
 import model.Restraunt.Restraunt;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
+import ui.Hotel.HotelFrame;
+import ui.flightAdminDashboard.FlightAdminDashboard;
 
 /**
  *
@@ -29,6 +31,8 @@ public class RestrauntMenu extends javax.swing.JPanel {
      * Creates new form RestrauntMenu
      */
     RestrauntFrame restrauntFrame;
+    FlightAdminDashboard flightAdminDashboard;
+    HotelFrame hotelFrame;
     String city;
     String restraunt; 
     String address;
@@ -39,6 +43,9 @@ public class RestrauntMenu extends javax.swing.JPanel {
     String desc;
     int itemId;
     int quantity;
+    int extraId;
+    String extraType;
+    
     ArrayList<OrderItems> cartItems = new ArrayList(); 
     
     public RestrauntMenu(RestrauntFrame restrauntFrame, String city, String restraunt, 
@@ -55,6 +62,48 @@ public class RestrauntMenu extends javax.swing.JPanel {
         sAddress.setText(address);
         sRestraunt.setText(restraunt);
         sZipcode.setText(zipcode);
+        
+        populateTable();
+    }
+    
+    public RestrauntMenu(FlightAdminDashboard flightAdminDashboard, String city, String restraunt, 
+            String address, String zipcode, int restrauntId, int extraId, String extraType) {
+        initComponents();
+        this.flightAdminDashboard = flightAdminDashboard;
+        this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+        this.extraId = extraId;
+        this.extraType = extraType;
+        
+        sCity.setText(city);
+        sAddress.setText(address);
+        sRestraunt.setText(restraunt);
+        sZipcode.setText(zipcode);
+        this.jButton4.setVisible(false);
+        
+        populateTable();
+    }
+    
+     public RestrauntMenu(HotelFrame hotelFrame, String city, String restraunt, 
+            String address, String zipcode, int restrauntId, int extraId, String extraType) {
+        initComponents();
+        this.hotelFrame = hotelFrame;
+        this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+        this.extraId = extraId;
+        this.extraType = extraType;
+        
+        sCity.setText(city);
+        sAddress.setText(address);
+        sRestraunt.setText(restraunt);
+        sZipcode.setText(zipcode);
+        this.jButton4.setVisible(false);
         
         populateTable();
     }
@@ -287,7 +336,15 @@ public class RestrauntMenu extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please add something to cart!");
             return;
         }
-        this.restrauntFrame.switchPanel(new Checkout(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId, cartItems));
+        if(extraId > 0 && extraType.equals("flight")) {
+            this.flightAdminDashboard.switchPanel(new Checkout(this.flightAdminDashboard, city, restraunt, address, zipcode, restrauntId, cartItems, extraId, extraType));
+        } 
+        else if(extraId > 0 && extraType.equals("hotel")) {
+            this.hotelFrame.switchPanel(new Checkout(this.hotelFrame, city, restraunt, address, zipcode, restrauntId, cartItems, extraId, extraType));
+        }
+        else {
+            this.restrauntFrame.switchPanel(new Checkout(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId, cartItems));
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.Hotel.Hotel;
 import model.Person.Person;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
@@ -48,9 +49,6 @@ public class Reports extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,18 +63,18 @@ public class Reports extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id", "name", "gender", "email"
+                "id", "hotel", "total amount"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, 260, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 560, 110));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 153, 255));
@@ -104,48 +102,25 @@ public class Reports extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 153, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Low Performing Hotels");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 300, 30));
+        jLabel4.setText("Most Sales by Hotels");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 590, 30));
 
         jScrollPane3.setForeground(new java.awt.Color(204, 153, 255));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id", "name", "gender", "email"
+                "id", "hotel", "total bookings"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 560, 100));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 153, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("New Customers");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 300, 30));
-
-        jScrollPane4.setForeground(new java.awt.Color(204, 153, 255));
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "id", "name", "gender", "email"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable4);
-
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 270, 100));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 560, 100));
     }// </editor-fold>//GEN-END:initComponents
     
     private void populateTable() {
@@ -181,22 +156,77 @@ public class Reports extends javax.swing.JPanel {
             model.addRow(row);
         }
         
+        ArrayList<Hotel> hotelList = new ArrayList(); 
+        String query2 = "select h.id, h.hotel, count(hb.id) as totalBookings from hotel h inner join hotel_bookings hb on h.id = hb.hotelId order by totalBookings desc limit 3";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query2); 
+            
+            ResultSet rs = ps.executeQuery();   
+            
+//        System.out.println("here------------"+rs.getInt("room_no"));
+            while(rs.next()) {
+                Hotel res = new Hotel(rs.getInt("id"), rs.getString("hotel"),
+                    rs.getString("totalBookings"));
+                hotelList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
+        model2.setRowCount(0);
         
+        for(Hotel r : hotelList) {
+            Object[] row = new Object[5];
+            row[0] = r.getId();
+            row[1] = r.getHotel();
+            row[2] = r.getAddress();
+            
+            model2.addRow(row);
+        }
+        
+        ArrayList<Hotel> hotelList2 = new ArrayList(); 
+        String query3 = "select h.id, h.hotel, sum(hb.amount) as totalAmount  from hotel h inner join hotel_bookings hb on h.id = hb.hotelId group by h.id order by totalAmount desc limit 3";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query3); 
+            
+            ResultSet rs = ps.executeQuery();   
+            
+//        System.out.println("here------------"+rs.getInt("room_no"));
+            while(rs.next()) {
+                Hotel res = new Hotel(rs.getInt("id"), rs.getString("hotel"),
+                    rs.getString("totalAmount"));
+                hotelList2.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model3 = (DefaultTableModel) jTable1.getModel();
+        model3.setRowCount(0);
+        
+        for(Hotel r : hotelList2) {
+            Object[] row = new Object[5];
+            row[0] = r.getId();
+            row[1] = r.getHotel();
+            row[2] = r.getAddress();
+            
+            model3.addRow(row);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
 }

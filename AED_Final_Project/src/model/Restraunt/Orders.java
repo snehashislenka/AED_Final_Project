@@ -16,6 +16,8 @@ public class Orders {
     private String status;
     private String user;
     private String restraunt;
+    private int flightId;
+    private int hotelId;
 
     public Orders(int id, int userId, int restrauntId, float orderTotal, String status, String user, String restraunt) {
         this.id = id;
@@ -25,6 +27,19 @@ public class Orders {
         this.status = status;
         this.user = user;
         this.restraunt = restraunt;
+    }
+    
+    public Orders(int id, int userId, int restrauntId, float orderTotal, String status, String user, String restraunt, 
+            int flightId, int hotelId) {
+        this.id = id;
+        this.userId = userId;
+        this.restrauntId = restrauntId;
+        this.orderTotal = orderTotal;
+        this.status = status;
+        this.user = user;
+        this.restraunt = restraunt;
+        this.flightId = flightId;
+        this.hotelId = hotelId;
     }
 
     public Orders(String restraunt, int id, float orderTotal) {
@@ -87,6 +102,22 @@ public class Orders {
 
     public void setRestraunt(String restraunt) {
         this.restraunt = restraunt;
+    }
+
+    public int getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
     
     
