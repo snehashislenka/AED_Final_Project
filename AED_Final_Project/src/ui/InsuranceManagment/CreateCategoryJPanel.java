@@ -50,6 +50,8 @@ public class CreateCategoryJPanel extends javax.swing.JPanel {
         updatebtn = new javax.swing.JButton();
         deletebtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         CategoryAddbtn.setBackground(new java.awt.Color(0, 204, 255));
         CategoryAddbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CategoryAddbtn.setForeground(new java.awt.Color(255, 255, 255));

@@ -63,6 +63,8 @@ public class Available_policies extends javax.swing.JPanel {
         Applybtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         ViewPolicyTable.setForeground(new java.awt.Color(0, 204, 255));
         ViewPolicyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

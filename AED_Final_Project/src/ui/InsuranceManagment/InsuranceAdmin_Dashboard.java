@@ -47,8 +47,9 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
-        jLabel1.setText("Admin Dashboard");
+        jLabel1.setText("InsuranceAdmin Dashboard");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 369));
 
@@ -77,7 +78,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
         CreateCategorybtn.setBackground(new java.awt.Color(0, 204, 255));
         CreateCategorybtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CreateCategorybtn.setForeground(new java.awt.Color(255, 255, 255));
-        CreateCategorybtn.setText("Category");
+        CreateCategorybtn.setText("Organization");
         CreateCategorybtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         CreateCategorybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +126,8 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -142,13 +145,13 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -184,7 +187,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
     private void CreatepolicybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatepolicybtnActionPerformed
         // TODO add your handling code here:
-        CreatePolicyJPanel policyPanel = new CreatePolicyJPanel();
+        CreatePolicyJPanel policyPanel = new CreatePolicyJPanel(this);
         jSplitPane1.setRightComponent(policyPanel);
     }//GEN-LAST:event_CreatepolicybtnActionPerformed
 

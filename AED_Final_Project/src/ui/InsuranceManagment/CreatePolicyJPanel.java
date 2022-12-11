@@ -27,11 +27,12 @@ public class CreatePolicyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreatePolicyJPanel
      */
+    InsuranceAdmin_Dashboard dashboardpanel;
     ArrayList<Category> categoryList;
     Category selectedCategory;
-    public CreatePolicyJPanel() {
+    public CreatePolicyJPanel(InsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
-         
+        this.dashboardpanel = dashboardpanel;
         this.categoryList = MySQLUtil.getallcategory();
         String[] categoryNameArr = new String[categoryList.size()];
         for(int i =0; i< categoryList.size(); i++) {
