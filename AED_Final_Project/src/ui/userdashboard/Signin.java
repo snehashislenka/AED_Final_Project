@@ -4,7 +4,7 @@
  */
 package ui.userdashboard;
 
-import Enterprise.SystemAdmin_Dashboard;
+import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import auth.AuthenticationUtil;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
