@@ -28,6 +28,12 @@ public class Hotel {
         this.zipcode = zipcode;
     }
 
+    public Hotel(int id, String hotel, String address) {
+        this.id = id;
+        this.hotel = hotel;
+        this.address = address;
+    }
+
     public int getId() {
         return id;
     }

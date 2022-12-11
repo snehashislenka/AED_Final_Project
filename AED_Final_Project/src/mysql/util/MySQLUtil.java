@@ -1392,10 +1392,12 @@ public class MySQLUtil {
 
     }
 
-//    public static void addpolicydetails(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
-//         String query = "INSERT INTO insurance_policy (Policyname,SumAssurance,Premium,Tenure,Date)"
-//        + " values (?, ?, ?, ?, ?)";
-//         try {
+    // public static void addpolicydetails(String PolicyName,int
+    // PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
+    // String query = "INSERT INTO insurance_policy
+    // (Policyname,SumAssurance,Premium,Tenure,Date)"
+    // + " values (?, ?, ?, ?, ?)";
+    // try {
 
     // policy crud operations
     public static void addpolicydetails(String PolicyName, String CategoryName, int PolicySumAssurance,
@@ -1572,7 +1574,7 @@ public class MySQLUtil {
 
             while (rs.next()) {
                 OrderItems res = new OrderItems(rs.getString("item"),
-                        rs.getFloat("price"),
+                        rs.getFloat("total"),
                         rs.getInt("quantity"));
 
                 orderItemList.add(res);
@@ -2019,7 +2021,7 @@ public class MySQLUtil {
     }
 
     public static void bookHotel(int hotelId, int room_no, int userId, Date from,
-            Date to, int no_of_rooms, String status) {
+            Date to, int no_of_rooms, String status, float totalPayable, int tax) {
         Connection conn = MySQLUtil.connectMySQL();
 
         String query = "INSERT INTO hotel_bookings (hotelId, room_no, userId, fromDate, toDate, no_of_rooms, status)"
@@ -2418,6 +2420,162 @@ public class MySQLUtil {
         } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static ArrayList<Person> getHotelAndRestrauntAdmin() {
+        String query = "select * from person where role in ('HOTEL_ADMIN', 'RESTRAUNT_ADMIN')";
+
+        ArrayList<Person> personList = new ArrayList<>();
+
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Person person = new Person(rs.getInt("id"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"),
+                        rs.getString("role"), rs.getString("email"),
+                        rs.getString("password"));
+
+                personList.add(person);
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return personList;
+    }
+
+    public static ArrayList<Orders> getAllFlightOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+
+        String query = "SELECT * FROM orders where flightId is not null";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"));
+
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
+    }
+
+    public static ArrayList<Orders> getAllHotelOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+
+        String query = "SELECT * FROM orders where hotelId is not null";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"));
+
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
+    }
+
+    public static void createFlightOrder(int userId, int restrauntId, float orderTotal, String status, String user,
+            String restraunt, int tax, int flightId) {
+        Connection conn = MySQLUtil.connectMySQL();
+
+        String query = "INSERT INTO orders (userId, restrauntId, orderTotal, "
+                + "status, user, restraunt, tax, flightId)"
+                + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setInt(2, restrauntId);
+            ps.setFloat(3, orderTotal);
+            ps.setString(4, status);
+            ps.setString(5, user);
+            ps.setString(6, restraunt);
+            ps.setInt(7, tax);
+            ps.setInt(8, flightId);
+
+            ps.execute();
+            System.out.println("order created here");
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void createHotelOrder(int userId, int restrauntId, float orderTotal, String status, String user,
+            String restraunt, int tax, int hotelId) {
+        Connection conn = MySQLUtil.connectMySQL();
+
+        String query = "INSERT INTO orders (userId, restrauntId, orderTotal, "
+                + "status, user, restraunt, tax, hotelId)"
+                + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            ps.setInt(2, restrauntId);
+            ps.setFloat(3, orderTotal);
+            ps.setString(4, status);
+            ps.setString(5, user);
+            ps.setString(6, restraunt);
+            ps.setInt(7, tax);
+            ps.setInt(8, hotelId);
+
+            ps.execute();
+            System.out.println("order created here");
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static ArrayList<Orders> getAllBulkOrders() {
+        Connection conn = MySQLUtil.connectMySQL();
+        ArrayList<Orders> ordersList = new ArrayList();
+
+        String query = "SELECT * FROM orders where hotelId is not null or flightId is not null";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders res = new Orders(rs.getInt("id"), rs.getInt("userId"),
+                        rs.getInt("restrauntId"),
+                        rs.getFloat("orderTotal"),
+                        rs.getString("status"),
+                        rs.getString("user"),
+                        rs.getString("restraunt"),
+                        rs.getInt("hotelId"),
+                        rs.getInt("flightId"));
+
+                ordersList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ordersList;
     }
 
 }

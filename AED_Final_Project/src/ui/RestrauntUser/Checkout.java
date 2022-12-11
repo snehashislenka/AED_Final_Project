@@ -19,6 +19,10 @@ import model.Restraunt.MenuItems;
 import model.Restraunt.OrderItems;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
+import ui.Hotel.HotelFrame;
+import ui.Hotel.OrderHotelFood;
+import ui.flightAdminDashboard.FlightAdminDashboard;
+import ui.flightAdminDashboard.OrderFlightFood;
 
 /**
  *
@@ -30,6 +34,8 @@ public class Checkout extends javax.swing.JPanel {
      * Creates new form Checkout
      */
     RestrauntFrame restrauntFrame;
+    FlightAdminDashboard flightAdminDashboard;
+    HotelFrame hotelFrame;
     String city;
     String restraunt; 
     String address;
@@ -39,6 +45,8 @@ public class Checkout extends javax.swing.JPanel {
     float totalQuantity = 0;
     int tax = 20;
     float totalPay = 0;
+    int extraId;
+    String extraType;
     ArrayList<OrderItems> cartItems;
     
     public Checkout(RestrauntFrame restrauntFrame, String city, String restraunt, 
@@ -51,6 +59,50 @@ public class Checkout extends javax.swing.JPanel {
         this.zipcode =zipcode;
         this.restrauntId =restrauntId;
         this.cartItems = cartItems;
+        
+        sCity.setText(city);
+        sAddress.setText(address);
+        sRestraunt.setText(restraunt);
+//        sZipcode.setText(zipcode);
+
+        populateTable();
+    }
+    
+      public Checkout(FlightAdminDashboard flightAdminDashboard, String city, String restraunt, 
+            String address, String zipcode, int restrauntId, ArrayList<OrderItems> cartItems, int extraId, String extraType) {
+        initComponents();
+        this.flightAdminDashboard = flightAdminDashboard;
+         this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+        this.cartItems = cartItems;
+        this.extraId = extraId;
+        this.extraType = extraType;
+        this.jButton2.setVisible(false);
+        
+        sCity.setText(city);
+        sAddress.setText(address);
+        sRestraunt.setText(restraunt);
+//        sZipcode.setText(zipcode);
+
+        populateTable();
+    }
+      
+      public Checkout(HotelFrame hotelFrame, String city, String restraunt, 
+            String address, String zipcode, int restrauntId, ArrayList<OrderItems> cartItems, int extraId, String extraType) {
+        initComponents();
+        this.hotelFrame = hotelFrame;
+         this.city = city;
+        this.restraunt =restraunt;
+        this.address = address;
+        this.zipcode =zipcode;
+        this.restrauntId =restrauntId;
+        this.cartItems = cartItems;
+        this.extraId = extraId;
+        this.extraType = extraType;
+        this.jButton2.setVisible(false);
         
         sCity.setText(city);
         sAddress.setText(address);
@@ -260,8 +312,20 @@ public class Checkout extends javax.swing.JPanel {
          } catch (SQLException ex) {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-        MySQLUtil.createOrder(userId, restrauntId, totalPay, status, username, restraunt, tax);
+        
+        if(extraId > 0) {
+            int flightId = 0;
+            int hotelId = 0;
+            if(extraType.equals("flight")) flightId = extraId;
+            if(extraType.equals("hotel")) hotelId = extraId;
+            if(flightId > 0) {
+                MySQLUtil.createFlightOrder(userId, restrauntId, totalPay, status, username, restraunt, tax, flightId); 
+            } else {
+                MySQLUtil.createHotelOrder(userId, restrauntId, totalPay, status, username, restraunt, tax, hotelId); 
+            }
+        } else {
+            MySQLUtil.createOrder(userId, restrauntId, totalPay, status, username, restraunt, tax);         
+        }
         
 //        get order id
         
@@ -286,7 +350,15 @@ public class Checkout extends javax.swing.JPanel {
         }
         
         JOptionPane.showMessageDialog(this,"Order created Successfully!");
-        this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
+        if(extraId > 0 && extraType.equals("flight")) { 
+            this.flightAdminDashboard.switchPanel(new OrderFlightFood(this.flightAdminDashboard));  
+        }
+        else if(extraId > 0 && extraType.equals("hotel")) {
+            this.hotelFrame.switchPanel(new OrderHotelFood(this.hotelFrame));  
+        }
+        else {
+            this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));         
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void populateTable() { 

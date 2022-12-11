@@ -117,8 +117,12 @@ public class RestrauntSearch extends javax.swing.JPanel {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 140, 40));
 
         sCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "Chicago" }));
-        sCity.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 0, 102))); // NOI18N
-        jPanel2.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 320, 50));
+        sCity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 102)));
+        jPanel2.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 320, 50));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Location");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 60, 50));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, 270));
 
