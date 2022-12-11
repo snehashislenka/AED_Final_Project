@@ -4,9 +4,10 @@
  */
 package util.helper;
 import Enterprise.SystemAdminLeftPanel;
-import Enterprise.SystemAdmin_Dashboard;
+import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import java.awt.Component;
 import model.Person.Person;
+import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import ui.sysAdminDashboard.SysAdminHomePanel;
 import ui.userdashboard.Dashboard;
 import ui.userdashboard.HomePanel;
