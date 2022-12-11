@@ -131,9 +131,13 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
         int selectedpersonId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
         
         JOptionPane.showMessageDialog(this,"Person Policy Approved");
-        String Status = "Approved";
+        String Status = "APPROVED";
+        
+        int policyId = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
                
         MySQLUtil.updatepolicybookingdetail(Status, selectedpersonId);
+        MySQLUtil.updateFlightBookingInsuranceStatus(policyId, Status, selectedpersonId);
+        MySQLUtil.updateCarBookingInsuranceStatus(policyId, Status, selectedpersonId);
         populateTable();
     }//GEN-LAST:event_ApprovedbtnActionPerformed
 
@@ -150,7 +154,11 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Person Policy Rejected");
         String Status = "REJECTED";
                
+        int policyId = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
+               
         MySQLUtil.rejectpolicybookingdetail(Status, selectedId);
+        MySQLUtil.updateFlightBookingInsuranceStatus(policyId, Status, selectedId);
+        MySQLUtil.updateCarBookingInsuranceStatus(policyId, Status, selectedId);
         populateTable();
     }//GEN-LAST:event_rejectbtnActionPerformed
 
