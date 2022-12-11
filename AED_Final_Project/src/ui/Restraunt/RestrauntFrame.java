@@ -4,6 +4,9 @@
  */
 package ui.Restraunt;
 
+import mysql.util.MySQLUtil;
+import ui.userdashboard.Signin;
+
 /**
  *
  * @author Anshul
@@ -39,6 +42,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         customer = new javax.swing.JButton();
         customer1 = new javax.swing.JButton();
         customer2 = new javax.swing.JButton();
+        customer4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,6 +122,15 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(customer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 120, 30));
 
+        customer4.setForeground(new java.awt.Color(204, 0, 102));
+        customer4.setText("Sign Out");
+        customer4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customer4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(customer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 120, 30));
+
         jSplitPane1.setLeftComponent(jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
@@ -177,6 +190,14 @@ public class RestrauntFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(bulkOrders);
     }//GEN-LAST:event_customer2ActionPerformed
 
+    private void customer4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer4ActionPerformed
+        // TODO add your handling code here:
+        MySQLUtil.removePersonSession();
+        dispose();
+        Signin signinFrame = new Signin();
+        signinFrame.setVisible(true);
+    }//GEN-LAST:event_customer4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -216,6 +237,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
     private javax.swing.JButton customer;
     private javax.swing.JButton customer1;
     private javax.swing.JButton customer2;
+    private javax.swing.JButton customer4;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
