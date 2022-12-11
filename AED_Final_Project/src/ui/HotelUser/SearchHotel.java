@@ -5,6 +5,7 @@
 package ui.HotelUser;
 
 import java.awt.PopupMenu;
+import java.util.Date;
 
 /**
  *
@@ -34,14 +35,14 @@ public class SearchHotel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        sRooms = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        sOut = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        sIn = new com.toedter.calendar.JDateChooser();
+        sCity = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -60,7 +61,7 @@ public class SearchHotel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Where");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 290, -1));
+        jPanel2.add(sRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 290, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Check-in");
@@ -69,12 +70,11 @@ public class SearchHotel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Check-out");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
-        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 130, -1));
+        jPanel2.add(sOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 130, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("No of Rooms");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 290, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Search");
@@ -84,7 +84,10 @@ public class SearchHotel extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
-        jPanel2.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 130, -1));
+        jPanel2.add(sIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 130, -1));
+
+        sCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "Chicago" }));
+        jPanel2.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 290, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 360, 310));
 
@@ -108,7 +111,11 @@ public class SearchHotel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          this.hotelFrame.switchPanel(new HotelList(this.hotelFrame));
+        String city = sCity.getSelectedItem().toString();
+        Date checkin = sIn.getDate();
+        Date checkout = sOut.getDate();
+        int no_rooms = Integer.parseInt(sRooms.getText());
+        this.hotelFrame.switchPanel(new HotelList(this.hotelFrame, city, checkin, checkout, no_rooms));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -120,8 +127,6 @@ public class SearchHotel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -130,8 +135,10 @@ public class SearchHotel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox<String> sCity;
+    private com.toedter.calendar.JDateChooser sIn;
+    private com.toedter.calendar.JDateChooser sOut;
+    private javax.swing.JTextField sRooms;
     // End of variables declaration//GEN-END:variables
 
     PopupMenu getPanel() {

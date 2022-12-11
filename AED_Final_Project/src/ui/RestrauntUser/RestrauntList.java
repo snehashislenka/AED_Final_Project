@@ -4,6 +4,22 @@
  */
 package ui.RestrauntUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Hotel.Hotel;
+import model.Restraunt.Restraunt;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+import ui.HotelUser.RoomSelect;
+
 /**
  *
  * @author Anshul
@@ -14,10 +30,20 @@ public class RestrauntList extends javax.swing.JPanel {
      * Creates new form RestrauntList
      */
     RestrauntFrame restrauntFrame;
-    public RestrauntList(RestrauntFrame restrauntFrame) {
+    String city;
+    
+    public RestrauntList(RestrauntFrame restrauntFrame, String city) {
+        initComponents();
+        this.city = city;
+        this.restrauntFrame = restrauntFrame;
+        searchRestraunt(city);
+    }
+    
+     public RestrauntList(RestrauntFrame restrauntFrame) {
         initComponents();
         this.restrauntFrame = restrauntFrame;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,15 +55,15 @@ public class RestrauntList extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        sCity = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,17 +71,18 @@ public class RestrauntList extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 0, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 51, 51));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Boston");
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 51, 51))); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        sCity.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        sCity.setForeground(new java.awt.Color(255, 51, 51));
+        sCity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        sCity.setText("Boston");
+        sCity.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 51, 51))); // NOI18N
+        sCity.setEnabled(false);
+        sCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                sCityActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 250, 50));
+        jPanel1.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 250, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,33 +107,55 @@ public class RestrauntList extends javax.swing.JPanel {
         jLabel4.setText("Delivery Restaurants in Boston");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 290, 30));
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jButton2.setText("Select");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 142, -1, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 190, 30));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 280, 190));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Restraunt", "Address", "City", "Zipcode", "Restraunt Id"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 280, 190));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 540, 330));
 
         jScrollPane1.setViewportView(jPanel2);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 600, 530));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void sCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sCityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_sCityActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.restrauntFrame.switchPanel(new RestrauntMenu(this.restrauntFrame));
+         int selectedRowIndex = jTable1.getSelectedRow();
+
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String restraunt = model.getValueAt(selectedRowIndex, 0).toString();
+        String address = model.getValueAt(selectedRowIndex, 1).toString();
+        //        String city = model.getValueAt(selectedRowIndex, 2).toString();
+        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+        int restrauntId = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
+
+        this.restrauntFrame.switchPanel(new RestrauntMenu(this.restrauntFrame, city, restraunt, address, zipcode, restrauntId));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -114,6 +163,44 @@ public class RestrauntList extends javax.swing.JPanel {
         this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
     }//GEN-LAST:event_jButton3ActionPerformed
 
+     private void searchRestraunt(String city) {
+        
+        sCity.setText(city);
+        
+        ArrayList<Restraunt> restrauntList = new ArrayList(); 
+        String query = "Select id, restraunt, address, city, zipcode from restraunt where city like CONCAT('%', ?, '%')";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setString(1,city);
+            
+            ResultSet rs = ps.executeQuery();   
+            
+        System.out.println("here------------"+rs);
+            while(rs.next()) {
+                Restraunt res = new Restraunt(rs.getInt("id"), rs.getString("restraunt"), rs.getString("address"), 
+                rs.getString("city"), rs.getString("zipcode"));
+                restrauntList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(Restraunt h : restrauntList) {
+            Object[] row = new Object[5];
+            row[0] = h.getRestraunt();
+            row[1] = h.getAddress();
+            row[2] = h.getCity();
+            row[3] = h.getZipcode();
+            row[4] = h.getId();
+            
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
@@ -122,9 +209,9 @@ public class RestrauntList extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField sCity;
     // End of variables declaration//GEN-END:variables
 }

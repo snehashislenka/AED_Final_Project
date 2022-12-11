@@ -4,6 +4,21 @@
  */
 package ui.HotelUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Hotel.Hotel;
+import model.Hotel.Rooms;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -14,6 +29,20 @@ public class HotelList extends javax.swing.JPanel {
      * Creates new form HotelList
      */
     HotelFrame hotelFrame;
+    String city;
+    Date checkin;
+    Date checkout;
+    int no_rooms;
+    
+    public HotelList(HotelFrame hotelFrame, String city, Date checkin, Date checkout, int no_rooms) {
+        initComponents();
+        this.hotelFrame = hotelFrame;
+        this.city = city;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.no_rooms = no_rooms;
+        searchHotel(city, checkin, checkout, no_rooms);
+    }
     
     public HotelList(HotelFrame hotelFrame) {
         initComponents();
@@ -30,18 +59,19 @@ public class HotelList extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        sRooms = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jTextField2 = new javax.swing.JTextField();
+        sIn = new com.toedter.calendar.JDateChooser();
+        sCity = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        sOut = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -50,44 +80,35 @@ public class HotelList extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(255, 204, 204));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("2");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        sRooms.setBackground(new java.awt.Color(255, 204, 204));
+        sRooms.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sRooms.setForeground(new java.awt.Color(255, 255, 255));
+        sRooms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                sRoomsActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 100, -1));
+        jPanel1.add(sRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 100, -1));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("No of Rooms");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Where");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
 
-        jDateChooser2.setBackground(new java.awt.Color(255, 204, 204));
-        jDateChooser2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check-out", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
-        jDateChooser2.setForeground(new java.awt.Color(255, 204, 204));
-        jDateChooser2.setToolTipText("");
-        jDateChooser2.setDateFormatString("MM-dd-yyyy");
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
+        sIn.setBackground(new java.awt.Color(255, 204, 204));
+        sIn.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check-in", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        sIn.setForeground(new java.awt.Color(255, 204, 204));
+        sIn.setToolTipText("");
+        sIn.setDateFormatString("MM-dd-yyyy");
+        jPanel1.add(sIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 110, -1));
 
-        jDateChooser3.setBackground(new java.awt.Color(255, 204, 204));
-        jDateChooser3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check-in", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
-        jDateChooser3.setForeground(new java.awt.Color(255, 204, 204));
-        jDateChooser3.setToolTipText("");
-        jDateChooser3.setDateFormatString("MM-dd-yyyy");
-        jPanel1.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
-
-        jTextField2.setBackground(new java.awt.Color(255, 204, 204));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("Mumbai");
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 100, -1));
+        sCity.setBackground(new java.awt.Color(255, 204, 204));
+        sCity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sCity.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 100, -1));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton3.setText("←");
@@ -97,6 +118,13 @@ public class HotelList extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 50, 50));
+
+        sOut.setBackground(new java.awt.Color(255, 204, 204));
+        sOut.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Check-out", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        sOut.setForeground(new java.awt.Color(255, 204, 204));
+        sOut.setToolTipText("");
+        sOut.setDateFormatString("MM-dd-yyyy");
+        jPanel1.add(sOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 110, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 90));
 
@@ -109,18 +137,28 @@ public class HotelList extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Hotel", "Address", "City", "Zipcode", "Hotel Id"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
-        jButton2.setText("Select");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 390, 330));
+
+        jButton1.setText("Select");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, -1, -1));
-
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 400, 140));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 390, 30));
 
         jScrollPane1.setViewportView(jPanel3);
 
@@ -132,35 +170,92 @@ public class HotelList extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, 320));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void sRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sRoomsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.hotelFrame.switchPanel(new RoomSelect( this.hotelFrame));
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_sRoomsActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.hotelFrame.switchPanel(new SearchHotel( this.hotelFrame));
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = jTable1.getSelectedRow();
+
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String hotel = model.getValueAt(selectedRowIndex, 0).toString();
+        String address = model.getValueAt(selectedRowIndex, 1).toString();
+        //        String city = model.getValueAt(selectedRowIndex, 2).toString();
+        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+        int hotelId = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
+
+        this.hotelFrame.switchPanel(new RoomSelect(this.hotelFrame, hotel, address, city, zipcode, hotelId, checkin, checkout, no_rooms));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void searchHotel(String city,Date checkin,Date checkout,int no_rooms) {
+        System.out.println("here------"+  city + checkin + checkout + no_rooms);
+        
+        sCity.setText(city);
+        sIn.setDate(checkin);
+        sOut.setDate(checkout);
+        sRooms.setText(String.valueOf(no_rooms));
+        
+        ArrayList<Hotel> hotelList = new ArrayList(); 
+        String query = "Select id, hotel, address, city, zipcode from hotel where city like CONCAT('%', ?, '%')";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setString(1,city);
+            
+            ResultSet rs = ps.executeQuery();   
+            
+        System.out.println("here------------"+rs);
+            while(rs.next()) {
+                Hotel res = new Hotel(rs.getInt("id"), rs.getString("hotel"), rs.getString("address"), 
+                rs.getString("city"), rs.getString("zipcode"));
+                hotelList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(Hotel h : hotelList) {
+            Object[] row = new Object[5];
+            row[0] = h.getHotel();
+            row[1] = h.getAddress();
+            row[2] = h.getCity();
+            row[3] = h.getZipcode();
+            row[4] = h.getId();
+            
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField sCity;
+    private com.toedter.calendar.JDateChooser sIn;
+    private com.toedter.calendar.JDateChooser sOut;
+    private javax.swing.JTextField sRooms;
     // End of variables declaration//GEN-END:variables
 }

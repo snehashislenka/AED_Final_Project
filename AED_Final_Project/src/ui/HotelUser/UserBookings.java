@@ -4,6 +4,12 @@
  */
 package ui.HotelUser;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Hotel.HotelBookings;
+import model.Restraunt.TableBookings;
+import mysql.util.MySQLUtil;
+
 /**
  *
  * @author Anshul
@@ -17,6 +23,7 @@ public class UserBookings extends javax.swing.JPanel {
     public UserBookings(HotelFrame hotelFrame) {
         initComponents();
         this.hotelFrame = hotelFrame;
+        populateTable();
     }
 
     /**
@@ -61,13 +68,13 @@ public class UserBookings extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Hotel", "Room No", "Rooms", "Check-in", "Check-out"
+                "Hotel", "Room No", "Check-in", "Check-out"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -83,7 +90,25 @@ public class UserBookings extends javax.swing.JPanel {
         // TODO add your handling code here:
           this.hotelFrame.switchPanel(new SearchHotel(this.hotelFrame));
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        int userId = 1;
+        
+        
+        ArrayList<HotelBookings> allUserBookings = MySQLUtil.getAllUserBookings(userId);
+        
+        for(HotelBookings u : allUserBookings) {
+            Object[] row = new Object[4];
+            row[0] = u.getHotel();
+            row[1] = u.getRoom_no();
+            row[2] = u.getFrom();
+            row[3] = u.getTo();
+            
+            model.addRow(row);
+        }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

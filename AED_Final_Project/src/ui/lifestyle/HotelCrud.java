@@ -277,32 +277,32 @@ public class HotelCrud extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = jTable1.getSelectedRow();
-         
-        if(selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this,"Please select a row to view.");
-            return;
-        }
-          
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
-        String hotel = model.getValueAt(selectedRowIndex, 0).toString();
-        String address = model.getValueAt(selectedRowIndex, 1).toString();
-        String city = model.getValueAt(selectedRowIndex, 2).toString();
-        String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
-        int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
-        
-        Hotel h = new Hotel(id, hotel, address, city, zipcode);
-        
-        MySQLUtil.deleteHotel(h);
-        JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
+            int selectedRowIndex = jTable1.getSelectedRow();
 
-        upHotel.setText("");
-        upAddress.setText("");
-        upCity.setText("");
-        upZipcode.setText("");
-        
-        populateTable();
+            if(selectedRowIndex < 0) {
+                JOptionPane.showMessageDialog(this,"Please select a row to view.");
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+            String hotel = model.getValueAt(selectedRowIndex, 0).toString();
+            String address = model.getValueAt(selectedRowIndex, 1).toString();
+            String city = model.getValueAt(selectedRowIndex, 2).toString();
+            String zipcode = model.getValueAt(selectedRowIndex, 3).toString();
+            int id = Integer.parseInt(model.getValueAt(selectedRowIndex, 4).toString());
+
+            Hotel h = new Hotel(id, hotel, address, city, zipcode);
+
+            MySQLUtil.deleteHotel(h);
+            JOptionPane.showMessageDialog(this,"Record deleted Successfully!");
+
+            upHotel.setText("");
+            upAddress.setText("");
+            upCity.setText("");
+            upZipcode.setText("");
+
+            populateTable();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed

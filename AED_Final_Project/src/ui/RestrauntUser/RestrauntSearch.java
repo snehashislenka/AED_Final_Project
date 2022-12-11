@@ -31,8 +31,8 @@ public class RestrauntSearch extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        sCity = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -58,18 +58,6 @@ public class RestrauntSearch extends javax.swing.JPanel {
         jLabel2.setText("RESTRAUNTS - CAFES - PUBS");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 600, 50));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 0, 102));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Boston");
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 0, 102))); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 400, 50));
-
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 0, 102));
         jButton1.setText("Search");
@@ -79,6 +67,10 @@ public class RestrauntSearch extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 140, 40));
+
+        sCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "Chicago" }));
+        sCity.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Location", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 0, 102))); // NOI18N
+        jPanel2.add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 320, 50));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, 270));
 
@@ -127,13 +119,10 @@ public class RestrauntSearch extends javax.swing.JPanel {
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 280, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         this.restrauntFrame.switchPanel(new RestrauntList(this.restrauntFrame));
+        String city = sCity.getSelectedItem().toString();
+        this.restrauntFrame.switchPanel(new RestrauntList(this.restrauntFrame,city));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -152,6 +141,6 @@ public class RestrauntSearch extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> sCity;
     // End of variables declaration//GEN-END:variables
 }
