@@ -27,6 +27,12 @@ public class Orders {
         this.restraunt = restraunt;
     }
 
+    public Orders(String restraunt, int id, float orderTotal) {
+            this.id = id;
+       this.restraunt = restraunt;
+          this.orderTotal = orderTotal;
+    }
+
     public int getId() {
         return id;
     }

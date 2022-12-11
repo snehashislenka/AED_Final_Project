@@ -4,6 +4,21 @@
  */
 package ui.RestrauntUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Hotel.Rooms;
+import model.Restraunt.OrderItems;
+import model.Restraunt.Orders;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -17,6 +32,7 @@ public class UserBookings extends javax.swing.JPanel {
     RestrauntFrame restrauntFrame;
     public UserBookings(RestrauntFrame restrauntFrame) {
         initComponents();
+        populateTable();
         this.restrauntFrame = restrauntFrame;
     }
 
@@ -42,7 +58,8 @@ public class UserBookings extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,7 +91,7 @@ public class UserBookings extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("ORDER");
+        jLabel9.setText("ORDERS");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 280, 60));
 
         add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 280, 70));
@@ -91,7 +108,7 @@ public class UserBookings extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("BOOK TABLE");
+        jLabel11.setText("TABLE BOOKINGS");
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
@@ -103,7 +120,7 @@ public class UserBookings extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("ORDER INFO");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("ORDERS");
@@ -122,10 +139,10 @@ public class UserBookings extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 580, 140));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 580, 20));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 580, 140));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 580, 20));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -136,9 +153,17 @@ public class UserBookings extends javax.swing.JPanel {
                 "Restraunt", "Order Id", "Total"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTable1);
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 580, 140));
+
+        jButton1.setText("View");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 120, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
@@ -156,8 +181,91 @@ public class UserBookings extends javax.swing.JPanel {
         this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+//        view
+        int selectedRowIndex = jTable1.getSelectedRow();
+         
+        if(selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this,"Please select a row to view.");
+            return;
+        }
+          
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int orderId = Integer.parseInt(model.getValueAt(selectedRowIndex, 1).toString());
+        populateOrderItems(orderId);
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void populateTable() {
+        ArrayList<Orders> orderList = new ArrayList(); 
+        String query = "Select restraunt, id, orderTotal from orders where userId = ?";
+        int userId = 1;
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1, userId);
+            
+            ResultSet rs = ps.executeQuery();   
+           
+            while(rs.next()) {
+                Orders res = new Orders(rs.getString("restraunt"),
+                rs.getInt("id"), rs.getFloat("orderTotal"));
+                orderList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(Orders r : orderList) {
+            Object[] row = new Object[3];
+            row[0] = r.getRestraunt();
+            row[1] = r.getId();
+            row[2] = r.getOrderTotal();
+            
+            model.addRow(row);
+        }
+    }
+    
+    private void populateOrderItems(int orderId) {
+        ArrayList<OrderItems> orderItemList = new ArrayList(); 
+        String query = "Select item, quantity, total from order_items where orderId = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1, orderId);
+            
+            ResultSet rs = ps.executeQuery();   
+           
+            while(rs.next()) {
+                OrderItems res = new OrderItems(rs.getString("item"),
+                rs.getInt("quantity"), (int) rs.getFloat("total"));
+                orderItemList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        
+        for(OrderItems r : orderItemList) {
+            Object[] row = new Object[3];
+            row[0] = r.getItem();
+            row[1] = r.getQuantity();
+            row[2] = r.getTotal();
+            
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -170,7 +278,7 @@ public class UserBookings extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }
