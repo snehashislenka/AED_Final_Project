@@ -60,6 +60,8 @@ public class HotelBookingCrud extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 204, 204));
+        setForeground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

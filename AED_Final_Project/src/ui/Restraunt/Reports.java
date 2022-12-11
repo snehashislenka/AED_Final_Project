@@ -39,12 +39,16 @@ public class Reports extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(0, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 153, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Top 3 Customers with max booking");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 600, 30));
+
+        jScrollPane1.setForeground(new java.awt.Color(204, 204, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,9 +66,12 @@ public class Reports extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, 260, 100));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 153, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Top 3 Hotels with max booking");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 600, 30));
+
+        jScrollPane2.setForeground(new java.awt.Color(204, 153, 255));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,9 +89,12 @@ public class Reports extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 560, 100));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 153, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Low Performing Hotels");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 300, 30));
+
+        jScrollPane3.setForeground(new java.awt.Color(204, 153, 255));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,9 +112,12 @@ public class Reports extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 560, 100));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 153, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("New Customers");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 300, 30));
+
+        jScrollPane4.setForeground(new java.awt.Color(204, 204, 255));
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

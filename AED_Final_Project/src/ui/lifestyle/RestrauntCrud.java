@@ -63,6 +63,7 @@ public class RestrauntCrud extends javax.swing.JPanel {
         viewBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

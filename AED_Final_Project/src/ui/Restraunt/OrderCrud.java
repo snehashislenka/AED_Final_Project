@@ -47,6 +47,7 @@ public class OrderCrud extends javax.swing.JPanel {
         upStatus = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
