@@ -45,6 +45,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton2.setForeground(new java.awt.Color(204, 0, 102));
         jButton2.setText("Orders");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +54,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 120, 30));
 
+        jButton3.setForeground(new java.awt.Color(204, 0, 102));
         jButton3.setText("Table Bookings");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +63,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 120, 30));
 
+        jButton4.setForeground(new java.awt.Color(204, 0, 102));
         jButton4.setText("Menu");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +72,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, 30));
 
+        jButton5.setForeground(new java.awt.Color(204, 0, 102));
         jButton5.setText("Tables");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +81,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 120, 30));
 
+        jButton6.setForeground(new java.awt.Color(204, 0, 102));
         jButton6.setText("Home");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +90,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 120, 30));
 
+        customer.setForeground(new java.awt.Color(204, 0, 102));
         customer.setText("Customer");
         customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +99,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
         });
         jPanel1.add(customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 120, 30));
 
+        customer1.setForeground(new java.awt.Color(204, 0, 102));
         customer1.setText("Reports");
         customer1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +110,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jSplitPane1.setRightComponent(jPanel2);
 
