@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.RestrauntUser;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -33,11 +36,56 @@ public class RestrauntSearch extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         sCity = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g) {
+                ImageIcon im = new ImageIcon("D:\\My "
+                    + "NEU Assignments\\AED Final Project\\git\\"
+                    + "AED_Final_Project\\AED_Final_Project\\src\\"
+                    + "assets\\11.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
+        jPanel5 = new javax.swing.JPanel() {
+            public void paintComponent(Graphics g) {
+                ImageIcon im = new ImageIcon("D:\\My "
+                    + "NEU Assignments\\AED Final Project\\git\\"
+                    + "AED_Final_Project\\AED_Final_Project\\src\\"
+                    + "assets\\3.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
+        jPanel6 = new javax.swing.JPanel() {
+            public void paintComponent(Graphics g) {
+                ImageIcon im = new ImageIcon("D:\\My "
+                    + "NEU Assignments\\AED Final Project\\git\\"
+                    + "AED_Final_Project\\AED_Final_Project\\src\\"
+                    + "assets\\4.jpeg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
+        jPanel1 = new javax.swing.JPanel() {
+            public void paintComponent(Graphics g) {
+                ImageIcon im = new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\2.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
         jButton2 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,22 +123,7 @@ public class RestrauntSearch extends javax.swing.JPanel {
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, 270));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton2.setBackground(new java.awt.Color(255, 0, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("My Bookings");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, 40));
-
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 290, 140));
-
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 280, 140));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -117,6 +150,34 @@ public class RestrauntSearch extends javax.swing.JPanel {
         );
 
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 280, -1));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 51, 102));
+        jButton2.setText("My Bookings");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jButton2)
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 280, 140));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -136,9 +197,9 @@ public class RestrauntSearch extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JComboBox<String> sCity;

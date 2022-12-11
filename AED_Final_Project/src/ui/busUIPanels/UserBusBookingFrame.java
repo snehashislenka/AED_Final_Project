@@ -62,12 +62,7 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         busSearchPanel = new javax.swing.JPanel();
         radioPanel = new javax.swing.JPanel();
-        radiobtnOneWay = new javax.swing.JRadioButton();
-        radiobtnReturn = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        txtReturn = new javax.swing.JTextField();
-        txtOutbound = new javax.swing.JTextField();
-        lblReturn = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtPassenger = new javax.swing.JTextField();
         txtFlyingTo = new javax.swing.JTextField();
@@ -75,6 +70,10 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnSearchFlights = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         scrollPaneBusSearch = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
@@ -90,33 +89,9 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
         radioPanel.setBackground(new java.awt.Color(0, 0, 0));
         radioPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        radiobtnOneWay.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radiobtnOneWay.setForeground(new java.awt.Color(255, 255, 255));
-        radiobtnOneWay.setText("One way");
-        radiobtnOneWay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                radiobtnOneWayMouseClicked(evt);
-            }
-        });
-
-        radiobtnReturn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        radiobtnReturn.setForeground(new java.awt.Color(255, 255, 255));
-        radiobtnReturn.setText("Return");
-        radiobtnReturn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                radiobtnReturnMouseClicked(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Going To");
-
-        txtOutbound.setToolTipText("Outbound Date Format YYYY-MM-DD");
-
-        lblReturn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblReturn.setForeground(new java.awt.Color(255, 255, 255));
-        lblReturn.setText("Return");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,76 +113,94 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Passenger");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("One Way Journey");
+
         javax.swing.GroupLayout radioPanelLayout = new javax.swing.GroupLayout(radioPanel);
         radioPanel.setLayout(radioPanelLayout);
         radioPanelLayout.setHorizontalGroup(
             radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(radioPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(radioPanelLayout.createSequentialGroup()
-                        .addComponent(radiobtnReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(radiobtnOneWay, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(radioPanelLayout.createSequentialGroup()
                         .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(radioPanelLayout.createSequentialGroup()
-                                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(61, 61, 61)
-                                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFlyingFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtOutbound, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(84, 84, 84)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(61, 61, 61)
                         .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(radioPanelLayout.createSequentialGroup()
-                                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(46, 46, 46)
-                                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFlyingTo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnSearchFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFlyingFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(txtPassenger, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(84, 84, 84)
+                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(radioPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(txtFlyingTo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearchFlights, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         radioPanelLayout.setVerticalGroup(
             radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(radioPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radiobtnReturn)
-                    .addComponent(radiobtnOneWay))
-                .addGap(18, 18, 18)
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFlyingFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSearchFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(radioPanelLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
                         .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)))
-                    .addComponent(txtFlyingTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtOutbound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReturn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(radioPanelLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel6))
-                    .addComponent(lblReturn))
-                .addGap(18, 18, 18)
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(radioPanelLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSearchFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                            .addComponent(txtFlyingFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(radioPanelLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)))
+                            .addComponent(txtFlyingTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPassenger, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(radioPanelLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel7)))))
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        radioPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jDateChooser1, jLabel3, jLabel4, jLabel6, jLabel7, txtFlyingFrom, txtFlyingTo, txtPassenger});
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setText("My Bus Bookings");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout busSearchPanelLayout = new javax.swing.GroupLayout(busSearchPanel);
@@ -217,13 +210,17 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
             .addGroup(busSearchPanelLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(radioPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(175, 175, 175)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         busSearchPanelLayout.setVerticalGroup(
             busSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(busSearchPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(radioPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(busSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -259,7 +256,7 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
                 .addComponent(busSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100)
                 .addComponent(scrollPaneBusSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,35 +273,11 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radiobtnReturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radiobtnReturnMouseClicked
-        if(!toggleRadioReturn) {
-            toggleRadioReturn = true;
-            radiobtnOneWay.setEnabled(false);
-        } else {
-            toggleRadioReturn = false;
-            radiobtnOneWay.setEnabled(true);
-        }
-    }//GEN-LAST:event_radiobtnReturnMouseClicked
-
-    private void radiobtnOneWayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radiobtnOneWayMouseClicked
-        if(!toggleRadioOneWay) {
-            toggleRadioOneWay = true;
-            radiobtnReturn.setEnabled(false);
-            txtReturn.setVisible(false);
-            lblReturn.setVisible(false);
-        } else {
-            toggleRadioOneWay = false;
-            radiobtnReturn.setEnabled(true);
-            txtReturn.setVisible(true);
-            lblReturn.setVisible(true);
-        }
-    }//GEN-LAST:event_radiobtnOneWayMouseClicked
-
     private void btnSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFlightsActionPerformed
 //                scrollPaneBusSearch.setVisible(true);
                 String departureCity = txtFlyingFrom.getText();
                 String arrivalCity = txtFlyingTo.getText();
-                String departureDate = txtOutbound.getText();
+                String departureDate = jDateChooser1.getDate().toString();
                 //        String arrivalDate = txtReturn.getText();
                 int passenger = Integer.parseInt(txtPassenger.getText());
         
@@ -324,6 +297,11 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
             Logger.getLogger(UserBusBookingFrame.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }//GEN-LAST:event_btnSearchFlightsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MyBusBookings b = new MyBusBookings();
+        b.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,22 +341,21 @@ public class UserBusBookingFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearchFlights;
     private javax.swing.JPanel busSearchPanel;
+    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel lblReturn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel radioPanel;
-    private javax.swing.JRadioButton radiobtnOneWay;
-    private javax.swing.JRadioButton radiobtnReturn;
     private javax.swing.JScrollPane scrollPaneBusSearch;
     private javax.swing.JTextField txtFlyingFrom;
     private javax.swing.JTextField txtFlyingTo;
-    private javax.swing.JTextField txtOutbound;
     private javax.swing.JTextField txtPassenger;
-    private javax.swing.JTextField txtReturn;
     private javax.swing.JPanel userBusDashboardPanel;
     // End of variables declaration//GEN-END:variables
 }

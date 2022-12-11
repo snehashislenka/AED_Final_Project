@@ -9,6 +9,8 @@ import mysql.util.MySQLUtil;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.ScrollPaneLayout;
@@ -54,13 +56,13 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         busSearchPanel = new javax.swing.JPanel();
         radioPanel = new javax.swing.JPanel();
-        txtDropOffDate = new javax.swing.JTextField();
-        txtPickupDate = new javax.swing.JTextField();
-        lblReturn = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtPickupLocation = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         scrollPaneCarRentSearch = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
 
@@ -75,12 +77,6 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
 
         radioPanel.setBackground(new java.awt.Color(0, 0, 0));
         radioPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtPickupDate.setToolTipText("Outbound Date Format YYYY-MM-DD");
-
-        lblReturn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblReturn.setForeground(new java.awt.Color(255, 255, 255));
-        lblReturn.setText("Drop off date");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,20 +105,15 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
                     .addGroup(radioPanelLayout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPickupLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPickupDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPickupLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(84, 84, 84)
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(radioPanelLayout.createSequentialGroup()
-                        .addComponent(lblReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(txtDropOffDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        radioPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel6, lblReturn});
+        radioPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel6});
 
         radioPanelLayout.setVerticalGroup(
             radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,20 +124,43 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
                     .addGroup(radioPanelLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel3)))
-                .addGap(21, 21, 21)
-                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPickupDate)
-                    .addComponent(txtDropOffDate)
+                .addGroup(radioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(radioPanelLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel6))
-                    .addComponent(lblReturn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel6)
+                        .addGap(21, 21, 21)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(radioPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
         radioPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel6});
+
+        jButton1.setText("My Car Rental Bookings");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout busSearchPanelLayout = new javax.swing.GroupLayout(busSearchPanel);
         busSearchPanel.setLayout(busSearchPanelLayout);
@@ -155,13 +169,17 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
             .addGroup(busSearchPanelLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(radioPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(168, 168, 168)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         busSearchPanelLayout.setVerticalGroup(
             busSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(busSearchPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(radioPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(busSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(radioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -217,20 +235,28 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         //                scrollPaneBusSearch.setVisible(true);
         String pickupLocation = txtPickupLocation.getText();
-        String pickupDate = txtPickupDate.getText();
-        String dropoffDate = txtDropOffDate.getText();
-        
+        String pickupDate = jDateChooser1.getDate().toString();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(pickupDate));
+        calendar.add(Calendar.HOUR_OF_DAY, 24);
+        String dropOffDate = calendar.getTime().toString();
         scrollPaneCarRentSearch.setLayout(new ScrollPaneLayout());
         
         try {
             scrollPaneCarRentSearch.setViewportView(new CarSearchDisplay(pickupLocation, pickupDate,
-                                dropoffDate));
+                                dropOffDate));
             scrollPaneCarRentSearch.getViewport().setBackground(new Color(1f, 1f, 1f, 0.2f));
         } catch (Exception e) {
         }
         
         
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MyCarRentalBookings myCarRentalBookings = 
+                new MyCarRentalBookings();
+        myCarRentalBookings.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,15 +296,15 @@ public class UserCarRentalFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JPanel busSearchPanel;
+    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel lblReturn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel radioPanel;
     private javax.swing.JScrollPane scrollPaneCarRentSearch;
-    private javax.swing.JTextField txtDropOffDate;
-    private javax.swing.JTextField txtPickupDate;
     private javax.swing.JTextField txtPickupLocation;
     private javax.swing.JPanel userBusDashboardPanel;
     // End of variables declaration//GEN-END:variables

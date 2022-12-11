@@ -4,8 +4,13 @@
  */
 package ui.userdashboard;
 
+import email.util.EmailUtil;
 import java.sql.Connection;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import mysql.util.MySQLUtil;
 
 /**
@@ -17,6 +22,8 @@ public class Signup extends javax.swing.JFrame {
     /**
      * Creates new form Signup
      */
+    String OTP;
+    
     public Signup() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
@@ -177,11 +184,50 @@ public class Signup extends javax.swing.JFrame {
         String role = "PASSENGER";
         
         Connection conn = MySQLUtil.connectMySQL();
-        MySQLUtil.addPerson(conn, firstname, lastname, gender, role, email, password);
+        
+        OTP = getRandomNumberString();
+        
+        try {
+            EmailUtil.sendEmail("slenkadev@gmail.com", OTP);
+        } catch (Exception ex) {
+            Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        OTPVerification oTPVerification = new OTPVerification(OTP, this);
+        oTPVerification.setVisible(true);
+        
+//        MySQLUtil.addPerson(conn, firstname, lastname, gender, role, email, password);
         
         dispose();
     }//GEN-LAST:event_btnSignupActionPerformed
+    
+    public void verified(boolean status) {
+        String email = lblEmail.getText().trim();
+        String password = lblPassword.getText().trim();
+        String firstname = lblFirstname.getText().trim();
+        String lastname = lblLastname.getText().trim();
+        String gender = lblGender.getText().trim();
+        Connection conn = MySQLUtil.connectMySQL();
+        String role = "PASSENGER";
+ 
+        if(status) {
+            MySQLUtil.addPerson(conn, firstname, lastname, gender, role, email, password);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter correct OTP, try again!");
+        }
+        
+    }
+    
+    public static String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
 
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
+    }
+    
     /**
      * @param args the command line arguments
      */

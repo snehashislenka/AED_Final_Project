@@ -5,6 +5,8 @@
 package ui.flightAdminDashboard;
 
 import javax.swing.JFrame;
+import mysql.util.MySQLUtil;
+import ui.userdashboard.Signin;
 
 /**
  *
@@ -35,6 +37,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
         btnFlightBookingStatus = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         dashboardRightPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -53,6 +57,7 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHome.setText("Home");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,10 +65,27 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        btnFlightBookingStatus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnFlightBookingStatus.setText("Update Flight Booking Status");
         btnFlightBookingStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFlightBookingStatusActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Manage Booking Insurance");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setText("Sign out");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -75,7 +97,9 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFlightBookingStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFlightBookingStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -85,8 +109,14 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
                 .addComponent(btnHome)
                 .addGap(50, 50, 50)
                 .addComponent(btnFlightBookingStatus)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jButton2)
+                .addContainerGap(241, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnFlightBookingStatus, btnHome, jButton1, jButton2});
 
         splitPane.setLeftComponent(jPanel1);
 
@@ -313,6 +343,18 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         splitPane.setRightComponent(new ActiveFlightsPanel());
     }//GEN-LAST:event_jPanel6MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ManageFlightInsurance m = new ManageFlightInsurance();
+        m.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+        MySQLUtil.removePersonSession();
+        Signin signinFrame = new Signin();
+        signinFrame.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,6 +394,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnFlightBookingStatus;
     private javax.swing.JButton btnHome;
     private javax.swing.JPanel dashboardRightPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

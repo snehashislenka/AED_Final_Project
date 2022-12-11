@@ -544,7 +544,7 @@ public class AddBusDetails extends javax.swing.JFrame {
         int totalMiles = Integer.parseInt(txtMiles.getText());
         String totalDuration = txtDuration.getText();
         
-        System.out.println(departureBusStation);
+//        System.out.println(departureBusStation);
         
         MySQLUtil.updateBusDetails(totalDuration, totalMiles, departureTime, arrivalTime,
                 departureBusStation, departureBusTerminal, arrivalBusStation,

@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.RestrauntUser;
-
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,8 +100,17 @@ public class Checkout extends javax.swing.JPanel {
         sQuantity = new javax.swing.JLabel();
         sTotal = new javax.swing.JLabel();
         sTax = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g) {
+
+                ImageIcon im = new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\dashboard-bg.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
         jButton1 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -210,10 +221,6 @@ public class Checkout extends javax.swing.JPanel {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel38.setText("Hotel?");
-        jPanel7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
-
         add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 220, 250));
 
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
@@ -315,7 +322,6 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

@@ -288,7 +288,7 @@ public class CreatePolicyJPanel extends javax.swing.JPanel {
         String PolicyDate = PolicyDateTextField.getText();
         
         
-        MySQLUtil.addpolicydetails(PolicyName,this.selectedCategory.getCategoryName(),PolicySumAssurance,PolicyPremium,PolicyTenure,PolicyDate);
+        MySQLUtil.addpolicydetails(PolicyName,this.selectedCategory.getCategoryName(), PolicySumAssurance, PolicyPremium, PolicyTenure, PolicyDate);
         JOptionPane.showMessageDialog(this,"New Policy Detail Added");
         clearAllFields();
     }//GEN-LAST:event_CreatePolicyBtnActionPerformed

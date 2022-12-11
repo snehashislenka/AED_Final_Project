@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ui.userdashboard;
+package ui.carRentalUIPanels;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,13 +22,12 @@ import ui.flightUIPanels.SelectInsurance;
  *
  * @author slenk
  */
-public class MyFlightBookings extends javax.swing.JFrame {
+public class MyCarRentalBookings extends javax.swing.JFrame {
 
     /**
-     * Creates new form MyFlightBookings
+     * Creates new form MyCarRentalBookings
      */
-    
-    public MyFlightBookings() {
+    public MyCarRentalBookings() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -36,11 +37,11 @@ public class MyFlightBookings extends javax.swing.JFrame {
     
     public void populateTable() {
         int personId = MySQLUtil.getPersonSession().getId();
-        String query = "select fb.bookingId, f.flightCompanyName, f.departingCity, f.departingTimeStamp, f.departureAirport,\n" +
-"f.departureTerminal, f.arrivalCity, f.arrivalTimeStamp, f.arrivalAirport, f.arrivalTerminal,\n" +
-"fb.flightSeat, fb.price, fb.booking_status, fb.insuranceStatus\n" +
-"from flight_bookings fb inner join flight f on f.flightId =\n" +
-" fb.flightId inner join person p on p.id = fb.personId where fb.personId=?";
+        String query = "select fb.bookingId, f.carCompany, f.carModel, f.pickupLocation, fb.bookingDate,\n" +
+"f.fuelType, f.mileage, f.carType, f.seats, fb.price,\n" +
+"fb.bookingStatus, fb.insuranceStatus \n" +
+"from car_rentals_bookings fb inner join car_rentals f on f.rentalId =\n" +
+" fb.rentalId inner join person p on p.id = fb.personId where fb.personId=?";
         
         DefaultTableModel model = (DefaultTableModel) tableMyFlightBookings.getModel();
         model.setRowCount(0);
@@ -54,21 +55,26 @@ public class MyFlightBookings extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()) {
-                Object[] row = new Object[14];
+                Object[] row = new Object[13];
                 row[0] = rs.getString("bookingId");
-                row[1] = rs.getString("flightCompanyName");
-                row[2] = rs.getString("departingCity");
-                row[3] = rs.getString("departingTimeStamp");
-                row[4] = rs.getString("departureAirport");
-                row[5] = rs.getString("departureTerminal");
-                row[6] = rs.getString("arrivalCity");
-                row[7] = rs.getString("arrivalTimeStamp");
-                row[8] = rs.getString("arrivalAirport");
-                row[9] = rs.getString("arrivalTerminal");
-                row[10] = rs.getString("flightSeat");
-                row[11] = rs.getString("price");
-                row[12] = rs.getString("booking_status");
-                row[13] = rs.getString("insuranceStatus");
+                row[1] = rs.getString("carCompany") + " " + rs.getString("carModel");
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date(rs.getString("bookingDate")));
+                calendar.add(Calendar.HOUR_OF_DAY, 24);
+//                System.out.println(calendar.getTime());
+                
+//                System.out.println();
+                row[2] = rs.getString("pickupLocation");
+                row[3] = rs.getString("pickupLocation");
+                row[4] = rs.getString("bookingDate");
+                row[5] = rs.getString("bookingDate");
+                row[6] = rs.getString("fuelType");
+                row[7] = rs.getString("mileage");
+                row[8] = rs.getString("carType");
+                row[9] = rs.getString("seats");
+                row[10] = rs.getString("price");
+                row[11] = rs.getString("bookingStatus");
+                row[12] = rs.getString("insuranceStatus");
                 model.addRow(row);
             }
                         
@@ -91,28 +97,29 @@ public class MyFlightBookings extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMyFlightBookings = new javax.swing.JTable();
-        btnCheckin = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnCheckin = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("My Flight Bookings");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("My Car Rental Bookings");
 
         tableMyFlightBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Flight Name", "Departing City", "Dept Time", "Dept Airport", "Dept Terminal", "Arrival City", "Arrival Time", "Arrival Airport", "Arrival Terminal", "Seats", "Price", "Status", "Insurance status"
+                "Id", "Car ", "Pickup", "Drop Off", "Booking Date", "Return Date", "Fuel Type", "Mileage", "Car Type", "Seats", "Price", "Status", "Insurance Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,17 +128,17 @@ public class MyFlightBookings extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableMyFlightBookings);
 
-        btnCheckin.setText("Check In");
-        btnCheckin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheckinActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Insurance Details");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnCheckin.setText("Check In");
+        btnCheckin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckinActionPerformed(evt);
             }
         });
 
@@ -147,23 +154,22 @@ public class MyFlightBookings extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(562, 562, 562))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(277, 277, 277)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(599, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(74, 74, 74)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
@@ -171,16 +177,19 @@ public class MyFlightBookings extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(328, 328, 328)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addGap(133, 133, 133))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(216, 216, 216)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(217, Short.MAX_VALUE)))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2});
@@ -190,51 +199,43 @@ public class MyFlightBookings extends javax.swing.JFrame {
 
     private void btnCheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckinActionPerformed
         int selectedRow = tableMyFlightBookings.getSelectedRow();
-        
+
         if(selectedRow < 0) {
             JOptionPane.showMessageDialog(this, "Please select a booking!");
             return;
         }
-        
+
         int selectedBookingId = Integer.parseInt(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 0).toString());
-        
+            .getValueAt(selectedRow, 0).toString());
+
         String selectedStatus = tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 12).toString();
-        
+        .getValueAt(selectedRow, 11).toString();
+
         if(selectedStatus.equals("CHECKED_IN")) {
             JOptionPane.showMessageDialog(this, "You are already checked in!");
-            return;
         }
         
-        
         if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13) == null) {
+                .getValueAt(selectedRow, 12) == null) {
             JOptionPane.showMessageDialog(this, "Please select an insurance!");
             return;
         }
         
         if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13).equals("PENDING")) {
+                .getValueAt(selectedRow, 12).equals("PENDING")) {
             JOptionPane.showMessageDialog(this, "Please wait for insurance approval for checkin!");
             return;
         }
         
         if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13).equals("APPLIED")) {
-            JOptionPane.showMessageDialog(this, "Please wait for insurance approval for checkin!");
-            return;
-        }
-        
-        if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13).equals("REJECTED")) {
+                .getValueAt(selectedRow, 12).equals("REJECTED")) {
             JOptionPane.showMessageDialog(this, "Sorry for the inconvinence,"
                     + " booking not insured. Money would be refunded in your account in 3-5 business days!");
             return;
         }
-                
-        MySQLUtil.updateFlightBookingStatus(selectedBookingId, "CHECKED_IN");
         
+        MySQLUtil.updateCarBookingStatus(selectedBookingId, "CHECKED_IN");
+
         populateTable();
     }//GEN-LAST:event_btnCheckinActionPerformed
 
@@ -247,7 +248,7 @@ public class MyFlightBookings extends javax.swing.JFrame {
         }
         
         String selectedStatus = tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 12).toString();
+                .getValueAt(selectedRow, 11).toString();
         
         if(selectedStatus.equals("CHECKED_IN")) {
             JOptionPane.showMessageDialog(this, "You are already checked in!");
@@ -255,14 +256,14 @@ public class MyFlightBookings extends javax.swing.JFrame {
         }
         
         if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13) != null) {
+                .getValueAt(selectedRow, 12) != null) {
             if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13).toString().equals("PENDING")) {
+                .getValueAt(selectedRow, 12).toString().equals("PENDING")) {
                 JOptionPane.showMessageDialog(this, "Wait for insurance approval!");
                 return;
             }
             if(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 13).toString().equals("APPROVED")) {
+                .getValueAt(selectedRow, 12).toString().equals("APPROVED")) {
                 JOptionPane.showMessageDialog(this, "You're insured!");
                 return;
             }
@@ -272,9 +273,9 @@ public class MyFlightBookings extends javax.swing.JFrame {
                 .getValueAt(selectedRow, 0).toString());
         
         double totalPrice = Double.valueOf(tableMyFlightBookings.getModel()
-                .getValueAt(selectedRow, 11).toString());
+                .getValueAt(selectedRow, 10).toString());
         
-        SelectInsurance s = new SelectInsurance(bookingId, totalPrice);
+        SelectCarInsurance s = new SelectCarInsurance(bookingId, totalPrice);
         s.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -299,20 +300,20 @@ public class MyFlightBookings extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MyFlightBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyCarRentalBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MyFlightBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyCarRentalBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MyFlightBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyCarRentalBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MyFlightBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyCarRentalBookings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MyFlightBookings().setVisible(true);
+                new MyCarRentalBookings().setVisible(true);
             }
         });
     }

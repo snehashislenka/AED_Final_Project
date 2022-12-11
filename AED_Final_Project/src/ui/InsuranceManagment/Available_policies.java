@@ -292,7 +292,7 @@ public class Available_policies extends javax.swing.JPanel {
         int personId = MySQLUtil.getPersonSession().getId();
         
         Date date = new Date();
-        System.out.println(date.toString());
+//        System.out.println(date.toString());
         String AppliedDate = date.toString();
         String Status = "Applied";
         MySQLUtil.addpolicybookingdetails(selectedpolicyId, personId, AppliedDate,Status);

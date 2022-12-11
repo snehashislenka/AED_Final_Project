@@ -305,6 +305,8 @@ public class FlightBooking extends javax.swing.JFrame {
         String departureCity = txtFlyingFrom.getText();
         String arrivalCity = txtFlyingTo.getText();
         Date departureDate = dateOutbound.getDate();
+        System.out.println(departureDate + "  sdasdasdasdasdad");
+//        Date departureTimestamp = dateOutbound.getDate();
         String formattedDepartureDate =
         Helper.getFormattedDateForFlightAPI(departureDate);
         //        String arrivalDate = txtReturn.getText();
@@ -314,7 +316,7 @@ public class FlightBooking extends javax.swing.JFrame {
         try {
 
             scrollPane.setViewportView(new FlightsDisplay(departureCity, arrivalCity,
-                formattedDepartureDate, passenger));
+                departureDate.toString(), formattedDepartureDate, passenger));
         } catch (IOException ex) {
             Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {

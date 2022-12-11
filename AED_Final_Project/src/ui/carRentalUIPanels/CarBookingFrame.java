@@ -151,10 +151,15 @@ public class CarBookingFrame extends javax.swing.JFrame {
         jLabel19.setText("Price");
 
         btnBook.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBook.setText("BOOK TICKET");
+        btnBook.setText("BOOK INSURANCE");
         btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBookMouseClicked(evt);
+            }
+        });
+        btnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookActionPerformed(evt);
             }
         });
 
@@ -278,6 +283,10 @@ public class CarBookingFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Booking confirmed");
         dispose();
     }//GEN-LAST:event_btnBookMouseClicked
+
+    private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
+        
+    }//GEN-LAST:event_btnBookActionPerformed
 
     /**
      * @param args the command line arguments

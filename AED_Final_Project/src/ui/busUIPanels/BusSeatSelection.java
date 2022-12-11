@@ -471,7 +471,7 @@ public class BusSeatSelection extends javax.swing.JFrame {
         if(!toggler3) {
             if(seatCount != 0) {
                 this.seatCount--;
-                System.out.println(seatCount);
+//                System.out.println(seatCount);
                 toggler3 = true;
                 this.seatsSelected.add("S3");
                 seat3.setBackground(Color.BLACK);
@@ -521,7 +521,7 @@ public class BusSeatSelection extends javax.swing.JFrame {
         if(!toggler4) {
             if(seatCount != 0) {
                 this.seatCount--;
-                System.out.println(seatCount);
+//                System.out.println(seatCount);
                 toggler4 = true;
                 this.seatsSelected.add("S4");
                 seat4.setBackground(Color.BLACK);
@@ -571,7 +571,7 @@ public class BusSeatSelection extends javax.swing.JFrame {
         if(!toggler7) {
             if(seatCount != 0) {
                 this.seatCount--;
-                System.out.println(seatCount);
+//                System.out.println(seatCount);
                 toggler7 = true;
                 this.seatsSelected.add("S7");
                 seat7.setBackground(Color.BLACK);

@@ -189,7 +189,7 @@ public class UpdateBusBooking extends javax.swing.JPanel {
     private void flightBookingStatusComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightBookingStatusComboActionPerformed
         String status = String.valueOf(flightBookingStatusCombo.getSelectedItem());
 
-        System.out.println(status + this.selectedBookingId);
+//        System.out.println(status + this.selectedBookingId);
 
         if(status.equals("SELECT A STATUS")) {
             this.selectedStatus = "";
@@ -205,8 +205,8 @@ public class UpdateBusBooking extends javax.swing.JPanel {
             return;
         }
 
-        System.out.println(this.selectedBookingId + " "
-            + this.selectedStatus);
+//        System.out.println(this.selectedBookingId + " "
+//            + this.selectedStatus);
 
         MySQLUtil.updateBusBookingStatus(this.selectedBookingId,
             this.selectedStatus);

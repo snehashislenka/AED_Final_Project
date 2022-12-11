@@ -34,9 +34,9 @@ public class HomePanel extends javax.swing.JPanel {
         initComponents();
         tabsPanel.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.4f));
 
-//        ImageIcon flightIcon = new ImageIcon(
-//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
-//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        ImageIcon flightIcon = new ImageIcon(
+                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 //        
 //        ImageIcon busIcon = new ImageIcon(
 //                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
@@ -53,9 +53,9 @@ public class HomePanel extends javax.swing.JPanel {
 //        ImageIcon InsuranceIcon = new ImageIcon(
 //                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
 //                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        ImageIcon flightIcon = new ImageIcon(
-                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
-                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon flightIcon = new ImageIcon(
+//                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         
         ImageIcon busIcon = new ImageIcon(
                     new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")

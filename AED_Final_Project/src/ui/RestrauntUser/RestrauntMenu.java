@@ -4,6 +4,7 @@
  */
 package ui.RestrauntUser;
 
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Restraunt.MenuItems;
@@ -55,12 +57,22 @@ public class RestrauntMenu extends javax.swing.JPanel {
         sAddress.setText(address);
         sRestraunt.setText(restraunt);
         sZipcode.setText(zipcode);
-        
+        ImageIcon i1 = new ImageIcon(
+                    new ImageIcon("D:\\My NEU Assignments\\AED Final"
+                            + " Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\1.png")
+                            .getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        jLabel2.setIcon(i1);
+        jLabel2.setText("");
         populateTable();
     }
      
     public RestrauntMenu(RestrauntFrame restrauntFrame) {
         initComponents();
+        ImageIcon i1 = new ImageIcon(
+                    new ImageIcon("D:\\My NEU Assignments\\AED Final"
+                            + " Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\1.png")
+                            .getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        jLabel2.setIcon(i1);
         this.restrauntFrame = restrauntFrame;
     }
 
@@ -205,6 +217,7 @@ public class RestrauntMenu extends javax.swing.JPanel {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Photo");
         jLabel2.setToolTipText("");

@@ -63,7 +63,7 @@ public class BusSearchDisplay extends javax.swing.JPanel {
         setLayout(new GridLayout(busSearchList.size(), 3, 0, 0));     
         for(Bus bus: busSearchList) {
             
-            System.out.println(bus.getDepartureBusStation());
+//            System.out.println(bus.getDepartureBusStation());
             
             for (int j=0; j<3; j++) {
                 JLabel lbl = new JLabel();
