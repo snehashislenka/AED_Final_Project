@@ -2,89 +2,92 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ui.flightUIPanels;
+package ui.busUIPanels;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Flight.Flight;
-import mysql.util.MySQLUtil;
 import model.Person.Person;
+import model.bus.Bus;
+import mysql.util.MySQLUtil;
 
 /**
  *
  * @author slenk
  */
-public class BookFlightDetails extends javax.swing.JFrame {
+public class BusBooking extends javax.swing.JFrame {
 
     /**
-     * Creates new form FlightBooking
+     * Creates new form BusBooking
      */
     
-    Flight selectedFlight;
+    Bus selectedBus;
     ArrayList<String> seatList;
+    String departureDate;
     
-    
-    public BookFlightDetails() {
+    public BusBooking() {
         initComponents();
     }
     
-    public BookFlightDetails(Flight flight, ArrayList<String> seatList) {
+    public BusBooking( ArrayList<String> seatList, Bus bus, String departureDate) {
         initComponents();
-        this.selectedFlight = flight;
+        this.selectedBus = bus;
         this.seatList = seatList;
+        this.departureDate = departureDate;
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        System.out.println(flight.getFlightCompanyName());
-        populateFlightBookingFrame();
+ 
+        populateBusBookingFrame();
     }
     
-    public void populateFlightBookingFrame() {
-        String departureDate = formattedDate(this.selectedFlight.getDepartingTimeStamp());
-        String departingTime = selectedFlight.getDepartingTimeStamp().substring(11);
-        String arrivalDate = formattedDate(this.selectedFlight.getArrivalTimeStamp());
-        String arrivalTime = selectedFlight.getArrivalTimeStamp().substring(11);
-        String flightName = selectedFlight.getFlightCompanyCode()
-                + "-" + selectedFlight.getFlightType() + " "
-                + selectedFlight.getFlightCompanyName();
+    public void populateBusBookingFrame() {
+        String departureDate = formattedDate(this.departureDate);
+        String departingTime = selectedBus.getDepartingTimestamp();
+        String arrivalDate = formattedDate(this.departureDate);
+        String arrivalTime = selectedBus.getArrivalTimestamp();
+        String busName = selectedBus.getBusCompanyName() + " - "
+                + selectedBus.getBusId();
         String seats = "";
         for(String seat: this.seatList) {
             seats = seats + seat + ", ";
         }
         seats = seats.substring(0, seats.length() - 2);
-        Double price = this.seatList.size() * selectedFlight.getPrice();
+        Double price = this.seatList.size() * selectedBus.getPrice();
         
         Person person = MySQLUtil.getPersonSession();
         
         lblPassengerName.setText(person.getFirstname() + " " + person.getLastname());
         
-        lblDepartureCity.setText(selectedFlight.getDepartingCity());
+        lblDepartureCity.setText(selectedBus.getDepartingCity());
         lblDepartureDate.setText(departureDate);
         lblDepartureTime.setText(departingTime);
-        lblDepartureAirport.setText(selectedFlight.getDepartureAirport());
-        lblDepartureTerminal.setText(selectedFlight.getDepartureTerminal());
+        lblDepartureAirport.setText(selectedBus.getDepartureBusStation());
+        lblDepartureTerminal.setText(selectedBus.getDepartureBusTerminal());
             
-        lblArrivalCity.setText(selectedFlight.getArrivalCity());
+        lblArrivalCity.setText(selectedBus.getArrivalCity());
         lblArrivalDate.setText(arrivalDate);
         lblArrivalTime.setText(arrivalTime);
-        lblArrivalAirport.setText(selectedFlight.getArrivalAirport());
-        lblArrivalTerminal.setText(selectedFlight.getArrivalTerminal());
+        lblArrivalAirport.setText(selectedBus.getArrivalBusStation());
+        lblArrivalTerminal.setText(selectedBus.getArrivalBusTerminal());
         
-        lblFlightName.setText(flightName);
-        lblFlightDuration.setText(selectedFlight.getTotalFlightDuration().substring(2));
-        lblTotalMiles.setText(String.valueOf(selectedFlight.getTotalMiles() + " Miles"));
+        lblFlightName.setText(busName);
+        lblFlightDuration.setText(selectedBus.getBusTotalDuration());
+        lblTotalMiles.setText(String.valueOf(selectedBus.getTotalMiles() + " Miles"));
         lblSeats.setText(seats);
         lblTotalPrice.setText(price.toString());
     }
     
     private String formattedDate(String dateTimestamp) {
+        System.out.println(dateTimestamp);
         int month = 0;
         String day = "";
         String year = "";
         StringBuilder stb = new StringBuilder(dateTimestamp);
         year = stb.substring(0, 4);
-        month = Integer.parseInt(stb.substring(5, 7));
-        day = stb.substring(8, 10);
+        month = Integer.parseInt(stb.substring(4, 6));
+        day = stb.substring(6, 8);
         
         String[] monthNames = {"Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
         "Sep", "Oct", "Nov", "Dec"};
@@ -144,7 +147,7 @@ public class BookFlightDetails extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("BOOK FLIGHT");
+        jLabel1.setText("BOOK BUS");
 
         jLabel2.setText("Name");
 
@@ -169,10 +172,10 @@ public class BookFlightDetails extends javax.swing.JFrame {
 
         jLabel9.setText("Departure Time");
 
-        jLabel10.setText("Departure Airport");
+        jLabel10.setText("Departure Bus Station");
 
         lblDepartureAirport.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblDepartureAirport.setText("Departure Airport");
+        lblDepartureAirport.setText("Departure Bus Station");
 
         jLabel12.setText("Departure Terminal");
 
@@ -198,9 +201,9 @@ public class BookFlightDetails extends javax.swing.JFrame {
         lblArrivalTime.setText("Arrival Time");
 
         lblArrivalAirport.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblArrivalAirport.setText("Arrival Airport");
+        lblArrivalAirport.setText("Arrival Bus Station");
 
-        jLabel23.setText("Arrival Airport");
+        jLabel23.setText("Arrival Bus Station ");
 
         jLabel24.setText("Arrival Terminal");
 
@@ -208,17 +211,17 @@ public class BookFlightDetails extends javax.swing.JFrame {
         lblArrivalTerminal.setText("Arrival Terminal");
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel26.setText("Flight Details");
+        jLabel26.setText("Bus Details");
 
-        jLabel27.setText("Flight Name");
+        jLabel27.setText("Bus");
 
         lblFlightName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFlightName.setText("Flight Name");
+        lblFlightName.setText("Bus Name");
 
-        jLabel29.setText("Flight Duration");
+        jLabel29.setText("Bus Duration");
 
         lblFlightDuration.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFlightDuration.setText("Flight Duration");
+        lblFlightDuration.setText("Bus Duration");
 
         lblTotalMiles.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTotalMiles.setText("Total Miles");
@@ -285,8 +288,8 @@ public class BookFlightDetails extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(lblArrivalTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(lblDepartureAirport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -430,24 +433,24 @@ public class BookFlightDetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookTicketActionPerformed
-        
+
         String seats = "";
         for(String seat: this.seatList) {
             seats = seats + seat + ", ";
         }
         seats = seats.substring(0, seats.length() - 2);
-        
+
         Person person = MySQLUtil.getPersonSession();
-        
+        Date date = new Date();
         try {
-            MySQLUtil.addFlightBooking(this.selectedFlight.getFlightId(), person.getId(),
-                seats, this.seatList.size() * selectedFlight.getPrice(), "BOOKED");
-            JOptionPane.showMessageDialog(this, "Flight Booked");
+            MySQLUtil.addBusBooking(this.selectedBus.getBusId(), person.getId(),
+                date.toString(), seats, this.seatList.size() * selectedBus.getPrice(), 
+                "BOOKED", this.selectedBus.getSeats() - this.seatList.size());
+            JOptionPane.showMessageDialog(this, "Bus Booked");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Issue with insertion!");
         }
-        
-        
+
     }//GEN-LAST:event_btnBookTicketActionPerformed
 
     /**
@@ -467,21 +470,20 @@ public class BookFlightDetails extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookFlightDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookFlightDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookFlightDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookFlightDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookFlightDetails().setVisible(true);
+                new BusBooking().setVisible(true);
             }
         });
     }

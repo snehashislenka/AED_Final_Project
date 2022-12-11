@@ -4,7 +4,12 @@
  */
 package ui.userdashboard;
 
+import java.awt.Component;
 import javax.swing.JFrame;
+import util.helper.GetRoleSpecificDashboard;
+import util.helper.Helper;
+import mysql.util.MySQLUtil;
+import model.Person.Person;
 
 /**
  *
@@ -18,11 +23,21 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        dashboardSplitPane.setRightComponent(new HomePanel());
-        dashboardSplitPane.setLeftComponent(new UserLeftPanel(this));
+        
+        Person person = MySQLUtil.getPersonSession();
+        
+        Component leftPanel = GetRoleSpecificDashboard.getLeftPanel(person, this);
+        Component rightPanel = GetRoleSpecificDashboard.getRightPanel(person, this);
+        
+        dashboardSplitPane.setRightComponent(rightPanel);
+        dashboardSplitPane.setLeftComponent(leftPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-
+    
+    
+    public void switchPanel(Component component) {
+        dashboardSplitPane.setRightComponent(component);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

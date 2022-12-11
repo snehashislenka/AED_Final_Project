@@ -4,6 +4,7 @@
  */
 package ui.userdashboard;
 
+import Enterprise.SystemAdmin_Dashboard;
 import auth.AuthenticationUtil;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -168,8 +169,20 @@ public class Signin extends javax.swing.JFrame {
             MySQLUtil.savePersonSession(person.getId(), person.getRole());
             
             dispose();
-            Dashboard dashboard = new Dashboard();
-            dashboard.setVisible(true);
+            switch (person.getRole()) {
+                case "PASSENGER":
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.setVisible(true);
+                    break;
+                case "SYSTEM_ADMIN":
+                    SystemAdmin_Dashboard systemAdminDashboard = 
+                        new SystemAdmin_Dashboard();
+                    systemAdminDashboard.setVisible(true); 
+                    break;
+                
+                default:
+                    break;
+            }
         }
     }//GEN-LAST:event_btnSigninActionPerformed
 

@@ -11,35 +11,31 @@ import java.util.Date;
  * @author slenk
  */
 public class FlightBookings {
-    private static int counter = 1555;
     private int flightId;
-    private String bookingId;
-    private String flightName;
+    private int bookingId;
+    private int personId;
     private String flightSeat;
-    private String flightSeatColumn;
-    private int flightSeatRow;
-    private String departingCity;
-    private String arrivalCity;
     private double price;
-    private Date departingTimeStamp;
-    private Date arrivalTimeStamp;
+    private String bookingStatus;
 
-    public FlightBookings(int flightId, String flightName, String flightSeat, 
-            String flightSeatColumn, int flightSeatRow, String departingCity, 
-            String arrivalCity, double price, Date departingTimeStamp, Date arrivalTimeStamp) {
-        this.bookingId = "FL-" + ++counter;
+    public FlightBookings(int flightId, int bookingId, int personId, String flightSeat, 
+            double price, String bookingStatus) {
+        this.bookingId = bookingId;
         this.flightId = flightId;
-        this.flightName = flightName;
-        this.flightSeatColumn = flightSeatColumn;
-        this.flightSeatRow = flightSeatRow;
-        this.flightSeat = "FL-" + flightSeatColumn + flightSeatRow;
-        this.departingCity = departingCity;
-        this.arrivalCity = arrivalCity;
+        this.personId = personId;
+        this.flightSeat = flightSeat;
         this.price = price;
-        this.departingTimeStamp = departingTimeStamp;
-        this.arrivalTimeStamp = arrivalTimeStamp;
+        this.bookingStatus = bookingStatus;
     }
 
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+    
     public int getFlightId() {
         return flightId;
     }
@@ -48,20 +44,12 @@ public class FlightBookings {
         this.flightId = flightId;
     }
 
-    public String getBookingId() {
+    public int getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(String bookingId) {
+    public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
-    }
-
-    public String getFlightName() {
-        return flightName;
-    }
-
-    public void setFlightName(String flightName) {
-        this.flightName = flightName;
     }
 
     public String getFlightSeat() {
@@ -72,38 +60,6 @@ public class FlightBookings {
         this.flightSeat = flightSeat;
     }
 
-    public String getFlightSeatColumn() {
-        return flightSeatColumn;
-    }
-
-    public void setFlightSeatColumn(String flightSeatColumn) {
-        this.flightSeatColumn = flightSeatColumn;
-    }
-
-    public int getFlightSeatRow() {
-        return flightSeatRow;
-    }
-
-    public void setFlightSeatRow(int flightSeatRow) {
-        this.flightSeatRow = flightSeatRow;
-    }
-
-    public String getDepartingCity() {
-        return departingCity;
-    }
-
-    public void setDepartingCity(String departingCity) {
-        this.departingCity = departingCity;
-    }
-
-    public String getArrivalCity() {
-        return arrivalCity;
-    }
-
-    public void setArrivalCity(String arrivalCity) {
-        this.arrivalCity = arrivalCity;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -112,20 +68,14 @@ public class FlightBookings {
         this.price = price;
     }
 
-    public Date getDepartingTimeStamp() {
-        return departingTimeStamp;
+    public String getBookingStatus() {
+        return bookingStatus;
     }
 
-    public void setDepartingTimeStamp(Date departingTimeStamp) {
-        this.departingTimeStamp = departingTimeStamp;
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
-
-    public Date getArrivalTimeStamp() {
-        return arrivalTimeStamp;
-    }
-
-    public void setArrivalTimeStamp(Date arrivalTimeStamp) {
-        this.arrivalTimeStamp = arrivalTimeStamp;
-    }
+    
+    
     
 }

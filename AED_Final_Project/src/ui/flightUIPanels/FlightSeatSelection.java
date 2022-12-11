@@ -124,7 +124,7 @@ public class FlightSeatSelection extends javax.swing.JFrame {
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.seatCount = passenger;
         this.flight = flight;
-//        System.out.println("constru called");
+        
         this.seatsSelected = new ArrayList<>();
         if(seatCount == 1) {
             lblSeatsDesc.setText("Please select a seat.");
