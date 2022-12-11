@@ -2,19 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.Hotel;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-import model.Person.Person;
-import mysql.util.MySQLUtil;
-import static mysql.util.MySQLUtil.connectMySQL;
+package ui.Restraunt;
 
 /**
  *
@@ -23,11 +11,10 @@ import static mysql.util.MySQLUtil.connectMySQL;
 public class Reports extends javax.swing.JPanel {
 
     /**
-     * Creates new form report
+     * Creates new form Reports
      */
     public Reports() {
         initComponents();
-        populateTable();
     }
 
     /**
@@ -81,13 +68,13 @@ public class Reports extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "id", "name", "gender", "email", "total bookings"
+                "id", "name", "gender", "email"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -134,43 +121,7 @@ public class Reports extends javax.swing.JPanel {
 
         add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 270, 100));
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void populateTable() {
-        ArrayList<Person> customerList = new ArrayList(); 
-        String query1 = "Select p.id, CONCAT(p.firstname, ' ', p.lastname) as name, p.gender, p.email, count(h.id) as totalBookings FROM person p inner join hotel_bookings h on p.id = h.userId group by p.id order by totalBookings desc limit 3";
-         try {
-            Connection conn = connectMySQL();
-            PreparedStatement ps = conn.prepareStatement(query1); 
-            
-            ResultSet rs = ps.executeQuery();   
-            
-//        System.out.println("here------------"+rs.getInt("room_no"));
-            while(rs.next()) {
-                Person res = new Person(rs.getInt("id"), rs.getString("name"),
-                rs.getString("gender"),rs.getString("email"), rs.getString("totalBookings"));
-                customerList.add(res);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0);
-        
-        for(Person r : customerList) {
-            Object[] row = new Object[5];
-            row[0] = r.getId();
-            row[1] = r.getFirstname();
-            row[2] = r.getGender();
-            row[3] = r.getEmail();
-            row[4] = r.getLastname();
-            
-            model.addRow(row);
-        }
-        
-        
-        
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
