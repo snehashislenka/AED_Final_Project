@@ -4,11 +4,20 @@
  */
 package ui.userdashboard;
 
+import ui.SystemAdminPanel.SystemAdmin_Dashboard;
 import auth.AuthenticationUtil;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mysql.util.MySQLUtil;
 import model.Person.Person;
+import ui.Hotel.HotelFrame;
+import ui.InsuranceManagment.InsuranceAdmin_Dashboard;
+import ui.Restraunt.RestrauntFrame;
+import ui.busAdminDashboard.BusAdminDashboard;
+import ui.carRentalAdminPanels.CarRentalAdminFrame;
+import ui.flightAdminDashboard.FlightAdminDashboard;
+import ui.lifestyle.LifestyleFrame;
+import ui.travelAdmin.TravelAdminDashboard;
 
 /**
  *
@@ -168,8 +177,68 @@ public class Signin extends javax.swing.JFrame {
             MySQLUtil.savePersonSession(person.getId(), person.getRole());
             
             dispose();
-            Dashboard dashboard = new Dashboard();
-            dashboard.setVisible(true);
+            switch (person.getRole()) {
+                case "PASSENGER":
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.setVisible(true);
+                    break;
+                case "SYSTEM_ADMIN":
+                    SystemAdmin_Dashboard systemAdminDashboard = 
+                        new SystemAdmin_Dashboard();
+                    systemAdminDashboard.setVisible(true); 
+                    break;
+                    
+                case "INSURANCE_ADMIN":
+                    InsuranceAdmin_Dashboard ia_dash = new 
+                        InsuranceAdmin_Dashboard();
+                    ia_dash.setVisible(true);
+                break;
+                
+                case "LIFESTYLE_ADMIN":
+                    LifestyleFrame lifeStyleFrame = new 
+                        LifestyleFrame();
+                    lifeStyleFrame.setVisible(true);
+                    break;
+                    
+                case "HOTEL_ADMIN":
+                    HotelFrame hotelFrame = new HotelFrame();
+                    hotelFrame.setVisible(true);
+                    break;
+                    
+                case "RESTRAUNT_ADMIN":
+                    RestrauntFrame restrauntFrame = new RestrauntFrame();
+                    restrauntFrame.setVisible(true);
+                    break;
+                    
+                case "TRAVEL_ADMIN":
+                    TravelAdminDashboard travelAdminDashboard = new TravelAdminDashboard();
+                    travelAdminDashboard.setVisible(true);
+                    break;
+                    
+                case "FLIGHT_ADMIN":
+                    FlightAdminDashboard flightAdminDashboard = new FlightAdminDashboard();
+                    flightAdminDashboard.setVisible(true);
+                    break;
+                    
+                case "BUS_ADMIN":
+                    BusAdminDashboard busAdminDashboard = 
+                            new BusAdminDashboard();
+                    busAdminDashboard.setVisible(true);
+                    break;
+                    
+                case "CAR_RENTAL_ADMIN":
+                    CarRentalAdminFrame carRentalAdmin = 
+                            new CarRentalAdminFrame();
+                    carRentalAdmin.setVisible(true);
+                    break;
+                    
+                case "RENTAL_ADMIN":
+                    
+                    break;
+                
+                default:
+                    break;
+            }
         }
     }//GEN-LAST:event_btnSigninActionPerformed
 

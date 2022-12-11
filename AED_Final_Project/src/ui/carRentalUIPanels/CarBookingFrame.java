@@ -4,7 +4,11 @@
  */
 package ui.carRentalUIPanels;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
 import model.CarRental.CarRental;
+import model.Person.Person;
+import mysql.util.MySQLUtil;
 
 /**
  *
@@ -20,14 +24,28 @@ public class CarBookingFrame extends javax.swing.JFrame {
     public CarBookingFrame(CarRental carRental) {
         initComponents();
         this.carRental = carRental;
-        
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        populateTable();
     }
     
     public CarBookingFrame() {
         initComponents();
     }
-
+    
+    public void populateTable() {
+        Person person = MySQLUtil.getPersonSession();
+        
+        txtName.setText(person.getFirstname() + " " + person.getLastname());
+        txtPickupLocation.setText(carRental.getPickupLocation());
+        txtDropoffLocation.setText(carRental.getPickupLocation());
+        lblCar.setText(carRental.getCarCompany() + " - " + carRental.getCarModel());
+        lblCarType.setText(carRental.getCarType());
+        lblSeats.setText(String.valueOf(carRental.getSeats()));
+        lblFuelType.setText(carRental.getFuelType());
+        lblPrice.setText(String.valueOf(carRental.getRatePerHour() * 24));
+     
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +75,7 @@ public class CarBookingFrame extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        btnBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +150,14 @@ public class CarBookingFrame extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel19.setText("Price");
 
+        btnBook.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBook.setText("BOOK TICKET");
+        btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBookMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -139,7 +166,7 @@ public class CarBookingFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -171,7 +198,8 @@ public class CarBookingFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblFuelType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblFuelType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -212,7 +240,9 @@ public class CarBookingFrame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(lblPrice))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,11 +263,21 @@ public class CarBookingFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBookMouseClicked
+        int personId = MySQLUtil.getPersonSession().getId();
+        Date date = new Date();
+        MySQLUtil.addCarRentalBooking(carRental.getRentalId(),
+                personId, date.toString(), 
+                carRental.getRatePerHour() * 24, "BOOKED");
+        JOptionPane.showMessageDialog(this, "Booking confirmed");
+        dispose();
+    }//GEN-LAST:event_btnBookMouseClicked
 
     /**
      * @param args the command line arguments
@@ -275,6 +315,7 @@ public class CarBookingFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;

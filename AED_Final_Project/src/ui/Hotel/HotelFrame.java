@@ -15,7 +15,7 @@ public class HotelFrame extends javax.swing.JFrame {
      */
     public HotelFrame() {
         initComponents();
-        
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         HotelAdminPanel hotelAdminPanel = new HotelAdminPanel();
         jSplitPane1.setRightComponent(hotelAdminPanel);
     }

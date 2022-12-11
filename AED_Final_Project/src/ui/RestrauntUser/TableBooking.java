@@ -4,6 +4,21 @@
  */
 package ui.RestrauntUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -18,6 +33,7 @@ public class TableBooking extends javax.swing.JPanel {
     String address;
     String zipcode;
     int restrauntId;
+    int table_no;
     
     public TableBooking(RestrauntFrame restrauntFrame, String city, String restraunt, 
             String address, String zipcode, int restrauntId) {
@@ -44,15 +60,15 @@ public class TableBooking extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        crAP = new javax.swing.JComboBox<>();
+        crTime = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -61,7 +77,14 @@ public class TableBooking extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        sDate = new com.toedter.calendar.JDateChooser();
+        sAP = new javax.swing.JComboBox<>();
+        sTime = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+
+        crAP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+
+        jLabel23.setText("Time");
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,17 +111,13 @@ public class TableBooking extends javax.swing.JPanel {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 280, 400));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 180, 30));
 
-        jLabel2.setText("Tables");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Book A Table: ");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, 30));
 
         jLabel3.setText("Date");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, 30));
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 180, 30));
-
-        jLabel4.setText("Time");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 30));
 
         jButton1.setText("Book");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -157,11 +176,48 @@ public class TableBooking extends javax.swing.JPanel {
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 100, 60));
 
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 80, -1, 100));
-        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 252, 180, 30));
+        add(sDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 252, 180, 30));
+
+        sAP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+        add(sAP, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 70, 30));
+        add(sTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 110, 30));
+
+        jLabel24.setText("Time");
+        add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 50, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+//        book tabel
+
+        if(sTime.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
+            return;
+        }
+          
+        int time = 0;
+        if(sAP.getSelectedItem().toString().equals("AM")) time = Integer.parseInt(sTime.getText());
+        if(sAP.getSelectedItem().toString().equals("PM")) time = Integer.parseInt(sTime.getText()) + 12;
+        if(time == 24) time = 0;
+        
+        Date date = sDate.getDate();
+        LocalDate dateFormat = LocalDate.of(2022, date.getMonth(),date.getDate());
+        LocalTime timeFormat = LocalTime.of(time, 0, 0);
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        
+        LocalDateTime localDateTime = LocalDateTime.of(dateFormat, timeFormat);
+        String dtf2 = dtf.format(localDateTime);
+        String status = "BOOKED";
+        getTable();
+        
+        MySQLUtil.addTableBookings(table_no, status, dtf2, restrauntId, restraunt);
+        
+        JOptionPane.showMessageDialog(this, "Record created successfully!");
+        
+        sDate.setDate(null);
+        sTime.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -184,25 +240,45 @@ public class TableBooking extends javax.swing.JPanel {
         this.restrauntFrame.switchPanel(new RestrauntList(this.restrauntFrame));
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void getTable() {
+        String query = "Select t.table_no from tables t inner join table_bookings tb on t.restrauntId = tb.restrauntId where t.restrauntId = ? and (t.status = 'AVAILABLE' or tb.status = 'AVAILABLE') LIMIT 1";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1,restrauntId);
+            
+            ResultSet rs = ps.executeQuery();   
+            
+            if(rs.next()){
+                table_no = rs.getInt("table_no");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> crAP;
+    private javax.swing.JTextField crTime;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JComboBox<String> sAP;
+    private com.toedter.calendar.JDateChooser sDate;
+    private javax.swing.JTextField sTime;
     // End of variables declaration//GEN-END:variables
 }

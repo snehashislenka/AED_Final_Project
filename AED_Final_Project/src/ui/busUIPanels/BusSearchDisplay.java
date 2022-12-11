@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 import model.bus.Bus;
 import mysql.util.MySQLUtil;
@@ -83,10 +84,9 @@ public class BusSearchDisplay extends javax.swing.JPanel {
                     lbl.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-//                            JOptionPane.showMessageDialog(comp, "Clicked"
-//                                    + flight.getFlightCompanyCode() + "-" + flight.getFlightType()
-//                            + flight.getFlightCompanyName());
-//                            CallFlightUIPanels.callFlightUIPanels(passenger, flight);
+                            BusSeatSelection busSeatSelection = 
+                                    new BusSeatSelection(passenger, bus, departureDate);
+                            busSeatSelection.setVisible(true);
                         }
                     });
                 }

@@ -6,6 +6,7 @@ package ui.flightUIPanels;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.Flight.Flight;
 import mysql.util.MySQLUtil;
 import model.Person.Person;
@@ -34,8 +35,8 @@ public class BookFlightDetails extends javax.swing.JFrame {
         this.seatList = seatList;
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-//        populateFlightBookingFrame();
+        System.out.println(flight.getFlightCompanyName());
+        populateFlightBookingFrame();
     }
     
     public void populateFlightBookingFrame() {
@@ -231,6 +232,11 @@ public class BookFlightDetails extends javax.swing.JFrame {
 
         btnBookTicket.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBookTicket.setText("BOOK TICKET");
+        btnBookTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookTicketActionPerformed(evt);
+            }
+        });
 
         jLabel35.setText("Total Price");
 
@@ -408,7 +414,7 @@ public class BookFlightDetails extends javax.swing.JFrame {
                         .addGap(288, 288, 288))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))))
+                        .addGap(103, 103, 103))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,6 +428,27 @@ public class BookFlightDetails extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBookTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookTicketActionPerformed
+        
+        String seats = "";
+        for(String seat: this.seatList) {
+            seats = seats + seat + ", ";
+        }
+        seats = seats.substring(0, seats.length() - 2);
+        
+        Person person = MySQLUtil.getPersonSession();
+        
+        try {
+            MySQLUtil.addFlightBooking(this.selectedFlight.getFlightId(), person.getId(),
+                seats, this.seatList.size() * selectedFlight.getPrice(), "BOOKED");
+            JOptionPane.showMessageDialog(this, "Flight Booked");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Issue with insertion!");
+        }
+        
+        
+    }//GEN-LAST:event_btnBookTicketActionPerformed
 
     /**
      * @param args the command line arguments

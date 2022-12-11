@@ -4,6 +4,20 @@
  */
 package ui.RestrauntUser;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import model.Restraunt.Orders;
+import model.Restraunt.TableBookings;
+import model.Restraunt.Tables;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -17,6 +31,7 @@ public class UserTableBookings extends javax.swing.JPanel {
     public UserTableBookings(RestrauntFrame restrauntFrame) {
         initComponents();
         this.restrauntFrame = restrauntFrame;
+        populateTable();
     }
 
     /**
@@ -73,7 +88,7 @@ public class UserTableBookings extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("ORDER");
+        jLabel9.setText("ORDERS");
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -90,7 +105,7 @@ public class UserTableBookings extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("BOOK TABLE");
+        jLabel11.setText("TABLE BOOKINGS");
         jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 280, 60));
 
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 80, -1, 70));
@@ -141,7 +156,42 @@ public class UserTableBookings extends javax.swing.JPanel {
         this.restrauntFrame.switchPanel(new RestrauntSearch(this.restrauntFrame));
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
+    private void populateTable() {
+        ArrayList<TableBookings> tableList = new ArrayList(); 
+        String query = "Select restraunt, table_no, cast(fromDate AS date) as date,cast(fromDate AS Time) as time from table_bookings where userId = ?";
+        int userId = 1;
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1, userId);
+            
+            ResultSet rs = ps.executeQuery();   
+           
+            while(rs.next()) {
+                TableBookings res = new TableBookings(rs.getString("restraunt"),
+                rs.getInt("table_no"), rs.getDate("date"), rs.getString("time"));
+                tableList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(TableBookings r : tableList) {
+            Object[] row = new Object[4];
+            
+            row[0] = r.getRestraunt();
+            row[1] = r.getTable_no();
+            row[2] = r.getFrom();
+            row[3] = r.getTime();
+            
+            model.addRow(row);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

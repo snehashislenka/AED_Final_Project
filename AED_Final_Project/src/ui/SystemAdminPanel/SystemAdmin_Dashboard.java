@@ -5,6 +5,8 @@
 package ui.SystemAdminPanel;
 
 import javax.swing.JFrame;
+import mysql.util.MySQLUtil;
+import ui.userdashboard.Signin;
 
 /**
  *
@@ -37,6 +39,7 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         Addnetworkbtn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        btnSignout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +47,8 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("System Admin Dashboard");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         CreateEnterpriseBtn.setBackground(new java.awt.Color(0, 153, 153));
         CreateEnterpriseBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -118,6 +123,8 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -131,6 +138,18 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
 
         jSplitPane1.setRightComponent(jPanel2);
 
+        btnSignout.setText("Sign Out");
+        btnSignout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSignoutMouseClicked(evt);
+            }
+        });
+        btnSignout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,16 +158,21 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSplitPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 389, Short.MAX_VALUE))
-                    .addComponent(jSplitPane1))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                        .addComponent(btnSignout, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnSignout, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane1))
         );
@@ -179,6 +203,17 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
         CreateCity CreatePanel = new CreateCity();
         jSplitPane1.setRightComponent(CreatePanel);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnSignoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignoutMouseClicked
+        
+    }//GEN-LAST:event_btnSignoutMouseClicked
+
+    private void btnSignoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignoutActionPerformed
+        MySQLUtil.removePersonSession();
+        dispose();
+        Signin signinFrame = new Signin();
+        signinFrame.setVisible(true);
+    }//GEN-LAST:event_btnSignoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +254,7 @@ public class SystemAdmin_Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton Addnetworkbtn;
     private javax.swing.JButton CreateEnterpriseBtn;
     private javax.swing.JButton ViewEnterpriseBtn;
+    private javax.swing.JButton btnSignout;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -29,6 +29,21 @@ public class Person {
         this.email = email;
         this.password = password;
     }
+    
+    public Person(int id, String firstname, String gender, String email) {
+        this.id = id;
+        this.firstname =firstname ;
+        this.gender = gender;
+        this.email =email;
+    }
+    
+    public Person(int id, String firstname, String gender, String email, String lastname) {
+        this.id = id;
+        this.firstname =firstname ;
+        this.gender = gender;
+        this.email =email;
+        this.lastname = lastname;
+    }
 
     public int getId() {
         return id;
@@ -84,6 +99,10 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Object getName() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -209,7 +209,6 @@ public class TableBookingCrud extends javax.swing.JPanel {
         LocalDate dateFormat = LocalDate.of(2022, date.getMonth(),date.getDate());
         LocalTime timeFormat = LocalTime.of(time, 0, 0);
         
-        
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
         
         LocalDateTime localDateTime = LocalDateTime.of(dateFormat, timeFormat);

@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import ui.HotelUser.HotelFrame;
+import ui.RestrauntUser.RestrauntFrame;
 import ui.busUIPanels.UserBusBookingFrame;
 import ui.carRentalUIPanels.UserCarRentalFrame;
 
@@ -170,6 +172,11 @@ public class HomePanel extends javax.swing.JPanel {
 
         lblResturant.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblResturant.setText("Resturants");
+        lblResturant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblResturantMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -338,9 +345,14 @@ public class HomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_lblInsuranceMouseClicked
 
     private void lblHotelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHotelsMouseClicked
-        Customer_Dashboard customerDashboard = new Customer_Dashboard();
-        customerDashboard.setVisible(true);
+        HotelFrame userHotelFrame = new HotelFrame();
+        userHotelFrame.setVisible(true);
     }//GEN-LAST:event_lblHotelsMouseClicked
+
+    private void lblResturantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResturantMouseClicked
+        RestrauntFrame frame = new RestrauntFrame();
+        frame.setVisible(true);
+    }//GEN-LAST:event_lblResturantMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

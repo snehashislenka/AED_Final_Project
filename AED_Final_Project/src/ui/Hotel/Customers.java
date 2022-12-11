@@ -4,6 +4,19 @@
  */
 package ui.Hotel;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import model.Hotel.Rooms;
+import model.Person.Person;
+import mysql.util.MySQLUtil;
+import static mysql.util.MySQLUtil.connectMySQL;
+
 /**
  *
  * @author Anshul
@@ -15,6 +28,7 @@ public class Customers extends javax.swing.JPanel {
      */
     public Customers() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -53,6 +67,38 @@ public class Customers extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 560, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateTable() {
+        ArrayList<Person> customerList = new ArrayList(); 
+        String query = "Select p.id, CONCAT(p.firstname, ' ', p.lastname) as name, p.gender, p.email from person p inner join hotel_bookings h on h.userId = p.id group by p.id";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ResultSet rs = ps.executeQuery();   
+            
+//        System.out.println("here------------"+rs.getInt("room_no"));
+            while(rs.next()) {
+                Person res = new Person(rs.getInt("id"), rs.getString("name"),
+                rs.getString("gender"),rs.getString("email"));
+                customerList.add(res);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(Person r : customerList) {
+            Object[] row = new Object[4];
+            row[0] = r.getId();
+            row[1] = r.getFirstname();
+            row[2] = r.getGender();
+            row[3] = r.getEmail();
+            
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;

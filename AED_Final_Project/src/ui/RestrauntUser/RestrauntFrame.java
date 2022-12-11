@@ -17,6 +17,7 @@ public class RestrauntFrame extends javax.swing.JFrame {
      */
     public RestrauntFrame() {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         RestrauntSearch restrauntSearch = new RestrauntSearch(this);
         jSplitPane1.setRightComponent(restrauntSearch);
     }
