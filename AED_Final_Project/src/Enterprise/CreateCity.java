@@ -59,15 +59,21 @@ public class CreateCity extends javax.swing.JPanel {
         viewbtn = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("Add City");
 
+        Createbtn.setBackground(new java.awt.Color(0, 153, 153));
+        Createbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Createbtn.setForeground(new java.awt.Color(255, 255, 255));
         Createbtn.setText("Add");
+        Createbtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         Createbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreatebtnActionPerformed(evt);
             }
         });
 
+        CityViewTable.setForeground(new java.awt.Color(0, 153, 153));
         CityViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -81,14 +87,22 @@ public class CreateCity extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(CityViewTable);
 
+        updatebtn.setBackground(new java.awt.Color(0, 153, 153));
+        updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updatebtn.setForeground(new java.awt.Color(255, 255, 255));
         updatebtn.setText("Update");
+        updatebtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatebtnActionPerformed(evt);
             }
         });
 
+        deletebtn.setBackground(new java.awt.Color(0, 153, 153));
+        deletebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deletebtn.setForeground(new java.awt.Color(255, 255, 255));
         deletebtn.setText("Delete");
+        deletebtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         deletebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deletebtnActionPerformed(evt);
@@ -96,9 +110,12 @@ public class CreateCity extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("City");
 
+        networkDropdown.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        networkDropdown.setForeground(new java.awt.Color(0, 153, 153));
         networkDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Please select network" }));
         networkDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,9 +124,14 @@ public class CreateCity extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Select The Network");
 
+        viewbtn.setBackground(new java.awt.Color(0, 153, 153));
+        viewbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        viewbtn.setForeground(new java.awt.Color(255, 255, 255));
         viewbtn.setText("View");
+        viewbtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         viewbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewbtnActionPerformed(evt);
@@ -161,11 +183,10 @@ public class CreateCity extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Createbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(viewbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Createbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
