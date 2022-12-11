@@ -20,9 +20,9 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
     /**
      * Creates new form CutomerAppliedPolicies
      */
-    InsuranceAdmin_Dashboard dashboardpanel;
+    TravelInsuranceAdmin_Dashboard dashboardpanel;
    
-    public CutomerAppliedPolicies(InsuranceAdmin_Dashboard dashboardpanel) {
+    public CutomerAppliedPolicies(TravelInsuranceAdmin_Dashboard dashboardpanel) {
         initComponents();
         this.dashboardpanel = dashboardpanel;
         populateTable();
@@ -43,6 +43,8 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
         rejectbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         AvailablePoliciesTable.setForeground(new java.awt.Color(0, 204, 255));
         AvailablePoliciesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -52,7 +54,7 @@ public class CutomerAppliedPolicies extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Person ID", "Person Name", "Policy ID", "Policy Name", "Category", "Sum Assurance", "Premium", "Tenure", "Application Date", "Status"
+                "Person ID", "Person Name", "Policy ID", "Policy Name", "Organization", "Sum Assurance", "Premium", "Tenure", "Application Date", "Status"
             }
         ));
         jScrollPane1.setViewportView(AvailablePoliciesTable);

@@ -1250,10 +1250,12 @@ public class MySQLUtil {
 
     }
 
-//    public static void addpolicydetails(String PolicyName,int PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
-//         String query = "INSERT INTO insurance_policy (Policyname,SumAssurance,Premium,Tenure,Date)"
-//        + " values (?, ?, ?, ?, ?)";
-//         try {
+    // public static void addpolicydetails(String PolicyName,int
+    // PolicySumAssurance,int PolicyPremium,int PolicyTenure,String PolicyDate){
+    // String query = "INSERT INTO insurance_policy
+    // (Policyname,SumAssurance,Premium,Tenure,Date)"
+    // + " values (?, ?, ?, ?, ?)";
+    // try {
 
     // policy crud operations
     public static void addpolicydetails(String PolicyName, String CategoryName, int PolicySumAssurance,
@@ -2277,7 +2279,7 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static ArrayList<Person> getHotelAndRestrauntAdmin() {
         String query = "select * from person where role in ('HOTEL_ADMIN', 'RESTRAUNT_ADMIN')";
 
@@ -2304,7 +2306,7 @@ public class MySQLUtil {
         }
         return personList;
     }
-    
+
     public static ArrayList<Orders> getAllFlightOrders() {
         Connection conn = MySQLUtil.connectMySQL();
         ArrayList<Orders> ordersList = new ArrayList();
@@ -2329,8 +2331,8 @@ public class MySQLUtil {
         }
         return ordersList;
     }
-    
-     public static ArrayList<Orders> getAllHotelOrders() {
+
+    public static ArrayList<Orders> getAllHotelOrders() {
         Connection conn = MySQLUtil.connectMySQL();
         ArrayList<Orders> ordersList = new ArrayList();
 
@@ -2354,8 +2356,8 @@ public class MySQLUtil {
         }
         return ordersList;
     }
-     
-     public static void createFlightOrder(int userId, int restrauntId, float orderTotal, String status, String user,
+
+    public static void createFlightOrder(int userId, int restrauntId, float orderTotal, String status, String user,
             String restraunt, int tax, int flightId) {
         Connection conn = MySQLUtil.connectMySQL();
 
@@ -2380,8 +2382,8 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-     public static void createHotelOrder(int userId, int restrauntId, float orderTotal, String status, String user,
+
+    public static void createHotelOrder(int userId, int restrauntId, float orderTotal, String status, String user,
             String restraunt, int tax, int hotelId) {
         Connection conn = MySQLUtil.connectMySQL();
 
@@ -2406,8 +2408,8 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-      public static ArrayList<Orders> getAllBulkOrders() {
+
+    public static ArrayList<Orders> getAllBulkOrders() {
         Connection conn = MySQLUtil.connectMySQL();
         ArrayList<Orders> ordersList = new ArrayList();
 
@@ -2423,8 +2425,8 @@ public class MySQLUtil {
                         rs.getString("status"),
                         rs.getString("user"),
                         rs.getString("restraunt"),
-                rs.getInt("hotelId"),
-                rs.getInt("flightId"));
+                        rs.getInt("hotelId"),
+                        rs.getInt("flightId"));
 
                 ordersList.add(res);
             }

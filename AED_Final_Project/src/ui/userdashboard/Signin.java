@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import mysql.util.MySQLUtil;
 import model.Person.Person;
 import ui.Hotel.HotelFrame;
-import ui.InsuranceManagment.InsuranceAdmin_Dashboard;
+import ui.InsuranceManagment.TravelInsuranceAdmin_Dashboard;
 import ui.Restraunt.RestrauntFrame;
 import ui.busAdminDashboard.BusAdminDashboard;
 import ui.carRentalAdminPanels.CarRentalAdminFrame;
@@ -189,8 +189,8 @@ public class Signin extends javax.swing.JFrame {
                     break;
                     
                 case "INSURANCE_ADMIN":
-                    InsuranceAdmin_Dashboard ia_dash = new 
-                        InsuranceAdmin_Dashboard();
+                    TravelInsuranceAdmin_Dashboard ia_dash = new 
+                        TravelInsuranceAdmin_Dashboard();
                     ia_dash.setVisible(true);
                 break;
                 
