@@ -86,6 +86,8 @@ public class FlightBooking extends javax.swing.JFrame {
         btnSearchFlights = new javax.swing.JButton();
         txtFlyingTo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         scrollPane = new javax.swing.JScrollPane();
 
@@ -196,6 +198,31 @@ public class FlightBooking extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("My Flight Bookings");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout flightSearchPanelLayout = new javax.swing.GroupLayout(flightSearchPanel);
         flightSearchPanel.setLayout(flightSearchPanelLayout);
         flightSearchPanelLayout.setHorizontalGroup(
@@ -203,7 +230,9 @@ public class FlightBooking extends javax.swing.JFrame {
             .addGroup(flightSearchPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(677, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         flightSearchPanelLayout.setVerticalGroup(
             flightSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,6 +240,10 @@ public class FlightBooking extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, flightSearchPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -272,6 +305,8 @@ public class FlightBooking extends javax.swing.JFrame {
         String departureCity = txtFlyingFrom.getText();
         String arrivalCity = txtFlyingTo.getText();
         Date departureDate = dateOutbound.getDate();
+        System.out.println(departureDate + "  sdasdasdasdasdad");
+//        Date departureTimestamp = dateOutbound.getDate();
         String formattedDepartureDate =
         Helper.getFormattedDateForFlightAPI(departureDate);
         //        String arrivalDate = txtReturn.getText();
@@ -281,7 +316,7 @@ public class FlightBooking extends javax.swing.JFrame {
         try {
 
             scrollPane.setViewportView(new FlightsDisplay(departureCity, arrivalCity,
-                formattedDepartureDate, passenger));
+                departureDate.toString(), formattedDepartureDate, passenger));
         } catch (IOException ex) {
             Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
@@ -292,6 +327,11 @@ public class FlightBooking extends javax.swing.JFrame {
             Logger.getLogger(FlightBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSearchFlightsActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MyFlightBookings myFlightBookings = new MyFlightBookings();
+        myFlightBookings.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +372,7 @@ public class FlightBooking extends javax.swing.JFrame {
     private javax.swing.JButton btnSearchFlights;
     private com.toedter.calendar.JDateChooser dateOutbound;
     private javax.swing.JPanel flightSearchPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -341,6 +382,7 @@ public class FlightBooking extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextField txtFlyingFrom;

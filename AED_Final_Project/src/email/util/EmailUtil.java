@@ -5,6 +5,7 @@
 package email.util;
 
 import java.util.Properties;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Authenticator;
@@ -21,7 +22,7 @@ import javax.mail.internet.MimeMessage;
  * @author slenk
  */
 public class EmailUtil {
-    public static void sendEmail(String recepient) throws Exception{
+    public static void sendEmail(String recepient, String OTP) throws Exception{
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -38,19 +39,23 @@ public class EmailUtil {
             }
         });
         
-        Message message = prepareMessage(session, myAccountEmail, recepient);
+        Message message = prepareMessage(session, myAccountEmail, recepient, OTP);
         
         Transport.send(message);
-        System.out.println("Message sent!");
+
     }
     
-    public static Message prepareMessage(Session session, String myAccountEmail, String recepient) {
+    
+    public static Message prepareMessage(Session session, String myAccountEmail, String recepient,
+            String OTP) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("AED Final Project");
-            String htmlCode = "<h1>AED Final Project</h1> </br> <h3>Email verification</h3>";
+            
+            String htmlCode = "<h1>AED Final Project</h1> </br> <h3>Email verification</h3> "
+                    + "</br> <h3>" + OTP + "</h3> ";
             message.setContent(htmlCode, "text/html");
             return message;
         } catch (Exception ex) {

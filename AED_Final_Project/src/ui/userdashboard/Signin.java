@@ -17,6 +17,7 @@ import ui.busAdminDashboard.BusAdminDashboard;
 import ui.carRentalAdminPanels.CarRentalAdminFrame;
 import ui.flightAdminDashboard.FlightAdminDashboard;
 import ui.lifestyle.LifestyleFrame;
+import ui.rentalAdmin.RentalAdminFrame;
 import ui.travelAdmin.TravelAdminDashboard;
 
 /**
@@ -31,6 +32,7 @@ public class Signin extends javax.swing.JFrame {
     public Signin() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        MySQLUtil.removePersonSession();
     }
 
     /**
@@ -233,7 +235,9 @@ public class Signin extends javax.swing.JFrame {
                     break;
                     
                 case "RENTAL_ADMIN":
-                    
+                    RentalAdminFrame rentalAdmin = 
+                            new RentalAdminFrame();
+                    rentalAdmin.setVisible(true);
                     break;
                 
                 default:

@@ -1,7 +1,5 @@
-# AED_Final_Project
+INFO 5100 - AED - Travel Management System Final Project
 
-Git branch guidelines
-1. Push code to personal branch.
-2. Raise a pull request from personal to dev branch.
-3. Raise a pull request from personal to main branch.
-4. Note dev branch is for backup, in case of merge conflicts on main branch.
+https://docs.google.com/document/d/1-tA26ORSxfXIo8Ywju0Fy5XGDXUmXgyz/edit?usp=sharing&ouid=116541715768460976970&rtpof=true&sd=true 
+
+https://docs.google.com/presentation/d/1av3FHCoqpYYQEhdByz1d3EzUtUMKiXuq/edit?usp=sharing&ouid=116541715768460976970&rtpof=true&sd=true 

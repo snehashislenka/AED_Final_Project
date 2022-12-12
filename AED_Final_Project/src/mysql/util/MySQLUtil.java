@@ -63,7 +63,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "root";
+        String PASSWORD = "1234";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -345,34 +345,37 @@ public class MySQLUtil {
      * Flight SQL Operations
      */
 
-    public static void addFlight(Connection conn, Flight flight) {
+    public static void addFlight(Connection conn, String totalFlightDuration, int totalMiles, 
+            String departingTimestamp, String arrivalTimestamp, String departureAirport, String departureTerminal, 
+                String arrivalAirport, String arrivalTerminal, String flightCompanyCode, String flightCompanyName, 
+                String flightType, int seats, String departingCity, String arrivalCity, Double price) {
 
-        String query = "INSERT INTO flight (flightId, totalFlightDuration, totalMiles, "
+        String query = "INSERT INTO flight ( totalFlightDuration, totalMiles, "
                 + "departingTimeStamp, arrivalTimeStamp, departureAirport, departureTerminal, "
                 + "arrivalAirport, arrivalTerminal, flightCompanyCode, flightCompanyName, "
                 + "flightType, seats, departingCity, arrivalCity, price)"
 
-                + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             PreparedStatement ps = conn.prepareStatement(query);
 
-            ps.setInt(1, flight.getFlightId());
-            ps.setString(2, flight.getTotalFlightDuration());
-            ps.setInt(3, flight.getTotalMiles());
-            ps.setString(4, flight.getDepartingTimeStamp());
-            ps.setString(5, flight.getArrivalTimeStamp());
-            ps.setString(6, flight.getDepartureAirport());
-            ps.setString(7, flight.getDepartureTerminal());
-            ps.setString(8, flight.getArrivalAirport());
-            ps.setString(9, flight.getArrivalTerminal());
-            ps.setString(10, flight.getFlightCompanyCode());
-            ps.setString(11, flight.getFlightCompanyName());
-            ps.setString(12, flight.getFlightType());
-            ps.setInt(13, flight.getSeats());
-            ps.setString(14, flight.getDepartingCity());
-            ps.setString(15, flight.getArrivalCity());
-            ps.setDouble(16, flight.getPrice());
+            
+            ps.setString(1, totalFlightDuration);
+            ps.setInt(2, totalMiles);
+            ps.setString(3, departingTimestamp);
+            ps.setString(4, arrivalTimestamp);
+            ps.setString(5, departureAirport);
+            ps.setString(6, departureTerminal);
+            ps.setString(7, arrivalAirport);
+            ps.setString(8, arrivalTerminal);
+            ps.setString(9, flightCompanyCode);
+            ps.setString(10, flightCompanyName);
+            ps.setString(11, flightType);
+            ps.setInt(12, seats);
+            ps.setString(13, departingCity);
+            ps.setString(14, arrivalCity);
+            ps.setDouble(15, price);
 
             ps.execute();
 
@@ -482,7 +485,8 @@ public class MySQLUtil {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Flight flight = new Flight(rs.getString("totalFlightDuration"),
+                Flight flight = new Flight(rs.getInt("flightId"),
+                        rs.getString("totalFlightDuration"),
                         rs.getInt("totalMiles"),
                         rs.getString("departingTimeStamp"),
                         rs.getString("arrivalTimeStamp"),
@@ -521,7 +525,8 @@ public class MySQLUtil {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Flight flight = new Flight(rs.getString("totalFlightDuration"),
+                Flight flight = new Flight(rs.getInt("flightId"),
+                        rs.getString("totalFlightDuration"),
                         rs.getInt("totalMiles"),
                         rs.getString("departingTimeStamp"),
                         rs.getString("arrivalTimeStamp"),
@@ -559,7 +564,7 @@ public class MySQLUtil {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Flight flight = new Flight(rs.getString("totalFlightDuration"),
+                Flight flight = new Flight(rs.getInt("flightId"), rs.getString("totalFlightDuration"),
                         rs.getInt("totalMiles"),
                         rs.getString("departingTimeStamp"),
                         rs.getString("arrivalTimeStamp"),
@@ -2462,5 +2467,140 @@ public class MySQLUtil {
         }
         return personList;
     }
+    
+    public static void updateFlightBookingInsuranceStatus(int policyId, String insuranceStatus, int personId) {
+        String query = "UPDATE flight_bookings SET policyId=?, insuranceStatus=? where personId = ?";
 
+        try {
+            Connection conn = connectMySQL();
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, policyId);
+            ps.setString(2, insuranceStatus);
+            ps.setInt(3, personId);
+
+            ps.execute();
+
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Not able to"
+                    + "update the flight booking status table!", ex);
+        }
+
+    }
+    
+    public static void updateCarBookingInsuranceStatus(int policyId, String insuranceStatus, int personId) {
+        String query = "UPDATE car_rentals_bookings SET policyId=?, insuranceStatus=? where personId = ?";
+
+        try {
+            Connection conn = connectMySQL();
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, policyId);
+            ps.setString(2, insuranceStatus);
+            ps.setInt(3, personId);
+
+            ps.execute();
+
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Not able to"
+                    + "update the car rentals booking status table!", ex);
+        }
+
+    }
+    
+    public static ArrayList<Flight> getAllFlightDataByDate(String departureDate) {    
+        
+        ArrayList<Flight> flightList = MySQLUtil.getAllFlightData();
+        
+        ArrayList<Flight> flightSearchList = new ArrayList<>();
+        
+        String[] mmArr = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+            int mm = 0;
+            System.out.println(departureDate.substring(4, 7));
+            for(int i=0; i<mmArr.length; i++) {
+                if(mmArr[i].equals(departureDate.substring(4, 7))) {
+                    mm = ++i;
+                }
+            }
+            
+            String dd = departureDate.substring(8, 10);
+            String yyyy = departureDate.substring(24, 28);
+//            System.out.println(yyyy+"-"+mm+"-"+dd);
+        
+        String formattedDate = yyyy+"-"+mm+"-"+dd;
+        
+        
+        
+        for(Flight flight: flightList) {
+            if(flight.getDepartingTimeStamp().substring(0, 10)
+                    .equals(formattedDate)) {
+                flightSearchList.add(flight);
+            }
+        }
+
+//        try {
+//            Connection conn = connectMySQL();
+//
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, departureDate);
+//
+//            ResultSet rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                Flight flight = new Flight(rs.getInt("flightId"), rs.getString("totalFlightDuration"),
+//                        rs.getInt("totalMiles"),
+//                        rs.getString("departingTimeStamp"),
+//                        rs.getString("arrivalTimeStamp"),
+//                        rs.getString("departureAirport"),
+//                        rs.getString("departureTerminal"),
+//                        rs.getString("arrivalAirport"),
+//                        rs.getString("arrivalTerminal"),
+//                        rs.getString("flightCompanyCode"),
+//                        rs.getString("flightCompanyName"),
+//                        rs.getString("flightType"),
+//                        rs.getInt("seats"), rs.getString("departingCity"),
+//                        rs.getString("arrivalCity"), rs.getDouble("price"));
+//
+//                flightList.add(flight);
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, "Issue with "
+//                    + "get all active flights query!", ex);
+//        }
+
+        return flightSearchList;
+    }
+    
+    public static ArrayList<Person> getCarRentalAdmin() {
+        String query = "select * from person where role in ('CAR_RENTAL_ADMIN')";
+
+        ArrayList<Person> personList = new ArrayList<>();
+
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Person person = new Person(rs.getInt("id"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"),
+                        rs.getString("role"), rs.getString("email"),
+                        rs.getString("password"));
+
+                personList.add(person);
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return personList;
+    }
+    
 }
