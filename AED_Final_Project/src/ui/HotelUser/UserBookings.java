@@ -7,6 +7,7 @@ package ui.HotelUser;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel.HotelBookings;
+import model.Person.Person;
 import model.Restraunt.TableBookings;
 import mysql.util.MySQLUtil;
 
@@ -94,7 +95,11 @@ public class UserBookings extends javax.swing.JPanel {
     private void populateTable(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        int userId = 1;
+        int userId;
+        Person person = MySQLUtil.getPersonSession();
+        userId = person.getId();
+        System.out.println("userid: -----"+ userId);
+        
         
         
         ArrayList<HotelBookings> allUserBookings = MySQLUtil.getAllUserBookings(userId);

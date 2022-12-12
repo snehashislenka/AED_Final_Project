@@ -49,7 +49,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
-        jLabel1.setText("TravelInsuranceAdmin Dashboard");
+        jLabel1.setText("InsuranceAdmin Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setName(""); // NOI18N

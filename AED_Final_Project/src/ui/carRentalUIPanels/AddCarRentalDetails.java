@@ -396,6 +396,7 @@ public class AddCarRentalDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_tableAddCarRentalsMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
         int selectedRow = tableAddCarRentals.getSelectedRow();
         
         if(selectedRow < 0) {
@@ -420,6 +421,9 @@ public class AddCarRentalDetails extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
+
+        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnDeleteActionPerformed
     
     public void populateCarRentalsTable() {

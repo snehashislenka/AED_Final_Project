@@ -150,7 +150,7 @@ public class MenuAdmin extends javax.swing.JPanel {
         jLabel21.setText("Price");
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, -1, 20));
 
-        crRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popeyes", "panera" }));
+        crRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Popeyes", "Panera Bread", "Dominos", "Subwaya" }));
         add(crRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -227,8 +227,10 @@ public class MenuAdmin extends javax.swing.JPanel {
         String restraunt = crRes.getSelectedItem().toString();
         
         int resId = 1;
-        if(restraunt.equals("popeyes")) resId = 1;
-        if(restraunt.equals("panera")) resId = 2;
+        if(restraunt.equals("Popeyes")) resId = 1;
+        if(restraunt.equals("Panera Bread")) resId = 2;
+        if(restraunt.equals("Dominos")) resId = 3;
+        if(restraunt.equals("Subway")) resId = 4;
         
         MenuItems m = new MenuItems();
         

@@ -63,7 +63,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "1234";
+        String PASSWORD = "root";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -1723,11 +1723,11 @@ public class MySQLUtil {
         }
     }
 
-    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt) {
+    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt, int userId, String user) {
         Connection conn = MySQLUtil.connectMySQL();
 
-        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt)"
-                + " values (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt, userId, user)"
+                + " values (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, table);
@@ -1735,6 +1735,8 @@ public class MySQLUtil {
             ps.setString(3, dates);
             ps.setInt(4, resId);
             ps.setString(5, restraunt);
+            ps.setInt(6, userId);
+            ps.setString(7, user);
 
             ps.execute();
 
@@ -1865,7 +1867,7 @@ public class MySQLUtil {
         Connection conn = MySQLUtil.connectMySQL();
         ArrayList<HotelBookings> userBookingList = new ArrayList();
 
-        String query = "SELECT h.hotel, hb.room_no, hb.from, hb.to FROM hotel_bookings as hb inner join hotel h on h.id = hb.hotelId where userId = ?";
+        String query = "SELECT h.hotel, hb.room_no, hb.fromDate, hb.toDate FROM hotel_bookings as hb inner join hotel h on h.id = hb.hotelId where userId = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, userId);
@@ -1873,7 +1875,7 @@ public class MySQLUtil {
 
             while (rs.next()) {
                 HotelBookings res = new HotelBookings(rs.getString("hotel"), rs.getInt("room_no"),
-                        rs.getDate("from"), rs.getDate("to"));
+                        rs.getDate("fromDate"), rs.getDate("toDate"));
 
                 userBookingList.add(res);
             }
@@ -1887,19 +1889,19 @@ public class MySQLUtil {
             Date to, int no_of_rooms, String status, float totalPayable, int tax) {
         Connection conn = MySQLUtil.connectMySQL();
 
-        String query = "INSERT INTO hotel_bookings (hotelId, room_no, userId, fromDate, toDate, no_of_rooms, status)"
-                + " values (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO hotel_bookings (hotelId, userId, fromDate, toDate, no_of_rooms, status)"
+                + " values (?, ?, ?, ?, ?, ?)";
         try {
             java.sql.Date fromDate = new java.sql.Date(from.getTime());
             java.sql.Date toDate = new java.sql.Date(to.getTime());
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, hotelId);
-            ps.setInt(2, room_no);
-            ps.setInt(3, userId);
-            ps.setDate(4, fromDate);
-            ps.setDate(5, toDate);
-            ps.setInt(6, no_of_rooms);
-            ps.setString(7, status);
+//            ps.setInt(2, room_no);
+            ps.setInt(2, userId);
+            ps.setDate(3, fromDate);
+            ps.setDate(4, toDate);
+            ps.setInt(5, no_of_rooms);
+            ps.setString(6, status);
 
             ps.execute();
 
@@ -2601,6 +2603,67 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return personList;
+    }
+    
+     public static ArrayList<Person> getAllPersons() {
+        String query = "SELECT * FROM person where role in ('PASSENGER')";
+        ArrayList<Person> personList = new ArrayList<>();
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+               Person person = new Person(rs.getInt("id"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"),
+                        rs.getString("role"), rs.getString("email"),
+                        rs.getString("password"));
+
+                personList.add(person);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return personList;
+    }
+     
+     public static int getAllPersonsId(String userName) {
+        String query = "SELECT * FROM person where firstname like CONCAT('%', ? , '%') limit 1";
+        int userId = 0;
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                userId = rs.getInt("id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return userId;
+    }
+     
+     public static String getAllPersonName(int id) {
+        String query = "SELECT * FROM person where id = ?";
+        String user = null;
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = rs.getString("firstname");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
     
 }
