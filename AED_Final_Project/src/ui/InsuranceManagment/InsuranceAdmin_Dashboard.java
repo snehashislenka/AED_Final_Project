@@ -43,6 +43,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
         dashboardbtn = new javax.swing.JButton();
         CreateCategorybtn = new javax.swing.JButton();
         signoutbtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,7 +56,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 369));
 
-        dashboardbtn.setBackground(new java.awt.Color(0, 204, 255));
+        dashboardbtn.setBackground(new java.awt.Color(0, 0, 0));
         dashboardbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         dashboardbtn.setForeground(new java.awt.Color(255, 255, 255));
         dashboardbtn.setText("Dashboard");
@@ -66,7 +67,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        CreateCategorybtn.setBackground(new java.awt.Color(0, 204, 255));
+        CreateCategorybtn.setBackground(new java.awt.Color(0, 0, 0));
         CreateCategorybtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CreateCategorybtn.setForeground(new java.awt.Color(255, 255, 255));
         CreateCategorybtn.setText("Organization");
@@ -77,7 +78,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
             }
         });
 
-        signoutbtn.setBackground(new java.awt.Color(0, 204, 255));
+        signoutbtn.setBackground(new java.awt.Color(0, 0, 0));
         signoutbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         signoutbtn.setForeground(new java.awt.Color(255, 255, 255));
         signoutbtn.setText("SignOut");
@@ -85,6 +86,16 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
         signoutbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signoutbtnActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("ADD ORGANIZATION");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -96,12 +107,20 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dashboardbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dashboardbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(signoutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(CreateCategorybtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(signoutbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CreateCategorybtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {CreateCategorybtn, dashboardbtn, jButton2, signoutbtn});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -111,7 +130,9 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
                 .addComponent(CreateCategorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(signoutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(742, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -175,6 +196,10 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
         signinFrame.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_signoutbtnActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jSplitPane1.setRightComponent(new AddIOrganization(this));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +238,7 @@ public class InsuranceAdmin_Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateCategorybtn;
     private javax.swing.JButton dashboardbtn;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

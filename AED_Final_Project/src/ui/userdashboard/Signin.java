@@ -26,6 +26,7 @@ import ui.travelAdmin.TravelAdminDashboard;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import ui.InsuranceManagment.InsuranceAdmin_Dashboard;
 
 /**
  *
@@ -237,9 +238,15 @@ public class Signin extends javax.swing.JFrame {
                 break;
 
                 case "INSURANCE_ADMIN":
-                TravelInsuranceAdmin_Dashboard ia_dash = new
-                TravelInsuranceAdmin_Dashboard();
+                InsuranceAdmin_Dashboard ia_dash = new
+                InsuranceAdmin_Dashboard();
                 ia_dash.setVisible(true);
+                break;
+                
+                case "TRAVEL_INSURANCE_ADMIN":
+                TravelInsuranceAdmin_Dashboard tia_dash = new
+                TravelInsuranceAdmin_Dashboard();
+                tia_dash.setVisible(true);
                 break;
 
                 case "LIFESTYLE_ADMIN":
