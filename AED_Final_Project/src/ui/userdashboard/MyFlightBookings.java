@@ -261,6 +261,13 @@ public class MyFlightBookings extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Wait for insurance approval!");
                 return;
             }
+            
+            if(tableMyFlightBookings.getModel()
+                .getValueAt(selectedRow, 13).toString().equals("APPLIED")) {
+                JOptionPane.showMessageDialog(this, "Wait for insurance approval!");
+                return;
+            }
+            
             if(tableMyFlightBookings.getModel()
                 .getValueAt(selectedRow, 13).toString().equals("APPROVED")) {
                 JOptionPane.showMessageDialog(this, "You're insured!");
