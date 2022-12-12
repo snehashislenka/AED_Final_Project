@@ -78,8 +78,10 @@ public class CarBookingFrame extends javax.swing.JFrame {
         btnBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 204, 204));
         jLabel1.setText("Booking Details");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -99,6 +101,8 @@ public class CarBookingFrame extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -111,6 +115,7 @@ public class CarBookingFrame extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 204, 204));
         jLabel2.setText("Name");
 
         txtName.setText("Name");
@@ -118,19 +123,23 @@ public class CarBookingFrame extends javax.swing.JFrame {
         txtPickupLocation.setText("Pickup Location");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 204, 204));
         jLabel5.setText("Pickup Location");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 204, 204));
         jLabel6.setText("Drop off Location");
 
         txtDropoffLocation.setText("Drop off Location");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 204, 204));
         jLabel8.setText("Car");
 
         lblCar.setText("Car Company + Model");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 204, 204));
         jLabel10.setText("Car Type");
 
         lblCarType.setText("Car Type");
@@ -138,20 +147,26 @@ public class CarBookingFrame extends javax.swing.JFrame {
         lblSeats.setText("Seats");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 204, 204));
         jLabel13.setText("Seats");
 
         lblFuelType.setText("Fuel type");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 204, 204));
         jLabel15.setText("Fuel type");
 
         lblPrice.setText("Price");
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 204, 204));
         jLabel19.setText("Price");
 
+        btnBook.setBackground(new java.awt.Color(0, 204, 204));
         btnBook.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBook.setForeground(new java.awt.Color(255, 255, 255));
         btnBook.setText("BOOK INSURANCE");
+        btnBook.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         btnBook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBookMouseClicked(evt);
@@ -254,7 +269,7 @@ public class CarBookingFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,7 +278,7 @@ public class CarBookingFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
