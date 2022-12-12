@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.HotelUser;
-
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import java.awt.PopupMenu;
 import java.util.Date;
 
@@ -43,7 +45,17 @@ public class SearchHotel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         sIn = new com.toedter.calendar.JDateChooser();
         sCity = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g) {
+
+                ImageIcon im = new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\12.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
 
@@ -104,7 +116,7 @@ public class SearchHotel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 110, 60));
 
         add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 200, 310));
     }// </editor-fold>//GEN-END:initComponents

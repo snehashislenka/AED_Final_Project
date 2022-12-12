@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.HotelUser;
-
+	import java.awt.Graphics;
+	import java.awt.Image;
+	import javax.swing.ImageIcon;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -73,7 +75,6 @@ public class RoomSelect extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         sHotel = new javax.swing.JLabel();
         sCity = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -85,11 +86,21 @@ public class RoomSelect extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         sAddress = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g) {
+
+                ImageIcon im = new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\12.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -98,21 +109,13 @@ public class RoomSelect extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Hotel Photo");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 210));
 
         sHotel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         sHotel.setForeground(new java.awt.Color(255, 255, 255));
@@ -171,6 +174,19 @@ public class RoomSelect extends javax.swing.JPanel {
         sAddress.setText("Hotel Address here");
         jPanel1.add(sAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 360, 30));
 
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 210, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 190));
+
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -178,28 +194,25 @@ public class RoomSelect extends javax.swing.JPanel {
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Select");
+        jButton1.setText("DELUXE ROOM");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
-
-        jLabel11.setText("DELUXE ROOM");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 140));
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 230, 160));
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("Select");
+        jButton2.setText("PREMIUM ROOM");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 210, 140));
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -222,38 +235,29 @@ public class RoomSelect extends javax.swing.JPanel {
 
         jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 230, 160));
 
-        jLabel12.setText("PREMIUM ROOM");
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
-
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 230, 160));
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton6.setText("Select");
+        jButton6.setText("SUITE");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
-
-        jLabel13.setText("SUITE");
-        jPanel9.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        jPanel9.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 12, 210, 140));
 
         jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 230, 160));
 
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton7.setText("Select");
+        jButton7.setText("PRESEDENTIAL SUITE");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel10.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
-
-        jLabel10.setText("PRESEDENTIAL SUITE");
-        jPanel10.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+        jPanel10.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 210, 140));
 
         jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 230, 160));
 
@@ -380,11 +384,6 @@ public class RoomSelect extends javax.swing.JPanel {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -393,6 +392,7 @@ public class RoomSelect extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

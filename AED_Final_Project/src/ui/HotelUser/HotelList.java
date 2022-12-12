@@ -74,7 +74,6 @@ public class HotelList extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,9 +172,6 @@ public class HotelList extends javax.swing.JPanel {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 510));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 440, 510));
-
-        jLabel3.setText("Photo here");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, 320));
     }// </editor-fold>//GEN-END:initComponents
 
     private void sRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sRoomsActionPerformed
@@ -254,7 +250,6 @@ public class HotelList extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

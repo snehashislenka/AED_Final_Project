@@ -22,6 +22,9 @@ import ui.Hotel.HotelFrame;
 import ui.Hotel.OrderHotelFood;
 import ui.flightAdminDashboard.FlightAdminDashboard;
 import ui.flightAdminDashboard.OrderFlightFood;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -130,7 +133,6 @@ public class Checkout extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         sRestraunt = new javax.swing.JLabel();
         sCity = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -138,6 +140,17 @@ public class Checkout extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         sAddress = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g) {
+
+                ImageIcon im = new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\3.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -151,8 +164,6 @@ public class Checkout extends javax.swing.JPanel {
         sQuantity = new javax.swing.JLabel();
         sTotal = new javax.swing.JLabel();
         sTax = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -183,10 +194,6 @@ public class Checkout extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("RESTRAUNT INFO");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 330, 20));
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Restraunt Photo");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 110, 100));
 
         sRestraunt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sRestraunt.setText("Restraunt Name");
@@ -220,6 +227,7 @@ public class Checkout extends javax.swing.JPanel {
 
         sAddress.setText("restraunt address");
         jPanel2.add(sAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 190, 30));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 110, 100));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 350, 510));
 
@@ -260,14 +268,6 @@ public class Checkout extends javax.swing.JPanel {
         jPanel3.add(sTax, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
 
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 220, 200));
-
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel38.setText("Hotel?");
-        jPanel7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
-
-        add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, 220, 250));
 
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -391,8 +391,6 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -400,7 +398,7 @@ public class Checkout extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
