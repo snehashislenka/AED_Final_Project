@@ -5,6 +5,8 @@
 package ui.SystemAdminPanel;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -57,12 +59,20 @@ public class CreateCity extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         viewbtn = new javax.swing.JButton();
         CityTextField = new javax.swing.JTextField();
+        net = new javax.swing.JLabel();
+        cit = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("Add City");
+
+        sNetwork.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                sNetworkKeyReleased(evt);
+            }
+        });
 
         Createbtn.setBackground(new java.awt.Color(0, 153, 153));
         Createbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -131,6 +141,16 @@ public class CreateCity extends javax.swing.JPanel {
             }
         });
 
+        CityTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CityTextFieldKeyReleased(evt);
+            }
+        });
+
+        net.setForeground(new java.awt.Color(204, 0, 102));
+
+        cit.setForeground(new java.awt.Color(204, 0, 102));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,7 +180,11 @@ public class CreateCity extends javax.swing.JPanel {
                                 .addComponent(sNetwork)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                                 .addComponent(CityTextField, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,11 +194,15 @@ public class CreateCity extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(sNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(net, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(CityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,8 +218,8 @@ public class CreateCity extends javax.swing.JPanel {
 
     private void CreatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatebtnActionPerformed
         // TODO add your handling code here:
-        if(CityTextField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "City Empty");
+        if(CityTextField.getText().isEmpty() || sNetwork.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Inputs cannot be Empty!");
             return;
         }
         
@@ -247,16 +275,48 @@ public class CreateCity extends javax.swing.JPanel {
         clearAllFields();
     }//GEN-LAST:event_updatebtnActionPerformed
 
+    private void sNetworkKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sNetworkKeyReleased
+        // TODO add your handling code here:
+        String Allowed="^[A-Z a-z]+$";
+        Pattern patt = Pattern.compile(Allowed);
+        Matcher same = patt.matcher(sNetwork.getText());
+        if(!same.matches()){
+            net.setText("Only Alphabets allowed.");
+            Createbtn.setEnabled(false);
+        }
+        else{
+            net.setText(null);
+            Createbtn.setEnabled(true);
+        }
+    }//GEN-LAST:event_sNetworkKeyReleased
+
+    private void CityTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CityTextFieldKeyReleased
+        // TODO add your handling code here:
+        String Allowed="^[A-Z a-z]+$";
+        Pattern patt = Pattern.compile(Allowed);
+        Matcher same = patt.matcher(CityTextField.getText());
+        if(!same.matches()){
+            cit.setText("Only Alphabets allowed.");
+            Createbtn.setEnabled(false);
+        }
+        else{
+            cit.setText(null);
+            Createbtn.setEnabled(true);
+        }
+    }//GEN-LAST:event_CityTextFieldKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CityTextField;
     private javax.swing.JTable CityViewTable;
     private javax.swing.JButton Createbtn;
+    private javax.swing.JLabel cit;
     private javax.swing.JButton deletebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel net;
     private javax.swing.JTextField sNetwork;
     private javax.swing.JButton updatebtn;
     private javax.swing.JButton viewbtn;
