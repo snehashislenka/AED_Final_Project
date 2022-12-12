@@ -1867,7 +1867,7 @@ public class MySQLUtil {
         Connection conn = MySQLUtil.connectMySQL();
         ArrayList<HotelBookings> userBookingList = new ArrayList();
 
-        String query = "SELECT h.hotel, hb.room_no, hb.from, hb.to FROM hotel_bookings as hb inner join hotel h on h.id = hb.hotelId where userId = ?";
+        String query = "SELECT h.hotel, hb.room_no, hb.fromDate, hb.toDate FROM hotel_bookings as hb inner join hotel h on h.id = hb.hotelId where userId = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, userId);
@@ -1875,7 +1875,7 @@ public class MySQLUtil {
 
             while (rs.next()) {
                 HotelBookings res = new HotelBookings(rs.getString("hotel"), rs.getInt("room_no"),
-                        rs.getDate("from"), rs.getDate("to"));
+                        rs.getDate("fromDate"), rs.getDate("toDate"));
 
                 userBookingList.add(res);
             }
@@ -1889,19 +1889,19 @@ public class MySQLUtil {
             Date to, int no_of_rooms, String status, float totalPayable, int tax) {
         Connection conn = MySQLUtil.connectMySQL();
 
-        String query = "INSERT INTO hotel_bookings (hotelId, room_no, userId, fromDate, toDate, no_of_rooms, status)"
-                + " values (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO hotel_bookings (hotelId, userId, fromDate, toDate, no_of_rooms, status)"
+                + " values (?, ?, ?, ?, ?, ?)";
         try {
             java.sql.Date fromDate = new java.sql.Date(from.getTime());
             java.sql.Date toDate = new java.sql.Date(to.getTime());
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, hotelId);
-            ps.setInt(2, room_no);
-            ps.setInt(3, userId);
-            ps.setDate(4, fromDate);
-            ps.setDate(5, toDate);
-            ps.setInt(6, no_of_rooms);
-            ps.setString(7, status);
+//            ps.setInt(2, room_no);
+            ps.setInt(2, userId);
+            ps.setDate(3, fromDate);
+            ps.setDate(4, toDate);
+            ps.setInt(5, no_of_rooms);
+            ps.setString(6, status);
 
             ps.execute();
 
