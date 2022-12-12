@@ -2,39 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.travelAdmin;
+package ui.InsuranceManagment;
 
 import javax.swing.JOptionPane;
-import model.Person.Person;
 import mysql.util.MySQLUtil;
 
 /**
  *
  * @author slenk
  */
-public class AddOrganization extends javax.swing.JPanel {
+public class AddIOrganization extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddOrganization
+     * Creates new form AddIOrganization
      */
-    TravelAdminDashboard travelAdminDashboard;
-    
-    public AddOrganization() {
+    public AddIOrganization() {
         initComponents();
     }
-    
+    InsuranceAdmin_Dashboard ia;
     String selectedOrg;
     String selectedGender;
     
-    public AddOrganization(TravelAdminDashboard travelAdminDashboard) {
+    
+    public AddIOrganization(InsuranceAdmin_Dashboard ia_dash) {
         initComponents();
-        this.travelAdminDashboard = travelAdminDashboard;
-        String[] travelOrganizations = {"Select", "Flight", "Bus"};
+        this.ia = ia_dash;
+        String[] travelOrganizations = {"Select", "Travel Insurance"};
         String[] gender = {"Select", "Male", "Female"};
         orgDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(travelOrganizations));
         genderDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(gender));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,54 +42,44 @@ public class AddOrganization extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        orgDropdown = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        txtFirstname = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtLastname = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtRole = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtRole = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtLastname = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         genderDropdown = new javax.swing.JComboBox<>();
+        txtFirstname = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        orgDropdown = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ADD ORGANIZATION");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setText("Email");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Organization ");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Role");
 
-        orgDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        orgDropdown.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Gender");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Last Name");
+
+        genderDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        genderDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                orgDropdownActionPerformed(evt);
+                genderDropdownActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("First Name");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Last Name");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Gender");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Role");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setText("Email");
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Password");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("ADD");
@@ -101,12 +89,22 @@ public class AddOrganization extends javax.swing.JPanel {
             }
         });
 
-        genderDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        genderDropdown.addActionListener(new java.awt.event.ActionListener() {
+        orgDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        orgDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genderDropdownActionPerformed(evt);
+                orgDropdownActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Organization ");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Password");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ADD ORGANIZATION");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -115,7 +113,7 @@ public class AddOrganization extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(300, 300, 300)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -173,19 +171,19 @@ public class AddOrganization extends javax.swing.JPanel {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void orgDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgDropdownActionPerformed
-        String org = String.valueOf(orgDropdown.getSelectedItem());
-        
-        if(org.equals("SELECT A STATUS")) {
-            this.selectedOrg = "";
+    private void genderDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderDropdownActionPerformed
+        String gender = String.valueOf(genderDropdown.getSelectedItem());
+
+        if(gender.equals("Select")) {
+            this.selectedGender = "";
         } else {
-            this.selectedOrg = org;
+            this.selectedGender = gender;
         }
-    }//GEN-LAST:event_orgDropdownActionPerformed
+    }//GEN-LAST:event_genderDropdownActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(this.selectedOrg.isEmpty()) {
@@ -196,22 +194,22 @@ public class AddOrganization extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a gender!");
             return;
         }
-        
+
         String firstname = txtFirstname.getText();
         String lastname = txtLastname.getText();
         String role = txtRole.getText();
         String email = txtEmail.getText();
         String password = txtPassword.getText();
-        
+
         MySQLUtil.addPerson(MySQLUtil.connectMySQL(), firstname, lastname, this.selectedGender
-                , role, email, password);
-        
+            , role, email, password);
+
         JOptionPane.showMessageDialog(this,"Organization Created Successfully!");
-        
+
         clearFields();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void clearFields() {
+     public void clearFields() {
         txtFirstname.setText("");
         txtLastname.setText("");
         txtRole.setText("");
@@ -223,15 +221,15 @@ public class AddOrganization extends javax.swing.JPanel {
         genderDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(gender));
     }
     
-    private void genderDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderDropdownActionPerformed
-        String gender = String.valueOf(genderDropdown.getSelectedItem());
-        
-        if(gender.equals("Select")) {
-            this.selectedGender = "";
+    private void orgDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgDropdownActionPerformed
+        String org = String.valueOf(orgDropdown.getSelectedItem());
+
+        if(org.equals("SELECT A STATUS")) {
+            this.selectedOrg = "";
         } else {
-            this.selectedGender = gender;
+            this.selectedOrg = org;
         }
-    }//GEN-LAST:event_genderDropdownActionPerformed
+    }//GEN-LAST:event_orgDropdownActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -264,22 +264,12 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
     private void RoleTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RoleTextFieldKeyReleased
         // TODO add your handling code here:
-         String Allowed="^[A-Z a-z]+$";
-        Pattern patt = Pattern.compile(Allowed);
-        Matcher same = patt.matcher(RoleTextField.getText());
-        if(!same.matches()){
-            erole.setText("Only Alphabets allowed.");
-            Createbtn.setEnabled(false);
-        }
-        else{
-            erole.setText(null);
-            Createbtn.setEnabled(true);
-        }
+        
     }//GEN-LAST:event_RoleTextFieldKeyReleased
 
     private void EmailTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmailTextFieldKeyReleased
         // TODO add your handling code here:
-        String Allowed="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}$";
+        String Allowed="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern patt = Pattern.compile(Allowed);
         Matcher same = patt.matcher(EmailTextField.getText());
         if(!same.matches()){
