@@ -293,7 +293,7 @@ public class RoomSelect extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //        deluxe
-        String roomName = "DELUXE ROOM";
+        String roomName = "DELUXE";
         
         long diffInMillies = Math.abs(checkin.getTime() - checkout.getTime());
         long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -308,19 +308,47 @@ public class RoomSelect extends javax.swing.JPanel {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 //        suite
-        String roomName = "SUITE";
+        String roomName = "KING SUITE";
+        
+        long diffInMillies = Math.abs(checkin.getTime() - checkout.getTime());
+        long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        System.out.println("diff-----"+days);
+        
+        getPrice(roomName);
+        System.out.println("price-----"+room_no+price);
+        
+        this.hotelFrame.switchPanel(new Checkout(this.hotelFrame, hotel,address,city,zipcode,hotelId,checkin,checkout,no_rooms,room_no,price,days, roomName));
+    
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
 //        presedential
-        String roomName = "PRESIDENTIAL SUITE";
+        String roomName = "PRESIDENTIAL SUITE"; 
+        long diffInMillies = Math.abs(checkin.getTime() - checkout.getTime());
+        long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        System.out.println("diff-----"+days);
+        
+        getPrice(roomName);
+        System.out.println("price-----"+room_no+price);
+        
+        this.hotelFrame.switchPanel(new Checkout(this.hotelFrame, hotel,address,city,zipcode,hotelId,checkin,checkout,no_rooms,room_no,price,days, roomName));
+    
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 //        premium
-        String roomName = "PREMIUM ROOM";
+        String roomName = "PREMIUM"; 
+        long diffInMillies = Math.abs(checkin.getTime() - checkout.getTime());
+        long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        System.out.println("diff-----"+days);
+        
+        getPrice(roomName);
+        System.out.println("price-----"+room_no+price);
+        
+        this.hotelFrame.switchPanel(new Checkout(this.hotelFrame, hotel,address,city,zipcode,hotelId,checkin,checkout,no_rooms,room_no,price,days, roomName));
+    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void getPrice(String room){

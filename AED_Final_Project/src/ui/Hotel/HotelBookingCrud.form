@@ -101,11 +101,12 @@
     <Component class="javax.swing.JComboBox" name="statusBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Booked"/>
-            <StringItem index="1" value="Checked-in"/>
-            <StringItem index="2" value="Checked-out"/>
-            <StringItem index="3" value="Cancelled"/>
+          <StringArray count="5">
+            <StringItem index="0" value="BOOKED"/>
+            <StringItem index="1" value="AVAILABLE"/>
+            <StringItem index="2" value="CHECKED-IN"/>
+            <StringItem index="3" value="CHECKED-OUT"/>
+            <StringItem index="4" value="CANCELLED"/>
           </StringArray>
         </Property>
       </Properties>

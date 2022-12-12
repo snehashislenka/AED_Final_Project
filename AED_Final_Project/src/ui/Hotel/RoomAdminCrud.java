@@ -154,7 +154,7 @@ public class RoomAdminCrud extends javax.swing.JPanel {
         jLabel24.setText("Hotel");
         add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 20));
 
-        upType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Deluxe", "Premium", "King Suite", "Presidentail Suite" }));
+        upType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DELUXE", "PREMIUM", "KING SUITE", "PRESEDENTIAL SUITE" }));
         add(upType, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 500, 200, 30));
 
         upHotel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marriot", "Hilton", "Hyatt" }));
@@ -164,7 +164,7 @@ public class RoomAdminCrud extends javax.swing.JPanel {
         crHotel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marriot", "Hilton", "Hyatt" }));
         add(crHotel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 200, 30));
 
-        crType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Deluxe", "Premium", "King Suite", "Presidentail Suite" }));
+        crType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DELUXE", "PREMIUM", "KING SUITE", "PRESEDENTIAL SUITE" }));
         add(crType, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 200, 30));
 
         jButton6.setText("View");
@@ -186,7 +186,7 @@ public class RoomAdminCrud extends javax.swing.JPanel {
         jLabel25.setText("Status");
         add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, -1, 20));
 
-        upStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Deluxe", "Premium", "King Suite", "Presidentail Suite" }));
+        upStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AVAILABLE", "BOOKED", "CHECKED-IN", "CHECKED-OUT" }));
         upStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 upStatusActionPerformed(evt);
