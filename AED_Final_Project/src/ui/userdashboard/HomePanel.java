@@ -37,41 +37,41 @@ public class HomePanel extends javax.swing.JPanel {
         ImageIcon flightIcon = new ImageIcon(
                     new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-//        
-//        ImageIcon busIcon = new ImageIcon(
-//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
-//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-//        ImageIcon hotelIcon = new ImageIcon(
-//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
-//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-//        ImageIcon resturantIcon = new ImageIcon(
-//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
-//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-//        ImageIcon carRentIcon = new ImageIcon(
-//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
-//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-//        ImageIcon InsuranceIcon = new ImageIcon(
-//                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
-//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        
+        ImageIcon busIcon = new ImageIcon(
+                    new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        ImageIcon hotelIcon = new ImageIcon(
+                    new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        ImageIcon resturantIcon = new ImageIcon(
+                    new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        ImageIcon carRentIcon = new ImageIcon(
+                    new ImageIcon("D:\\My NEU Assignments\\AED Final Project\\git\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        ImageIcon InsuranceIcon = new ImageIcon(
+                    new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
+                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 //        ImageIcon flightIcon = new ImageIcon(
 //                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\plane.png")
 //                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         
-        ImageIcon busIcon = new ImageIcon(
-                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
-                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        ImageIcon hotelIcon = new ImageIcon(
-                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
-                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        ImageIcon resturantIcon = new ImageIcon(
-                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
-                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        ImageIcon carRentIcon = new ImageIcon(
-                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
-                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        ImageIcon InsuranceIcon = new ImageIcon(
-                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
-                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon busIcon = new ImageIcon(
+//                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\bus.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon hotelIcon = new ImageIcon(
+//                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\hotels.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon resturantIcon = new ImageIcon(
+//                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\resturant.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon carRentIcon = new ImageIcon(
+//                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\car-rent.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+//        ImageIcon InsuranceIcon = new ImageIcon(
+//                    new ImageIcon("E:\\Java\\AED_Final_Project\\AED_Final_Project\\src\\assets\\insurance.png")
+//                            .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         lblFlights.setText("");
         lblBus.setText("");
         lblHotels.setText("");
@@ -123,6 +123,7 @@ public class HomePanel extends javax.swing.JPanel {
         lblRentals = new javax.swing.JLabel();
         lblInsurance = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setPreferredSize(new java.awt.Dimension(780, 832));
@@ -276,21 +277,29 @@ public class HomePanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41))
         );
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("USER DASHBOARD");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109)
                 .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addContainerGap(407, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel5);
@@ -299,7 +308,7 @@ public class HomePanel extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,6 +371,7 @@ public class HomePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;

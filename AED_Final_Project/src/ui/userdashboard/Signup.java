@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mysql.util.MySQLUtil;
@@ -27,6 +30,8 @@ public class Signup extends javax.swing.JFrame {
     public Signup() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
+        String[] genderArr = {"Select", "M", "F"};
+        gendercombo.setModel(new DefaultComboBoxModel(genderArr));
     }
 
     /**
@@ -43,14 +48,14 @@ public class Signup extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JTextField();
         btnSignup = new javax.swing.JButton();
-        lblGender = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         lblLastname = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         lblFirstname = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        gendercombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,24 +108,19 @@ public class Signup extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(lblLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelUserSigninLayout.createSequentialGroup()
-                                .addGroup(panelUserSigninLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelUserSigninLayout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(lblGender, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelUserSigninLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelUserSigninLayout.createSequentialGroup()
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panelUserSigninLayout.createSequentialGroup()
                         .addGap(180, 180, 180)
                         .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         panelUserSigninLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4});
@@ -134,8 +134,7 @@ public class Signup extends javax.swing.JFrame {
                 .addGroup(panelUserSigninLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lblFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(panelUserSigninLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -144,18 +143,24 @@ public class Signup extends javax.swing.JFrame {
                 .addGroup(panelUserSigninLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addGap(71, 71, 71)
                 .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
+        gendercombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(461, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword)
+                    .addComponent(gendercombo, 0, 194, Short.MAX_VALUE))
+                .addGap(92, 92, 92))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(54, 54, 54)
@@ -164,7 +169,12 @@ public class Signup extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(gendercombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(55, 55, 55)
@@ -176,16 +186,42 @@ public class Signup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
+        
+        
         String email = lblEmail.getText().trim();
-        String password = lblPassword.getText().trim();
+        
+        String Allowed="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern patt = Pattern.compile(Allowed);
+        Matcher same = patt.matcher(email);
+        
+        if(!same.matches()){
+            JOptionPane.showMessageDialog(this, "Please enter valid email!");
+            lblEmail.setText("");
+            return; 
+        } 
+        
+        char[] password = txtPassword.getPassword();
         String firstname = lblFirstname.getText().trim();
         String lastname = lblLastname.getText().trim();
-        String gender = lblGender.getText().trim();
+        if(gendercombo.getSelectedItem().toString().equals("Select")) {
+            JOptionPane.showMessageDialog(this, "Please select a gender!");
+            return;
+        } 
+        
+        String gender = gendercombo.getSelectedItem().toString();
+        
         String role = "PASSENGER";
+                
+        String pass = new String(password);
         
         Connection conn = MySQLUtil.connectMySQL();
         
         OTP = getRandomNumberString();
+        
+        if(gender.equals("Select") || pass.isEmpty() || firstname.isEmpty() 
+                || lastname.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter all the necessary fields");
+        }
         
         try {
             EmailUtil.sendEmail("slenkadev@gmail.com", OTP);
@@ -203,15 +239,33 @@ public class Signup extends javax.swing.JFrame {
     
     public void verified(boolean status) {
         String email = lblEmail.getText().trim();
-        String password = lblPassword.getText().trim();
+        String Allowed="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern patt = Pattern.compile(Allowed);
+        Matcher same = patt.matcher(email);
+        
+        if(!same.matches()){
+            JOptionPane.showMessageDialog(this, "Please enter valid email!");
+            lblEmail.setText("");
+            return; 
+        } 
+        
+        
+        char[] password = txtPassword.getPassword();
+        String pass = new String(password);
+        
         String firstname = lblFirstname.getText().trim();
         String lastname = lblLastname.getText().trim();
-        String gender = lblGender.getText().trim();
+        if(gendercombo.getSelectedItem().toString().equals("Select")) {
+            JOptionPane.showMessageDialog(this, "Please select a gender!");
+            return;
+        } 
+        
+        String gender = gendercombo.getSelectedItem().toString();
         Connection conn = MySQLUtil.connectMySQL();
         String role = "PASSENGER";
  
         if(status) {
-            MySQLUtil.addPerson(conn, firstname, lastname, gender, role, email, password);
+            MySQLUtil.addPerson(conn, firstname, lastname, gender, role, email, pass);
         } else {
             JOptionPane.showMessageDialog(this, "Please enter correct OTP, try again!");
         }
@@ -265,6 +319,7 @@ public class Signup extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignup;
+    private javax.swing.JComboBox<String> gendercombo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -273,9 +328,8 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField lblEmail;
     private javax.swing.JTextField lblFirstname;
-    private javax.swing.JTextField lblGender;
     private javax.swing.JTextField lblLastname;
-    private javax.swing.JTextField lblPassword;
     private javax.swing.JPanel panelUserSignin;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

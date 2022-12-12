@@ -27,17 +27,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Component id="btnSignout" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btnHome" min="-2" pref="168" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMyBookings" linkSize="3" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
-                          <Component id="btnProfile" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
-                          <Component id="btnSignout" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -47,15 +40,11 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-              <Component id="btnHome" linkSize="2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="btnProfile" linkSize="2" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="btnMyBookings" linkSize="4" min="-2" pref="32" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Component id="btnSignout" linkSize="4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="185" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+              <Component id="btnHome" linkSize="5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <Component id="btnSignout" linkSize="5" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace pref="271" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,22 +60,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnProfile">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Profile"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMyBookings">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="My Bookings"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSignout">
       <Properties>
