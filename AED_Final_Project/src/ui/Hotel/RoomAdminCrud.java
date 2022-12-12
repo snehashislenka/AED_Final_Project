@@ -206,9 +206,9 @@ public class RoomAdminCrud extends javax.swing.JPanel {
           
         int room_no = Integer.parseInt(crRoom.getText());
         float price = Float.parseFloat(crPrice.getText());
-        String hotel = (String)crHotel.getSelectedItem();
+        String hotel = crHotel.getSelectedItem().toString();
         String desc = crDesc.getText();
-        String type = (String)crType.getSelectedItem();
+        String type = crType.getSelectedItem().toString();
         
         Rooms r = new Rooms();
         int hotelId = 1;
@@ -218,7 +218,7 @@ public class RoomAdminCrud extends javax.swing.JPanel {
         r.setRoom_no(room_no);
         r.setHotelId(hotelId);
         r.setPrice(price);
-        r.setHotel("Marriot");
+        r.setHotel(hotel);
         r.setDesc(desc);
         r.setStatus("AVAILABLE");
         r.setType(type);
@@ -230,7 +230,7 @@ public class RoomAdminCrud extends javax.swing.JPanel {
         crPrice.setText("");
         crHotel.setSelectedItem("Marriot");
         crDesc.setText("");
-        crType.setSelectedItem("BOOKED");
+        crType.setSelectedItem("AVAILABLE");
         
         populateTable();
     }//GEN-LAST:event_jButton4ActionPerformed

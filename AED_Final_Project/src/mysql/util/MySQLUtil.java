@@ -1723,11 +1723,11 @@ public class MySQLUtil {
         }
     }
 
-    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt, int userId) {
+    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt, int userId, String user) {
         Connection conn = MySQLUtil.connectMySQL();
 
-        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt, userId)"
-                + " values (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt, userId, user)"
+                + " values (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, table);
@@ -1735,7 +1735,8 @@ public class MySQLUtil {
             ps.setString(3, dates);
             ps.setInt(4, resId);
             ps.setString(5, restraunt);
-            ps.setInt(5, userId);
+            ps.setInt(6, userId);
+            ps.setString(7, user);
 
             ps.execute();
 
@@ -2644,6 +2645,25 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return userId;
+    }
+     
+     public static String getAllPersonName(int id) {
+        String query = "SELECT * FROM person where id = ?";
+        String user = null;
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = rs.getString("firstname");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
     
 }

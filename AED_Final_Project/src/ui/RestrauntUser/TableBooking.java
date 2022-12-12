@@ -194,6 +194,7 @@ public class TableBooking extends javax.swing.JPanel {
         int userId;
         Person person = MySQLUtil.getPersonSession();
         userId = person.getId();
+        String user = MySQLUtil.getAllPersonName(userId);
         System.out.println("userid: -----"+ userId);
         if(sTime.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
@@ -216,7 +217,7 @@ public class TableBooking extends javax.swing.JPanel {
         String status = "BOOKED";
         getTable();
         
-        MySQLUtil.addTableBookings(table_no, status, dtf2, restrauntId, restraunt, userId);
+        MySQLUtil.addTableBookings(table_no, status, dtf2, restrauntId, restraunt, userId, user);
         
         JOptionPane.showMessageDialog(this, "Record created successfully!");
         

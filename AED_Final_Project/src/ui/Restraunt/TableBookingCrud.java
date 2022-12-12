@@ -243,7 +243,7 @@ public class TableBookingCrud extends javax.swing.JPanel {
         if(restraunt.equals("Dominos")) resId = 3;
         if(restraunt.equals("Subway")) resId = 4;
         
-        MySQLUtil.addTableBookings(table, status, dtf2, resId, restraunt, userId);
+        MySQLUtil.addTableBookings(table, status, dtf2, resId, restraunt, userId, username);
         
         JOptionPane.showMessageDialog(this, "Record created successfully!");
         
