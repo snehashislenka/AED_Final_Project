@@ -120,7 +120,7 @@ public class RentDisplayUILabels {
                     "        height: 100px;\n" +
                     "        background-color: #000;\n" +
                     "        padding-left: 10px;\n" +
-                    "        color: #fff;\n" +
+                    "        color: #ffffff;\n" +
                     "      }\n" +
                     "\n" +
                     "      .column {\n" +

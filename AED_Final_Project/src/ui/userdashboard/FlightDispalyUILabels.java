@@ -47,7 +47,7 @@ public class FlightDispalyUILabels {
                 "        width: 321px;\n" +
                 "        height: 100px;\n" +
                 "        background-color: #000000;\n" +
-                "        text-color: #ffffff;\n" +
+                "        color: #ffffff;\n" +
                 "        padding-left: 10px;\n" +
                 "      }\n" +
                 "\n" +
@@ -128,7 +128,8 @@ public class FlightDispalyUILabels {
                     "      .row {\n" +
                     "        width: 321px;\n" +
                     "        height: 100px;\n" +
-                    "        background-color: #aaadaa;\n" +
+                    "        background-color: #000000;\n" +
+                    "        color: #ffffff;\n" +
                     "        padding-left: 10px;\n" +
                     "      }\n" +
                     "\n" +
@@ -201,7 +202,8 @@ public class FlightDispalyUILabels {
                 "      .row {\n" +
                 "        width: 321px;\n" +
                 "        height: 100px;\n" +
-                "        background-color: #aaadaa;\n" +
+                "        background-color: #000000;\n" +
+                "        color: #ffffff;\n" +
                 "        padding-left: 10px;\n" +
                 "      }\n" +
                 "\n" +

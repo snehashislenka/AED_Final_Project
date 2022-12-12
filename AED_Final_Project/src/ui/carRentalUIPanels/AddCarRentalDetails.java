@@ -6,7 +6,8 @@ package ui.carRentalUIPanels;
 
 import java.awt.Color;
 import javax.swing.JFrame;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -395,7 +396,34 @@ public class AddCarRentalDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_tableAddCarRentalsMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        int selectedRow = tableAddCarRentals.getSelectedRow();
+        
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tableAddCarRentals.getModel();
+        
+        int selectedId = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+        
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            String query = "DELETE from car_rentals where rentalId=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, selectedId);
+            ps.execute();
+            conn.close();
+            populateCarRentalsTable();
+            clearFields();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnDeleteActionPerformed
     
     public void populateCarRentalsTable() {
