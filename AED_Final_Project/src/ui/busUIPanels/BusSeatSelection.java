@@ -39,15 +39,18 @@ public class BusSeatSelection extends javax.swing.JFrame {
     
     public BusSeatSelection() {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.seatsSelected = new ArrayList<>();
     }
     
     public BusSeatSelection(int seatCount, Bus bus, String departureDate) {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.seatCount = seatCount;
         this.seatsSelected = new ArrayList<>();
         this.departureDate = departureDate;
         this.bus = bus;
+        
     }
 
     /**
@@ -1151,9 +1154,11 @@ public class BusSeatSelection extends javax.swing.JFrame {
         }
         
         System.out.println(this.seatsSelected.toString());
+        System.out.println(this.seatsSelected + " " + bus + " " + departureDate);
         
         BusBooking busBooking = new BusBooking(this.seatsSelected, bus, departureDate);
         busBooking.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnBookSeatsActionPerformed
 
     /**

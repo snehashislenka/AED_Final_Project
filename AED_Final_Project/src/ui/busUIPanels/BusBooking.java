@@ -44,9 +44,18 @@ public class BusBooking extends javax.swing.JFrame {
     }
     
     public void populateBusBookingFrame() {
-        String departureDate = formattedDate(this.departureDate);
+        String departureDate = this.departureDate;
+        Date departDate = new Date(departureDate);
+        
         String departingTime = selectedBus.getDepartingTimestamp();
-        String arrivalDate = formattedDate(this.departureDate);
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(departDate);
+        calendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(
+                selectedBus.getBusTotalDuration().substring(0, 2)));
+        Date arrDate = calendar.getTime();
+        String arrivalDate = arrDate.toString();
+        
         String arrivalTime = selectedBus.getArrivalTimestamp();
         String busName = selectedBus.getBusCompanyName() + " - "
                 + selectedBus.getBusId();
@@ -87,7 +96,7 @@ public class BusBooking extends javax.swing.JFrame {
         String year = "";
         StringBuilder stb = new StringBuilder(dateTimestamp);
         year = stb.substring(0, 4);
-        month = Integer.parseInt(stb.substring(4, 6));
+        month = Integer.parseInt(stb.substring(4, 7));
         day = stb.substring(6, 8);
         
         String[] monthNames = {"Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
@@ -449,7 +458,8 @@ public class BusBooking extends javax.swing.JFrame {
             MySQLUtil.addBusBooking(this.selectedBus.getBusId(), person.getId(),
                 date.toString(), seats, this.seatList.size() * selectedBus.getPrice(), 
                 "BOOKED", this.selectedBus.getSeats() - this.seatList.size());
-            JOptionPane.showMessageDialog(this, "Bus Booked");
+            JOptionPane.showMessageDialog(this, "Congratulations! your bus is booked.");
+            dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Issue with insertion!");
         }

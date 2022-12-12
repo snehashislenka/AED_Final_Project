@@ -95,13 +95,10 @@ public class MyBusBookings extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("My Bus Bookings");
 
-        tableMyBusBookings.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 102, 153), null, null));
+        tableMyBusBookings.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 51, 51), null));
         tableMyBusBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Bus Name", "Departing City", "Dept Time", "Dept Bus Stn", "Dept Terminal", "Arrival City", "Arrival Time", "Arrival Bus", "Arrival Terminal", "Seats", "Price", "Status"
