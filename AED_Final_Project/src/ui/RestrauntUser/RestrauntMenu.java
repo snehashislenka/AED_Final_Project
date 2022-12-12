@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui.RestrauntUser;
-
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -139,8 +141,6 @@ public class RestrauntMenu extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         sItem = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         sRestraunt = new javax.swing.JLabel();
         sAddress = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -153,6 +153,17 @@ public class RestrauntMenu extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         sCity = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g) {
+
+                ImageIcon im = new ImageIcon("D:\\xxxxxx\\git 3\\AED_Final_Project\\AED_Final_Project\\src\\assets\\3.jpg");
+
+                Image i = im.getImage();
+
+                g.drawImage(i, 0, 0, this.getSize().width,
+                    this.getSize().height, this);
+            }
+        };
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -252,15 +263,6 @@ public class RestrauntMenu extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 600, 230));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Photo");
-        jLabel2.setToolTipText("");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 160));
-
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 230, -1));
-
         sRestraunt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         sRestraunt.setText("Restraunt Name");
         add(sRestraunt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 250, 30));
@@ -326,6 +328,7 @@ public class RestrauntMenu extends javax.swing.JPanel {
 
         sCity.setText("Restraunt City");
         add(sCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
+        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 250, 150));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -479,7 +482,6 @@ public class RestrauntMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -487,7 +489,7 @@ public class RestrauntMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
