@@ -6,6 +6,7 @@ package ui.flightAdminDashboard;
 
 import java.awt.Component;
 import javax.swing.JFrame;
+import ui.userdashboard.Signin;
 
 /**
  *
@@ -42,6 +43,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
         btnFlightBookingStatus = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         dashboardRightPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -88,6 +91,20 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Manage Flight Insurance");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Signout");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,7 +115,9 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
                     .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnFlightBookingStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +131,11 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(44, 44, 44)
                 .addComponent(jButton2)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(jButton3)
+                .addGap(35, 35, 35)
+                .addComponent(jButton4)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(jPanel1);
@@ -350,6 +373,18 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
          splitPane.setRightComponent(new FoodOrders());
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ManageFlightInsurance m = new ManageFlightInsurance();
+        m.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+        mysql.util.MySQLUtil.removePersonSession();
+        Signin signin = new Signin();
+        signin.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -391,6 +426,8 @@ public class FlightAdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel dashboardRightPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

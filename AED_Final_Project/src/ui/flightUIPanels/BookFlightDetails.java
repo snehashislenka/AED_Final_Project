@@ -146,6 +146,8 @@ public class BookFlightDetails extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BOOK FLIGHT");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setText("Name");
 
         lblPassengerName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -443,6 +445,7 @@ public class BookFlightDetails extends javax.swing.JFrame {
             MySQLUtil.addFlightBooking(this.selectedFlight.getFlightId(), person.getId(),
                 seats, this.seatList.size() * selectedFlight.getPrice(), "BOOKED");
             JOptionPane.showMessageDialog(this, "Flight Booked");
+            dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Issue with insertion!");
         }

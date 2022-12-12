@@ -150,6 +150,8 @@ public class BusBooking extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BOOK BUS");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setText("Name");
 
         lblPassengerName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
