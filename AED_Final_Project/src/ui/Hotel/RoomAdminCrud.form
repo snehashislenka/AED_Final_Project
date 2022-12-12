@@ -319,10 +319,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Deluxe"/>
-            <StringItem index="1" value="Premium"/>
-            <StringItem index="2" value="King Suite"/>
-            <StringItem index="3" value="Presidentail Suite"/>
+            <StringItem index="0" value="DELUXE"/>
+            <StringItem index="1" value="PREMIUM"/>
+            <StringItem index="2" value="KING SUITE"/>
+            <StringItem index="3" value="PRESEDENTIAL SUITE"/>
           </StringArray>
         </Property>
       </Properties>
@@ -378,10 +378,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Deluxe"/>
-            <StringItem index="1" value="Premium"/>
-            <StringItem index="2" value="King Suite"/>
-            <StringItem index="3" value="Presidentail Suite"/>
+            <StringItem index="0" value="DELUXE"/>
+            <StringItem index="1" value="PREMIUM"/>
+            <StringItem index="2" value="KING SUITE"/>
+            <StringItem index="3" value="PRESEDENTIAL SUITE"/>
           </StringArray>
         </Property>
       </Properties>
@@ -434,10 +434,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Deluxe"/>
-            <StringItem index="1" value="Premium"/>
-            <StringItem index="2" value="King Suite"/>
-            <StringItem index="3" value="Presidentail Suite"/>
+            <StringItem index="0" value="AVAILABLE"/>
+            <StringItem index="1" value="BOOKED"/>
+            <StringItem index="2" value="CHECKED-IN"/>
+            <StringItem index="3" value="CHECKED-OUT"/>
           </StringArray>
         </Property>
       </Properties>

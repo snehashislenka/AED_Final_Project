@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Person.Person;
 import model.Restraunt.MenuItems;
 import model.Restraunt.OrderItems;
 import mysql.util.MySQLUtil;
@@ -287,7 +288,11 @@ public class Checkout extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //        order here
-        int userId = 1;
+        int userId;
+        Person person = MySQLUtil.getPersonSession();
+        userId = person.getId();
+        System.out.println("userid: -----"+ userId);
+        
         String username = "";
         String status = "ORDERED";
         int orderId = 0;

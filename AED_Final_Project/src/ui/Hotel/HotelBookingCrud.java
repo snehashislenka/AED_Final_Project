@@ -30,6 +30,7 @@ public class HotelBookingCrud extends javax.swing.JPanel {
      * Creates new form BookingAdmin
      */
     int booking_id;
+    int hotelId;
     public HotelBookingCrud() {
         initComponents();
         populateTable();
@@ -95,7 +96,7 @@ public class HotelBookingCrud extends javax.swing.JPanel {
         });
         add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 150, 30));
 
-        statusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Booked", "Checked-in", "Checked-out", "Cancelled" }));
+        statusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "AVAILABLE", "CHECKED-IN", "CHECKED-OUT", "CANCELLED" }));
         add(statusBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 200, 30));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -161,7 +162,7 @@ public class HotelBookingCrud extends javax.swing.JPanel {
           
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         booking_id = Integer.parseInt(model.getValueAt(selectedRowIndex, 7).toString());
-        int hotelId = Integer.parseInt(model.getValueAt(selectedRowIndex, 6).toString());
+        hotelId = Integer.parseInt(model.getValueAt(selectedRowIndex, 6).toString());
         int room_no = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
         
         populateRoomNoTable(hotelId, room_no);
@@ -219,10 +220,25 @@ public class HotelBookingCrud extends javax.swing.JPanel {
         
         int room_no = Integer.parseInt(model.getValueAt(selectedRowIndex, 0).toString());
         
-        String query = "Update hotel_bookings set room_no = ? where id = ?";
+        String query = "Update rooms set status = 'BOOKED' where room_no = ? and hotelId = ?";
          try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 
+            
+            ps.setInt(1,room_no);
+            ps.setInt(2,hotelId);
+            
+            ps.execute();   
+            conn.close();
+         } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        populateTable();
+        
+        String query1 = "Update hotel_bookings set status = 'CHECKED-IN', room_no = ? where id = ?";
+         try {
+            Connection conn = connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query1); 
             
             ps.setInt(1,room_no);
             ps.setInt(2,booking_id);
