@@ -228,6 +228,12 @@ public class MyCarRentalBookings extends javax.swing.JFrame {
         }
         
         if(tableMyFlightBookings.getModel()
+                .getValueAt(selectedRow, 12).equals("APPLIED")) {
+            JOptionPane.showMessageDialog(this, "Please wait for insurance approval for checkin!");
+            return;
+        }
+        
+        if(tableMyFlightBookings.getModel()
                 .getValueAt(selectedRow, 12).equals("REJECTED")) {
             JOptionPane.showMessageDialog(this, "Sorry for the inconvinence,"
                     + " booking not insured. Money would be refunded in your account in 3-5 business days!");
@@ -259,6 +265,11 @@ public class MyCarRentalBookings extends javax.swing.JFrame {
                 .getValueAt(selectedRow, 12) != null) {
             if(tableMyFlightBookings.getModel()
                 .getValueAt(selectedRow, 12).toString().equals("PENDING")) {
+                JOptionPane.showMessageDialog(this, "Wait for insurance approval!");
+                return;
+            }
+            if(tableMyFlightBookings.getModel()
+                .getValueAt(selectedRow, 12).toString().equals("APPLIED")) {
                 JOptionPane.showMessageDialog(this, "Wait for insurance approval!");
                 return;
             }
