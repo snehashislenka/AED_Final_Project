@@ -201,7 +201,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="1"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Select Seats"/>
@@ -1432,7 +1432,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x2022; Aisle Seat - $ 10"/>
+            <Property name="text" type="java.lang.String" value="&#x2022; Aisle Seat "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel33">
@@ -1440,7 +1440,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x2022; Normal Seat - FREE"/>
+            <Property name="text" type="java.lang.String" value="&#x2022; Normal Seat - Rest"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel34">

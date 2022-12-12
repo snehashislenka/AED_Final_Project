@@ -4,6 +4,8 @@
  */
 package ui.rentalAdmin;
 
+import ui.userdashboard.Signin;
+
 /**
  *
  * @author slenk
@@ -36,6 +38,7 @@ public class RentalAdminFrame extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         btnAddOrganization = new javax.swing.JButton();
         btnViewOrganization = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -62,6 +65,13 @@ public class RentalAdminFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("SIGN OUT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -71,7 +81,8 @@ public class RentalAdminFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAddOrganization, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnViewOrganization, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnViewOrganization, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,7 +94,9 @@ public class RentalAdminFrame extends javax.swing.JFrame {
                 .addComponent(btnAddOrganization)
                 .addGap(33, 33, 33)
                 .addComponent(btnViewOrganization)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton1)
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -137,6 +150,13 @@ public class RentalAdminFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(new ViewOrganizationAdmin(this));
     }//GEN-LAST:event_btnViewOrganizationActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        mysql.util.MySQLUtil.removePersonSession();
+        Signin signinFrame = new Signin();
+        signinFrame.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,6 +196,7 @@ public class RentalAdminFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAddOrganization;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnViewOrganization;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

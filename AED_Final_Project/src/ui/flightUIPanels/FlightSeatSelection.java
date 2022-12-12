@@ -281,7 +281,7 @@ public class FlightSeatSelection extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Select Seats");
 
@@ -1307,10 +1307,10 @@ public class FlightSeatSelection extends javax.swing.JFrame {
         jLabel31.setText("SEATS LEGEND");
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel32.setText("• Aisle Seat - $ 10");
+        jLabel32.setText("• Aisle Seat ");
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel33.setText("• Normal Seat - FREE");
+        jLabel33.setText("• Normal Seat - Rest");
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel34.setText("• Column: 3, 4, 6, 7");
@@ -18963,12 +18963,11 @@ public class FlightSeatSelection extends javax.swing.JFrame {
     }//GEN-LAST:event_radiobtnJ9ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        System.out.println(Arrays.toString(this.seatsSelected.toArray()));
-        System.out.println(this.flight.getFlightCompanyName());
-        
+       
         BookFlightDetails flightBookingFrame = 
                 new BookFlightDetails(this.flight, this.seatsSelected);
         flightBookingFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnSubmitActionPerformed
     
     /**
