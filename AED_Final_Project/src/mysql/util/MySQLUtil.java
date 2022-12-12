@@ -63,7 +63,7 @@ public class MySQLUtil {
     public static Connection connectMySQL() {
         Connection conn = null;
         String USER_NAME = "root";
-        String PASSWORD = "1234";
+        String PASSWORD = "root";
         String CONNECTION_URL = "jdbc:mysql://localhost:3306/travel_management_system";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -1723,11 +1723,11 @@ public class MySQLUtil {
         }
     }
 
-    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt) {
+    public static void addTableBookings(int table, String status, String dates, int resId, String restraunt, int userId, String user) {
         Connection conn = MySQLUtil.connectMySQL();
 
-        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt)"
-                + " values (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO table_bookings (table_no, status, fromDate, restrauntId, restraunt, userId, user)"
+                + " values (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, table);
@@ -1735,6 +1735,8 @@ public class MySQLUtil {
             ps.setString(3, dates);
             ps.setInt(4, resId);
             ps.setString(5, restraunt);
+            ps.setInt(6, userId);
+            ps.setString(7, user);
 
             ps.execute();
 
@@ -2601,6 +2603,67 @@ public class MySQLUtil {
             Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return personList;
+    }
+    
+     public static ArrayList<Person> getAllPersons() {
+        String query = "SELECT * FROM person where role in ('PASSENGER')";
+        ArrayList<Person> personList = new ArrayList<>();
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+               Person person = new Person(rs.getInt("id"), rs.getString("firstname"),
+                        rs.getString("lastname"), rs.getString("gender"),
+                        rs.getString("role"), rs.getString("email"),
+                        rs.getString("password"));
+
+                personList.add(person);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return personList;
+    }
+     
+     public static int getAllPersonsId(String userName) {
+        String query = "SELECT * FROM person where firstname like CONCAT('%', ? , '%') limit 1";
+        int userId = 0;
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                userId = rs.getInt("id");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return userId;
+    }
+     
+     public static String getAllPersonName(int id) {
+        String query = "SELECT * FROM person where id = ?";
+        String user = null;
+        try {
+            Connection conn = MySQLUtil.connectMySQL();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = rs.getString("firstname");
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
     
 }

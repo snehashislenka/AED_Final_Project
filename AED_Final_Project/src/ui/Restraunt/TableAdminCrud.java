@@ -132,13 +132,13 @@ public class TableAdminCrud extends javax.swing.JPanel {
         jLabel17.setText("Restraunt");
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, 20));
 
-        crStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "AVAILABLE" }));
+        crStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "SITTING", "AVAILABLE" }));
         add(crStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 200, 30));
 
-        crRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "popeyes", "panera" }));
+        crRes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Popeyes", "Panera Bread", "Dominos", "Subway" }));
         add(crRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 200, 30));
 
-        upStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "AVAILABLE" }));
+        upStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKED", "SITTING", "AVAILABLE" }));
         add(upStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, 200, 30));
 
         jButton8.setText("Update");
@@ -171,8 +171,10 @@ public class TableAdminCrud extends javax.swing.JPanel {
         String restraunt = crRes.getSelectedItem().toString();
         
         int resId = 1;
-        if(restraunt.equals("popeyes")) resId = 1;
-        if(restraunt.equals("panera")) resId = 2;
+        if(restraunt.equals("Popeyes")) resId = 1;
+        if(restraunt.equals("Panera Bread")) resId = 2;
+        if(restraunt.equals("Dominos")) resId = 3;
+        if(restraunt.equals("Subway")) resId = 4;
         
         MySQLUtil.addTables(table, status, resId, restraunt);
         

@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Person.Person;
 import mysql.util.MySQLUtil;
 import static mysql.util.MySQLUtil.connectMySQL;
 
@@ -190,7 +191,11 @@ public class TableBooking extends javax.swing.JPanel {
         // TODO add your handling code here:
         
 //        book tabel
-
+        int userId;
+        Person person = MySQLUtil.getPersonSession();
+        userId = person.getId();
+        String user = MySQLUtil.getAllPersonName(userId);
+        System.out.println("userid: -----"+ userId);
         if(sTime.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Inputs should not be Empty");
             return;
@@ -212,7 +217,7 @@ public class TableBooking extends javax.swing.JPanel {
         String status = "BOOKED";
         getTable();
         
-        MySQLUtil.addTableBookings(table_no, status, dtf2, restrauntId, restraunt);
+        MySQLUtil.addTableBookings(table_no, status, dtf2, restrauntId, restraunt, userId, user);
         
         JOptionPane.showMessageDialog(this, "Record created successfully!");
         

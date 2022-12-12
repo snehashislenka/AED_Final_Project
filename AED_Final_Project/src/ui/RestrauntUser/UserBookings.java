@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Hotel.Rooms;
+import model.Person.Person;
 import model.Restraunt.OrderItems;
 import model.Restraunt.Orders;
 import mysql.util.MySQLUtil;
@@ -200,7 +201,10 @@ public class UserBookings extends javax.swing.JPanel {
     private void populateTable() {
         ArrayList<Orders> orderList = new ArrayList(); 
         String query = "Select restraunt, id, orderTotal from orders where userId = ?";
-        int userId = 1;
+        int userId;
+        Person person = MySQLUtil.getPersonSession();
+        userId = person.getId();
+        System.out.println("userid: -----"+ userId);
          try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 

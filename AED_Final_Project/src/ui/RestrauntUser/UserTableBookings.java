@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.Person.Person;
 import model.Restraunt.Orders;
 import model.Restraunt.TableBookings;
 import model.Restraunt.Tables;
@@ -159,7 +160,10 @@ public class UserTableBookings extends javax.swing.JPanel {
     private void populateTable() {
         ArrayList<TableBookings> tableList = new ArrayList(); 
         String query = "Select restraunt, table_no, cast(fromDate AS date) as date,cast(fromDate AS Time) as time from table_bookings where userId = ?";
-        int userId = 1;
+        int userId;
+        Person person = MySQLUtil.getPersonSession();
+        userId = person.getId();
+        System.out.println("userid: -----"+ userId);
          try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 
