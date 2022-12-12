@@ -22,6 +22,7 @@ public class CreateNetwork extends javax.swing.JPanel {
      */
     public CreateNetwork() {
         initComponents();
+        populateTable(); 
        
     }
     /**
@@ -166,6 +167,7 @@ public class CreateNetwork extends javax.swing.JPanel {
                 
         MySQLUtil.addenetworkdetails(NetworkName);
         JOptionPane.showMessageDialog(this,"New Network Added");
+        populateTable(); 
         
     }//GEN-LAST:event_AddbtnActionPerformed
     public void clearAllFields() {
