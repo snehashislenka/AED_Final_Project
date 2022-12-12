@@ -45,6 +45,8 @@ public class FlightBooking extends javax.swing.JFrame {
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
+        jPanel2.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
+        
 //        dateReturn.setVisible(false);
 //        lblReturn.setVisible(false);
 //          dateReturn.setEnabled(false);
@@ -101,6 +103,8 @@ public class FlightBooking extends javax.swing.JFrame {
         jLabel1.setText("FLIGHTS");
 
         flightSearchPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Flying From");
