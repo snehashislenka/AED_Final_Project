@@ -297,7 +297,7 @@ public class HotelBookingCrud extends javax.swing.JPanel {
         } 
         System.out.println("here------------"+hotelId);
         ArrayList<Rooms> roomsList = new ArrayList(); 
-        String query = "Select r.room_no from rooms r inner join hotel_bookings h on r.hotelId = h.hotelId where r.hotelId = ? and (h.status = 'CHECKED-OUT' or r.status = 'AVAILABLE')";
+        String query = "Select r.room_no from rooms r inner join hotel_bookings h on r.hotelId = h.hotelId where r.hotelId = ? and (h.status = 'CHECKED-OUT' or r.status = 'AVAILABLE') group by r.room_no";
          try {
             Connection conn = connectMySQL();
             PreparedStatement ps = conn.prepareStatement(query); 
